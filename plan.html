@@ -431,9 +431,13 @@
     // --- Detect Environment (Local vs GitHub Pages) ---
     const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     
-    // Detect if running on GitHub Pages subdirectory vs custom domain
+    // For custom domains pointing to /training_tracker/, detect by pathname
+    const pathName = window.location.pathname;
+    const isInTrainingTrackerPath = pathName.includes('/training_tracker/');
     const isGitHubPages = window.location.hostname.includes('github.io');
-    const BASE_PATH = (isLocalhost || !isGitHubPages) ? '' : '/training_tracker';
+    
+    // Use relative paths for everything - no need for BASE_PATH on custom domains
+    const BASE_PATH = '';
     
     // Function to get correct path
     function getPath(filePath) {
