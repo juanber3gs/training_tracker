@@ -146,9 +146,11 @@
                     <p class="text-stone-600">Aquí puedes consultar los detalles de cada rutina. Selecciona una para ver los ejercicios.</p>
                 </div>
                 <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8">
-                    <button data-routine="PUSH" class="routine-selector bg-white hover:bg-stone-50 text-[#5a6e5f] font-semibold py-2 px-4 border border-stone-200 rounded-lg shadow-sm transition-all duration-200">💪 Día de Empuje (Push)</button>
-                    <button data-routine="PULL" class="routine-selector bg-white hover:bg-stone-50 text-[#5a6e5f] font-semibold py-2 px-4 border border-stone-200 rounded-lg shadow-sm transition-all duration-200">🏋️‍♂️ Día de Tirón (Pull)</button>
-                    <button data-routine="LEGS" class="routine-selector bg-white hover:bg-stone-50 text-[#5a6e5f] font-semibold py-2 px-4 border border-stone-200 rounded-lg shadow-sm transition-all duration-200">🦵 Día de Pierna (Legs)</button>
+                    <button data-routine="TORSO_PUSH" class="routine-selector bg-white hover:bg-stone-50 text-[#5a6e5f] font-semibold py-2 px-4 border border-stone-200 rounded-lg shadow-sm transition-all duration-200">💪 Torso Empuje</button>
+                    <button data-routine="LEGS_ANKLES" class="routine-selector bg-white hover:bg-stone-50 text-[#5a6e5f] font-semibold py-2 px-4 border border-stone-200 rounded-lg shadow-sm transition-all duration-200">🦵 Pierna y Tobillos</button>
+                    <button data-routine="TORSO_PULL" class="routine-selector bg-white hover:bg-stone-50 text-[#5a6e5f] font-semibold py-2 px-4 border border-stone-200 rounded-lg shadow-sm transition-all duration-200">🏋️‍♂️ Torso Tracción</button>
+                    <button data-routine="GLUTES_CORE" class="routine-selector bg-white hover:bg-stone-50 text-[#5a6e5f] font-semibold py-2 px-4 border border-stone-200 rounded-lg shadow-sm transition-all duration-200">🍑 Glúteos y Core</button>
+                    <button data-routine="METABOLIC" class="routine-selector bg-white hover:bg-stone-50 text-[#5a6e5f] font-semibold py-2 px-4 border border-stone-200 rounded-lg shadow-sm transition-all duration-200">⚡ Metabólico</button>
                 </div>
                 <div id="routine-details-container"></div>
             </section>
@@ -215,10 +217,78 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const routines = {
-        PUSH: { title: '💪 Día de Empuje (Push)', hasGuide: true, description: 'Pecho, Hombros y Tríceps', details: { exercises: [ { name: 'Press de Banca con Mancuernas', series: 4, reps: '8-12', rest: '60 seg', notes: 'Avanzado' }, { name: 'Press de Hombro Sentado con Mancuernas', series: 3, reps: '10-15', rest: '60 seg', notes: 'Avanzado' }, { name: 'Press Inclinado con Mancuernas', series: 3, reps: '10-15', rest: '60 seg', notes: 'Avanzado' }, { name: 'Flexiones Inclinadas', series: 3, reps: '10-15', rest: '60 seg', notes: 'Plan Anterior' }, { name: 'Aperturas con Ligas (Chest Flys)', series: 3, reps: '12-15', rest: '60 seg', notes: 'Plan Anterior' }, { name: 'Elevaciones Laterales', series: 3, reps: '15-20', rest: '45 seg', notes: 'Ambos Planes' }, { name: 'Pushdowns de Tríceps con Liga', series: 3, reps: '15-20', rest: '45 seg', notes: 'Avanzado' }, { name: 'Flexiones (Push-Ups)', series: 3, reps: 'Al fallo', rest: '60 seg', notes: 'Avanzado' } ] } },
-        PULL: { title: '🏋️‍♂️ Día de Tirón (Pull)', hasGuide: true, description: 'Espalda y Bíceps', details: { exercises: [ { name: 'Remo inclinado con mancuernas', series: 4, reps: '8-12', rest: '60 seg', notes: 'Avanzado' }, { name: 'Dominadas Asistidas/Negativas', series: 3, reps: '5-8 o Al fallo', rest: '90 seg', notes: 'Plan Anterior' }, { name: 'Remo a una mano con Mancuerna', series: 3, reps: '10-12 c/lado', rest: '60 seg', notes: 'Avanzado' }, { name: 'Remo con Ligas', series: 3, reps: '12-15', rest: '60 seg', notes: 'Plan Anterior' }, { name: 'Face Pulls con Liga de Resistencia', series: 3, reps: '15-20', rest: '45 seg', notes: 'Avanzado' }, { name: 'Curl de Bíceps con Mancuernas', series: 3, reps: '10-15', rest: '45 seg', notes: 'Avanzado' }, { name: 'Curl de Bíceps con Ligas', series: 2, reps: '15-20', rest: '45 seg', notes: 'Plan Anterior' }, { name: 'Curl Martillo con Mancuernas', series: 3, reps: '12-15', rest: '45 seg', notes: 'Avanzado' } ] } },
-        LEGS: { title: '🦵 Día de Pierna (Legs) y Core', hasGuide: true, description: 'Piernas, Glúteos y Abdomen', details: { exercises: [ { name: 'Sentadillas (Squats)', series: 4, reps: '10-15', rest: '60 seg', notes: 'Ambos Planes' }, { name: 'Peso Muerto Rumano', series: 3, reps: '12-15', rest: '60 seg', notes: 'Avanzado (con peso)' }, { name: 'Zancadas (Lunges) con Mancuernas', series: 3, reps: '10-12 c/pierna', rest: '60 seg', notes: 'Avanzado' }, { name: 'Puente de Glúteos', series: 3, reps: '15-20', rest: '60 seg', notes: 'Ambos Planes (con peso opcional)' }, { name: 'Elevación de Gemelos con Mancuernas', series: 4, reps: '15-20', rest: '45 seg', notes: 'Avanzado' }, { name: 'Plancha (sobre antebrazos)', series: 3, reps: '30-60 seg', rest: '45 seg', notes: 'Plan Anterior' }, { name: 'Pájaro-Perro (Bird-Dog)', series: 3, reps: '10 (c/lado)', rest: '45 seg', notes: 'Plan Anterior' } ] } },
-        REST: { title: '😴 Descanso', description: 'Recuperación y Crecimiento' }
+        TORSO_PUSH: {
+            title: '💪 Torso Empuje y Muñecas',
+            hasGuide: false, // For now, will need new guides
+            description: 'Fuerza de pecho, hombros, tríceps y salud de muñecas.',
+            details: {
+                exercises: [
+                    { name: 'Press de Banca con Mancuernas', series: 4, reps: '8-12', rest: '60 seg', notes: 'Fuerza base de pecho' },
+                    { name: 'Press de Hombros (con barra de pilates)', series: 4, reps: '12-15', rest: '60 seg', notes: 'Pisa la banda para resistencia' },
+                    { name: 'Aperturas con Ligas', series: 3, reps: '15-20', rest: '45 seg', notes: 'Aislar y estirar pecho' },
+                    { name: 'Elevaciones Laterales con Mancuernas', series: 3, reps: '15-20', rest: '45 seg', notes: 'Amplitud de hombros' },
+                    { name: 'Pushdowns de Tríceps con Liga', series: 3, reps: '15-20', rest: '45 seg', notes: 'Aislar tríceps' },
+                    { name: 'Extensión de Muñeca (Palmas abajo)', series: 3, reps: '15-20', rest: '30 seg', notes: 'Salud articular, con barra de pilates' }
+                ]
+            }
+        },
+        LEGS_ANKLES: {
+            title: '🦵 Pierna y Tobillos',
+            hasGuide: true, // The LEGS guide is still relevant
+            description: 'Fuerza de piernas, glúteos y estabilidad de tobillos.',
+            details: {
+                exercises: [
+                    { name: 'Sentadilla con Barra de Pilates', series: 4, reps: '12-15', rest: '60 seg', notes: 'Pisa la banda, barra en espalda' },
+                    { name: 'Peso Muerto Rumano con Mancuernas', series: 3, reps: '12-15', rest: '75 seg', notes: 'Foco en isquiotibiales' },
+                    { name: 'Zancada Estática (Foco Tobillo)', series: 3, reps: '10-12 c/lado', rest: '60 seg', notes: 'Controla la estabilidad del tobillo' },
+                    { name: 'Puente de Glúteos con Banda', series: 3, reps: '15-20', rest: '45 seg', notes: 'Banda en las rodillas, empuja hacia afuera' },
+                    { name: 'Elevación de Talones (Foco Tobillo)', series: 4, reps: '20-25', rest: '45 seg', notes: 'Con barra de pilates para resistencia' }
+                ]
+            }
+        },
+        TORSO_PULL: {
+            title: '🏋️‍♂️ Torso Tracción y Muñecas',
+            hasGuide: false,
+            description: 'Fuerza de espalda, bíceps y salud de muñecas.',
+            details: {
+                exercises: [
+                    { name: 'Jalón al Pecho con Barra de Pilates', series: 4, reps: '12-15', rest: '60 seg', notes: 'Anclaje alto en puerta' },
+                    { name: 'Remo Inclinado con Mancuernas', series: 4, reps: '8-12', rest: '60 seg', notes: 'Fuerza y densidad de espalda' },
+                    { name: 'Face Pulls con Liga', series: 3, reps: '15-20', rest: '45 seg', notes: 'Salud del hombro y postura' },
+                    { name: 'Curl de Bíceps con Barra de Pilates', series: 3, reps: '12-15', rest: '45 seg', notes: 'Pisa la banda para resistencia' },
+                    { name: 'Flexión de Muñeca (Palmas arriba)', series: 3, reps: '15-20', rest: '30 seg', notes: 'Salud articular, con barra de pilates' }
+                ]
+            }
+        },
+        GLUTES_CORE: {
+            title: '🍑 Glúteos y Core',
+            hasGuide: false,
+            description: 'Fortalecimiento de la cadena posterior y el abdomen.',
+            details: {
+                exercises: [
+                    { name: 'Jalón entre Piernas (Pull Through)', series: 4, reps: '15-20', rest: '60 seg', notes: 'Anclaje bajo, foco en glúteos' },
+                    { name: 'Caminata Lateral con Banda', series: 3, reps: '12 pasos c/lado', rest: '45 seg', notes: 'Banda en rodillas o tobillos' },
+                    { name: 'Giros Rusos con Barra de Pilates', series: 3, reps: '20 giros', rest: '45 seg', notes: 'Sostén la barra, gira el torso' },
+                    { name: 'Plancha', series: 3, reps: '45-75 seg', rest: '60 seg', notes: 'Mantén el cuerpo recto' },
+                    { name: 'Pájaro-Perro (Bird-Dog)', series: 3, reps: '12 (c/lado)', rest: '30 seg', notes: 'Movimiento lento y controlado' }
+                ]
+            }
+        },
+        METABOLIC: {
+            title: '⚡ Circuito Metabólico',
+            hasGuide: false,
+            description: 'Quema de grasa y resistencia cardiovascular. Realizar como un circuito.',
+            details: {
+                exercises: [
+                    { name: 'Thrusters con Barra de Pilates', series: '4 Rondas', reps: '15', rest: '15 seg', notes: 'Sentadilla + Press de hombros' },
+                    { name: 'Remo Rápido con Liga', series: '4 Rondas', reps: '20', rest: '15 seg', notes: 'Ritmo rápido y constante' },
+                    { name: 'Zancada con Giro', series: '4 Rondas', reps: '10 c/lado', rest: '15 seg', notes: 'Con barra de pilates' },
+                    { name: 'Jumping Jacks', series: '4 Rondas', reps: '45 seg', rest: '90 seg', notes: 'Descanso largo al final de la ronda' }
+                ]
+            }
+        },
+        YOGA_REST: { title: '🧘‍♂️ Descanso Activo', description: 'Día de recuperación con Yoga y movilidad. Revisa la pestaña de Yoga.' },
+        REST: { title: '😴 Descanso Completo', description: 'Recuperación y Crecimiento. ¡Escucha a tu cuerpo!' }
     };
 
     const guides = {
@@ -543,14 +613,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const day = today.getDate();
     const dateKey = `${year}-${month + 1}-${day}`;
 
-    const schedulePattern = ['PUSH', 'PULL', 'LEGS', 'PUSH', 'PULL', 'LEGS', 'REST'];
+    const schedulePattern = ['TORSO_PUSH', 'LEGS_ANKLES', 'YOGA_REST', 'TORSO_PULL', 'GLUTES_CORE', 'METABOLIC', 'REST'];
     const monthlySchedule = {};
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
     for (let d = 1; d <= daysInMonth; d++) {
         const date = new Date(year, month, d);
-        const dayOfWeek = date.getDay();
-        const patternIndex = (dayOfWeek === 0) ? 6 : dayOfWeek - 1;
+        const dayOfWeek = date.getDay(); // 0 for Sunday, 1 for Monday...
+        const patternIndex = (dayOfWeek === 0) ? 6 : dayOfWeek - 1; // Adjust to make Monday the start of the week
         monthlySchedule[d] = schedulePattern[patternIndex];
     }
     
@@ -565,7 +635,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createRoutineHTML(routineKey, isTodayView) {
         const routineData = routines[routineKey];
-        if (!routineData) return '<p>Rutina no encontrada.</p>';
+        if (!routineData || !routineData.details) return ''; // Return empty for REST days
         
         let progressHTML = '';
         if (isTodayView) {
@@ -582,7 +652,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let guideButtonHTML = '';
         if (routineData.hasGuide) {
-            let guideType = routineKey; // LEGS, PUSH, or PULL
+            let guideType = 'LEGS'; // Hardcoded for now as it's the only guide
             guideButtonHTML = `<div class="text-center my-4"><button data-guide="${guideType}" class="show-guide-btn bg-[#c5a265] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#b38e52] transition-colors">Ver Guía Visual de Ejercicios</button></div>`;
         }
 
@@ -622,11 +692,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let commonSections = `
             <div class="mt-6 p-4 bg-[#5a6e5f]/10 text-[#2c3144] rounded-lg">
                 <h4 class="font-bold">▶️ Calentamiento (10 min antes)</h4>
-                <p class="text-sm">Movilidad de muñecas, Jumping Jacks, Círculos de brazos, Sentadillas sin peso, Gato-Vaca.</p>
+                <p class="text-sm">Movilidad articular (muñecas, tobillos, caderas), 5 min de cardio ligero (Jumping Jacks, trote en el sitio), Sentadillas sin peso, Gato-Vaca.</p>
             </div>
             <div class="mt-4 p-4 bg-[#6d7b8d]/10 text-[#2c3144] rounded-lg">
                 <h4 class="font-bold">⏸️ Enfriamiento (10 min después)</h4>
-                <p class="text-sm">Gato-Vaca, Postura del Niño, Estiramiento de Piriforme, Estiramiento de pecho y muñecas.</p>
+                <p class="text-sm">Estiramientos suaves de los músculos trabajados. Revisa la pestaña de Yoga para ideas específicas según la rutina.</p>
             </div>
         `;
         
@@ -639,18 +709,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const todayName = today.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
         let content = '';
-        if (activityKey !== 'REST') {
+        if (activity.details) { // Check if it's a workout day
             content = `<div class="text-center mb-6">
                            <h2 class="text-3xl font-bold">Plan para Hoy</h2>
                            <p class="text-stone-500">${todayName}</p>
                        </div>
                        ${createRoutineHTML(activityKey, true)}`;
-        } else {
+        } else { // It's a REST or YOGA_REST day
              content = `<div class="bg-white p-6 rounded-lg shadow-md border border-stone-200 text-center">
                            <h2 class="text-3xl font-bold">Plan para Hoy</h2>
                            <p class="text-stone-500 mb-4">${todayName}</p>
                            <p class="text-2xl mt-4 text-[#5a6e5f]">${activity.title}</p>
-                           <p class="mt-2 text-stone-600">${activity.description}. ¡Escucha a tu cuerpo!</p>
+                           <p class="mt-2 text-stone-600">${activity.description}</p>
                        </div>`;
         }
         hoyContainer.innerHTML = content;
@@ -697,7 +767,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (let d = 1; d <= daysInMonth; d++) {
             const routineKey = monthlySchedule[d];
-            if (routineKey !== 'REST') {
+            if (routines[routineKey] && routines[routineKey].details) {
                 totalExercisesInMonth += routines[routineKey].details.exercises.length;
                 
                 const progressKey = `${year}-${month + 1}-${d}`;
@@ -788,13 +858,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.dataset.tab)));
 
-    routineSelectors.forEach(button => {
-        button.addEventListener('click', () => {
-            routineDetailsContainer.innerHTML = createRoutineHTML(button.dataset.routine, false);
+    // Need to re-query selectors after potential DOM changes
+    document.getElementById('rutinas').addEventListener('click', (e) => {
+        if (e.target.classList.contains('routine-selector')) {
+            const routineKey = e.target.dataset.routine;
+            routineDetailsContainer.innerHTML = createRoutineHTML(routineKey, false);
             if (window.innerWidth < 640) {
                 routineDetailsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-        });
+        }
     });
     
     document.querySelectorAll('.accordion-toggle').forEach(button => {
@@ -831,7 +903,8 @@ document.addEventListener('DOMContentLoaded', () => {
     updateGlobalProgress();
     initModal();
     switchTab('hoy');
-    routineDetailsContainer.innerHTML = createRoutineHTML('PUSH', false);
+    // Set a default view for the routines tab
+    routineDetailsContainer.innerHTML = createRoutineHTML('TORSO_PUSH', false);
 });
 </script>
 
