@@ -1,13 +1,238 @@
-body { font-family: 'Inter', sans-serif; background-color: #f9f9f9; color: #2c3144; margin: 20px; }
-h1, h2, h3 { font-family: 'Lora', serif; color: #2c3144; }
-h1 { text-align: center; }
-.week { margin-bottom: 30px; }
-.day { background-color: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
-.day h3 { color: #5a6e5f; border-bottom: 2px solid #c5a265; padding-bottom: 10px; }
-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-th { background-color: #6d7b8d; color: #f9f9f9; }
-.completed-checkbox { width: 80px; text-align: center; }
-.notes-input { width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 8px; }
-.save-btn { background-color: #c5a265; color: #fff; border: none; padding: 15px 30px; border-radius: 5px; cursor: pointer; font-size: 18px; margin-top: 20px; display: block; margin-left: auto; margin-right: auto; transition: background-color 0.3s; }
-.save-btn:hover { background-color: #b38e52; }
+
+        :root {
+            --bg-color: #10001C;
+            --card-bg: #1A0A2A;
+            --text-primary: #F0E6FF;
+            --text-secondary: #A094B7;
+            --accent: #00D0FF;
+            --accent-hover: #9effff;
+            --metabolic: #FF00FF;
+            --border: #3C1E5A;
+            --glow-accent: 0 0 3px var(--accent), 0 0 6px var(--accent), 0 0 10px var(--accent);
+            --glow-metabolic: 0 0 3px var(--metabolic), 0 0 6px var(--metabolic), 0 0 10px var(--metabolic);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            /* Updated background with logo and gradient */
+            background-image: 
+                linear-gradient(rgba(16, 0, 28, 0.95), rgba(16, 0, 28, 0.95)), /* Dark overlay for text readability */
+                linear-gradient(var(--accent), transparent 1px),
+                linear-gradient(90deg, var(--accent), transparent 1px);
+            background-size: 
+                cover, /* For the overlay */
+                30% auto, /* Adjust logo size as needed */
+                40px 40px,
+                40px 40px;
+            background-repeat: 
+                no-repeat, 
+                no-repeat, 
+                repeat, 
+                repeat;
+            background-position: 
+                center center, /* For the overlay */
+                center 10%, /* Adjust logo position */
+                -1px -1px,
+                -1px -1px;
+            background-blend-mode: overlay, normal, normal, normal; /* Blend the overlay with the logo */
+            animation: bg-scroll 3s linear infinite;
+        }
+        @keyframes bg-scroll {
+            0% { background-position: center center, center 10%, 0 0, 0 0; } /* Include logo position */
+            100% { background-position: center center, center 10%, 40px 40px, 40px 40px; } /* Include logo position */
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .main-container {
+            background-color: rgba(16, 0, 28, 0.9);
+            backdrop-filter: blur(5px);
+        }
+        h1 {
+             font-family: 'Press Start 2P', cursive;
+             color: var(--text-primary);
+             text-shadow: var(--glow-accent);
+             font-size: clamp(1.5rem, 5vw, 3rem);
+        }
+        h2, h3, h4, h5 {
+             font-family: 'Aldrich', sans-serif;
+             color: var(--text-primary);
+             text-transform: uppercase;
+        }
+        .tab-active {
+            border-color: var(--accent);
+            color: var(--accent);
+            text-shadow: var(--glow-accent);
+        }
+        .content-section { 
+            display: none;
+        }
+        .content-section.active { 
+            display: block;
+            animation: fade-in 0.4s ease-in-out;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        .calendar-day { 
+            min-height: 100px; 
+            transition: all 0.2s ease-in-out;
+            position: relative;
+        }
+        .calendar-day:hover {
+            transform: scale(1.05);
+            border-color: var(--accent) !important;
+            box-shadow: var(--glow-accent);
+            z-index: 10;
+        }
+        .calendar-day-header {
+            font-size: 0.75rem;
+            text-align: center;
+            padding: 4px 0;
+            color: var(--text-secondary);
+            font-family: 'Aldrich', sans-serif;
+        }
+        .today {
+            border-width: 2px;
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(0, 208, 255, 0.7);
+        }
+        .progress-bar-container {
+            background-color: #334155;
+            border-radius: 9999px;
+            height: 1.25rem;
+            width: 100%;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: inset 0 0 5px #000;
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+            height: 100%;
+            border-radius: 9999px;
+            transition: width 0.5s ease-in-out;
+            box-shadow: var(--glow-accent);
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(16, 0, 28, 0.8);
+            backdrop-filter: blur(8px);
+            display: none; /* Changed from opacity */
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0; /* Use opacity for transition */
+            pointer-events: none;
+            transition: opacity 0.3s ease-out;
+        }
+        .modal-overlay.active {
+            display: flex; /* Use display to show/hide */
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            width: 60rem;
+            color: var(--text-primary);
+            transform: scale(0.95);
+            transition: transform 0.3s ease-out;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        .prose { color: var(--text-secondary); }
+        .prose h3 { color: var(--text-primary); text-shadow: var(--glow-accent); }
+        .prose h5 { color: var(--text-secondary); }
+        .prose a { color: var(--accent); }
+        .prose a:hover { color: var(--accent-hover); }
+        .prose ul { list-style-type: '⚡ '; }
+        .prose hr { border-color: var(--border); }
+        .img-placeholder {
+            background-color: var(--bg-color);
+            border: 2px dashed var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            min-height: 200px;
+            text-align: center;
+            padding: 1rem;
+            color: var(--text-secondary);
+        }
+        .routine-selector, .nav-tab {
+            transition: all 0.2s ease-in-out;
+        }
+        .routine-selector:hover, .nav-tab:hover {
+            transform: translateY(-2px);
+            text-shadow: var(--glow-accent);
+        }
+        .metabolic-text {
+            color: var(--metabolic);
+            text-shadow: var(--glow-metabolic);
+        }
+        .metabolic-border {
+            border-color: var(--metabolic);
+        }
+        .metabolic-shadow {
+            box-shadow: 0 0 12px rgba(255, 0, 255, 0.7);
+        }
+        .stats-card {
+            background: linear-gradient(135deg, var(--card-bg), rgba(60, 30, 90, 0.5));
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 8px rgba(0, 208, 255, 0.3);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @media (max-width: 640px) {
+            .calendar-grid {
+                gap: 2px;
+            }
+            .calendar-day {
+                min-height: 80px;
+                font-size: 0.75rem;
+            }
+            h2, h3, h4, h5 {
+                font-size: clamp(1rem, 3vw, 1.5rem);
+            }
+        }
+        .edit-exercise-modal .modal-content {
+            width: 90vw;
+            max-width: 500px;
+        }
+        .routine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        @media (max-width: 768px) {
+            .routine-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    

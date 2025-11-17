@@ -1,0 +1,2176 @@
+
+    // --- App Configuration ---
+    const routines = {
+        TORSO_PUSH: {
+            title: () => t('push'),
+            hasGuide: false,
+            description: () => t('chestShouldersTricepsStr'),
+            details: {
+                exercises: [
+                    { name: 'Dumbbell Bench Press', series: 4, reps: '8-12', rest: '60s', notes: 'Chest base strength' },
+                    { name: 'Pilates Bar Shoulder Press', series: 4, reps: '12-15', rest: '60s', notes: 'Step on the band for resistance' },
+                    { name: 'Band Flys', series: 3, reps: '15-20', rest: '45s', notes: 'Isolate and stretch chest' },
+                    { name: 'Dumbbell Lateral Raises', series: 3, reps: '15-20', rest: '45s', notes: 'Shoulder width' },
+                    { name: 'Band Triceps Pushdowns', series: 3, reps: '15-20', rest: '45s', notes: 'Isolate triceps' },
+                    { name: 'Wrist Extension (Palms down)', series: 3, reps: '15-20', rest: '30s', notes: 'Joint health, with pilates bar' }
+                ]
+            }
+        },
+        LEGS_ANKLES: {
+            title: () => t('legsAnkles'),
+            hasGuide: true,
+            description: () => t('legsGlutesStr'),
+            details: {
+                exercises: [
+                    { name: 'Pilates Bar Squat', series: 4, reps: '12-15', rest: '60s', notes: 'Step on band, bar on back' },
+                    { name: 'Dumbbell Romanian Deadlift', series: 3, reps: '12-15', rest: '75s', notes: 'Focus on hamstrings' },
+                    { name: 'Static Lunge (Ankle Focus)', series: 3, reps: '10-12/side', rest: '60s', notes: 'Control ankle stability' },
+                    { name: 'Banded Glute Bridge', series: 3, reps: '15-20', rest: '45s', notes: 'Band on knees, push outwards' },
+                    { name: 'Calf Raises (Ankle Focus)', series: 4, reps: '20-25', rest: '45s', notes: 'With pilates bar for resistance' }
+                ]
+            }
+        },
+        TORSO_PULL: {
+            title: () => t('pull'),
+            hasGuide: false,
+            description: () => t('backBicepsStr'),
+            details: {
+                exercises: [
+                    { name: 'Pilates Bar Lat Pulldown', series: 4, reps: '12-15', rest: '60s', notes: 'High anchor on door' },
+                    { name: 'Dumbbell Bent-Over Row', series: 4, reps: '8-12', rest: '60s', notes: 'Back strength and density' },
+                    { name: 'Band Face Pulls', series: 3, reps: '15-20', rest: '45s', notes: 'Shoulder health and posture' },
+                    { name: 'Pilates Bar Bicep Curl', series: 3, reps: '12-15', rest: '45s', notes: 'Step on band for resistance' },
+                    { name: 'Wrist Flexion (Palms up)', series: 3, reps: '15-20', rest: '30s', notes: 'Joint health, with pilates bar' }
+                ]
+            }
+        },
+        GLUTES_CORE: {
+            title: () => t('glutesCore'),
+            hasGuide: false,
+            description: () => t('posteriorChainAbs'),
+            details: {
+                exercises: [
+                    { name: 'Pull Through', series: 4, reps: '15-20', rest: '60s', notes: 'Low anchor, focus on glutes' },
+                    { name: 'Banded Lateral Walk', series: 3, reps: '12 steps/side', rest: '45s', notes: 'Band on knees or ankles' },
+                    { name: 'Pilates Bar Russian Twists', series: 3, reps: '20 twists', rest: '45s', notes: 'Hold the bar, twist the torso' },
+                    { name: 'Plank', series: 3, reps: '45-75s', rest: '60s', notes: 'Keep body straight' },
+                    { name: 'Bird-Dog', series: 3, reps: '12/side', rest: '30s', notes: 'Slow and controlled movement' }
+                ]
+            }
+        },
+        METABOLIC: {
+            title: () => t('metabolic'),
+            hasGuide: false,
+            description: () => t('fatBurningCardio'),
+            details: {
+                exercises: [
+                    { name: 'Pilates Bar Thrusters', series: '4 Rounds', reps: '15', rest: '15s', notes: 'Squat + Shoulder Press' },
+                    { name: 'Fast Band Rows', series: '4 Rounds', reps: '20', rest: '15s', notes: 'Fast and steady pace' },
+                    { name: 'Lunge with Twist', series: '4 Rounds', reps: '10/side', rest: '15s', notes: 'With pilates bar' },
+                    { name: 'Jumping Jacks', series: '4 Rounds', reps: '45s', rest: '90s', notes: 'Long rest at the end of the round' }
+                ]
+            }
+        },
+        YOGA_REST: {
+            title: () => t('yoga'), 
+            description: () => t('recoveryYoga')
+        },
+        REST: {
+            title: () => t('rest'), 
+            description: () => t('recoveryGrowth')
+        }
+    };
+
+    const guides = {
+        LEGS: {
+            title: { en: 'Visual Guide: Legs & Ankles', es: 'Guía Visual: Piernas y Tobillos' },
+            content: function() {
+                const lang = currentLanguage;
+                const content = {
+                    en: `
+                        <div class="space-y-6">
+                            <div class="text-center mb-8">
+                                <h2 class="text-3xl font-bold text-accent mb-2">🦵 Legs & Ankles Training Guide</h2>
+                                <p class="text-secondary">Complete leg and ankle stability training for maximum strength and joint health</p>
+                            </div>
+
+                            <!-- Pilates Bar Squat -->
+                            <div class="bg-card-bg/60 border border-accent/30 rounded-lg p-6">
+                                <h3 class="text-2xl font-bold text-accent mb-4">1. Pilates Bar Squat</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">📋 Form Steps:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-secondary text-sm">
+                                            <li>Step on band with both feet, hip-width apart</li>
+                                            <li>Hold pilates bar across shoulders (behind neck)</li>
+                                            <li>Keep chest up and core engaged</li>
+                                            <li>Bend knees and hips, lower to parallel (thighs parallel to floor)</li>
+                                            <li>Knees track over toes (don't cave inward)</li>
+                                            <li>Drive through heels to stand</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">💡 Pro Tips:</h4>
+                                        <ul class="space-y-2 text-secondary text-sm">
+                                            <li>✓ Chest upright throughout - no forward lean</li>
+                                            <li>✓ Weight in heels, not toes</li>
+                                            <li>✓ Full depth: hips below knees</li>
+                                            <li>✓ Band tension increases resistance</li>
+                                            <li>✗ Avoid: Knees caving inward</li>
+                                            <li>✗ Avoid: Heels lifting off ground</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">💪 Muscles:</p>
+                                        <p class="text-accent font-bold">Quads, Glutes, Hamstrings</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">⚙️ Equipment:</p>
+                                        <p class="text-accent font-bold">Pilates Bar, Band</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dumbbell Romanian Deadlift -->
+                            <div class="bg-card-bg/60 border border-accent/30 rounded-lg p-6">
+                                <h3 class="text-2xl font-bold text-accent mb-4">2. Dumbbell Romanian Deadlift</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">📋 Form Steps:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-secondary text-sm">
+                                            <li>Stand with feet hip-width apart</li>
+                                            <li>Hold dumbbells in front of thighs</li>
+                                            <li>Slight bend in knees (not locked)</li>
+                                            <li>Hinge at hips, lower weight down legs</li>
+                                            <li>Feel stretch in hamstrings at bottom</li>
+                                            <li>Drive hips forward to return to standing</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">💡 Pro Tips:</h4>
+                                        <ul class="space-y-2 text-secondary text-sm">
+                                            <li>✓ Keep back straight - slight natural curve</li>
+                                            <li>✓ Dumbbells stay close to legs</li>
+                                            <li>✓ Feel hamstring stretch at bottom</li>
+                                            <li>✓ Hip hinge is key, not bending knees</li>
+                                            <li>✗ Avoid: Rounding lower back</li>
+                                            <li>✗ Avoid: Bending knees too much</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">💪 Muscles:</p>
+                                        <p class="text-accent font-bold">Hamstrings, Glutes, Lower Back</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">⚙️ Equipment:</p>
+                                        <p class="text-accent font-bold">Dumbbells</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Static Lunge (Ankle Focus) -->
+                            <div class="bg-card-bg/60 border border-accent/30 rounded-lg p-6">
+                                <h3 class="text-2xl font-bold text-accent mb-4">3. Static Lunge (Ankle Focus)</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">📋 Form Steps:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-secondary text-sm">
+                                            <li>Stand with feet together</li>
+                                            <li>Step forward with one leg</li>
+                                            <li>Lower until both knees are at 90°</li>
+                                            <li>Front knee aligned directly above ankle</li>
+                                            <li>Back knee hovers just above ground</li>
+                                            <li>Keep torso upright, focus on ankle stability</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">💡 Pro Tips:</h4>
+                                        <ul class="space-y-2 text-secondary text-sm">
+                                            <li>✓ Front knee tracks over toes</li>
+                                            <li>✓ Balance weight between both legs</li>
+                                            <li>✓ Activate ankle stabilizers</li>
+                                            <li>✓ Control during descent and ascent</li>
+                                            <li>✗ Avoid: Front knee past toes</li>
+                                            <li>✗ Avoid: Leaning forward</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">💪 Muscles:</p>
+                                        <p class="text-accent font-bold">Quads, Glutes, Ankle Stabilizers</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">⚙️ Equipment:</p>
+                                        <p class="text-accent font-bold">Bodyweight</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Banded Glute Bridge -->
+                            <div class="bg-card-bg/60 border border-accent/30 rounded-lg p-6">
+                                <h3 class="text-2xl font-bold text-accent mb-4">4. Banded Glute Bridge</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">📋 Form Steps:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-secondary text-sm">
+                                            <li>Lie on back, knees bent, feet flat</li>
+                                            <li>Place band above knees</li>
+                                            <li>Push knees outward against band</li>
+                                            <li>Drive through heels, lift hips</li>
+                                            <li>Squeeze glutes hard at top</li>
+                                            <li>Lower hips with control</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">💡 Pro Tips:</h4>
+                                        <ul class="space-y-2 text-secondary text-sm">
+                                            <li>✓ Maintain tension on band throughout</li>
+                                            <li>✓ Squeeze glutes - don't use lower back</li>
+                                            <li>✓ Knees push against band all movement</li>
+                                            <li>✓ Full glute contraction at top</li>
+                                            <li>✗ Avoid: Lower back hyperextending</li>
+                                            <li>✗ Avoid: Losing band tension</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">💪 Muscles:</p>
+                                        <p class="text-accent font-bold">Glutes, Hamstrings, Core</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">⚙️ Equipment:</p>
+                                        <p class="text-accent font-bold">Band, Mat</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Calf Raises (Ankle Focus) -->
+                            <div class="bg-card-bg/60 border border-accent/30 rounded-lg p-6">
+                                <h3 class="text-2xl font-bold text-accent mb-4">5. Calf Raises (Ankle Focus)</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">📋 Form Steps:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-secondary text-sm">
+                                            <li>Hold pilates bar for balance</li>
+                                            <li>Stand with feet hip-width apart</li>
+                                            <li>Rise up on toes, lifting heels high</li>
+                                            <li>Pause briefly at the top</li>
+                                            <li>Lower heels back to ground slowly</li>
+                                            <li>Focus on ankle control and stability</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">💡 Pro Tips:</h4>
+                                        <ul class="space-y-2 text-secondary text-sm">
+                                            <li>✓ Full range: heels up, then fully down</li>
+                                            <li>✓ Move through ankle joint only</li>
+                                            <li>✓ Controlled pace - not bouncy</li>
+                                            <li>✓ Balance on balls of feet</li>
+                                            <li>✗ Avoid: Bouncing at bottom</li>
+                                            <li>✗ Avoid: Turning feet inward/outward</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">💪 Muscles:</p>
+                                        <p class="text-accent font-bold">Calves, Ankles</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">⚙️ Equipment:</p>
+                                        <p class="text-accent font-bold">Pilates Bar</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Banded Lateral Walk -->
+                            <div class="bg-card-bg/60 border border-accent/30 rounded-lg p-6">
+                                <h3 class="text-2xl font-bold text-accent mb-4">6. Banded Lateral Walk</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">📋 Form Steps:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-secondary text-sm">
+                                            <li>Place band above knees or at ankles</li>
+                                            <li>Stand with feet hip-width apart</li>
+                                            <li>Slight bend in knees and hips</li>
+                                            <li>Maintain tension on band</li>
+                                            <li>Step to side, keeping band tight</li>
+                                            <li>Alternate directions for reps</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">💡 Pro Tips:</h4>
+                                        <ul class="space-y-2 text-secondary text-sm">
+                                            <li>✓ Keep knees bent throughout</li>
+                                            <li>✓ Never let knees cave inward</li>
+                                            <li>✓ Push against band each step</li>
+                                            <li>✓ Controlled, deliberate steps</li>
+                                            <li>✗ Avoid: Standing upright - bend knees</li>
+                                            <li>✗ Avoid: Band going slack</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">💪 Muscles:</p>
+                                        <p class="text-accent font-bold">Glutes, Hip Abductors</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">⚙️ Equipment:</p>
+                                        <p class="text-accent font-bold">Resistance Band</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-accent/10 border border-accent/30 rounded-lg p-6 mt-8">
+                                <h4 class="font-bold text-accent mb-2">⚡ Key Takeaways:</h4>
+                                <ul class="space-y-2 text-secondary text-sm">
+                                    <li>🎯 <strong>Ankle Stability:</strong> Focus on controlled movements and body awareness</li>
+                                    <li>💪 <strong>Progressive Overload:</strong> Gradually increase band resistance or add weight</li>
+                                    <li>🔄 <strong>Full Range:</strong> Complete every rep with full range of motion</li>
+                                    <li>⏱️ <strong>Tempo:</strong> Control descent - 2-3 seconds down, 1 second up</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `,
+                    es: `
+                        <div class="space-y-6">
+                            <div class="text-center mb-8">
+                                <h2 class="text-3xl font-bold text-accent mb-2">🦵 Guía de Entrenamiento: Piernas y Tobillos</h2>
+                                <p class="text-secondary">Entrenamiento completo de piernas y estabilidad de tobillos para máxima fuerza y salud articular</p>
+                            </div>
+
+                            <!-- Sentadilla con Barra Pilates -->
+                            <div class="bg-card-bg/60 border border-accent/30 rounded-lg p-6">
+                                <h3 class="text-2xl font-bold text-accent mb-4">1. Sentadilla con Barra Pilates</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">📋 Pasos de Forma:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-secondary text-sm">
+                                            <li>Párate sobre la banda, pies a ancho de cadera</li>
+                                            <li>Sostén la barra pilates sobre los hombros (detrás del cuello)</li>
+                                            <li>Mantén pecho arriba y core contraído</li>
+                                            <li>Dobla rodillas y caderas, baja a paralelo (muslos paralelos al suelo)</li>
+                                            <li>Las rodillas siguen los dedos (no colapsen hacia adentro)</li>
+                                            <li>Empuja desde los talones para incorporarte</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">💡 Consejos Pro:</h4>
+                                        <ul class="space-y-2 text-secondary text-sm">
+                                            <li>✓ Pecho erguido durante todo el movimiento - sin inclinarte</li>
+                                            <li>✓ Peso en los talones, no en los dedos</li>
+                                            <li>✓ Profundidad completa: caderas debajo de rodillas</li>
+                                            <li>✓ La tensión de la banda aumenta la resistencia</li>
+                                            <li>✗ Evita: Rodillas colapsando hacia adentro</li>
+                                            <li>✗ Evita: Talones levantándose del suelo</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">💪 Músculos:</p>
+                                        <p class="text-accent font-bold">Cuádriceps, Glúteos, Isquiotibiales</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">⚙️ Equipamiento:</p>
+                                        <p class="text-accent font-bold">Barra Pilates, Banda</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Peso Muerto Rumano -->
+                            <div class="bg-card-bg/60 border border-accent/30 rounded-lg p-6">
+                                <h3 class="text-2xl font-bold text-accent mb-4">2. Peso Muerto Rumano con Mancernas</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">📋 Pasos de Forma:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-secondary text-sm">
+                                            <li>Párate con pies a ancho de cadera</li>
+                                            <li>Sostén mancernas frente a los muslos</li>
+                                            <li>Ligero doblez en rodillas (no bloqueadas)</li>
+                                            <li>Bisagra desde las caderas, baja el peso bajando las piernas</li>
+                                            <li>Siente el estiramiento en los isquiotibiales al fondo</li>
+                                            <li>Empuja las caderas hacia adelante para incorporarte</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">💡 Consejos Pro:</h4>
+                                        <ul class="space-y-2 text-secondary text-sm">
+                                            <li>✓ Mantén espalda recta - ligera curva natural</li>
+                                            <li>✓ Mancernas cerca de las piernas</li>
+                                            <li>✓ Siente el estiramiento de isquiotibiales al fondo</li>
+                                            <li>✓ La bisagra de cadera es clave, no doblar rodillas</li>
+                                            <li>✗ Evita: Redondear la espalda baja</li>
+                                            <li>✗ Evita: Doblar rodillas demasiado</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">💪 Músculos:</p>
+                                        <p class="text-accent font-bold">Isquiotibiales, Glúteos, Espalda Baja</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">⚙️ Equipamiento:</p>
+                                        <p class="text-accent font-bold">Mancernas</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Estocada Estática -->
+                            <div class="bg-card-bg/60 border border-accent/30 rounded-lg p-6">
+                                <h3 class="text-2xl font-bold text-accent mb-4">3. Estocada Estática (Enfoque en Tobillo)</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">📋 Pasos de Forma:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-secondary text-sm">
+                                            <li>Párate con pies juntos</li>
+                                            <li>Da un paso adelante con una pierna</li>
+                                            <li>Baja hasta que ambas rodillas estén a 90°</li>
+                                            <li>Rodilla frontal alineada directamente sobre el tobillo</li>
+                                            <li>Rodilla trasera flota justo sobre el suelo</li>
+                                            <li>Mantén torso erguido, enfócate en la estabilidad del tobillo</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">💡 Consejos Pro:</h4>
+                                        <ul class="space-y-2 text-secondary text-sm">
+                                            <li>✓ Rodilla frontal sigue los dedos del pie</li>
+                                            <li>✓ Equilibra peso entre ambas piernas</li>
+                                            <li>✓ Activa los estabilizadores del tobillo</li>
+                                            <li>✓ Controla el descenso y ascenso</li>
+                                            <li>✗ Evita: Rodilla frontal pasando los dedos</li>
+                                            <li>✗ Evita: Inclinarse hacia adelante</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">💪 Músculos:</p>
+                                        <p class="text-accent font-bold">Cuádriceps, Glúteos, Estabilizadores de Tobillo</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">⚙️ Equipamiento:</p>
+                                        <p class="text-accent font-bold">Peso Corporal</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Puente de Glúteos con Banda -->
+                            <div class="bg-card-bg/60 border border-accent/30 rounded-lg p-6">
+                                <h3 class="text-2xl font-bold text-accent mb-4">4. Puente de Glúteos con Banda</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">📋 Pasos de Forma:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-secondary text-sm">
+                                            <li>Acuéstate de espaldas, rodillas dobladas, pies planos</li>
+                                            <li>Coloca banda sobre las rodillas</li>
+                                            <li>Empuja rodillas hacia afuera contra la banda</li>
+                                            <li>Empuja a través de los talones, levanta caderas</li>
+                                            <li>Aprieta glúteos fuertemente en la parte superior</li>
+                                            <li>Baja caderas con control</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">💡 Consejos Pro:</h4>
+                                        <ul class="space-y-2 text-secondary text-sm">
+                                            <li>✓ Mantén tensión en la banda durante todo el movimiento</li>
+                                            <li>✓ Aprieta glúteos - no uses espalda baja</li>
+                                            <li>✓ Las rodillas empujan contra la banda todo el tiempo</li>
+                                            <li>✓ Contracción completa de glúteos en la parte superior</li>
+                                            <li>✗ Evita: Hiperextensión de espalda baja</li>
+                                            <li>✗ Evita: Perder tensión de la banda</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">💪 Músculos:</p>
+                                        <p class="text-accent font-bold">Glúteos, Isquiotibiales, Core</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">⚙️ Equipamiento:</p>
+                                        <p class="text-accent font-bold">Banda, Tapete</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Elevaciones de Pantorrilla -->
+                            <div class="bg-card-bg/60 border border-accent/30 rounded-lg p-6">
+                                <h3 class="text-2xl font-bold text-accent mb-4">5. Elevaciones de Pantorrilla (Enfoque en Tobillo)</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">📋 Pasos de Forma:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-secondary text-sm">
+                                            <li>Sostén la barra pilates para equilibrio</li>
+                                            <li>Párate con pies a ancho de cadera</li>
+                                            <li>Levántate sobre los dedos, eleva talones alto</li>
+                                            <li>Pausa brevemente en la parte superior</li>
+                                            <li>Baja talones al suelo lentamente</li>
+                                            <li>Enfócate en el control y estabilidad del tobillo</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">💡 Consejos Pro:</h4>
+                                        <ul class="space-y-2 text-secondary text-sm">
+                                            <li>✓ Rango completo: talones arriba, luego completamente abajo</li>
+                                            <li>✓ Muévete solo a través de la articulación del tobillo</li>
+                                            <li>✓ Ritmo controlado - no rebotes</li>
+                                            <li>✓ Equilibrio sobre la parte anterior del pie</li>
+                                            <li>✗ Evita: Rebotar en la parte inferior</li>
+                                            <li>✗ Evita: Girar los pies hacia adentro/afuera</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">💪 Músculos:</p>
+                                        <p class="text-accent font-bold">Pantorrillas, Tobillos</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">⚙️ Equipamiento:</p>
+                                        <p class="text-accent font-bold">Barra Pilates</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Caminata Lateral con Banda -->
+                            <div class="bg-card-bg/60 border border-accent/30 rounded-lg p-6">
+                                <h3 class="text-2xl font-bold text-accent mb-4">6. Caminata Lateral con Banda</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">📋 Pasos de Forma:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-secondary text-sm">
+                                            <li>Coloca banda sobre rodillas o tobillos</li>
+                                            <li>Párate con pies a ancho de cadera</li>
+                                            <li>Ligero doblez en rodillas y caderas</li>
+                                            <li>Mantén tensión en la banda</li>
+                                            <li>Da un paso al lado, mantén la banda tensa</li>
+                                            <li>Alterna direcciones para las repeticiones</li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-primary mb-2">💡 Consejos Pro:</h4>
+                                        <ul class="space-y-2 text-secondary text-sm">
+                                            <li>✓ Mantén rodillas dobladas durante todo</li>
+                                            <li>✓ Nunca dejes que las rodillas colapsen hacia adentro</li>
+                                            <li>✓ Empuja contra la banda en cada paso</li>
+                                            <li>✓ Pasos controlados y deliberados</li>
+                                            <li>✗ Evita: Estar erguido - dobla rodillas</li>
+                                            <li>✗ Evita: La banda aflojándose</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">💪 Músculos:</p>
+                                        <p class="text-accent font-bold">Glúteos, Abductores de Cadera</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded">
+                                        <p class="text-secondary text-sm">⚙️ Equipamiento:</p>
+                                        <p class="text-accent font-bold">Banda de Resistencia</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-accent/10 border border-accent/30 rounded-lg p-6 mt-8">
+                                <h4 class="font-bold text-accent mb-2">⚡ Puntos Clave:</h4>
+                                <ul class="space-y-2 text-secondary text-sm">
+                                    <li>🎯 <strong>Estabilidad de Tobillo:</strong> Enfócate en movimientos controlados y conciencia corporal</li>
+                                    <li>💪 <strong>Sobrecarga Progresiva:</strong> Aumenta gradualmente la resistencia de la banda o agrega peso</li>
+                                    <li>🔄 <strong>Rango Completo:</strong> Completa cada repetición con rango completo de movimiento</li>
+                                    <li>⏱️ <strong>Tempo:</strong> Controla el descenso - 2-3 segundos abajo, 1 segundo arriba</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `
+                };
+                return content[lang] || content.en;
+            }
+        }
+    };
+    
+    // --- Comprehensive Exercise Library ---
+    const exerciseLibrary = {
+        'Dumbbell Bench Press': {
+            category: 'Chest',
+            equipment: '🏋️ Dumbbells',
+            difficulty: 'Intermediate',
+            form: [
+                '1. Lie flat on a bench (or floor for home gym)',
+                '2. Hold dumbbells at chest level, elbows at 90°',
+                '3. Press dumbbells upward until arms are extended',
+                '4. Lower back to chest with control',
+                '5. Keep your core engaged and back flat'
+            ],
+            tips: [
+                '✓ Elbows should be at ~75° angle from body',
+                '✓ Full range of motion: chest to full extension',
+                '✓ Breathe out on press, in on lower',
+                '✗ Avoid: Bouncing or rushing the movement',
+                '✗ Avoid: Elbows too wide (risk of injury)'
+            ],
+            muscleGroups: ['Chest', 'Triceps', 'Shoulders'],
+            source: 'ACE (American Council on Exercise)'
+        },
+        'Pilates Bar Shoulder Press': {
+            category: 'Shoulders',
+            equipment: '🎯 Pilates Bar + Resistance Band',
+            difficulty: 'Beginner',
+            form: [
+                '1. Stand with feet shoulder-width apart',
+                '2. Step on band with both feet (for resistance)',
+                '3. Hold pilates bar at shoulder height',
+                '4. Press bar overhead until arms extend',
+                '5. Lower back to shoulder height with control',
+                '6. Keep core engaged throughout'
+            ],
+            tips: [
+                '✓ Keep wrists neutral and stable',
+                '✓ Press straight overhead, not forward',
+                '✓ Maintain good posture - no arching',
+                '✗ Avoid: Using momentum to press',
+                '✗ Avoid: Pressing too far forward'
+            ],
+            muscleGroups: ['Shoulders', 'Triceps', 'Core'],
+            source: 'NASM (National Academy of Sports Medicine)'
+        },
+        'Band Flys': {
+            category: 'Chest',
+            equipment: '🟰 Resistance Bands',
+            difficulty: 'Beginner',
+            form: [
+                '1. Attach band at chest height to door anchor',
+                '2. Stand with side to anchor, hold band',
+                '3. Extend arm straight out to side',
+                '4. Bring arm across body in a hugging motion',
+                '5. Slow and controlled - no swinging',
+                '6. Return to starting position'
+            ],
+            tips: [
+                '✓ Keep slight bend in elbow throughout',
+                '✓ Move only at shoulder joint',
+                '✓ Squeeze chest at end of movement',
+                '✗ Avoid: Locking elbow straight',
+                '✗ Avoid: Using momentum or swinging'
+            ],
+            muscleGroups: ['Chest', 'Front Shoulders'],
+            source: 'ACE Fitness'
+        },
+        'Dumbbell Lateral Raises': {
+            category: 'Shoulders',
+            equipment: '🏋️ Dumbbells',
+            difficulty: 'Beginner',
+            form: [
+                '1. Stand with feet hip-width apart',
+                '2. Hold dumbbells at sides with slight bend in elbows',
+                '3. Raise dumbbells out to sides to shoulder height',
+                '4. Slight bend at elbow - not locked',
+                '5. Lower with control back to starting position'
+            ],
+            tips: [
+                '✓ Elbow should be slightly higher than hand',
+                '✓ Move slowly - avoid momentum',
+                '✓ Full range from hip to shoulder height',
+                '✗ Avoid: Swinging the weights',
+                '✗ Avoid: Raising above shoulder height'
+            ],
+            muscleGroups: ['Lateral Shoulders', 'Upper Back'],
+            source: 'ISSA (International Sports Sciences Association)'
+        },
+        'Band Triceps Pushdowns': {
+            category: 'Triceps',
+            equipment: '🟰 Resistance Band + Door Anchor',
+            difficulty: 'Beginner',
+            form: [
+                '1. Attach band high on door',
+                '2. Face away from door, hold band at chest',
+                '3. Keep elbows at 90° angle close to body',
+                '4. Push band down until arms are extended',
+                '5. Hold briefly at bottom',
+                '6. Return to chest level with control'
+            ],
+            tips: [
+                '✓ Elbows stay close to ribs throughout',
+                '✓ Only elbow joint moves - no shoulder',
+                '✓ Squeeze triceps at bottom',
+                '✗ Avoid: Letting elbows flare out',
+                '✗ Avoid: Using back muscles for movement'
+            ],
+            muscleGroups: ['Triceps'],
+            source: 'NASM'
+        },
+        'Wrist Extension (Palms down)': {
+            category: 'Forearms',
+            equipment: '🎯 Pilates Bar',
+            difficulty: 'Beginner',
+            form: [
+                '1. Sit or stand with forearm flat on table',
+                '2. Hold pilates bar with palm facing down',
+                '3. Hand extends just past table edge',
+                '4. Lift bar by extending wrist upward',
+                '5. Lower back down with control',
+                '6. Keep forearm flat throughout'
+            ],
+            tips: [
+                '✓ Move only at wrist joint',
+                '✓ Full range: curl up then extend down',
+                '✓ Use light weight for proper form',
+                '✗ Avoid: Moving forearm or elbow',
+                '✗ Avoid: Jerky movements'
+            ],
+            muscleGroups: ['Forearm Extensors', 'Wrist'],
+            source: 'ACE Fitness'
+        },
+        'Pilates Bar Squat': {
+            category: 'Legs',
+            equipment: '🎯 Pilates Bar + Resistance Band',
+            difficulty: 'Intermediate',
+            form: [
+                '1. Step on band with both feet, hip-width apart',
+                '2. Hold pilates bar across shoulders (behind neck)',
+                '3. Keep chest up and core engaged',
+                '4. Bend knees and hips, lower to parallel',
+                '5. Knees track over toes',
+                '6. Drive through heels to stand'
+            ],
+            tips: [
+                '✓ Keep chest upright throughout',
+                '✓ Weight in heels, not toes',
+                '✓ Full depth: hips below knees',
+                '✗ Avoid: Knees caving inward',
+                '✗ Avoid: Heels lifting off ground'
+            ],
+            muscleGroups: ['Quads', 'Glutes', 'Hamstrings'],
+            source: 'ACE Fitness'
+        },
+        'Dumbbell Romanian Deadlift': {
+            category: 'Hamstrings',
+            equipment: '🏋️ Dumbbells',
+            difficulty: 'Intermediate',
+            form: [
+                '1. Stand with feet hip-width apart',
+                '2. Hold dumbbells in front of thighs',
+                '3. Slight bend in knees (not locked)',
+                '4. Hinge at hips, lowering weight down legs',
+                '5. Feel stretch in hamstrings',
+                '6. Drive hips forward to return to standing'
+            ],
+            tips: [
+                '✓ Keep back straight - slight curve natural',
+                '✓ Dumbbells stay close to legs',
+                '✓ Feel hamstring stretch at bottom',
+                '✗ Avoid: Rounding lower back',
+                '✗ Avoid: Bending knees too much'
+            ],
+            muscleGroups: ['Hamstrings', 'Glutes', 'Lower Back'],
+            source: 'NASM'
+        },
+        'Static Lunge (Ankle Focus)': {
+            category: 'Legs',
+            equipment: '🛏️ Mat/Floor',
+            difficulty: 'Intermediate',
+            form: [
+                '1. Stand with feet together',
+                '2. Step forward with one leg',
+                '3. Both knees bend to 90°',
+                '4. Front knee aligned with ankle',
+                '5. Back knee hovers just above ground',
+                '6. Keep torso upright, focus on ankle stability'
+            ],
+            tips: [
+                '✓ Front knee tracks over toes',
+                '✓ Keep weight balanced between legs',
+                '✓ Activate ankle stabilizers',
+                '✗ Avoid: Front knee past toes',
+                '✗ Avoid: Leaning forward'
+            ],
+            muscleGroups: ['Quads', 'Glutes', 'Ankle Stabilizers'],
+            source: 'NASM'
+        },
+        'Banded Glute Bridge': {
+            category: 'Glutes',
+            equipment: '🟰 Resistance Band + Mat',
+            difficulty: 'Beginner',
+            form: [
+                '1. Lie on back, knees bent, feet flat',
+                '2. Place band above knees',
+                '3. Push knees outward against band',
+                '4. Drive through heels, lift hips',
+                '5. Squeeze glutes at top',
+                '6. Lower hips with control'
+            ],
+            tips: [
+                '✓ Maintain tension on band throughout',
+                '✓ Squeeze glutes - don\'t use lower back',
+                '✓ Knees push against band all movement',
+                '✗ Avoid: Lower back hyperextending',
+                '✗ Avoid: Losing band tension'
+            ],
+            muscleGroups: ['Glutes', 'Hamstrings', 'Core'],
+            source: 'ACE Fitness'
+        },
+        'Calf Raises (Ankle Focus)': {
+            category: 'Calves',
+            equipment: '🎯 Pilates Bar',
+            difficulty: 'Beginner',
+            form: [
+                '1. Hold pilates bar for balance',
+                '2. Stand with feet hip-width apart',
+                '3. Rise up on toes, lifting heels high',
+                '4. Pause briefly at the top',
+                '5. Lower heels back to ground',
+                '6. Focus on ankle control and stability'
+            ],
+            tips: [
+                '✓ Full range: heels up, then fully down',
+                '✓ Move through ankle joint only',
+                '✓ Controlled pace - not bouncy',
+                '✗ Avoid: Bouncing at bottom',
+                '✗ Avoid: Turning feet inward/outward'
+            ],
+            muscleGroups: ['Calves', 'Ankle'],
+            source: 'ACE Fitness'
+        },
+        'Pilates Bar Lat Pulldown': {
+            category: 'Back',
+            equipment: '🎯 Pilates Bar + Door Anchor',
+            difficulty: 'Beginner',
+            form: [
+                '1. Attach band at top of door',
+                '2. Hold pilates bar with hands shoulder-width',
+                '3. Sit with knees bent, feet flat',
+                '4. Pull bar down to chest level',
+                '5. Keep elbows pointing down',
+                '6. Return with control'
+            ],
+            tips: [
+                '✓ Elbows follow straight path downward',
+                '✓ Pull elbows back and down',
+                '✓ Squeeze back muscles at bottom',
+                '✗ Avoid: Pulling bar too far down',
+                '✗ Avoid: Using arms instead of back'
+            ],
+            muscleGroups: ['Lats', 'Back', 'Biceps'],
+            source: 'NASM'
+        },
+        'Dumbbell Bent-Over Row': {
+            category: 'Back',
+            equipment: '🏋️ Dumbbells',
+            difficulty: 'Intermediate',
+            form: [
+                '1. Stand with feet hip-width apart',
+                '2. Hold dumbbells at sides',
+                '3. Hinge at hips, back nearly parallel to floor',
+                '4. Pull dumbbells to rib cage',
+                '5. Squeeze back muscles at top',
+                '6. Lower dumbbells with control'
+            ],
+            tips: [
+                '✓ Keep back straight - engaged core',
+                '✓ Pull elbows close to body',
+                '✓ Full range from hang to chest',
+                '✗ Avoid: Rounding lower back',
+                '✗ Avoid: Using momentum'
+            ],
+            muscleGroups: ['Back', 'Lats', 'Biceps'],
+            source: 'ACE Fitness'
+        },
+        'Band Face Pulls': {
+            category: 'Shoulders',
+            equipment: '🟰 Resistance Band + Door Anchor',
+            difficulty: 'Beginner',
+            form: [
+                '1. Attach band at face height on door',
+                '2. Stand facing door, hold band',
+                '3. Pull band toward face/head',
+                '4. Elbows stay high and flared',
+                '5. Pause briefly at end',
+                '6. Return with control'
+            ],
+            tips: [
+                '✓ Elbows high - at or above shoulder',
+                '✓ Rotate hands outward at end',
+                '✓ Squeeze rear shoulders and upper back',
+                '✗ Avoid: Pulling down instead of to face',
+                '✗ Avoid: Letting elbows drop'
+            ],
+            muscleGroups: ['Rear Shoulders', 'Upper Back'],
+            source: 'NASM'
+        },
+        'Pilates Bar Bicep Curl': {
+            category: 'Biceps',
+            equipment: '🎯 Pilates Bar + Resistance Band',
+            difficulty: 'Beginner',
+            form: [
+                '1. Stand with feet hip-width apart',
+                '2. Step on band with both feet',
+                '3. Hold pilates bar, arms extended',
+                '4. Bend elbows, curl bar to shoulders',
+                '5. Squeeze biceps at top',
+                '6. Lower with control'
+            ],
+            tips: [
+                '✓ Keep elbows close to body',
+                '✓ Only elbow joint moves',
+                '✓ Full range: extended to shoulders',
+                '✗ Avoid: Swinging or using momentum',
+                '✗ Avoid: Elbows flaring out'
+            ],
+            muscleGroups: ['Biceps', 'Forearms'],
+            source: 'ACE Fitness'
+        },
+        'Wrist Flexion (Palms up)': {
+            category: 'Forearms',
+            equipment: '🎯 Pilates Bar',
+            difficulty: 'Beginner',
+            form: [
+                '1. Sit with forearm flat on table',
+                '2. Hold pilates bar with palm facing up',
+                '3. Hand extends just past table edge',
+                '4. Curl wrist upward',
+                '5. Lower back down with control',
+                '6. Keep forearm flat throughout'
+            ],
+            tips: [
+                '✓ Move only at wrist joint',
+                '✓ Full range: down then up fully',
+                '✓ Use light weight for control',
+                '✗ Avoid: Moving forearm or elbow',
+                '✗ Avoid: Bouncing at bottom'
+            ],
+            muscleGroups: ['Forearm Flexors', 'Wrist'],
+            source: 'ACE Fitness'
+        },
+        'Pull Through': {
+            category: 'Glutes',
+            equipment: '🔔 Kettlebell + Cable Anchor (Low)',
+            difficulty: 'Intermediate',
+            form: [
+                '1. Attach band low on door or anchor',
+                '2. Stand facing away, hold band between legs',
+                '3. Feet hip-width apart, slight bend in knees',
+                '4. Hinge at hips, push band between legs',
+                '5. Drive hips forward',
+                '6. Return to standing'
+            ],
+            tips: [
+                '✓ Power comes from hips, not arms',
+                '✓ Keep core engaged throughout',
+                '✓ Full hip extension at top',
+                '✗ Avoid: Rounding lower back',
+                '✗ Avoid: Using arms to pull'
+            ],
+            muscleGroups: ['Glutes', 'Hamstrings', 'Lower Back'],
+            source: 'NASM'
+        },
+        'Banded Lateral Walk': {
+            category: 'Glutes',
+            equipment: '🟰 Resistance Band',
+            difficulty: 'Beginner',
+            form: [
+                '1. Place band above knees or at ankles',
+                '2. Stand with feet hip-width apart',
+                '3. Slight bend in knees and hips',
+                '4. Maintain tension on band',
+                '5. Step to side, keeping band tight',
+                '6. Alternate directions'
+            ],
+            tips: [
+                '✓ Keep knees bent throughout',
+                '✓ Never let knees cave inward',
+                '✓ Push against band each step',
+                '✗ Avoid: Standing upright - bend knees',
+                '✗ Avoid: Band going slack'
+            ],
+            muscleGroups: ['Glutes', 'Hip Abductors'],
+            source: 'ACE Fitness'
+        },
+        'Pilates Bar Russian Twists': {
+            category: 'Core',
+            equipment: '🎯 Pilates Bar',
+            difficulty: 'Intermediate',
+            form: [
+                '1. Sit on floor with knees bent',
+                '2. Lean back slightly (45° angle)',
+                '3. Hold pilates bar with hands',
+                '4. Rotate torso left, tap bar to ground',
+                '5. Rotate to right, tap to ground',
+                '6. Keep core engaged throughout'
+            ],
+            tips: [
+                '✓ Rotation comes from abs, not arms',
+                '✓ Keep chest up - don\'t slouch',
+                '✓ Move with control, not speed',
+                '✗ Avoid: Jerking or bouncing',
+                '✗ Avoid: Over-rotating too far'
+            ],
+            muscleGroups: ['Obliques', 'Core'],
+            source: 'NASM'
+        },
+        'Plank': {
+            category: 'Core',
+            equipment: '🛏️ Mat/Floor',
+            difficulty: 'Beginner',
+            form: [
+                '1. Get into push-up position',
+                '2. Lower to forearms, elbows under shoulders',
+                '3. Body in straight line from head to heels',
+                '4. Engage core throughout',
+                '5. Hold position without sagging hips',
+                '6. Breathe steadily - don\'t hold breath'
+            ],
+            tips: [
+                '✓ Hips level with body - not sagging',
+                '✓ Shoulders over elbows',
+                '✓ Core squeezed tight',
+                '✗ Avoid: Hips dropping or rising',
+                '✗ Avoid: Holding breath'
+            ],
+            muscleGroups: ['Core', 'Shoulders', 'Back'],
+            source: 'ACE Fitness'
+        },
+        'Bird-Dog': {
+            category: 'Core',
+            equipment: '🛏️ Mat/Floor',
+            difficulty: 'Beginner',
+            form: [
+                '1. Start on hands and knees',
+                '2. Shoulders over hands, hips over knees',
+                '3. Extend opposite arm and leg',
+                '4. Hold briefly - maintain balance',
+                '5. Return slowly to start',
+                '6. Alternate sides'
+            ],
+            tips: [
+                '✓ Keep body aligned - no rotation',
+                '✓ Move slowly and controlled',
+                '✓ Squeeze core for stability',
+                '✗ Avoid: Rotating hips or shoulders',
+                '✗ Avoid: Moving too quickly'
+            ],
+            muscleGroups: ['Core', 'Lower Back', 'Glutes'],
+            source: 'NASM'
+        },
+        'Pilates Bar Thrusters': {
+            category: 'Full Body',
+            equipment: '🎯 Pilates Bar + Resistance Band',
+            difficulty: 'Advanced',
+            form: [
+                '1. Stand on band with feet shoulder-width',
+                '2. Hold bar at shoulder height',
+                '3. Squat down to parallel',
+                '4. Drive through heels, stand up',
+                '5. Press bar overhead in one motion',
+                '6. Return bar to shoulders'
+            ],
+            tips: [
+                '✓ Squat and press as one fluid motion',
+                '✓ Drive power from legs through upper body',
+                '✓ Full extension overhead',
+                '✗ Avoid: Pressing without full leg drive',
+                '✗ Avoid: Incomplete squat depth'
+            ],
+            muscleGroups: ['Quads', 'Shoulders', 'Full Body'],
+            source: 'CrossFit'
+        },
+        'Fast Band Rows': {
+            category: 'Back',
+            equipment: '🟰 Resistance Band + Door Anchor',
+            difficulty: 'Intermediate',
+            form: [
+                '1. Attach band at chest height on door',
+                '2. Stand facing door, hold band',
+                '3. Arms extended in front',
+                '4. Quickly pull band to chest',
+                '5. Squeeze back hard',
+                '6. Quick controlled return'
+            ],
+            tips: [
+                '✓ Speed is controlled, not wild',
+                '✓ Elbows pull close to body',
+                '✓ Explosive pull, controlled release',
+                '✗ Avoid: Excessive momentum',
+                '✗ Avoid: Sloppy form for speed'
+            ],
+            muscleGroups: ['Back', 'Lats', 'Biceps'],
+            source: 'NASM'
+        },
+        'Lunge with Twist': {
+            category: 'Full Body',
+            equipment: '🎯 Pilates Bar',
+            difficulty: 'Intermediate',
+            form: [
+                '1. Step forward into lunge position',
+                '2. Both knees at 90°',
+                '3. Hold pilates bar at chest',
+                '4. Rotate torso over front leg',
+                '5. Feel core and leg engagement',
+                '6. Return to center and step back'
+            ],
+            tips: [
+                '✓ Controlled lunge first, then twist',
+                '✓ Twist from core, not arms',
+                '✓ Keep front knee aligned',
+                '✗ Avoid: Twisting before stable in lunge',
+                '✗ Avoid: Front knee past toes'
+            ],
+            muscleGroups: ['Quads', 'Core', 'Glutes'],
+            source: 'NASM'
+        },
+        'Jumping Jacks': {
+            category: 'Cardio',
+            equipment: '🛏️ Space',
+            difficulty: 'Beginner',
+            form: [
+                '1. Stand with feet together, arms at sides',
+                '2. Jump up while spreading feet shoulder-width',
+                '3. Simultaneously raise arms to shoulder height',
+                '4. Jump back to starting position',
+                '5. Lower arms to sides',
+                '6. Repeat in continuous motion'
+            ],
+            tips: [
+                '✓ Land on balls of feet for cushioning',
+                '✓ Keep core engaged',
+                '✓ Smooth, rhythmic movement',
+                '✗ Avoid: Slamming feet when landing',
+                '✗ Avoid: Incomplete arm raises'
+            ],
+            muscleGroups: ['Full Body', 'Cardio'],
+            source: 'ACE Fitness'
+        }
+    };
+    
+    function generateExerciseLibrary() {
+        const container = document.getElementById('exercise-library');
+        let html = '<div class="space-y-4">';
+        
+        for (const [name, data] of Object.entries(exerciseLibrary)) {
+            html += `
+                <div class="bg-card-bg/80 rounded-lg border border-border p-4 sm:p-6 hover:border-accent transition">
+                    <div class="flex flex-col sm:flex-row justify-between items-start gap-4 mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-accent mb-2">${name}</h3>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-3 py-1 bg-accent/20 text-accent text-xs font-semibold rounded-full">${data.category}</span>
+                                <span class="px-3 py-1 bg-metabolic/20 text-metabolic text-xs font-semibold rounded-full">${data.difficulty}</span>
+                                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full">${data.equipment}</span>
+                            </div>
+                        </div>
+                        <span class="text-xs text-secondary italic">Source: ${data.source}</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-primary mb-3">📋 PROPER FORM:</h4>
+                            <ol class="space-y-2">
+                                ${data.form.map((step, i) => `<li class="text-secondary text-sm leading-relaxed">${step}</li>`).join('')}
+                            </ol>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-lg font-semibold text-primary mb-3">💡 PRO TIPS:</h4>
+                            <div class="space-y-2">
+                                ${data.tips.map(tip => `<p class="text-secondary text-sm leading-relaxed">${tip}</p>`).join('')}
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-border">
+                                <p class="text-xs text-secondary"><strong>Muscles:</strong> ${data.muscleGroups.join(', ')}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        html += '</div>';
+        container.innerHTML = html;
+    }
+    
+    // --- Date & Schedule Variables ---
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth(); // 0-11
+    const day = today.getDate(); // 1-31
+    const dateKey = `${year}-${month + 1}-${day}`; // Firestore document ID
+
+    const LOCAL_STORAGE_KEY = 'ftber_progress';
+    const ROUTINES_STORAGE_KEY = 'ftber_routines';
+    const LANGUAGE_STORAGE_KEY = 'ftber_language';
+    const schedulePattern = ['TORSO_PUSH', 'LEGS_ANKLES', 'YOGA_REST', 'TORSO_PULL', 'GLUTES_CORE', 'METABOLIC', 'REST'];
+    const monthlySchedule = {};
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        const date = new Date(year, month, d);
+        const dayOfWeek = date.getDay(); // 0 for Sunday, 1 for Monday...
+        const patternIndex = (dayOfWeek === 0) ? 6 : dayOfWeek - 1; // Adjust to make Monday the start of the week
+        monthlySchedule[d] = schedulePattern[patternIndex];
+    }
+
+    // --- Language System ---
+    const translations = {
+        en: {
+            today: 'Today',
+            stats: 'Stats',
+            calendar: 'Calendar',
+            routines: 'Routines',
+            library: 'Library',
+            yoga: 'Yoga',
+            weeklyStats: 'Weekly Statistics',
+            weeklyCompletion: 'Weekly Completion',
+            workoutsDone: 'Workouts Done',
+            totalExercises: 'Total Exercises',
+            streak: 'Streak',
+            daysActive: 'Days active',
+            dailyBreakdown: 'Daily Breakdown',
+            lastSevenDays: 'Last 7 days',
+            thisWeek: 'This week',
+            completed: 'Completed',
+            exercise: 'Exercise',
+            sets: 'Sets',
+            reps: 'Reps',
+            rest: 'Rest',
+            notes: 'Notes',
+            done: 'Done',
+            edit: 'Edit',
+            dailyProgress: 'Daily Progress',
+            equipmentNeeded: 'Equipment Needed',
+            viewVisualGuide: 'View Visual Guide',
+            routineMenu: 'Routine Menu',
+            customWorkout: 'Create Custom Workout',
+            selectRoutine: 'Select a routine to view',
+            editExercise: 'Edit Exercise',
+            deleteExercise: 'Delete Exercise',
+            save: 'Save',
+            cancel: 'Cancel',
+            addExercise: 'Add Exercise',
+            exerciseLibrary: 'Exercise Library',
+            category: 'Category',
+            equipment: 'Equipment',
+            difficulty: 'Difficulty',
+            muscleGroups: 'Muscle Groups',
+            formSteps: 'Form Steps',
+            proTips: 'Pro Tips',
+            dumbbell: 'Dumbbell',
+            pilatesBar: 'Pilates Bar',
+            band: 'Band',
+            kettlebell: 'Kettlebell',
+            mat: 'Mat',
+            doorAnchor: 'Door Anchor',
+            beginner: 'Beginner',
+            intermediate: 'Intermediate',
+            advanced: 'Advanced',
+            chest: 'Chest',
+            shoulders: 'Shoulders',
+            triceps: 'Triceps',
+            back: 'Back',
+            biceps: 'Biceps',
+            forearms: 'Forearms',
+            legs: 'Legs',
+            glutes: 'Glutes',
+            hamstrings: 'Hamstrings',
+            calves: 'Calves',
+            core: 'Core',
+            push: '💪 Push & Wrists',
+            legsAnkles: '🦵 Legs & Ankles',
+            pull: '🏋️‍♂️ Pull & Wrists',
+            glutesCore: '🍑 Glutes & Core',
+            metabolic: '⚡ Metabolic Circuit',
+            yoga: '🧘‍♂️ Active Rest',
+            rest: '😴 Full Rest',
+            chestShouldersTricepsStr: 'Chest, shoulders, triceps strength and wrist health.',
+            legsGlutesStr: 'Legs, glutes strength and ankle stability.',
+            backBicepsStr: 'Back, biceps strength and wrist health.',
+            posteriorChainAbs: 'Strengthening the posterior chain and abdomen.',
+            fatBurningCardio: 'Fat burning and cardiovascular endurance. Perform as a circuit.',
+            recoveryYoga: 'Recovery day with Yoga and mobility. Check the Yoga tab.',
+            recoveryGrowth: 'Recovery and Growth. Listen to your body!',
+            torso: 'Torso',
+            notas: 'Notes',
+            exerciseLibraryDesc: 'Complete guide to all exercises with proper form and technique',
+            recoveryYogaTitle: 'Recovery Yoga',
+            posesComplementTitle: 'Poses to complement your training, improve flexibility, and speed up recovery.',
+            weeklyStats: 'Weekly Statistics'
+        },
+        es: {
+            today: 'Hoy',
+            stats: 'Estadísticas',
+            calendar: 'Calendario',
+            routines: 'Rutinas',
+            library: 'Biblioteca',
+            yoga: 'Yoga',
+            weeklyStats: 'Estadísticas Semanales',
+            weeklyCompletion: 'Completitud Semanal',
+            workoutsDone: 'Entrenamientos Realizados',
+            totalExercises: 'Ejercicios Totales',
+            streak: 'Racha',
+            daysActive: 'Días activos',
+            dailyBreakdown: 'Desglose Diario',
+            lastSevenDays: 'Últimos 7 días',
+            thisWeek: 'Esta semana',
+            completed: 'Completados',
+            exercise: 'Ejercicio',
+            sets: 'Series',
+            reps: 'Repeticiones',
+            rest: 'Descanso',
+            notes: 'Notas',
+            done: 'Hecho',
+            edit: 'Editar',
+            dailyProgress: 'Progreso Diario',
+            equipmentNeeded: 'Equipamiento Necesario',
+            viewVisualGuide: 'Ver Guía Visual',
+            routineMenu: 'Menú de Rutinas',
+            customWorkout: 'Crear Entrenamiento Personalizado',
+            selectRoutine: 'Selecciona una rutina para ver',
+            editExercise: 'Editar Ejercicio',
+            deleteExercise: 'Eliminar Ejercicio',
+            save: 'Guardar',
+            cancel: 'Cancelar',
+            addExercise: 'Añadir Ejercicio',
+            exerciseLibrary: 'Biblioteca de Ejercicios',
+            category: 'Categoría',
+            equipment: 'Equipamiento',
+            difficulty: 'Dificultad',
+            muscleGroups: 'Grupos Musculares',
+            formSteps: 'Pasos de Forma',
+            proTips: 'Consejos Pro',
+            dumbbell: 'Mancernas',
+            pilatesBar: 'Barra Pilates',
+            band: 'Banda',
+            kettlebell: 'Pesa Rusa',
+            mat: 'Tapete',
+            doorAnchor: 'Ancla de Puerta',
+            beginner: 'Principiante',
+            intermediate: 'Intermedio',
+            advanced: 'Avanzado',
+            chest: 'Pecho',
+            shoulders: 'Hombros',
+            triceps: 'Tríceps',
+            back: 'Espalda',
+            biceps: 'Bíceps',
+            forearms: 'Antebrazos',
+            legs: 'Piernas',
+            glutes: 'Glúteos',
+            hamstrings: 'Isquiotibiales',
+            calves: 'Pantorrillas',
+            core: 'Core',
+            push: '💪 Empuje y Muñecas',
+            legsAnkles: '🦵 Piernas y Tobillos',
+            pull: '🏋️‍♂️ Tracción y Muñecas',
+            glutesCore: '🍑 Glúteos y Core',
+            metabolic: '⚡ Circuito Metabólico',
+            yoga: '🧘‍♂️ Descanso Activo',
+            rest: '😴 Descanso Completo',
+            chestShouldersTricepsStr: 'Fuerza de pecho, hombros, tríceps y salud de muñecas.',
+            legsGlutesStr: 'Fuerza de piernas, glúteos y estabilidad de tobillos.',
+            backBicepsStr: 'Fuerza de espalda, bíceps y salud de muñecas.',
+            posteriorChainAbs: 'Fortalecimiento de la cadena posterior y abdomen.',
+            fatBurningCardio: 'Quema de grasa y resistencia cardiovascular. Realizar como circuito.',
+            recoveryYoga: 'Día de recuperación con Yoga y movilidad. Revisa la pestaña de Yoga.',
+            recoveryGrowth: '¡Recuperación y Crecimiento. Escucha tu cuerpo!',
+            torso: 'Torso',
+            notas: 'Notas',
+            exerciseLibraryDesc: 'Guía completa de todos los ejercicios con forma y técnica adecuadas',
+            recoveryYogaTitle: 'Yoga de Recuperación',
+            posesComplementTitle: 'Posturas para complementar tu entrenamiento, mejorar la flexibilidad y acelerar la recuperación.',
+            weeklyStats: 'Estadísticas Semanales'
+        }
+    };
+
+    let currentLanguage = localStorage.getItem(LANGUAGE_STORAGE_KEY) || 'en';
+
+    function t(key) {
+        return translations[currentLanguage]?.[key] || translations.en[key] || key;
+    }
+
+    function updateLanguageDisplay() {
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            el.textContent = t(key);
+        });
+        document.querySelectorAll('[data-routine-key]').forEach(el => {
+            const routineKey = el.getAttribute('data-routine-key');
+            const routine = routines[routineKey];
+            if (routine && routine.title) {
+                const title = typeof routine.title === 'function' ? routine.title() : routine.title;
+                el.textContent = title.split(' ').slice(1).join(' '); // Remove emoji
+            }
+        });
+        const langToggle = document.getElementById('lang-toggle');
+        if (langToggle) {
+            langToggle.textContent = currentLanguage === 'en' ? '🌐 ES' : '🌐 EN';
+        }
+
+        // Re-render dynamic content
+        displayTodaysPlan();
+        generateCalendar();
+        const activeRoutine = document.querySelector('.routine-selector.tab-active');
+        if (activeRoutine) {
+            routineDetailsContainer.innerHTML = createRoutineHTML(activeRoutine.dataset.routine, false);
+        }
+    }
+
+    function switchLanguage() {
+        currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+        localStorage.setItem(LANGUAGE_STORAGE_KEY, currentLanguage);
+        updateLanguageDisplay();
+        // Re-render all visible content with new language
+        const activeTab = document.querySelector('.nav-tab.tab-active');
+        if (activeTab) {
+            switchTab(activeTab.dataset.tab);
+        }
+    }
+
+    // Exercise name translations
+    const exerciseNames = {
+        'Dumbbell Bench Press': { en: 'Dumbbell Bench Press', es: 'Press de Banco con Mancernas' },
+        'Pilates Bar Shoulder Press': { en: 'Pilates Bar Shoulder Press', es: 'Press de Hombros con Barra Pilates' },
+        'Band Flys': { en: 'Band Flys', es: 'Aperturas con Banda' },
+        'Dumbbell Lateral Raises': { en: 'Dumbbell Lateral Raises', es: 'Elevaciones Laterales con Mancernas' },
+        'Band Triceps Pushdowns': { en: 'Band Triceps Pushdowns', es: 'Fondos de Tríceps con Banda' },
+        'Wrist Extension (Palms down)': { en: 'Wrist Extension (Palms down)', es: 'Extensión de Muñeca (Palmas abajo)' },
+        'Pilates Bar Squat': { en: 'Pilates Bar Squat', es: 'Sentadilla con Barra Pilates' },
+        'Dumbbell Romanian Deadlift': { en: 'Dumbbell Romanian Deadlift', es: 'Peso Muerto Rumano con Mancernas' },
+        'Static Lunge (Ankle Focus)': { en: 'Static Lunge (Ankle Focus)', es: 'Estocada Estática (Enfoque en Tobillo)' },
+        'Banded Glute Bridge': { en: 'Banded Glute Bridge', es: 'Puente de Glúteos con Banda' },
+        'Calf Raises (Ankle Focus)': { en: 'Calf Raises (Ankle Focus)', es: 'Elevaciones de Pantorrilla (Enfoque en Tobillo)' },
+        'Pilates Bar Lat Pulldown': { en: 'Pilates Bar Lat Pulldown', es: 'Jalón de Espalda con Barra Pilates' },
+        'Dumbbell Bent-Over Row': { en: 'Dumbbell Bent-Over Row', es: 'Remo Inclinado con Mancernas' },
+        'Band Face Pulls': { en: 'Band Face Pulls', es: 'Jalones a la Cara con Banda' },
+        'Pilates Bar Bicep Curl': { en: 'Pilates Bar Bicep Curl', es: 'Curl de Bíceps con Barra Pilates' },
+        'Wrist Flexion (Palms up)': { en: 'Wrist Flexion (Palms up)', es: 'Flexión de Muñeca (Palmas arriba)' },
+        'Pull Through': { en: 'Pull Through', es: 'Jalón de Glúteos' },
+        'Banded Lateral Walk': { en: 'Banded Lateral Walk', es: 'Caminata Lateral con Banda' },
+        'Pilates Bar Russian Twists': { en: 'Pilates Bar Russian Twists', es: 'Giros Rusos con Barra Pilates' },
+        'Plank': { en: 'Plank', es: 'Plancha' },
+        'Bird-Dog': { en: 'Bird-Dog', es: 'Pájaro-Perro' },
+        'Pilates Bar Thrusters': { en: 'Pilates Bar Thrusters', es: 'Thrusters con Barra Pilates' },
+        'Fast Band Rows': { en: 'Fast Band Rows', es: 'Remos Rápidos con Banda' },
+        'Lunge with Twist': { en: 'Lunge with Twist', es: 'Estocada con Giro' },
+        'Jumping Jacks': { en: 'Jumping Jacks', es: 'Saltos de Tijera' }
+    };
+
+    function getExerciseName(englishName) {
+        if (currentLanguage === 'es' && exerciseNames[englishName]) {
+            return exerciseNames[englishName].es;
+        }
+        return englishName;
+    }
+
+    // Exercise descriptions in both languages
+    const exerciseDescriptions = {
+        'Dumbbell Bench Press': { en: 'Chest base strength', es: 'Fortaleza base del pecho' },
+        'Pilates Bar Shoulder Press': { en: 'Step on the band for resistance', es: 'Párate en la banda para resistencia' },
+        'Band Flys': { en: 'Isolate and stretch chest', es: 'Aisla y estira el pecho' },
+        'Dumbbell Lateral Raises': { en: 'Shoulder width', es: 'Ancho de hombros' },
+        'Band Triceps Pushdowns': { en: 'Isolate triceps', es: 'Aísla tríceps' },
+        'Wrist Extension (Palms down)': { en: 'Joint health, with pilates bar', es: 'Salud articular, con barra pilates' },
+        'Pilates Bar Squat': { en: 'Step on band, bar on back', es: 'Párate en la banda, barra en la espalda' },
+        'Dumbbell Romanian Deadlift': { en: 'Focus on hamstrings', es: 'Enfoque en isquiotibiales' },
+        'Static Lunge (Ankle Focus)': { en: 'Control ankle stability', es: 'Controla la estabilidad del tobillo' },
+        'Banded Glute Bridge': { en: 'Band on knees, push outwards', es: 'Banda en rodillas, empuja hacia afuera' },
+        'Calf Raises (Ankle Focus)': { en: 'With pilates bar for resistance', es: 'Con barra pilates para resistencia' },
+        'Pilates Bar Lat Pulldown': { en: 'High anchor on door', es: 'Anclaje alto en la puerta' },
+        'Dumbbell Bent-Over Row': { en: 'Back strength and density', es: 'Fuerza y densidad de espalda' },
+        'Band Face Pulls': { en: 'Shoulder health and posture', es: 'Salud de hombros y postura' },
+        'Pilates Bar Bicep Curl': { en: 'Step on band for resistance', es: 'Párate en la banda para resistencia' },
+        'Wrist Flexion (Palms up)': { en: 'Joint health, with pilates bar', es: 'Salud articular, con barra pilates' },
+        'Pull Through': { en: 'Low anchor, focus on glutes', es: 'Anclaje bajo, enfoque en glúteos' },
+        'Banded Lateral Walk': { en: 'Band on knees or ankles', es: 'Banda en rodillas o tobillos' },
+        'Pilates Bar Russian Twists': { en: 'Hold the bar, twist the torso', es: 'Sostén la barra, gira el torso' },
+        'Plank': { en: 'Keep body straight', es: 'Mantén el cuerpo recto' },
+        'Bird-Dog': { en: 'Slow and controlled movement', es: 'Movimiento lento y controlado' },
+        'Pilates Bar Thrusters': { en: 'Squat + Shoulder Press', es: 'Sentadilla + Press de Hombros' },
+        'Fast Band Rows': { en: 'Fast and steady pace', es: 'Ritmo rápido y constante' },
+        'Lunge with Twist': { en: 'With pilates bar', es: 'Con barra pilates' },
+        'Jumping Jacks': { en: 'Long rest at the end of the round', es: 'Descanso largo al final de la ronda' }
+    };
+
+    function getExerciseDescription(englishName) {
+        if (currentLanguage === 'es' && exerciseDescriptions[englishName]) {
+            return exerciseDescriptions[englishName].es;
+        }
+        return exerciseDescriptions[englishName]?.en || '';
+    }
+    
+    // --- DOM Elements ---
+    const tabs = document.querySelectorAll('.nav-tab');
+    const contentSections = document.querySelectorAll('.content-section');
+    const routineDetailsContainer = document.getElementById('routine-details-container');
+    const hoyContainer = document.getElementById('hoy');
+    const calendarBody = document.getElementById('calendar-body');
+    const calendarTitle = document.getElementById('calendar-title');
+    const mainContent = document.getElementById('main-content');
+    const modal = document.getElementById('guide-modal');
+    const guideTitle = document.getElementById('guide-title');
+    const guideContent = document.getElementById('guide-content');
+    const closeBtn = document.getElementById('close-guide-btn');
+    const editModal = document.getElementById('edit-exercise-modal');
+    const closeEditBtn = document.getElementById('close-edit-modal');
+    const editForm = document.getElementById('edit-exercise-form');
+
+    // --- Core Functions ---
+
+    function createRoutineHeaderHTML(routineData, routineKey, isTodayView) {
+        const isMetabolic = routineKey === 'METABOLIC';
+        let progressHTML = '';
+        if (isTodayView) {
+            progressHTML = `
+                <div class="mb-6">
+                    <h3 class="text-center font-bold text-xl mb-3 text-primary">Daily Progress</h3>
+                    <div id="progress-text" class="text-center font-bold text-lg mb-2 text-accent" style="text-shadow: var(--glow-accent);">0%</div>
+                    <div class="progress-bar-container" style="height: 1rem;">
+                        <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        let guideButtonHTML = '';
+        if (routineData.hasGuide) {
+            // Make the guide key dynamic instead of hardcoded
+            const guideKey = Object.keys(guides).find(key => routineKey.includes(key));
+            if (guideKey) {
+                 guideButtonHTML = `<div class="text-center my-4"><button data-guide="${guideKey}" class="show-guide-btn bg-accent text-bg-color font-bold py-2 px-4 rounded-lg hover:bg-accent-hover transition-colors">${t('viewVisualGuide')}</button></div>`;
+            }
+        }
+
+        const routineTitle = typeof routineData.title === 'function' ? routineData.title() : routineData.title;
+        const routineDesc = typeof routineData.description === 'function' ? routineData.description() : routineData.description;
+
+        return `<div class="bg-card-bg/80 p-4 sm:p-6 rounded-lg shadow-lg border ${isMetabolic ? 'metabolic-border metabolic-shadow' : 'border-border'}">
+                    ${progressHTML}
+                    <h2 class="text-2xl font-bold mb-1 text-center ${isMetabolic ? 'metabolic-text' : 'text-primary'}">${routineTitle}</h2>
+                    <p class="text-center text-secondary mb-2">${routineDesc}</p>
+                    ${guideButtonHTML}`;
+    }
+
+    function createRoutineTableHTML(exercises, isTodayView, routineKey) {
+        const rows = exercises.map((ex, index) => `
+            <tr class="border-b border-border last:border-b-0 hover:bg-black/20 transition">
+                <td class="p-3 font-medium text-primary">
+                    <div class="font-semibold">${getExerciseName(ex.name)}</div>
+                    <div class="text-xs text-secondary">${getExerciseDescription(ex.name)}</div>
+                </td>
+                <td class="p-3 text-center text-secondary">${ex.series}</td>
+                <td class="p-3 text-center text-secondary">${ex.reps}</td>
+                <td class="p-3 text-center text-secondary">${ex.rest}</td>
+                <td class="p-3 text-sm text-secondary">${ex.notes || ''}</td>
+                ${isTodayView ? `<td class="p-3 text-center"><input type="checkbox" data-exercise-index="${index}" class="h-5 w-5 rounded bg-card-bg border-border text-accent focus:ring-accent"></td>` : `<td class="p-3 text-center"><button class="edit-exercise-btn text-accent hover:text-accent-hover" data-routine="${routineKey}" data-index="${index}" title="Edit">✎</button></td>`}
+            </tr>
+        `).join('');
+
+        return `<div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-black/30"><tr><th class="p-3 font-semibold text-sm text-secondary uppercase">${t('exercise')}</th><th class="p-3 font-semibold text-sm text-center text-secondary uppercase">${t('sets')}</th><th class="p-3 font-semibold text-sm text-center text-secondary uppercase">${t('reps')}</th><th class="p-3 font-semibold text-sm text-center text-secondary uppercase">${t('rest')}</th><th class="p-3 font-semibold text-sm text-secondary uppercase">${t('notes')}</th><th class="p-3 font-semibold text-sm text-center text-secondary uppercase">${isTodayView ? t('done') : t('edit')}</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    }
+
+    function createRoutineHTML(routineKey, isTodayView) {
+        const routineData = routines[routineKey];
+        if (!routineData || !routineData.details) return '';
+
+        const isMetabolic = routineKey === 'METABOLIC';
+        
+        let progressHTML = '';
+        const headerHTML = createRoutineHeaderHTML(routineData, routineKey, isTodayView);
+        const tableHTML = createRoutineTableHTML(routineData.details.exercises, isTodayView, routineKey);
+        
+        // Get unique equipment needed
+        const equipmentSet = new Set();
+        routineData.details.exercises.forEach(ex => {
+            if (ex.name.includes('Dumbbell')) equipmentSet.add('🏋️ Dumbbells');
+            if (ex.name.includes('Pilates Bar')) equipmentSet.add('🎯 Pilates Bar');
+            if (ex.name.includes('Band') || ex.name.includes('Banded')) equipmentSet.add('🟰 Resistance Bands');
+            if (ex.name.includes('Kettlebell')) equipmentSet.add('🔔 Kettlebell');
+            if (ex.name.includes('Plank') || ex.name.includes('Push-up')) equipmentSet.add('🛏️ Mat/Floor');
+            if (ex.name.includes('Pull') || ex.name.includes('Lat')) equipmentSet.add('🚪 Door Anchor');
+            if (ex.name.includes('Squat')) equipmentSet.add('🏋️ Dumbbells or Bar');
+        });
+        
+        let equipmentHTML = '';
+        if (equipmentSet.size > 0 && isTodayView) {
+            equipmentHTML = `
+                <div class="mt-6 p-4 bg-metabolic/10 border border-metabolic/30 rounded-lg">
+                    <h4 class="font-bold text-metabolic mb-3">⚙️ ${t('equipmentNeeded')}</h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        ${Array.from(equipmentSet).map(eq => `<div class="flex items-center gap-2 text-sm text-secondary"><span class="text-base">${eq.split(' ')[0]}</span> <span>${eq.split(' ').slice(1).join(' ')}</span></div>`).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        const commonSectionsHTML = `
+            <div class="mt-6 p-4 bg-accent/10 text-accent rounded-lg border border-accent/20">
+                <h4 class="font-bold">▶️ WARM-UP (10 MIN BEFORE)</h4>
+                <p class="text-sm text-secondary">Joint mobility (wrists, ankles, hips), 5 min light cardio (Jumping Jacks, jogging in place), Bodyweight Squats, Cat-Cow.</p>
+            </div>
+            <div class="mt-4 p-4 bg-metabolic/10 text-metabolic rounded-lg border border-metabolic/20">
+                <h4 class="font-bold">⏸️ COOL-DOWN (10 MIN AFTER)</h4>
+                <p class="text-sm text-secondary">Gentle stretches for the muscles worked. Check the Yoga tab for specific ideas based on the routine.</p>
+            </div>
+        `;
+        
+        return headerHTML + tableHTML + equipmentHTML + commonSectionsHTML + `</div>`;
+    }
+
+    async function displayTodaysPlan() {
+        const activityKey = monthlySchedule[day];
+        const activity = routines[activityKey];
+        const todayName = today.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        const dayOfWeekEmoji = ['🌙', '📅', '📅', '📅', '📅', '📅', '📅'][today.getDay()];
+
+        let content = '';
+        
+        if (activity.details) {
+            // Workout day
+            content = `
+                <div class="space-y-6">
+                    <!-- Header Card -->
+                    <div class="relative overflow-hidden bg-gradient-to-r from-card-bg/80 to-card-bg/40 p-8 rounded-2xl shadow-2xl border border-accent/30 backdrop-blur-sm">
+                        <div class="absolute -right-20 -top-10 w-60 h-60 bg-accent/10 rounded-full blur-3xl"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="inline-block px-4 py-2 bg-accent/20 border border-accent rounded-full">
+                                    <p class="text-accent text-sm font-semibold uppercase tracking-wider">${todayName}</p>
+                                </div>
+                                <div class="text-4xl">${dayOfWeekEmoji}</div>
+                            </div>
+                            <h2 class="text-5xl sm:text-6xl font-bold animated-text-glow mb-2">Today's Workout</h2>
+                            <p class="text-secondary text-lg">Get ready to crush your goals 💪</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Main Content -->
+                    ${createRoutineHTML(activityKey, true)}
+                </div>
+            `;
+        } else {
+            // Rest/Recovery day
+            const isFullRest = activityKey === 'REST';
+            const emoji = isFullRest ? '🛌' : '🧘‍♀️';
+            const badge = isFullRest ? 'Full Rest' : 'Active Recovery';
+            const color = isFullRest ? 'emerald' : 'accent';
+            
+            content = `
+                <div class="space-y-6">
+                    <!-- Header Card -->
+                    <div class="relative overflow-hidden bg-gradient-to-r from-card-bg/80 to-card-bg/40 p-8 rounded-2xl shadow-2xl border border-${color}/30 backdrop-blur-sm">
+                        <div class="absolute -right-20 -top-10 w-60 h-60 bg-${color}/10 rounded-full blur-3xl"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="inline-block px-4 py-2 bg-${color}/20 border border-${color} rounded-full">
+                                    <p class="text-${color} text-sm font-bold uppercase tracking-widest">${emoji} ${badge}</p>
+                                </div>
+                                <div class="text-4xl">${emoji}</div>
+                            </div>
+                            <h2 class="text-5xl sm:text-6xl font-bold animated-text-glow mb-2">${activity.title}</h2>
+                            <p class="text-secondary text-lg">${activity.description}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Recovery Info Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-card-bg/80 border border-accent/30 rounded-xl p-6 hover:border-accent/50 transition-all">
+                            <div class="flex items-start gap-3">
+                                <div class="text-2xl">⚡</div>
+                                <div>
+                                    <p class="text-accent font-bold mb-1">Why Rest Matters</p>
+                                    <p class="text-secondary text-sm">Muscle recovery and growth happen during rest. Let your body adapt and rebuild stronger.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-card-bg/80 border border-accent/30 rounded-xl p-6 hover:border-accent/50 transition-all">
+                            <div class="flex items-start gap-3">
+                                <div class="text-2xl">💧</div>
+                                <div>
+                                    <p class="text-accent font-bold mb-1">Recovery Tips</p>
+                                    <p class="text-secondary text-sm">Stay hydrated, eat well, get quality sleep, and listen to your body's signals.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-card-bg/80 border border-accent/30 rounded-xl p-6 hover:border-accent/50 transition-all">
+                            <div class="flex items-start gap-3">
+                                <div class="text-2xl">🧘‍♀️</div>
+                                <div>
+                                    <p class="text-accent font-bold mb-1">Mobility Work</p>
+                                    <p class="text-secondary text-sm">Light stretching, yoga, or foam rolling can enhance recovery and flexibility.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-card-bg/80 border border-accent/30 rounded-xl p-6 hover:border-accent/50 transition-all">
+                            <div class="flex items-start gap-3">
+                                <div class="text-2xl">📊</div>
+                                <div>
+                                    <p class="text-accent font-bold mb-1">Plan Ahead</p>
+                                    <p class="text-secondary text-sm">Check your calendar for tomorrow's workout and prepare mentally and physically.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Motivation Card -->
+                    <div class="relative overflow-hidden bg-gradient-to-r from-metabolic/10 to-accent/10 p-8 rounded-2xl shadow-lg border border-accent/20 backdrop-blur-sm">
+                        <div class="absolute -left-20 -bottom-10 w-40 h-40 bg-accent/5 rounded-full blur-3xl"></div>
+                        <div class="relative z-10 text-center">
+                            <p class="text-lg text-secondary mb-2">Remember:</p>
+                            <p class="text-2xl font-bold text-accent">Rest is not laziness, it's part of the process. 💪</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        hoyContainer.innerHTML = content;
+    }
+
+    function getStoredProgress() {
+        const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+        try {
+            return stored ? JSON.parse(stored) : {};
+        } catch (e) {
+            console.error("Error parsing stored progress:", e);
+            return {};
+        }
+    }
+
+    function updateProgressUI() {
+        const checkboxes = document.querySelectorAll('#hoy input[type="checkbox"]');
+        const total = checkboxes.length;
+        if (total === 0) return;
+
+        const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+        const percentage = Math.round((checked / total) * 100);
+        
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+
+        if (progressBar) progressBar.style.width = `${percentage}%`;
+        if (progressText) progressText.textContent = `${percentage}% Completado`;
+    }
+
+    async function saveProgress() {
+        const checkboxes = document.querySelectorAll('#hoy input[type="checkbox"]');
+        if (checkboxes.length === 0) return;
+
+        const progressState = Array.from(checkboxes).map(cb => cb.checked);
+        const allProgress = getStoredProgress();
+        allProgress[dateKey] = progressState;
+
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allProgress));
+        console.log(`Progreso guardado para ${dateKey}`);
+    }
+
+    async function loadProgress() {
+        const allProgress = getStoredProgress();
+        const todaysProgress = allProgress[dateKey];
+
+        if (todaysProgress) {
+            const checkboxes = document.querySelectorAll('#hoy input[type="checkbox"]');
+            checkboxes.forEach((cb, index) => {
+                if (todaysProgress[index]) {
+                    cb.checked = true;
+                }
+            });
+        }
+        updateProgressUI();
+    }
+
+    async function updateGlobalProgress() {
+        const allProgress = getStoredProgress();
+        let totalExercisesInMonth = 0;
+        let completedExercisesInMonth = 0;
+
+        for (let d = 1; d <= daysInMonth; d++) {
+            const routineKey = monthlySchedule[d];
+            const routine = routines[routineKey];
+            if (routine && routine.details) {
+                totalExercisesInMonth += routine.details.exercises.length;
+
+                const progressKey = `${year}-${month + 1}-${d}`;
+                const dayProgress = allProgress[progressKey] || [];
+                if (dayProgress) {
+                    completedExercisesInMonth += dayProgress.filter(Boolean).length;
+                }
+            }
+        }
+
+        const globalPercentage = totalExercisesInMonth > 0 ? Math.round((completedExercisesInMonth / totalExercisesInMonth) * 100) : 0;
+        
+        const globalProgressBar = document.getElementById('global-progress-bar');
+        const globalProgressText = document.getElementById('global-progress-text');
+
+        if (globalProgressBar) globalProgressBar.style.width = `${globalPercentage}%`;
+        if (globalProgressText) globalProgressText.textContent = `${globalPercentage}% Complete`;
+    }
+
+    function generateCalendar() {
+        const monthName = today.toLocaleDateString('en-US', { month: 'long' });
+        calendarTitle.textContent = `Plan for ${monthName} ${year}`;
+        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const offset = (firstDayOfMonth === 0) ? 6 : firstDayOfMonth - 1;
+
+        calendarBody.innerHTML = '';
+        for (let i = 0; i < offset; i++) {
+            calendarBody.innerHTML += `<div class="bg-black/20 rounded-md"></div>`;
+        }
+
+        for (let d = 1; d <= daysInMonth; d++) {
+            const activityKey = monthlySchedule[d];
+            const activity = routines[activityKey];
+            const isToday = (d === day);
+            const todayClass = isToday ? 'today' : '';
+            const isMetabolic = activityKey === 'METABOLIC';
+
+            // Handle title and description as functions
+            const activityTitle = typeof activity.title === 'function' ? activity.title() : activity.title;
+            const activityDesc = typeof activity.description === 'function' ? activity.description() : activity.description;
+
+            let dayCell = `
+                <div class="calendar-day bg-card-bg/80 p-2 rounded-md border border-border flex flex-col ${todayClass}">
+                    <div class="font-bold text-sm text-primary">${d}</div>
+                    <div class="text-xs mt-1 flex-grow">
+                        <p class="font-semibold ${isMetabolic ? 'metabolic-text' : 'text-accent'}">${activityTitle}</p>
+                        <p class="text-secondary hidden sm:block">${activityDesc}</p>
+                    </div>
+                </div>`;
+            calendarBody.innerHTML += dayCell;
+        }
+    }
+
+    function switchTab(tabName) {
+        contentSections.forEach(section => section.classList.remove('active'));
+        const activeSection = document.getElementById(tabName);
+        if (activeSection) {
+            activeSection.classList.add('active');
+        }
+
+        tabs.forEach(tab => {
+            tab.classList.remove('tab-active');
+            if (tab.dataset.tab === tabName) {
+                tab.classList.add('tab-active');
+            }
+        });
+    }
+
+    function initModal() {
+        mainContent.addEventListener('click', (e) => {
+            const button = e.target.closest('.show-guide-btn');
+            if (button) {
+                const guideKey = button.dataset.guide;
+                const guideData = guides[guideKey];
+                if(guideData) {
+                    // Handle title as function or string
+                    const guideTitle_text = typeof guideData.title === 'function' 
+                        ? guideData.title() 
+                        : (typeof guideData.title === 'object' 
+                            ? guideData.title[currentLanguage] || guideData.title.en 
+                            : guideData.title);
+                    guideTitle.textContent = guideTitle_text;
+                    
+                    // Handle content as function or string
+                    const guideContent_html = typeof guideData.content === 'function' 
+                        ? guideData.content() 
+                        : guideData.content;
+                    guideContent.innerHTML = guideContent_html;
+                    modal.classList.add('active');
+                }
+            }
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    }
+
+    // --- Statistics Functions ---
+    function calculateWeeklyStats() {
+        const allProgress = getStoredProgress();
+        const today = new Date();
+        let weeklyCompletion = 0;
+        let workoutsDone = 0;
+        let totalExercises = 0;
+        let streak = 0;
+        let lastCompletedDate = null;
+
+        // Calculate stats for last 7 days
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date(today);
+            date.setDate(date.getDate() - i);
+            const d = date.getDate();
+            const m = date.getMonth() + 1;
+            const y = date.getFullYear();
+            const progressKey = `${y}-${m}-${d}`;
+            
+            const routineKey = monthlySchedule[d];
+            const routine = routines[routineKey];
+            
+            if (routine && routine.details) {
+                const exerciseCount = routine.details.exercises.length;
+                totalExercises += exerciseCount;
+
+                const dayProgress = allProgress[progressKey] || [];
+                const completedCount = dayProgress.filter(Boolean).length;
+                
+                if (completedCount > 0) {
+                    weeklyCompletion += completedCount;
+                    if (completedCount === exerciseCount) {
+                        workoutsDone++;
+                    }
+                }
+            }
+        }
+
+        // Calculate streak
+        let currentDate = new Date();
+        for (let i = 0; i < 365; i++) {
+            const d = currentDate.getDate();
+            const m = currentDate.getMonth() + 1;
+            const y = currentDate.getFullYear();
+            const progressKey = `${y}-${m}-${d}`;
+            
+            const routineKey = monthlySchedule[d];
+            const routine = routines[routineKey];
+            
+            if (routine && routine.details) {
+                const dayProgress = allProgress[progressKey] || [];
+                if (dayProgress.filter(Boolean).length > 0) {
+                    streak++;
+                } else {
+                    break;
+                }
+            }
+            
+            currentDate.setDate(currentDate.getDate() - 1);
+        }
+
+        const weeklyPercentage = totalExercises > 0 ? Math.round((weeklyCompletion / totalExercises) * 100) : 0;
+
+        return { weeklyPercentage, workoutsDone, totalExercises: weeklyCompletion, streak };
+    }
+
+    function updateStatsDashboard() {
+        const stats = calculateWeeklyStats();
+        document.getElementById('weekly-completion').textContent = `${stats.weeklyPercentage}%`;
+        document.getElementById('workouts-done').textContent = stats.workoutsDone;
+        document.getElementById('total-exercises').textContent = stats.totalExercises;
+        document.getElementById('current-streak').textContent = stats.streak;
+
+        // Update daily breakdown
+        const breakdownContainer = document.getElementById('weekly-breakdown');
+        const allProgress = getStoredProgress();
+        breakdownContainer.innerHTML = '';
+
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date();
+            date.setDate(date.getDate() - i);
+            const d = date.getDate();
+            const m = date.getMonth() + 1;
+            const y = date.getFullYear();
+            const progressKey = `${y}-${m}-${d}`;
+            
+            const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+            const routineKey = monthlySchedule[d];
+            const routine = routines[routineKey];
+            
+            if (routine && routine.details) {
+                const exerciseCount = routine.details.exercises.length;
+                const dayProgress = allProgress[progressKey] || [];
+                const completedCount = dayProgress.filter(Boolean).length;
+                const percentage = Math.round((completedCount / exerciseCount) * 100);
+
+                const barColor = percentage === 100 ? 'bg-emerald-500' : percentage >= 50 ? 'bg-accent' : 'bg-orange-500';
+                breakdownContainer.innerHTML += `
+                    <div class="flex items-center gap-3">
+                        <span class="w-12 text-sm font-semibold text-secondary">${dayName}</span>
+                        <div class="flex-grow bg-black/30 rounded-full h-2">
+                            <div class="${barColor} h-2 rounded-full transition-all" style="width: ${percentage}%"></div>
+                        </div>
+                        <span class="w-12 text-right text-xs text-secondary">${completedCount}/${exerciseCount}</span>
+                    </div>
+                `;
+            }
+        }
+    }
+
+    // --- Exercise Editor Functions ---
+    let currentEditingExercise = { routineKey: null, index: null };
+
+    function openEditExerciseModal(routineKey, index) {
+        currentEditingExercise = { routineKey, index };
+        const routine = routines[routineKey];
+        if (!routine || !routine.details || !routine.details.exercises[index]) return;
+
+        const exercise = routine.details.exercises[index];
+        document.getElementById('edit-exercise-name').value = exercise.name;
+        document.getElementById('edit-exercise-series').value = exercise.series;
+        document.getElementById('edit-exercise-reps').value = exercise.reps;
+        document.getElementById('edit-exercise-rest').value = exercise.rest;
+        document.getElementById('edit-exercise-notes').value = exercise.notes || '';
+
+        editModal.classList.add('active');
+    }
+
+    function saveEditedExercise(e) {
+        e.preventDefault();
+        const { routineKey, index } = currentEditingExercise;
+        if (!routineKey || index === null) return;
+
+        const routine = routines[routineKey];
+        if (!routine || !routine.details) return;
+
+        routine.details.exercises[index] = {
+            name: document.getElementById('edit-exercise-name').value,
+            series: document.getElementById('edit-exercise-series').value,
+            reps: document.getElementById('edit-exercise-reps').value,
+            rest: document.getElementById('edit-exercise-rest').value,
+            notes: document.getElementById('edit-exercise-notes').value
+        };
+
+        localStorage.setItem(ROUTINES_STORAGE_KEY, JSON.stringify(routines));
+        editModal.classList.remove('active');
+
+        // Refresh the routine display
+        routineDetailsContainer.innerHTML = createRoutineHTML(routineKey, false);
+    }
+
+    function deleteExercise() {
+        const { routineKey, index } = currentEditingExercise;
+        if (!routineKey || index === null) return;
+
+        if (confirm('Delete this exercise?')) {
+            const routine = routines[routineKey];
+            if (routine && routine.details) {
+                routine.details.exercises.splice(index, 1);
+                localStorage.setItem(ROUTINES_STORAGE_KEY, JSON.stringify(routines));
+                editModal.classList.remove('active');
+                routineDetailsContainer.innerHTML = createRoutineHTML(routineKey, false);
+            }
+        }
+    }
+
+    // --- Event Listeners ---
+    function addEventListeners() {
+        tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.dataset.tab)));
+
+        // Language toggle
+        const langToggle = document.getElementById('lang-toggle');
+        if (langToggle) {
+            langToggle.addEventListener('click', switchLanguage);
+        }
+
+        document.getElementById('rutinas').addEventListener('click', (e) => {
+            const button = e.target.closest('.routine-selector');
+            if (button) {
+                const routineKey = button.dataset.routine;
+                routineDetailsContainer.innerHTML = createRoutineHTML(routineKey, false);
+                if (window.innerWidth < 640) {
+                    routineDetailsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+        
+        routineDetailsContainer.addEventListener('click', (e) => {
+            const editBtn = e.target.closest('.edit-exercise-btn');
+            if (editBtn) {
+                const routineKey = editBtn.dataset.routine;
+                const index = parseInt(editBtn.dataset.index);
+                openEditExerciseModal(routineKey, index);
+            }
+        });
+        
+        document.querySelectorAll('.accordion-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('span:last-child');
+                const isExpanded = content.style.maxHeight;
+
+                // Close all others
+                document.querySelectorAll('.accordion-content').forEach(el => {
+                    el.style.maxHeight = null;
+                    const otherIcon = el.previousElementSibling.querySelector('span:last-child');
+                    if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+                });
+
+                // Open the clicked one if it was closed
+                if (!isExpanded) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    if (icon) icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+        
+        hoyContainer.addEventListener('change', (e) => {
+            if (e.target.matches('input[type="checkbox"]')) {
+                saveProgress();
+                updateProgressUI();
+                updateGlobalProgress(); // Update global progress on change
+                updateStatsDashboard(); // Update stats on change
+            }
+        });
+
+        // Edit modal handlers
+        editForm.addEventListener('submit', saveEditedExercise);
+        document.getElementById('delete-exercise-btn').addEventListener('click', deleteExercise);
+        closeEditBtn.addEventListener('click', () => editModal.classList.remove('active'));
+        editModal.addEventListener('click', (e) => {
+            if (e.target === editModal) editModal.classList.remove('active');
+        });
+
+        // ESC key to close modals
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.remove('active');
+                editModal.classList.remove('active');
+            }
+        });
+
+        initModal();
+    }
+
+    // --- Simplified App Start ---
+    async function initializeApp() {
+        // Add all event listeners
+        addEventListeners();
+        
+        // Load data and set initial state
+        await loadProgress();
+        displayTodaysPlan();
+        generateCalendar();
+        updateGlobalProgress();
+        updateStatsDashboard(); // Initialize stats
+        
+        // Set initial UI state
+        switchTab('hoy');
+        routineDetailsContainer.innerHTML = createRoutineHTML('TORSO_PUSH', false);
+        generateExerciseLibrary();
+        
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            const swPath = 'service-worker.js';
+            navigator.serviceWorker.register(swPath).catch(err => {
+                console.log('Service Worker registration failed:', err);
+            });
+        }
+    }
+
+    // --- App Entry Point ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize language display
+        updateLanguageDisplay();
+        
+        initializeApp();
+    });
