@@ -2060,45 +2060,110 @@
         const activityKey = monthlySchedule[day];
         const activity = routines[activityKey];
         const todayName = today.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        const dayOfWeekEmoji = ['🌙', '📅', '📅', '📅', '📅', '📅', '📅'][today.getDay()];
 
         let content = '';
+        
         if (activity.details) {
-            content = `<div class="mb-6">
-                        <div class="inline-block px-4 py-2 bg-accent/20 border border-accent rounded-full mb-4">
-                            <p class="text-accent text-sm font-semibold uppercase tracking-wider">${todayName}</p>
+            // Workout day
+            content = `
+                <div class="space-y-6">
+                    <!-- Header Card -->
+                    <div class="relative overflow-hidden bg-gradient-to-r from-card-bg/80 to-card-bg/40 p-8 rounded-2xl shadow-2xl border border-accent/30 backdrop-blur-sm">
+                        <div class="absolute -right-20 -top-10 w-60 h-60 bg-accent/10 rounded-full blur-3xl"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="inline-block px-4 py-2 bg-accent/20 border border-accent rounded-full">
+                                    <p class="text-accent text-sm font-semibold uppercase tracking-wider">${todayName}</p>
+                                </div>
+                                <div class="text-4xl">${dayOfWeekEmoji}</div>
+                            </div>
+                            <h2 class="text-5xl sm:text-6xl font-bold animated-text-glow mb-2">Today's Workout</h2>
+                            <p class="text-secondary text-lg">Get ready to crush your goals 💪</p>
                         </div>
-                        <h2 class="text-4xl font-bold animated-text-glow mb-4">Today's Workout</h2>
                     </div>
-                    ${createRoutineHTML(activityKey, true)}`;
+                    
+                    <!-- Main Content -->
+                    ${createRoutineHTML(activityKey, true)}
+                </div>
+            `;
         } else {
-             content = `<div class="mb-6">
-                            <div class="inline-block px-4 py-2 bg-accent/20 border border-accent rounded-full mb-4">
-                                <p class="text-accent text-sm font-semibold uppercase tracking-wider">${todayName}</p>
+            // Rest/Recovery day
+            const isFullRest = activityKey === 'REST';
+            const emoji = isFullRest ? '🛌' : '🧘‍♀️';
+            const badge = isFullRest ? 'Full Rest' : 'Active Recovery';
+            const color = isFullRest ? 'emerald' : 'accent';
+            
+            content = `
+                <div class="space-y-6">
+                    <!-- Header Card -->
+                    <div class="relative overflow-hidden bg-gradient-to-r from-card-bg/80 to-card-bg/40 p-8 rounded-2xl shadow-2xl border border-${color}/30 backdrop-blur-sm">
+                        <div class="absolute -right-20 -top-10 w-60 h-60 bg-${color}/10 rounded-full blur-3xl"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="inline-block px-4 py-2 bg-${color}/20 border border-${color} rounded-full">
+                                    <p class="text-${color} text-sm font-bold uppercase tracking-widest">${emoji} ${badge}</p>
+                                </div>
+                                <div class="text-4xl">${emoji}</div>
                             </div>
-                            <h2 class="text-4xl font-bold animated-text-glow mb-6">Today's Plan</h2>
+                            <h2 class="text-5xl sm:text-6xl font-bold animated-text-glow mb-2">${activity.title}</h2>
+                            <p class="text-secondary text-lg">${activity.description}</p>
                         </div>
-                        <div class="relative overflow-hidden bg-card-bg/80 p-8 sm:p-12 rounded-2xl shadow-2xl border border-accent/30 backdrop-blur-sm">
-                            <div class="absolute -right-10 -top-10 w-40 h-40 bg-accent/5 rounded-full blur-3xl"></div>
-                            <div class="relative z-10">
-                                <div class="mb-6">
-                                    <div class="inline-block px-4 py-2 bg-${activity.title.includes('Rest') ? 'emerald' : 'metabolic'}-500/20 border border-${activity.title.includes('Rest') ? 'emerald' : 'metabolic'}-500 rounded-lg mb-4">
-                                        <p class="text-${activity.title.includes('Rest') ? 'emerald' : 'metabolic'}-400 text-xs font-bold uppercase tracking-widest">${activity.title.includes('Rest') ? '🛌 Recovery' : '⚡ Active Recovery'}</p>
-                                    </div>
-                                </div>
-                                <h3 class="text-3xl sm:text-4xl font-bold mb-4" style="background: linear-gradient(135deg, #00D0FF, #9effff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${activity.title}</h3>
-                                <p class="text-lg text-secondary leading-relaxed mb-6">${activity.description}</p>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
-                                    <div class="p-4 bg-accent/10 border border-accent/30 rounded-lg">
-                                        <p class="text-accent text-sm font-semibold mb-2">FOCUS</p>
-                                        <p class="text-secondary">Rest and recover to get stronger 💪</p>
-                                    </div>
-                                    <div class="p-4 bg-accent/10 border border-accent/30 rounded-lg">
-                                        <p class="text-accent text-sm font-semibold mb-2">DURATION</p>
-                                        <p class="text-secondary">Flexible - Listen to your body</p>
-                                    </div>
+                    </div>
+                    
+                    <!-- Recovery Info Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-card-bg/80 border border-accent/30 rounded-xl p-6 hover:border-accent/50 transition-all">
+                            <div class="flex items-start gap-3">
+                                <div class="text-2xl">⚡</div>
+                                <div>
+                                    <p class="text-accent font-bold mb-1">Why Rest Matters</p>
+                                    <p class="text-secondary text-sm">Muscle recovery and growth happen during rest. Let your body adapt and rebuild stronger.</p>
                                 </div>
                             </div>
-                        </div>`;
+                        </div>
+                        
+                        <div class="bg-card-bg/80 border border-accent/30 rounded-xl p-6 hover:border-accent/50 transition-all">
+                            <div class="flex items-start gap-3">
+                                <div class="text-2xl">💧</div>
+                                <div>
+                                    <p class="text-accent font-bold mb-1">Recovery Tips</p>
+                                    <p class="text-secondary text-sm">Stay hydrated, eat well, get quality sleep, and listen to your body's signals.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-card-bg/80 border border-accent/30 rounded-xl p-6 hover:border-accent/50 transition-all">
+                            <div class="flex items-start gap-3">
+                                <div class="text-2xl">🧘‍♀️</div>
+                                <div>
+                                    <p class="text-accent font-bold mb-1">Mobility Work</p>
+                                    <p class="text-secondary text-sm">Light stretching, yoga, or foam rolling can enhance recovery and flexibility.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-card-bg/80 border border-accent/30 rounded-xl p-6 hover:border-accent/50 transition-all">
+                            <div class="flex items-start gap-3">
+                                <div class="text-2xl">📊</div>
+                                <div>
+                                    <p class="text-accent font-bold mb-1">Plan Ahead</p>
+                                    <p class="text-secondary text-sm">Check your calendar for tomorrow's workout and prepare mentally and physically.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Motivation Card -->
+                    <div class="relative overflow-hidden bg-gradient-to-r from-metabolic/10 to-accent/10 p-8 rounded-2xl shadow-lg border border-accent/20 backdrop-blur-sm">
+                        <div class="absolute -left-20 -bottom-10 w-40 h-40 bg-accent/5 rounded-full blur-3xl"></div>
+                        <div class="relative z-10 text-center">
+                            <p class="text-lg text-secondary mb-2">Remember:</p>
+                            <p class="text-2xl font-bold text-accent">Rest is not laziness, it's part of the process. 💪</p>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
         hoyContainer.innerHTML = content;
     }
