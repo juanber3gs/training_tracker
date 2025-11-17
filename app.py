@@ -117,8 +117,8 @@ def get_dashboard_data():
 # --- ROUTES ---
 @app.route('/')
 def index():
-    dashboard_data = get_dashboard_data()
-    return render_template('index.html', **dashboard_data)
+    # The plan.html file is self-contained and doesn't need data from Flask yet.
+    return render_template('plan.html')
 
 @app.route('/save', methods=['POST'])
 def save():
