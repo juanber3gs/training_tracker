@@ -3,27 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Blueprint de Fitness Interactivo</title>
+    <title>Ft Ber Fitness - Plan RetroWave</title>
+    <meta name="theme-color" content="#00D0FF">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="fitnesslogo.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Inter:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #10001C;
+            --card-bg: #1A0A2A;
+            --text-primary: #F0E6FF;
+            --text-secondary: #A094B7;
+            --accent: #00D0FF;
+            --accent-hover: #9effff;
+            --metabolic: #FF00FF;
+            --border: #3C1E5A;
+            --glow-accent: 0 0 3px var(--accent), 0 0 6px var(--accent), 0 0 10px var(--accent);
+            --glow-metabolic: 0 0 3px var(--metabolic), 0 0 6px var(--metabolic), 0 0 10px var(--metabolic);
+        }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F5F5F4; /* stone-100 */
-            color: #3f3f46; /* stone-700 */
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            /* Updated background with logo and gradient */
+            background-image: 
+                linear-gradient(rgba(16, 0, 28, 0.95), rgba(16, 0, 28, 0.95)), /* Dark overlay for text readability */
+                url('https://i.imgur.com/your-logo-image.png'), /* Replace with your uploaded logo URL */
+                linear-gradient(var(--accent), transparent 1px),
+                linear-gradient(90deg, var(--accent), transparent 1px);
+            background-size: 
+                cover, /* For the overlay */
+                30% auto, /* Adjust logo size as needed */
+                40px 40px,
+                40px 40px;
+            background-repeat: 
+                no-repeat, 
+                no-repeat, 
+                repeat, 
+                repeat;
+            background-position: 
+                center center, /* For the overlay */
+                center 10%, /* Adjust logo position */
+                -1px -1px,
+                -1px -1px;
+            background-blend-mode: overlay, normal, normal, normal; /* Blend the overlay with the logo */
+            animation: bg-scroll 3s linear infinite;
         }
-        h1, h2, h3, h4, h5 {
-             font-family: 'Lora', serif;
+        @keyframes bg-scroll {
+            0% { background-position: center center, center 10%, 0 0, 0 0; } /* Include logo position */
+            100% { background-position: center center, center 10%, 40px 40px, 40px 40px; } /* Include logo position */
+        }
+        @keyframes text-glow {
+            0%, 100% { text-shadow: 0 0 4px var(--accent), 0 0 8px var(--accent), 0 0 12px var(--accent); }
+            50% { text-shadow: 0 0 8px var(--accent-hover), 0 0 16px var(--accent-hover), 0 0 24px var(--accent-hover); }
+        }
+        @keyframes box-glow {
+            0%, 100% { box-shadow: 0 0 10px var(--accent), 0 0 15px var(--accent); border-color: var(--accent); }
+            50% { box-shadow: 0 0 15px var(--accent-hover), 0 0 30px var(--accent-hover); border-color: var(--accent-hover); }
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .main-container {
+            background-color: rgba(16, 0, 28, 0.9);
+            backdrop-filter: blur(5px);
+        }
+        h1 {
+             font-family: 'Press Start 2P', cursive;
+             color: var(--text-primary);
+             text-shadow: var(--glow-accent);
+             font-size: clamp(1.5rem, 5vw, 3rem);
+        }
+        .animated-text-glow {
+            animation: text-glow 2.5s ease-in-out infinite;
+        }
+        .animated-box-glow {
+            animation: box-glow 2.5s ease-in-out infinite;
+        }
+        h2, h3, h4, h5 {
+             font-family: 'Aldrich', sans-serif;
+             color: var(--text-primary);
+             text-transform: uppercase;
         }
         .tab-active {
-            border-color: #c5a265; /* Bruma Gold */
-            color: #2c3144; /* Deep Charcoal */
-            background-color: rgba(197, 162, 101, 0.1);
+            border-color: var(--accent);
+            color: var(--accent);
+            text-shadow: var(--glow-accent);
         }
-        .content-section { display: none; }
-        .content-section.active { display: block; }
+        .content-section { 
+            display: none;
+        }
+        .content-section.active { 
+            display: block;
+            animation: fade-in 0.4s ease-in-out;
+        }
         .accordion-content {
             max-height: 0;
             overflow: hidden;
@@ -34,57 +113,93 @@
             grid-template-columns: repeat(7, 1fr);
             gap: 4px;
         }
-        .calendar-day { min-height: 100px; }
+        .calendar-day { 
+            min-height: 100px; 
+            transition: all 0.2s ease-in-out;
+            position: relative;
+        }
+        .calendar-day:hover {
+            transform: scale(1.05);
+            border-color: var(--accent) !important;
+            box-shadow: var(--glow-accent);
+            z-index: 10;
+        }
         .calendar-day-header {
             font-size: 0.75rem;
             text-align: center;
             padding: 4px 0;
-            background-color: #F5F5F4;
-            font-family: 'Inter', sans-serif;
+            color: var(--text-secondary);
+            font-family: 'Aldrich', sans-serif;
         }
         .today {
-            border: 2px solid #c5a265; /* Bruma Gold */
-            box-shadow: 0 0 8px rgba(197, 162, 101, 0.5);
+            border-width: 2px;
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(0, 208, 255, 0.7);
         }
         .progress-bar-container {
-            background-color: #e5e7eb; /* cool-gray-200 */
+            background-color: #334155;
             border-radius: 9999px;
             height: 1.25rem;
             width: 100%;
             overflow: hidden;
-            border: 1px solid #d4d4d8;
+            border: 1px solid var(--border);
+            box-shadow: inset 0 0 5px #000;
         }
         .progress-bar {
-            background-color: #c5a265; /* Bruma Gold */
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
             height: 100%;
             border-radius: 9999px;
             transition: width 0.5s ease-in-out;
+            box-shadow: var(--glow-accent);
         }
-        /* Estilos para el Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.75);
-            display: flex;
+            background-color: rgba(16, 0, 28, 0.8);
+            backdrop-filter: blur(8px);
+            display: none; /* Changed from opacity */
             align-items: center;
             justify-content: center;
             z-index: 50;
+            opacity: 0; /* Use opacity for transition */
+            pointer-events: none;
+            transition: opacity 0.3s ease-out;
+        }
+        .modal-overlay.active {
+            display: flex; /* Use display to show/hide */
+            opacity: 1;
+            pointer-events: auto;
         }
         .modal-content {
-            background-color: white;
+            background-color: var(--card-bg);
             padding: 1.5rem;
             border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             max-width: 90%;
             max-height: 90vh;
             overflow-y: auto;
             width: 60rem;
+            color: var(--text-primary);
+            transform: scale(0.95);
+            transition: transform 0.3s ease-out;
         }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        .prose { color: var(--text-secondary); }
+        .prose h3 { color: var(--text-primary); text-shadow: var(--glow-accent); }
+        .prose h5 { color: var(--text-secondary); }
+        .prose a { color: var(--accent); }
+        .prose a:hover { color: var(--accent-hover); }
+        .prose ul { list-style-type: '⚡ '; }
+        .prose hr { border-color: var(--border); }
         .img-placeholder {
-            background-color: #f3f4f6;
-            border: 2px dashed #d1d5db;
+            background-color: var(--bg-color);
+            border: 2px dashed var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -92,109 +207,197 @@
             min-height: 200px;
             text-align: center;
             padding: 1rem;
+            color: var(--text-secondary);
+        }
+        .routine-selector, .nav-tab {
+            transition: all 0.2s ease-in-out;
+        }
+        .routine-selector:hover, .nav-tab:hover {
+            transform: translateY(-2px);
+            text-shadow: var(--glow-accent);
+        }
+        .metabolic-text {
+            color: var(--metabolic);
+            text-shadow: var(--glow-metabolic);
+        }
+        .metabolic-border {
+            border-color: var(--metabolic);
+        }
+        .metabolic-shadow {
+            box-shadow: 0 0 12px rgba(255, 0, 255, 0.7);
+        }
+        .stats-card {
+            background: linear-gradient(135deg, var(--card-bg), rgba(60, 30, 90, 0.5));
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 8px rgba(0, 208, 255, 0.3);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @media (max-width: 640px) {
+            .calendar-grid {
+                gap: 2px;
+            }
+            .calendar-day {
+                min-height: 80px;
+                font-size: 0.75rem;
+            }
+            h2, h3, h4, h5 {
+                font-size: clamp(1rem, 3vw, 1.5rem);
+            }
+        }
+        .edit-exercise-modal .modal-content {
+            width: 90vw;
+            max-width: 500px;
+        }
+        .routine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        @media (max-width: 768px) {
+            .routine-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body class="antialiased">
-
-    <div class="container mx-auto max-w-5xl p-4 sm:p-6">
+    <div class="container mx-auto max-w-5xl p-4 sm:p-6 main-container rounded-lg shadow-2xl border border-border">
         
-        <header class="text-center mb-6">
-            <h1 class="text-3xl sm:text-4xl font-bold text-stone-900">Mi Blueprint de Fitness</h1>
-            <p class="text-stone-600 mt-2">Tu plan de entrenamiento avanzado, fusionado e interactivo.</p>
+        <header class="text-center my-8">
+            <!-- Removed the img tag for the logo, as it's now in the background --><h1 class="text-3xl sm:text-4xl animated-text-glow">Ft Ber Fitness</h1>
+            <p class="text-lg text-secondary mt-2 font-['Aldrich'] uppercase">Your retro-futuristic training plan.</p>
         </header>
 
-        <div class="mb-8 p-4 bg-white rounded-lg shadow-md border border-stone-200">
-            <h2 class="text-center text-xl font-bold text-stone-800 mb-3">Progreso Mensual General</h2>
-            <div id="global-progress-text" class="text-center font-bold text-lg mb-2 text-[#5a6e5f]">0%</div>
+        <div class="mb-8 p-4 bg-card-bg/80 rounded-lg shadow-lg border border-border">
+            <h2 class="text-center text-xl font-bold text-primary mb-3">Global Monthly Progress</h2>
+            <div id="global-progress-text" class="text-center font-bold text-lg mb-2 text-accent" style="text-shadow: var(--glow-accent);">0%</div>
             <div class="progress-bar-container">
-                <div id="global-progress-bar" class="progress-bar"></div>
+                <div id="global-progress-bar" class="progress-bar" style="width: 0%;"></div>
             </div>
         </div>
 
-        <nav class="flex justify-center border-b border-stone-200 mb-8">
+        <nav class="flex justify-center border-b border-border mb-8">
             <div class="flex flex-wrap justify-center -mb-px">
-                <button data-tab="hoy" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent hover:text-[#b38e52] transition-colors duration-200">🗓️ Hoy</button>
-                <button data-tab="calendario" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent hover:text-[#b38e52] transition-colors duration-200">📅 Calendario</button>
-                <button data-tab="rutinas" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent hover:text-[#b38e52] transition-colors duration-200">🏋️‍♂️ Rutinas</button>
-                <button data-tab="yoga" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent hover:text-[#b38e52] transition-colors duration-200">🧘‍♂️ Yoga</button>
+                <button data-tab="hoy" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent">🗓️ Today</button>
+                <button data-tab="stats" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent">📊 Stats</button>
+                <button data-tab="calendario" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent">📅 Calendar</button>
+                <button data-tab="rutinas" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent">🏋️‍♂️ Routines</button>
+                <button data-tab="yoga" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent">🧘‍♂️ Yoga</button>
             </div>
         </nav>
 
         <main id="main-content">
             <section id="hoy" class="content-section"></section>
+            <section id="stats" class="content-section">
+                <div class="bg-card-bg/80 p-4 sm:p-6 rounded-lg shadow-lg border border-border">
+                    <h2 class="text-2xl font-bold mb-6 text-center">📊 Weekly Statistics</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                        <div class="stats-card p-4 rounded-lg">
+                            <p class="text-secondary text-sm mb-2">Weekly Completion</p>
+                            <div class="stat-number" id="weekly-completion">0%</div>
+                            <p class="text-xs text-secondary mt-2">Last 7 days</p>
+                        </div>
+                        <div class="stats-card p-4 rounded-lg">
+                            <p class="text-secondary text-sm mb-2">Workouts Done</p>
+                            <div class="stat-number" id="workouts-done">0</div>
+                            <p class="text-xs text-secondary mt-2">This week</p>
+                        </div>
+                        <div class="stats-card p-4 rounded-lg">
+                            <p class="text-secondary text-sm mb-2">Total Exercises</p>
+                            <div class="stat-number" id="total-exercises">0</div>
+                            <p class="text-xs text-secondary mt-2">Completed</p>
+                        </div>
+                        <div class="stats-card p-4 rounded-lg">
+                            <p class="text-secondary text-sm mb-2">Streak</p>
+                            <div class="stat-number" id="current-streak">0</div>
+                            <p class="text-xs text-secondary mt-2">Days active</p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-lg font-bold mb-4 text-primary">Daily Breakdown</h3>
+                        <div id="weekly-breakdown" class="space-y-2"></div>
+                    </div>
+                </div>
+            </section>
             <section id="calendario" class="content-section">
-                 <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md border border-stone-200">
+                 <div class="bg-card-bg/80 p-4 sm:p-6 rounded-lg shadow-lg border border-border">
                     <div class="text-center mb-6">
                         <h2 id="calendar-title" class="text-2xl font-bold"></h2>
-                        <p class="text-stone-600 mt-1">Un vistazo completo a tu mes de entrenamiento.</p>
+                        <p class="text-secondary mt-1">A complete overview of your training month.</p>
                     </div>
-                    <div class="calendar-grid font-semibold text-stone-600">
-                        <div class="calendar-day-header">Lunes</div>
-                        <div class="calendar-day-header">Martes</div>
-                        <div class="calendar-day-header">Miércoles</div>
-                        <div class="calendar-day-header">Jueves</div>
-                        <div class="calendar-day-header">Viernes</div>
-                        <div class="calendar-day-header">Sábado</div>
-                        <div class="calendar-day-header">Domingo</div>
+                    <div class="calendar-grid font-semibold text-secondary">
+                        <div class="calendar-day-header">Mon</div>
+                        <div class="calendar-day-header">Tue</div>
+                        <div class="calendar-day-header">Wed</div>
+                        <div class="calendar-day-header">Thu</div>
+                        <div class="calendar-day-header">Fri</div>
+                        <div class="calendar-day-header">Sat</div>
+                        <div class="calendar-day-header">Sun</div>
                     </div>
                     <div id="calendar-body" class="calendar-grid"></div>
                 </div>
             </section>
             <section id="rutinas" class="content-section">
                 <div class="mb-6 text-center">
-                    <p class="text-stone-600">Aquí puedes consultar los detalles de cada rutina. Selecciona una para ver los ejercicios.</p>
+                    <p class="text-secondary">Here you can check the details of each routine. Select one to see the exercises.</p>
                 </div>
                 <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8">
-                    <button data-routine="TORSO_PUSH" class="routine-selector bg-white hover:bg-stone-50 text-[#5a6e5f] font-semibold py-2 px-4 border border-stone-200 rounded-lg shadow-sm transition-all duration-200">💪 Torso Empuje</button>
-                    <button data-routine="LEGS_ANKLES" class="routine-selector bg-white hover:bg-stone-50 text-[#5a6e5f] font-semibold py-2 px-4 border border-stone-200 rounded-lg shadow-sm transition-all duration-200">🦵 Pierna y Tobillos</button>
-                    <button data-routine="TORSO_PULL" class="routine-selector bg-white hover:bg-stone-50 text-[#5a6e5f] font-semibold py-2 px-4 border border-stone-200 rounded-lg shadow-sm transition-all duration-200">🏋️‍♂️ Torso Tracción</button>
-                    <button data-routine="GLUTES_CORE" class="routine-selector bg-white hover:bg-stone-50 text-[#5a6e5f] font-semibold py-2 px-4 border border-stone-200 rounded-lg shadow-sm transition-all duration-200">🍑 Glúteos y Core</button>
-                    <button data-routine="METABOLIC" class="routine-selector bg-white hover:bg-stone-50 text-[#5a6e5f] font-semibold py-2 px-4 border border-stone-200 rounded-lg shadow-sm transition-all duration-200">⚡ Metabólico</button>
+                    <button data-routine="TORSO_PUSH" class="routine-selector bg-card-bg hover:bg-border text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md">💪 Push</button>
+                    <button data-routine="LEGS_ANKLES" class="routine-selector bg-card-bg hover:bg-border text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md">🦵 Legs & Ankles</button>
+                    <button data-routine="TORSO_PULL" class="routine-selector bg-card-bg hover:bg-border text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md">🏋️‍♂️ Pull</button>
+                    <button data-routine="GLUTES_CORE" class="routine-selector bg-card-bg hover:bg-border text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md">🍑 Glutes & Core</button>
+                    <button data-routine="METABOLIC" class="routine-selector bg-card-bg hover:bg-border text-metabolic font-semibold py-2 px-4 border border-border rounded-lg shadow-md">⚡ Metabolic</button>
                 </div>
                 <div id="routine-details-container"></div>
             </section>
             <section id="yoga" class="content-section space-y-4">
                  <div class="text-center mb-6">
-                    <h2 class="text-2xl font-bold">Yoga para Recuperación</h2>
-                    <p class="text-stone-600 mt-1">Posturas para complementar tu entrenamiento, mejorar la flexibilidad y acelerar la recuperación.</p>
+                    <h2 class="text-2xl font-bold">Recovery Yoga</h2>
+                    <p class="text-secondary mt-1">Poses to complement your training, improve flexibility, and speed up recovery.</p>
                 </div>
-                <div class="bg-white p-4 rounded-lg shadow-sm border border-stone-200">
-                    <button class="accordion-toggle flex justify-between items-center w-full text-left text-xl font-semibold">
-                        <span>🧘‍♀️ Post-Empuje (Pecho, Hombros, Tríceps)</span>
+                <div class="bg-card-bg/80 p-4 rounded-lg shadow-sm border border-border">
+                    <button class="accordion-toggle flex justify-between items-center w-full text-left text-xl font-semibold text-primary">
+                        <span>🧘‍♀️ Post-Push (Chest, Shoulders, Triceps)</span>
                         <span class="transform transition-transform duration-300">▼</span>
                     </button>
-                    <div class="accordion-content pt-2">
-                        <ul class="list-disc list-inside space-y-3 text-stone-700">
-                            <li><strong>Postura del Cachorro (Uttana Shishosana):</strong> Arrodíllate y camina las manos hacia adelante, bajando el pecho al suelo. Estira los hombros y el pecho. Mantén por 30-60 segundos.</li>
-                            <li><strong>Brazos de Cara de Vaca (Gomukhasana):</strong> Levanta un brazo, dóblalo para que tu mano toque la espalda. Lleva el otro brazo por debajo y trata de unir las manos. Estira tríceps y hombros. Mantén 30 seg por lado.</li>
-                            <li><strong>Estiramiento de Pecho en la Pared:</strong> Coloca el antebrazo en una pared, formando un ángulo de 90 grados. Gira tu cuerpo suavemente en dirección opuesta para un estiramiento profundo del pectoral. Mantén 30 seg por lado.</li>
+                    <div class="accordion-content pt-2 prose max-w-none">
+                        <ul>
+                            <li><strong>Puppy Pose (Uttana Shishosana):</strong> Kneel and walk your hands forward, lowering your chest to the ground. Stretches shoulders and chest. Hold for 30-60 seconds.</li>
+                            <li><strong>Cow Face Arms (Gomukhasana):</strong> Raise one arm, bend it so your hand touches your back. Bring the other arm from below and try to clasp hands. Stretches triceps and shoulders. Hold 30 sec per side.</li>
+                            <li><strong>Wall Chest Stretch:</strong> Place your forearm on a wall at a 90-degree angle. Gently turn your body away for a deep pectoral stretch. Hold 30 sec per side.</li>
                         </ul>
                     </div>
                 </div>
-                 <div class="bg-white p-4 rounded-lg shadow-sm border border-stone-200">
-                    <button class="accordion-toggle flex justify-between items-center w-full text-left text-xl font-semibold">
-                        <span>🧘‍♂️ Post-Tirón (Espalda, Bíceps)</span>
+                 <div class="bg-card-bg/80 p-4 rounded-lg shadow-sm border border-border">
+                    <button class="accordion-toggle flex justify-between items-center w-full text-left text-xl font-semibold text-primary">
+                        <span>🧘‍♂️ Post-Pull (Back, Biceps)</span>
                         <span class="transform transition-transform duration-300">▼</span>
                     </button>
-                    <div class="accordion-content pt-2">
-                         <ul class="list-disc list-inside space-y-3 text-stone-700">
-                            <li><strong>Gato-Vaca (Marjaryasana-Bitilasana):</strong> A cuatro patas, inhala para arquear la espalda (Vaca) y exhala para redondearla (Gato). Moviliza y relaja toda la columna. Realiza 10-15 repeticiones lentas.</li>
-                            <li><strong>Torsión Espinal Supina (Supta Matsyendrasana):</strong> Acostado, lleva una rodilla al pecho y luego crúzala sobre tu cuerpo, extendiendo el brazo opuesto. Relaja la espalda y el pecho. Mantén 30-60 seg por lado.</li>
-                            <li><strong>Estiramiento de Bíceps en la Pared:</strong> De pie, extiende un brazo y coloca la palma en la pared. Gira tu cuerpo lentamente en dirección opuesta hasta sentir un estiramiento en el bíceps y el hombro. Mantén 30 seg por lado.</li>
+                    <div class="accordion-content pt-2 prose max-w-none">
+                         <ul>
+                            <li><strong>Cat-Cow (Marjaryasana-Bitilasana):</strong> On all fours, inhale to arch your back (Cow) and exhale to round it (Cat). Mobilizes and relaxes the entire spine. Perform 10-15 slow repetitions.</li>
+                            <li><strong>Supine Spinal Twist (Supta Matsyendrasana):</strong> Lying down, bring one knee to your chest and then cross it over your body, extending the opposite arm. Relaxes the back and chest. Hold 30-60 sec per side.</li>
+                            <li><strong>Wall Bicep Stretch:</strong> Standing, extend one arm and place your palm on the wall. Slowly turn your body away until you feel a stretch in your bicep and shoulder. Hold 30 sec per side.</li>
                         </ul>
                     </div>
                 </div>
-                 <div class="bg-white p-4 rounded-lg shadow-sm border border-stone-200">
-                    <button class="accordion-toggle flex justify-between items-center w-full text-left text-xl font-semibold">
-                        <span>🧘‍♀️ Post-Piernas (Piernas, Glúteos)</span>
+                 <div class="bg-card-bg/80 p-4 rounded-lg shadow-sm border border-border">
+                    <button class="accordion-toggle flex justify-between items-center w-full text-left text-xl font-semibold text-primary">
+                        <span>🧘‍♀️ Post-Legs (Legs, Glutes)</span>
                         <span class="transform transition-transform duration-300">▼</span>
                     </button>
-                    <div class="accordion-content pt-2">
-                        <ul class="list-disc list-inside space-y-3 text-stone-700">
-                           <li><strong>Zancada de Corredor (Anjaneyasana):</strong> Desde una posición de zancada baja, apoya la rodilla trasera en el suelo. Mantén las manos en el suelo o en la rodilla delantera para estirar el flexor de la cadera y el cuádriceps. Mantén 30 seg por lado.</li>
-                           <li><strong>Postura del Ojo de la Aguja (Sucirandhrasana):</strong> Acostado, cruza un tobillo sobre la rodilla opuesta. Sujeta el muslo de la pierna de abajo y tira suavemente hacia ti para estirar el glúteo y el piriforme. Mantén 30-60 seg por lado.</li>
-                           <li><strong>Piernas Arriba de la Pared (Viparita Karani):</strong> Siéntate de lado contra una pared y luego gira para acostarte y extender las piernas hacia arriba por la pared. Es una postura de recuperación pasiva excelente para la circulación. Mantén 3-5 minutos.</li>
+                    <div class="accordion-content pt-2 prose max-w-none">
+                        <ul>
+                            <li><strong>Runner's Lunge (Anjaneyasana):</strong> From a low lunge position, rest your back knee on the floor. Keep your hands on the floor or on your front knee to stretch the hip flexor and quadriceps. Hold 30 sec per side.</li>
+                            <li><strong>Eye of the Needle Pose (Sucirandhrasana):</strong> Lying down, cross one ankle over the opposite knee. Clasp the thigh of the bottom leg and gently pull it towards you to stretch the glute and piriformis. Hold 30-60 sec per side.</li>
+                            <li><strong>Legs Up the Wall (Viparita Karani):</strong> Sit sideways against a wall, then swing your legs up the wall as you lie back. This is an excellent passive recovery pose for circulation. Hold for 3-5 minutes.</li>
                         </ul>
                     </div>
                 </div>
@@ -202,417 +405,158 @@
         </main>
     </div>
 
-    <!-- Modal para la Guía de Ejercicios -->
-    <div id="guide-modal" class="modal-overlay hidden">
+    <!-- Modal for Exercise Guide --><div id="guide-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="flex justify-between items-center mb-4">
                 <h2 id="guide-title" class="text-2xl font-bold"></h2>
-                <button id="close-guide-btn" class="text-2xl font-bold">&times;</button>
+                <button id="close-guide-btn" class="text-2xl font-bold text-secondary hover:text-white">&times;</button>
             </div>
             <div id="guide-content" class="prose max-w-none"></div>
         </div>
     </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+    <!-- Modal for Exercise Editor -->
+    <div id="edit-exercise-modal" class="modal-overlay edit-exercise-modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold">Edit Exercise</h2>
+                <button id="close-edit-modal" class="text-2xl font-bold text-secondary hover:text-white">&times;</button>
+            </div>
+            <form id="edit-exercise-form" class="space-y-4">
+                <div>
+                    <label class="block text-secondary mb-2">Exercise Name</label>
+                    <input id="edit-exercise-name" type="text" class="w-full bg-bg-color border border-border rounded px-3 py-2 text-primary" required>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-secondary mb-2">Series</label>
+                        <input id="edit-exercise-series" type="text" class="w-full bg-bg-color border border-border rounded px-3 py-2 text-primary" required>
+                    </div>
+                    <div>
+                        <label class="block text-secondary mb-2">Reps</label>
+                        <input id="edit-exercise-reps" type="text" class="w-full bg-bg-color border border-border rounded px-3 py-2 text-primary" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-secondary mb-2">Rest Time</label>
+                    <input id="edit-exercise-rest" type="text" class="w-full bg-bg-color border border-border rounded px-3 py-2 text-primary" required>
+                </div>
+                <div>
+                    <label class="block text-secondary mb-2">Notes</label>
+                    <textarea id="edit-exercise-notes" class="w-full bg-bg-color border border-border rounded px-3 py-2 text-primary" rows="3"></textarea>
+                </div>
+                <div class="flex gap-2 mt-6">
+                    <button type="submit" class="flex-1 bg-accent text-bg-color font-bold py-2 rounded hover:bg-accent-hover transition">Save</button>
+                    <button type="button" id="delete-exercise-btn" class="flex-1 bg-red-600 text-white font-bold py-2 rounded hover:bg-red-700 transition">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
+<!-- Firebase SDK Imports --><script type="module">
+
+    // --- App Configuration ---
     const routines = {
         TORSO_PUSH: {
-            title: '💪 Torso Empuje y Muñecas',
+            title: '💪 Push & Wrists',
             hasGuide: false, // For now, will need new guides
-            description: 'Fuerza de pecho, hombros, tríceps y salud de muñecas.',
+            description: 'Chest, shoulders, triceps strength and wrist health.',
             details: {
                 exercises: [
-                    { name: 'Press de Banca con Mancuernas', series: 4, reps: '8-12', rest: '60 seg', notes: 'Fuerza base de pecho' },
-                    { name: 'Press de Hombros (con barra de pilates)', series: 4, reps: '12-15', rest: '60 seg', notes: 'Pisa la banda para resistencia' },
-                    { name: 'Aperturas con Ligas', series: 3, reps: '15-20', rest: '45 seg', notes: 'Aislar y estirar pecho' },
-                    { name: 'Elevaciones Laterales con Mancuernas', series: 3, reps: '15-20', rest: '45 seg', notes: 'Amplitud de hombros' },
-                    { name: 'Pushdowns de Tríceps con Liga', series: 3, reps: '15-20', rest: '45 seg', notes: 'Aislar tríceps' },
-                    { name: 'Extensión de Muñeca (Palmas abajo)', series: 3, reps: '15-20', rest: '30 seg', notes: 'Salud articular, con barra de pilates' }
+                    { name: 'Dumbbell Bench Press', series: 4, reps: '8-12', rest: '60s', notes: 'Chest base strength' },
+                    { name: 'Pilates Bar Shoulder Press', series: 4, reps: '12-15', rest: '60s', notes: 'Step on the band for resistance' },
+                    { name: 'Band Flys', series: 3, reps: '15-20', rest: '45s', notes: 'Isolate and stretch chest' },
+                    { name: 'Dumbbell Lateral Raises', series: 3, reps: '15-20', rest: '45s', notes: 'Shoulder width' },
+                    { name: 'Band Triceps Pushdowns', series: 3, reps: '15-20', rest: '45s', notes: 'Isolate triceps' },
+                    { name: 'Wrist Extension (Palms down)', series: 3, reps: '15-20', rest: '30s', notes: 'Joint health, with pilates bar' }
                 ]
             }
         },
         LEGS_ANKLES: {
-            title: '🦵 Pierna y Tobillos',
+            title: '🦵 Legs & Ankles',
             hasGuide: true, // The LEGS guide is still relevant
-            description: 'Fuerza de piernas, glúteos y estabilidad de tobillos.',
+            description: 'Legs, glutes strength and ankle stability.',
             details: {
                 exercises: [
-                    { name: 'Sentadilla con Barra de Pilates', series: 4, reps: '12-15', rest: '60 seg', notes: 'Pisa la banda, barra en espalda' },
-                    { name: 'Peso Muerto Rumano con Mancuernas', series: 3, reps: '12-15', rest: '75 seg', notes: 'Foco en isquiotibiales' },
-                    { name: 'Zancada Estática (Foco Tobillo)', series: 3, reps: '10-12 c/lado', rest: '60 seg', notes: 'Controla la estabilidad del tobillo' },
-                    { name: 'Puente de Glúteos con Banda', series: 3, reps: '15-20', rest: '45 seg', notes: 'Banda en las rodillas, empuja hacia afuera' },
-                    { name: 'Elevación de Talones (Foco Tobillo)', series: 4, reps: '20-25', rest: '45 seg', notes: 'Con barra de pilates para resistencia' }
+                    { name: 'Pilates Bar Squat', series: 4, reps: '12-15', rest: '60s', notes: 'Step on band, bar on back' },
+                    { name: 'Dumbbell Romanian Deadlift', series: 3, reps: '12-15', rest: '75s', notes: 'Focus on hamstrings' },
+                    { name: 'Static Lunge (Ankle Focus)', series: 3, reps: '10-12/side', rest: '60s', notes: 'Control ankle stability' },
+                    { name: 'Banded Glute Bridge', series: 3, reps: '15-20', rest: '45s', notes: 'Band on knees, push outwards' },
+                    { name: 'Calf Raises (Ankle Focus)', series: 4, reps: '20-25', rest: '45s', notes: 'With pilates bar for resistance' }
                 ]
             }
         },
         TORSO_PULL: {
-            title: '🏋️‍♂️ Torso Tracción y Muñecas',
+            title: '🏋️‍♂️ Pull & Wrists',
             hasGuide: false,
-            description: 'Fuerza de espalda, bíceps y salud de muñecas.',
+            description: 'Back, biceps strength and wrist health.',
             details: {
                 exercises: [
-                    { name: 'Jalón al Pecho con Barra de Pilates', series: 4, reps: '12-15', rest: '60 seg', notes: 'Anclaje alto en puerta' },
-                    { name: 'Remo Inclinado con Mancuernas', series: 4, reps: '8-12', rest: '60 seg', notes: 'Fuerza y densidad de espalda' },
-                    { name: 'Face Pulls con Liga', series: 3, reps: '15-20', rest: '45 seg', notes: 'Salud del hombro y postura' },
-                    { name: 'Curl de Bíceps con Barra de Pilates', series: 3, reps: '12-15', rest: '45 seg', notes: 'Pisa la banda para resistencia' },
-                    { name: 'Flexión de Muñeca (Palmas arriba)', series: 3, reps: '15-20', rest: '30 seg', notes: 'Salud articular, con barra de pilates' }
+                    { name: 'Pilates Bar Lat Pulldown', series: 4, reps: '12-15', rest: '60s', notes: 'High anchor on door' },
+                    { name: 'Dumbbell Bent-Over Row', series: 4, reps: '8-12', rest: '60s', notes: 'Back strength and density' },
+                    { name: 'Band Face Pulls', series: 3, reps: '15-20', rest: '45s', notes: 'Shoulder health and posture' },
+                    { name: 'Pilates Bar Bicep Curl', series: 3, reps: '12-15', rest: '45s', notes: 'Step on band for resistance' },
+                    { name: 'Wrist Flexion (Palms up)', series: 3, reps: '15-20', rest: '30s', notes: 'Joint health, with pilates bar' }
                 ]
             }
         },
         GLUTES_CORE: {
-            title: '🍑 Glúteos y Core',
+            title: '🍑 Glutes & Core',
             hasGuide: false,
-            description: 'Fortalecimiento de la cadena posterior y el abdomen.',
+            description: 'Strengthening the posterior chain and abdomen.',
             details: {
                 exercises: [
-                    { name: 'Jalón entre Piernas (Pull Through)', series: 4, reps: '15-20', rest: '60 seg', notes: 'Anclaje bajo, foco en glúteos' },
-                    { name: 'Caminata Lateral con Banda', series: 3, reps: '12 pasos c/lado', rest: '45 seg', notes: 'Banda en rodillas o tobillos' },
-                    { name: 'Giros Rusos con Barra de Pilates', series: 3, reps: '20 giros', rest: '45 seg', notes: 'Sostén la barra, gira el torso' },
-                    { name: 'Plancha', series: 3, reps: '45-75 seg', rest: '60 seg', notes: 'Mantén el cuerpo recto' },
-                    { name: 'Pájaro-Perro (Bird-Dog)', series: 3, reps: '12 (c/lado)', rest: '30 seg', notes: 'Movimiento lento y controlado' }
+                    { name: 'Pull Through', series: 4, reps: '15-20', rest: '60s', notes: 'Low anchor, focus on glutes' },
+                    { name: 'Banded Lateral Walk', series: 3, reps: '12 steps/side', rest: '45s', notes: 'Band on knees or ankles' },
+                    { name: 'Pilates Bar Russian Twists', series: 3, reps: '20 twists', rest: '45s', notes: 'Hold the bar, twist the torso' },
+                    { name: 'Plank', series: 3, reps: '45-75s', rest: '60s', notes: 'Keep body straight' },
+                    { name: 'Bird-Dog', series: 3, reps: '12/side', rest: '30s', notes: 'Slow and controlled movement' }
                 ]
             }
         },
         METABOLIC: {
-            title: '⚡ Circuito Metabólico',
+            title: '⚡ Metabolic Circuit',
             hasGuide: false,
-            description: 'Quema de grasa y resistencia cardiovascular. Realizar como un circuito.',
+            description: 'Fat burning and cardiovascular endurance. Perform as a circuit.',
             details: {
                 exercises: [
-                    { name: 'Thrusters con Barra de Pilates', series: '4 Rondas', reps: '15', rest: '15 seg', notes: 'Sentadilla + Press de hombros' },
-                    { name: 'Remo Rápido con Liga', series: '4 Rondas', reps: '20', rest: '15 seg', notes: 'Ritmo rápido y constante' },
-                    { name: 'Zancada con Giro', series: '4 Rondas', reps: '10 c/lado', rest: '15 seg', notes: 'Con barra de pilates' },
-                    { name: 'Jumping Jacks', series: '4 Rondas', reps: '45 seg', rest: '90 seg', notes: 'Descanso largo al final de la ronda' }
+                    { name: 'Pilates Bar Thrusters', series: '4 Rounds', reps: '15', rest: '15s', notes: 'Squat + Shoulder Press' },
+                    { name: 'Fast Band Rows', series: '4 Rounds', reps: '20', rest: '15s', notes: 'Fast and steady pace' },
+                    { name: 'Lunge with Twist', series: '4 Rounds', reps: '10/side', rest: '15s', notes: 'With pilates bar' },
+                    { name: 'Jumping Jacks', series: '4 Rounds', reps: '45s', rest: '90s', notes: 'Long rest at the end of the round' }
                 ]
             }
         },
-        YOGA_REST: { title: '🧘‍♂️ Descanso Activo', description: 'Día de recuperación con Yoga y movilidad. Revisa la pestaña de Yoga.' },
-        REST: { title: '😴 Descanso Completo', description: 'Recuperación y Crecimiento. ¡Escucha a tu cuerpo!' }
+        YOGA_REST: { title: '🧘‍♂️ Active Rest', description: 'Recovery day with Yoga and mobility. Check the Yoga tab.' },
+        REST: { title: '😴 Full Rest', description: 'Recovery and Growth. Listen to your body!' }
     };
 
     const guides = {
         LEGS: {
-            title: 'Guía Visual de Pierna y Core',
+            title: 'Visual Guide: Legs & Core',
             content: `
                 <div class="space-y-8">
-                    <!-- Sentadillas -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>1. Sentadillas (Squats)</h3><p><strong>Descripción:</strong> Ejercicio fundamental para fortalecer piernas y glúteos.</p><h5>Técnica:</h5><ul class="list-disc list-inside text-sm"><li>Pies al ancho de hombros, pecho erguido.</li><li>Baja las caderas hacia atrás y abajo, manteniendo espalda recta.</li><li>Baja hasta que los muslos estén paralelos al suelo.</li><li>Sube empujando desde los talones.</li></ul><a href="https://www.youtube.com/watch?v=l7_B-mI4G6I" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a></div><div><img src="imagenes/sentadillas.png" alt="Imagen de Sentadilla" class="rounded-lg shadow-lg w-full"></div></div><hr>
-                    <!-- Peso Muerto Rumano -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>2. Peso Muerto Rumano (RDL)</h3><p><strong>Descripción:</strong> Excelente para isquiotibiales, glúteos y la cadena posterior.</p><h5>Técnica:</h5><ul class="list-disc list-inside text-sm"><li>Ligera flexión de rodillas (no bloqueadas), espalda recta.</li><li>Inicia empujando las caderas hacia atrás.</li><li>Baja la carga cerca de las piernas hasta sentir un estiramiento.</li><li>Sube extendiendo las caderas.</li></ul><a href="https://www.youtube.com/watch?v=JCX0s_23b3A" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a></div><div><img src="imagenes/pesomuertorumano.png" alt="Imagen de Peso Muerto Rumano" class="rounded-lg shadow-lg w-full"></div></div><hr>
-                    <!-- Zancadas -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>3. Zancadas (Lunges)</h3><p><strong>Descripción:</strong> Ejercicio unilateral que trabaja cuádriceps, isquiotibiales y glúteos.</p><h5>Técnica:</h5><ul class="list-disc list-inside text-sm"><li>Da un paso largo hacia adelante.</li><li>Baja las caderas hasta que ambas rodillas formen un ángulo de 90 grados.</li><li>La rodilla delantera alineada con el tobillo.</li><li>Empuja con el talón delantero para volver.</li></ul><a href="https://www.youtube.com/watch?v=zGq_T-gYQ9A" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a></div><div><img src="imagenes/zancadas.png" alt="Imagen de Zancada" class="rounded-lg shadow-lg w-full"></div></div><hr>
-                    <!-- Puente de Glúteos -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>4. Puente de Glúteos</h3><p><strong>Descripción:</strong> Activa y fortalece glúteos e isquiotibiales con bajo impacto.</p><h5>Técnica:</h5><ul class="list-disc list-inside text-sm"><li>Acuéstate boca arriba, rodillas flexionadas.</li><li>Levanta las caderas formando una línea recta de hombros a rodillas.</li><li>Aprieta los glúteos en la cima.</li></ul><a href="https://www.youtube.com/watch?v=8bbE64NuDTU" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a></div><div><img src="imagenes/puente de gluteos.png" alt="Imagen de Puente de Glúteos" class="rounded-lg shadow-lg w-full"></div></div><hr>
-                    <!-- Elevación de Gemelos -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>5. Elevación de Gemelos</h3><p><strong>Descripción:</strong> Se enfoca en los músculos de la pantorrilla.</p><h5>Técnica:</h5><ul class="list-disc list-inside text-sm"><li>De pie, con o sin una superficie elevada.</li><li>Levanta los talones tan alto como puedas.</li><li>Baja lentamente para un estiramiento completo.</li></ul><a href="https://www.youtube.com/watch?v=3u_j7g-p4w4" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a></div><div><img src="imagenes/Elevación de Gemelos con Mancuernas.png" alt="Imagen de Elevación de Gemelos" class="rounded-lg shadow-lg w-full"></div></div><hr>
-                    <!-- Plancha -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>6. Plancha sobre Antebrazos</h3><p><strong>Descripción:</strong> Fortalece el core en su totalidad.</p><h5>Técnica:</h5><ul class="list-disc list-inside text-sm"><li>Apóyate sobre antebrazos y puntas de los pies.</li><li>Cuerpo en línea recta de cabeza a talones.</li><li>Mantén el abdomen contraído.</li></ul><a href="https://www.youtube.com/watch?v=E_A3j3A-H7k" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a></div><div><img src="imagenes/Plancha.png" alt="Imagen de Plancha" class="rounded-lg shadow-lg w-full"></div></div><hr>
-                    <!-- Pájaro-Perro -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>7. Pájaro-Perro (Bird-Dog)</h3><p><strong>Descripción:</strong> Mejora la estabilidad del core y la coordinación.</p><h5>Técnica:</h5><ul class="list-disc list-inside text-sm"><li>A cuatro patas, espalda recta.</li><li>Extiende un brazo hacia adelante y la pierna opuesta hacia atrás.</li><li>Mantén el equilibrio y regresa controladamente.</li></ul><a href="https://www.youtube.com/watch?v=2b_j_Yq-3Qc" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a></div><div><img src="imagenes/Pájaro-Perro.png" alt="Imagen de Pájaro-Perro" class="rounded-lg shadow-lg w-full"></div></div>
-                </div>
-            `
-        },
-        PUSH: {
-            title: 'Guía Visual de Torso (Empuje)',
-            content: `
-                <div class="space-y-8">
-                    <!-- Press de Banca con Mancuernas -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>1. Press de Banca con Mancuernas (Dumbbell Bench Press)</h3>
-                            <p><strong>Descripción:</strong> Es el ejercicio fundamental para construir fuerza y tamaño en el pecho (pectorales). También trabaja los hombros (deltoides frontales) y los tríceps.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Acuéstate en un banco plano con una mancuerna en cada mano, apoyadas sobre tus muslos.</li>
-                                <li>Usa tus rodillas para ayudarte a "patear" las mancuernas hacia arriba, una a la vez, y colócalas a los lados de tu pecho. Tus palmas deben mirar hacia adelante.</li>
-                                <li>Contrae el abdomen y apoya firmemente los pies en el suelo.</li>
-                                <li>Empuja las mancuernas hacia arriba en un movimiento de arco ligero, hasta que estén casi juntas sobre tu pecho.</li>
-                                <li>Baja las mancuernas de forma controlada hasta que estén a los lados de tu pecho, sintiendo un estiramiento.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=999-y4p2iS4" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Press de Hombro Sentado con Mancuernas -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>2. Press de Hombro Sentado con Mancuernas (Seated Dumbbell Shoulder Press)</h3>
-                            <p><strong>Descripción:</strong> Este ejercicio se enfoca en los deltoides (músculos del hombro), especialmente la parte frontal y media, además de involucrar los tríceps.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Siéntate en un banco con respaldo vertical (o a 90 grados).</li>
-                                <li>Sostén las mancuernas a la altura de los hombros, con las palmas mirando hacia adelante.</li>
-                                <li>Mantén el pecho erguido y el abdomen contraído.</li>
-                                <li>Empuja las mancuernas hacia arriba hasta que tus brazos estén completamente extendidos sobre tu cabeza (sin bloquear los codos).</li>
-                                <li>Baja lentamente a la posición inicial.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=8Aiw_o0aE1g" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Press Inclinado con Mancuernas -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>3. Press Inclinado con Mancuernas (Incline Dumbbell Press)</h3>
-                            <p><strong>Descripción:</strong> Realizado en un banco inclinado (30-45 grados), este ejercicio pone un mayor énfasis en la parte superior del pecho (la "cabeza clavicular" del pectoral).</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Ajusta el banco a una inclinación de 30-45 grados.</li>
-                                <li>Realiza el mismo movimiento que el Press de Banca plano.</li>
-                                <li>Baja las mancuernas a la parte superior de tu pecho y empuja hacia arriba y ligeramente hacia atrás, siguiendo la línea del banco.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=Z0bRiX_L6uA" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Flexiones Inclinadas -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>4. Flexiones Inclinadas (Incline Push-Ups)</h3>
-                            <p><strong>Descripción:</strong> Una variación de la flexión estándar donde las manos se colocan en una superficie elevada (banco, silla, mesa). Esto reduce la cantidad de peso corporal que levantas y enfoca el trabajo en la parte inferior del pecho.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Coloca las manos sobre un banco o superficie estable, un poco más anchas que los hombros.</li>
-                                <li>Forma una línea recta desde la cabeza hasta los talones. Contrae el abdomen y los glúteos.</li>
-                                <li>Baja el pecho hacia el banco, manteniendo los codos relativamente cerca del cuerpo.</li>
-                                <li>Empuja hacia arriba para volver a la posición inicial.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=Z0bRiX_L6uA" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Aperturas con Ligas -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>5. Aperturas con Ligas (Band Chest Flys)</h3>
-                            <p><strong>Descripción:</strong> Un ejercicio de aislamiento excelente para el pecho. La liga proporciona tensión constante, lo que es genial para la conexión mente-músculo.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Ancla la liga a un punto fijo detrás de ti, a la altura del pecho.</li>
-                                <li>Sujeta las asas y da un paso adelante para crear tensión. Mantén una ligera flexión en los codos (como si abrazaras un árbol grande).</li>
-                                <li>Junta las manos frente a tu pecho, apretando los pectorales fuertemente.</li>
-                                <li>Regresa lentamente a la posición inicial, controlando la tensión de la liga.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=Z0bRiX_L6uA" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Elevaciones Laterales -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>6. Elevaciones Laterales (Lateral Raises)</h3>
-                            <p><strong>Descripción:</strong> El ejercicio de aislamiento clave para los deltoides laterales (la parte media del hombro), que da la apariencia de "anchura" a los hombros.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Ponte de pie con una mancuerna ligera en cada mano, a los lados de tu cuerpo.</li>
-                                <li>Mantén el pecho erguido y una ligera flexión en los codos.</li>
-                                <li>Levanta los brazos rectos hacia los lados hasta que estén paralelos al suelo (a la altura de los hombros).</li>
-                                <li>Baja lentamente y con control.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=34B2-kI_L-M" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Pushdowns de Tríceps con Liga -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>7. Pushdowns de Tríceps con Liga (Band Triceps Pushdowns)</h3>
-                            <p><strong>Descripción:</strong> Un ejercicio de aislamiento muy efectivo para los tríceps.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Ancla una liga en un punto alto (como el marco de una puerta).</li>
-                                <li>Sujeta la liga con ambas manos y mantén los codos "pegados" a los costados de tu torso.</li>
-                                <li>Empuja la liga hacia abajo hasta que tus brazos estén completamente extendidos, apretando los tríceps.</li>
-                                <li>Regresa lentamente a la posición inicial, sin mover los codos de su sitio.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=999-y4p2iS4" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Flexiones (Push-Ups) -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>8. Flexiones (Push-Ups)</h3>
-                            <p><strong>Descripción:</strong> El ejercicio de peso corporal por excelencia. Trabaja el pecho, los hombros, los tríceps y el core de manera integrada.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Colócate en posición de plancha alta, con las manos un poco más anchas que los hombros.</li>
-                                <li>Forma una línea recta desde la cabeza hasta los talones.</li>
-                                <li>Baja el cuerpo de forma controlada hasta que tu pecho esté cerca del suelo.</li>
-                                <li>Empuja con fuerza para volver a la posición inicial.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=P_Vui-hG3aI" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                </div>
-            `
-        },
-        PULL: {
-            title: 'Guía Visual de Torso (Tirón)',
-            content: `
-                <div class="space-y-8">
-                    <!-- Remo Inclinado con Mancuernas -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>1. Remo Inclinado con Mancuernas (Bent-Over Dumbbell Row)</h3>
-                            <p><strong>Descripción:</strong> Un ejercicio fundamental para desarrollar una espalda fuerte y densa. Trabaja principalmente los dorsales, romboides, trapecios y la parte posterior de los hombros.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Ponte de pie con una mancuerna en cada mano, con los pies separados al ancho de los hombros.</li>
-                                <li>Mantén una ligera flexión en las rodillas e inclina tu torso hacia adelante desde las caderas, hasta que quede casi paralelo al suelo. Mantén la espalda completamente recta.</li>
-                                <li>Deja que las mancuernas cuelguen directamente debajo de tus hombros con los brazos extendidos.</li>
-                                <li>Jala las mancuernas hacia tu torso, llevando los codos hacia el techo y apretando los omóplatos.</li>
-                                <li>Baja las mancuernas de forma controlada a la posición inicial.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=your_video_id" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Dominadas Asistidas / Negativas -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>2. Dominadas Asistidas / Negativas (Assisted / Negative Pull-Ups)</h3>
-                            <p><strong>Descripción:</strong> Las dominadas son el rey de los ejercicios para la espalda superior. Esta variación te ayuda a construir la fuerza necesaria para hacerlas sin ayuda. Las negativas se enfocan en la fase de descenso del movimiento.</p>
-                            <h5>Técnica (Negativas):</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Coloca un banco o una silla debajo de una barra de dominadas.</li>
-                                <li>Súbete al banco y agarra la barra con las manos un poco más anchas que los hombros.</li>
-                                <li>Salta para llevar tu barbilla por encima de la barra (la posición final de una dominada).</li>
-                                <li>Quita los pies del banco y baja tu cuerpo de la forma más lenta y controlada posible. El objetivo es que el descenso dure entre 3 y 5 segundos.</li>
-                                <li>Una vez abajo, vuelve a subirte al banco y repite.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=your_video_id" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Remo a una mano con Mancuerna -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>3. Remo a una mano con Mancuerna (Single-Arm Dumbbell Row)</h3>
-                            <p><strong>Descripción:</strong> Este ejercicio unilateral es excelente para aislar los dorsales de cada lado, corregir desequilibrios de fuerza y mejorar la estabilidad del core.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Coloca una rodilla y la mano del mismo lado sobre un banco plano. Tu espalda debe estar paralela al suelo.</li>
-                                <li>Con la otra mano, agarra una mancuerna del suelo, manteniendo el brazo extendido.</li>
-                                <li>Jala la mancuerna hacia arriba, a un costado de tu pecho, manteniendo el codo cerca del cuerpo.</li>
-                                <li>Concéntrate en apretar el músculo de la espalda en la parte superior del movimiento.</li>
-                                <li>Baja la mancuerna lentamente a la posición inicial. Completa todas las repeticiones de un lado antes de cambiar al otro.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=your_video_id" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Remo con Ligas -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>4. Remo con Ligas (Band Rows)</h3>
-                            <p><strong>Descripción:</strong> Una alternativa fantástica a las pesas que proporciona tensión constante en los músculos de la espalda. Ideal para hacer en casa.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Siéntate en el suelo con las piernas extendidas. Pasa una liga de resistencia por la planta de tus pies.</li>
-                                <li>Sujeta los extremos de la liga con ambas manos, manteniendo la espalda recta y el pecho erguido.</li>
-                                <li>Jala la liga hacia tu abdomen, llevando los codos hacia atrás y apretando los omóplatos.</li>
-                                <li>Haz una pausa de un segundo en la posición de máxima contracción.</li>
-                                <li>Regresa lentamente a la posición inicial, controlando la tensión de la liga.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=your_video_id" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Face Pulls con Liga de Resistencia -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>5. Face Pulls con Liga de Resistencia (Resistance Band Face Pulls)</h3>
-                            <p><strong>Descripción:</strong> Un ejercicio crucial para la salud de los hombros y la postura. Fortalece los deltoides posteriores y los músculos de la espalda alta que suelen estar debilitados.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Ancla una liga de resistencia a la altura de tu cara o un poco más arriba (en el marco de una puerta, por ejemplo).</li>
-                                <li>Sujeta la liga con ambas manos, con las palmas hacia abajo, y da un paso atrás para crear tensión.</li>
-                                <li>Jala la liga directamente hacia tu cara, apuntando a la altura de tus ojos.</li>
-                                <li>A medida que jalas, rota externamente tus hombros, llevando los nudillos hacia atrás y los codos hacia los lados y arriba.</li>
-                                <li>Aprieta la parte superior de tu espalda y regresa de forma controlada.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=your_video_id" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Curl de Bíceps con Mancuernas -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>6. Curl de Bíceps con Mancuernas (Dumbbell Bicep Curl)</h3>
-                            <p><strong>Descripción:</strong> El ejercicio clásico para construir el "pico" del bíceps.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Ponte de pie, sosteniendo una mancuerna en cada mano con un agarre supino (palmas hacia adelante).</li>
-                                <li>Mantén los codos pegados a los costados de tu torso.</li>
-                                <li>Sin mover la parte superior de los brazos, flexiona los codos y lleva las mancuernas hacia tus hombros.</li>
-                                <li>Aprieta los bíceps en la parte superior del movimiento.</li>
-                                <li>Baja las mancuernas lentamente y con control hasta la posición inicial.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=your_video_id" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Curl de Bíceps con Ligas -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>7. Curl de Bíceps con Ligas (Band Bicep Curl)</h3>
-                            <p><strong>Descripción:</strong> Una gran variación que mantiene la tensión en el bíceps durante todo el rango de movimiento, especialmente en la parte superior.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Pisa el centro de una liga de resistencia con ambos pies.</li>
-                                <li>Sujeta los extremos de la liga con un agarre supino (palmas hacia arriba).</li>
-                                <li>Manteniendo los codos fijos a los costados, flexiona los brazos y lleva las manos hacia los hombros.</li>
-                                <li>Aprieta los bíceps en la contracción máxima.</li>
-                                <li>Baja lentamente, resistiendo la tensión de la liga.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=your_video_id" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
-                    <hr>
-                    <!-- Curl Martillo con Mancuernas -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="prose">
-                            <h3>8. Curl Martillo con Mancuernas (Dumbbell Hammer Curl)</h3>
-                            <p><strong>Descripción:</strong> Esta variación del curl se realiza con un agarre neutro (como si sostuvieras un martillo). Trabaja el bíceps, el braquial (un músculo debajo del bíceps que ayuda a dar grosor al brazo) y el antebrazo.</p>
-                            <h5>Técnica:</h5>
-                            <ul class="list-disc list-inside text-sm">
-                                <li>Ponte de pie con una mancuerna en cada mano y las palmas enfrentadas (agarre neutro).</li>
-                                <li>Mantén los codos pegados a los costados.</li>
-                                <li>Flexiona los codos y levanta las mancuernas hacia los hombros, manteniendo el agarre neutro durante todo el movimiento.</li>
-                                <li>Baja de forma controlada a la posición inicial.</li>
-                            </ul>
-                            <a href="https://www.youtube.com/watch?v=your_video_id" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">Ver video en YouTube</a>
-                        </div>
-                        <div class="img-placeholder"><span>Espacio para tu imagen</span></div>
-                    </div>
+                    <!-- Squats --><div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>1. Squats</h3><p><strong>Description:</strong> Fundamental exercise for strengthening legs and glutes.</p><h5>Technique:</h5><ul><li>Feet shoulder-width apart, chest up.</li><li>Lower hips back and down, keeping back straight.</li><li>Go down until thighs are parallel to the floor.</li><li>Push up from the heels.</li></ul><a href="https://www.youtube.com/watch?v=l7_B-mI4G6I" target="_blank">Watch on YouTube</a></div><div><img src="https://placehold.co/400x300/1A0A2A/F0E6FF?text=Squats" alt="Squat Image" class="rounded-lg shadow-lg w-full"></div></div><hr>
+                    <!-- Romanian Deadlift --><div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>2. Romanian Deadlift (RDL)</h3><p><strong>Description:</strong> Excellent for hamstrings, glutes, and the posterior chain.</p><h5>Technique:</h5><ul><li>Slight knee bend (not locked), straight back.</li><li>Initiate by pushing hips back.</li><li>Lower the weight close to your legs until you feel a stretch.</li><li>Come up by extending your hips.</li></ul><a href="https://www.youtube.com/watch?v=JCX0s_23b3A" target="_blank">Watch on YouTube</a></div><div><img src="https://placehold.co/400x300/1A0A2A/F0E6FF?text=RDL" alt="RDL Image" class="rounded-lg shadow-lg w-full"></div></div><hr>
+                    <!-- Lunges --><div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>3. Lunges</h3><p><strong>Description:</strong> Unilateral exercise that works quads, hamstrings, and glutes.</p><h5>Technique:</h5><ul><li>Take a long step forward.</li><li>Lower hips until both knees form a 90-degree angle.</li><li>Front knee aligned with the ankle.</li><li>Push off the front heel to return.</li></ul><a href="https://www.youtube.com/watch?v=zGq_T-gYQ9A" target="_blank">Watch on YouTube</a></div><div><img src="https://placehold.co/400x300/1A0A2A/F0E6FF?text=Lunges" alt="Lunge Image" class="rounded-lg shadow-lg w-full"></div></div><hr>
+                    <!-- Glute Bridge --><div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>4. Glute Bridge</h3><p><strong>Description:</strong> Activates and strengthens glutes and hamstrings with low impact.</p><h5>Technique:</h5><ul><li>Lie on your back, knees bent.</li><li>Lift hips to form a straight line from shoulders to knees.</li><li>Squeeze glutes at the top.</li></ul><a href="https://www.youtube.com/watch?v=8bbE64NuDTU" target="_blank">Watch on YouTube</a></div><div><img src="https://placehold.co/400x300/1A0A2A/F0E6FF?text=Glute+Bridge" alt="Glute Bridge Image" class="rounded-lg shadow-lg w-full"></div></div><hr>
+                    <!-- Calf Raises --><div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>5. Calf Raises</h3><p><strong>Description:</strong> Focuses on the calf muscles.</p><h5>Technique:</h5><ul><li>Standing, with or without an elevated surface.</li><li>Raise your heels as high as you can.</li><li>Lower slowly for a full stretch.</li></ul><a href="https://www.youtube.com/watch?v=3u_j7g-p4w4" target="_blank">Watch on YouTube</a></div><div><img src="https://placehold.co/400x300/1A0A2A/F0E6FF?text=Calf+Raises" alt="Calf Raise Image" class="rounded-lg shadow-lg w-full"></div></div><hr>
+                    <!-- Plank --><div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>6. Forearm Plank</h3><p><strong>Description:</strong> Strengthens the entire core.</p><h5>Technique:</h5><ul><li>Rest on forearms and toes.</li><li>Body in a straight line from head to heels.</li><li>Keep abdomen contracted.</li></ul><a href="https://www.youtube.com/watch?v=E_A3j3A-H7k" target="_blank">Watch on YouTube</a></div><div><img src="https://placehold.co/400x300/1A0A2A/F0E6FF?text=Plank" alt="Plank Image" class="rounded-lg shadow-lg w-full"></div></div><hr>
+                    <!-- Bird-Dog --><div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"><div class="prose"><h3>7. Bird-Dog</h3><p><strong>Description:</strong> Improves core stability and coordination.</p><h5>Technique:</h5><ul><li>On all fours, back straight.</li><li>Extend one arm forward and the opposite leg back.</li><li>Maintain balance and return with control.</li></ul><a href="https://www.youtube.com/watch?v=2b_j_Yq-3Qc" target="_blank">Watch on YouTube</a></div><div><img src="https://placehold.co/400x300/1A0A2A/F0E6FF?text=Bird-Dog" alt="Bird-Dog Image" class="rounded-lg shadow-lg w-full"></div></div>
                 </div>
             `
         }
     };
     
+    // --- Date & Schedule Variables ---
     const today = new Date();
     const year = today.getFullYear();
-    const month = today.getMonth();
-    const day = today.getDate();
-    const dateKey = `${year}-${month + 1}-${day}`;
+    const month = today.getMonth(); // 0-11
+    const day = today.getDate(); // 1-31
+    const dateKey = `${year}-${month + 1}-${day}`; // Firestore document ID
 
+    const LOCAL_STORAGE_KEY = 'ftber_progress';
+    const ROUTINES_STORAGE_KEY = 'ftber_routines';
     const schedulePattern = ['TORSO_PUSH', 'LEGS_ANKLES', 'YOGA_REST', 'TORSO_PULL', 'GLUTES_CORE', 'METABOLIC', 'REST'];
     const monthlySchedule = {};
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -624,27 +568,34 @@ document.addEventListener('DOMContentLoaded', () => {
         monthlySchedule[d] = schedulePattern[patternIndex];
     }
     
+    // --- DOM Elements ---
     const tabs = document.querySelectorAll('.nav-tab');
     const contentSections = document.querySelectorAll('.content-section');
-    const routineSelectors = document.querySelectorAll('.routine-selector');
     const routineDetailsContainer = document.getElementById('routine-details-container');
     const hoyContainer = document.getElementById('hoy');
     const calendarBody = document.getElementById('calendar-body');
     const calendarTitle = document.getElementById('calendar-title');
     const mainContent = document.getElementById('main-content');
+    const modal = document.getElementById('guide-modal');
+    const guideTitle = document.getElementById('guide-title');
+    const guideContent = document.getElementById('guide-content');
+    const closeBtn = document.getElementById('close-guide-btn');
+    const editModal = document.getElementById('edit-exercise-modal');
+    const closeEditBtn = document.getElementById('close-edit-modal');
+    const editForm = document.getElementById('edit-exercise-form');
 
-    function createRoutineHTML(routineKey, isTodayView) {
-        const routineData = routines[routineKey];
-        if (!routineData || !routineData.details) return ''; // Return empty for REST days
-        
+    // --- Core Functions ---
+
+    function createRoutineHeaderHTML(routineData, routineKey, isTodayView) {
+        const isMetabolic = routineKey === 'METABOLIC';
         let progressHTML = '';
         if (isTodayView) {
             progressHTML = `
                 <div class="mb-6">
-                    <h3 class="text-center font-bold text-xl mb-3">Progreso Diario</h3>
-                    <div id="progress-text" class="text-center font-bold text-lg mb-2 text-[#5a6e5f]">0%</div>
+                    <h3 class="text-center font-bold text-xl mb-3 text-primary">Daily Progress</h3>
+                    <div id="progress-text" class="text-center font-bold text-lg mb-2 text-accent" style="text-shadow: var(--glow-accent);">0%</div>
                     <div class="progress-bar-container" style="height: 1rem;">
-                        <div id="progress-bar" class="progress-bar"></div>
+                        <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
                     </div>
                 </div>
             `;
@@ -652,89 +603,98 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let guideButtonHTML = '';
         if (routineData.hasGuide) {
-            let guideType = 'LEGS'; // Hardcoded for now as it's the only guide
-            guideButtonHTML = `<div class="text-center my-4"><button data-guide="${guideType}" class="show-guide-btn bg-[#c5a265] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#b38e52] transition-colors">Ver Guía Visual de Ejercicios</button></div>`;
+            // Make the guide key dynamic instead of hardcoded
+            const guideKey = Object.keys(guides).find(key => routineKey.includes(key));
+            if (guideKey) {
+                 guideButtonHTML = `<div class="text-center my-4"><button data-guide="${guideKey}" class="show-guide-btn bg-accent text-bg-color font-bold py-2 px-4 rounded-lg hover:bg-accent-hover transition-colors">View Visual Guide</button></div>`;
+            }
         }
 
-        let header = `<div class="bg-white p-4 sm:p-6 rounded-lg shadow-md border border-stone-200">
-                        ${progressHTML}
-                        <h2 class="text-2xl font-bold mb-1 text-center">${routineData.title}</h2>
-                        <p class="text-center text-stone-500 mb-2">${routineData.description}</p>
-                        ${guideButtonHTML}`;
+        return `<div class="bg-card-bg/80 p-4 sm:p-6 rounded-lg shadow-lg border ${isMetabolic ? 'metabolic-border metabolic-shadow' : 'border-border'}">
+                    ${progressHTML}
+                    <h2 class="text-2xl font-bold mb-1 text-center ${isMetabolic ? 'metabolic-text' : 'text-primary'}">${routineData.title}</h2>
+                    <p class="text-center text-secondary mb-2">${routineData.description}</p>
+                    ${guideButtonHTML}`;
+    }
 
-        let tableHeader = `
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead class="bg-stone-50">
-                        <tr>
-                            <th class="p-3 font-semibold text-sm">Ejercicio</th>
-                            <th class="p-3 font-semibold text-sm text-center">Series</th>
-                            <th class="p-3 font-semibold text-sm text-center">Reps</th>
-                            <th class="p-3 font-semibold text-sm text-center">Descanso</th>
-                            <th class="p-3 font-semibold text-sm">Notas</th>
-                            ${isTodayView ? '<th class="p-3 font-semibold text-sm text-center">Hecho</th>' : ''}
-                        </tr>
-                    </thead>
-                    <tbody>`;
-        
-        let tableRows = routineData.details.exercises.map((ex, index) => `
-            <tr class="border-b border-stone-200 last:border-b-0">
-                <td class="p-3 font-medium">${ex.name}</td>
-                <td class="p-3 text-center">${ex.series}</td>
-                <td class="p-3 text-center">${ex.reps}</td>
-                <td class="p-3 text-center">${ex.rest}</td>
-                <td class="p-3 text-sm text-stone-600">${ex.notes || ''}</td>
-                ${isTodayView ? `<td class="p-3 text-center"><input type="checkbox" data-exercise-index="${index}" class="h-5 w-5 rounded text-[#c5a265] focus:ring-[#b38e52]"></td>` : ''}
+    function createRoutineTableHTML(exercises, isTodayView, routineKey) {
+        const rows = exercises.map((ex, index) => `
+            <tr class="border-b border-border last:border-b-0 hover:bg-black/20 transition">
+                <td class="p-3 font-medium text-primary">${ex.name}</td>
+                <td class="p-3 text-center text-secondary">${ex.series}</td>
+                <td class="p-3 text-center text-secondary">${ex.reps}</td>
+                <td class="p-3 text-center text-secondary">${ex.rest}</td>
+                <td class="p-3 text-sm text-secondary">${ex.notes || ''}</td>
+                ${isTodayView ? `<td class="p-3 text-center"><input type="checkbox" data-exercise-index="${index}" class="h-5 w-5 rounded bg-card-bg border-border text-accent focus:ring-accent"></td>` : `<td class="p-3 text-center"><button class="edit-exercise-btn text-accent hover:text-accent-hover" data-routine="${routineKey}" data-index="${index}" title="Edit">✎</button></td>`}
             </tr>
         `).join('');
+
+        return `<div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-black/30"><tr><th class="p-3 font-semibold text-sm text-secondary uppercase">Exercise</th><th class="p-3 font-semibold text-sm text-center text-secondary uppercase">Sets</th><th class="p-3 font-semibold text-sm text-center text-secondary uppercase">Reps</th><th class="p-3 font-semibold text-sm text-center text-secondary uppercase">Rest</th><th class="p-3 font-semibold text-sm text-secondary uppercase">Notes</th><th class="p-3 font-semibold text-sm text-center text-secondary uppercase">${isTodayView ? 'Done' : 'Edit'}</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    }
+
+    function createRoutineHTML(routineKey, isTodayView) {
+        const routineData = routines[routineKey];
+        if (!routineData || !routineData.details) return '';
+
+        const isMetabolic = routineKey === 'METABOLIC';
         
-        let tableFooter = `</tbody></table></div>`;
-        let commonSections = `
-            <div class="mt-6 p-4 bg-[#5a6e5f]/10 text-[#2c3144] rounded-lg">
-                <h4 class="font-bold">▶️ Calentamiento (10 min antes)</h4>
-                <p class="text-sm">Movilidad articular (muñecas, tobillos, caderas), 5 min de cardio ligero (Jumping Jacks, trote en el sitio), Sentadillas sin peso, Gato-Vaca.</p>
+        let progressHTML = '';
+        const headerHTML = createRoutineHeaderHTML(routineData, routineKey, isTodayView);
+        const tableHTML = createRoutineTableHTML(routineData.details.exercises, isTodayView, routineKey);
+        const commonSectionsHTML = `
+            <div class="mt-6 p-4 bg-accent/10 text-accent rounded-lg border border-accent/20">
+                <h4 class="font-bold">▶️ WARM-UP (10 MIN BEFORE)</h4>
+                <p class="text-sm text-secondary">Joint mobility (wrists, ankles, hips), 5 min light cardio (Jumping Jacks, jogging in place), Bodyweight Squats, Cat-Cow.</p>
             </div>
-            <div class="mt-4 p-4 bg-[#6d7b8d]/10 text-[#2c3144] rounded-lg">
-                <h4 class="font-bold">⏸️ Enfriamiento (10 min después)</h4>
-                <p class="text-sm">Estiramientos suaves de los músculos trabajados. Revisa la pestaña de Yoga para ideas específicas según la rutina.</p>
+            <div class="mt-4 p-4 bg-metabolic/10 text-metabolic rounded-lg border border-metabolic/20">
+                <h4 class="font-bold">⏸️ COOL-DOWN (10 MIN AFTER)</h4>
+                <p class="text-sm text-secondary">Gentle stretches for the muscles worked. Check the Yoga tab for specific ideas based on the routine.</p>
             </div>
         `;
         
-        return header + tableHeader + tableRows + tableFooter + commonSections + `</div>`;
+        return headerHTML + tableHTML + commonSectionsHTML + `</div>`;
     }
 
-    function displayTodaysPlan() {
+    async function displayTodaysPlan() {
         const activityKey = monthlySchedule[day];
         const activity = routines[activityKey];
-        const todayName = today.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        const todayName = today.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
         let content = '';
-        if (activity.details) { // Check if it's a workout day
+        if (activity.details) {
             content = `<div class="text-center mb-6">
-                           <h2 class="text-3xl font-bold">Plan para Hoy</h2>
-                           <p class="text-stone-500">${todayName}</p>
-                       </div>
-                       ${createRoutineHTML(activityKey, true)}`;
-        } else { // It's a REST or YOGA_REST day
-             content = `<div class="bg-white p-6 rounded-lg shadow-md border border-stone-200 text-center">
-                           <h2 class="text-3xl font-bold">Plan para Hoy</h2>
-                           <p class="text-stone-500 mb-4">${todayName}</p>
-                           <p class="text-2xl mt-4 text-[#5a6e5f]">${activity.title}</p>
-                           <p class="mt-2 text-stone-600">${activity.description}</p>
-                       </div>`;
+                            <h2 class="text-3xl font-bold">Plan for Today</h2>
+                            <p class="text-secondary">${todayName}</p>
+                        </div>
+                        ${createRoutineHTML(activityKey, true)}`;
+        } else {
+             content = `<div class="bg-card-bg/80 p-6 rounded-lg shadow-lg border border-border text-center">
+                            <h2 class="text-3xl font-bold">Plan for Today</h2>
+                            <p class="text-secondary mb-4">${todayName}</p>
+                            <p class="text-2xl mt-4 text-accent" style="text-shadow: var(--glow-accent);">${activity.title}</p>
+                            <p class="mt-2 text-primary">${activity.description}</p>
+                        </div>`;
         }
         hoyContainer.innerHTML = content;
-        loadProgress();
-        updateProgress();
     }
 
-    function updateProgress() {
+    function getStoredProgress() {
+        const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+        try {
+            return stored ? JSON.parse(stored) : {};
+        } catch (e) {
+            console.error("Error parsing stored progress:", e);
+            return {};
+        }
+    }
+
+    function updateProgressUI() {
         const checkboxes = document.querySelectorAll('#hoy input[type="checkbox"]');
         const total = checkboxes.length;
         if (total === 0) return;
 
         const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
-        const percentage = total > 0 ? Math.round((checked / total) * 100) : 0;
+        const percentage = Math.round((checked / total) * 100);
         
         const progressBar = document.getElementById('progress-bar');
         const progressText = document.getElementById('progress-text');
@@ -743,37 +703,48 @@ document.addEventListener('DOMContentLoaded', () => {
         if (progressText) progressText.textContent = `${percentage}% Completado`;
     }
 
-    function saveProgress() {
+    async function saveProgress() {
         const checkboxes = document.querySelectorAll('#hoy input[type="checkbox"]');
-        const progress = Array.from(checkboxes).map(cb => cb.checked);
-        localStorage.setItem(dateKey, JSON.stringify(progress));
+        if (checkboxes.length === 0) return;
+
+        const progressState = Array.from(checkboxes).map(cb => cb.checked);
+        const allProgress = getStoredProgress();
+        allProgress[dateKey] = progressState;
+
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allProgress));
+        console.log(`Progreso guardado para ${dateKey}`);
     }
 
-    function loadProgress() {
-        const savedProgress = JSON.parse(localStorage.getItem(dateKey));
-        if (savedProgress) {
+    async function loadProgress() {
+        const allProgress = getStoredProgress();
+        const todaysProgress = allProgress[dateKey];
+
+        if (todaysProgress) {
             const checkboxes = document.querySelectorAll('#hoy input[type="checkbox"]');
             checkboxes.forEach((cb, index) => {
-                if (savedProgress[index]) {
+                if (todaysProgress[index]) {
                     cb.checked = true;
                 }
             });
         }
+        updateProgressUI();
     }
 
-    function updateGlobalProgress() {
+    async function updateGlobalProgress() {
+        const allProgress = getStoredProgress();
         let totalExercisesInMonth = 0;
         let completedExercisesInMonth = 0;
 
         for (let d = 1; d <= daysInMonth; d++) {
             const routineKey = monthlySchedule[d];
-            if (routines[routineKey] && routines[routineKey].details) {
-                totalExercisesInMonth += routines[routineKey].details.exercises.length;
-                
+            const routine = routines[routineKey];
+            if (routine && routine.details) {
+                totalExercisesInMonth += routine.details.exercises.length;
+
                 const progressKey = `${year}-${month + 1}-${d}`;
-                const savedProgress = JSON.parse(localStorage.getItem(progressKey));
-                if (savedProgress) {
-                    completedExercisesInMonth += savedProgress.filter(Boolean).length;
+                const dayProgress = allProgress[progressKey];
+                if (dayProgress) {
+                    completedExercisesInMonth += dayProgress.filter(Boolean).length;
                 }
             }
         }
@@ -784,31 +755,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const globalProgressText = document.getElementById('global-progress-text');
 
         if (globalProgressBar) globalProgressBar.style.width = `${globalPercentage}%`;
-        if (globalProgressText) globalProgressText.textContent = `${globalPercentage}% Completado`;
+        if (globalProgressText) globalProgressText.textContent = `${globalPercentage}% Complete`;
     }
 
     function generateCalendar() {
-        calendarTitle.textContent = `Plan de ${today.toLocaleDateString('es-ES', { month: 'long' })} ${year}`;
+        calendarTitle.textContent = `Plan for ${today.toLocaleDateString('en-US', { month: 'long' })} ${year}`;
         const firstDayOfMonth = new Date(year, month, 1).getDay();
         const offset = (firstDayOfMonth === 0) ? 6 : firstDayOfMonth - 1;
 
         calendarBody.innerHTML = '';
         for (let i = 0; i < offset; i++) {
-            calendarBody.innerHTML += `<div class="bg-stone-50 rounded-md"></div>`;
+            calendarBody.innerHTML += `<div class="bg-black/20 rounded-md"></div>`;
         }
 
         for (let d = 1; d <= daysInMonth; d++) {
             const activityKey = monthlySchedule[d];
             const activity = routines[activityKey];
-            const isToday = d === day;
+            const isToday = (d === day);
             const todayClass = isToday ? 'today' : '';
+            const isMetabolic = activityKey === 'METABOLIC';
 
             let dayCell = `
-                <div class="calendar-day bg-white p-2 rounded-md border border-stone-200 flex flex-col ${todayClass}">
-                    <div class="font-bold text-sm">${d}</div>
+                <div class="calendar-day bg-card-bg/80 p-2 rounded-md border border-border flex flex-col ${todayClass}">
+                    <div class="font-bold text-sm text-primary">${d}</div>
                     <div class="text-xs mt-1 flex-grow">
-                        <p class="font-semibold text-[#2c3144]">${activity.title}</p>
-                        <p class="text-stone-500 hidden sm:block">${activity.description}</p>
+                        <p class="font-semibold ${isMetabolic ? 'metabolic-text' : 'text-accent'}">${activity.title}</p>
+                        <p class="text-secondary hidden sm:block">${activity.description}</p>
                     </div>
                 </div>`;
             calendarBody.innerHTML += dayCell;
@@ -817,7 +789,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function switchTab(tabName) {
         contentSections.forEach(section => section.classList.remove('active'));
-        document.getElementById(tabName).classList.add('active');
+        const activeSection = document.getElementById(tabName);
+        if (activeSection) {
+            activeSection.classList.add('active');
+        }
 
         tabs.forEach(tab => {
             tab.classList.remove('tab-active');
@@ -828,84 +803,298 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function initModal() {
-        const modal = document.getElementById('guide-modal');
-        const guideTitle = document.getElementById('guide-title');
-        const guideContent = document.getElementById('guide-content');
-        const closeBtn = document.getElementById('close-guide-btn');
-        
         mainContent.addEventListener('click', (e) => {
-            if (e.target.classList.contains('show-guide-btn')) {
-                const guideKey = e.target.dataset.guide;
+            const button = e.target.closest('.show-guide-btn');
+            if (button) {
+                const guideKey = button.dataset.guide;
                 const guideData = guides[guideKey];
                 if(guideData) {
                     guideTitle.textContent = guideData.title;
                     guideContent.innerHTML = guideData.content;
-                    modal.classList.remove('hidden');
+                    modal.classList.add('active');
                 }
             }
         });
 
         closeBtn.addEventListener('click', () => {
-            modal.classList.add('hidden');
+            modal.classList.remove('active');
         });
 
         modal.addEventListener('click', (e) => {
-            if (e.target === modal) { // Clicked on the overlay
-                modal.classList.add('hidden');
+            if (e.target === modal) {
+                modal.classList.remove('active');
             }
         });
     }
 
-    tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.dataset.tab)));
+    // --- Statistics Functions ---
+    function calculateWeeklyStats() {
+        const allProgress = getStoredProgress();
+        const today = new Date();
+        let weeklyCompletion = 0;
+        let workoutsDone = 0;
+        let totalExercises = 0;
+        let streak = 0;
+        let lastCompletedDate = null;
 
-    // Need to re-query selectors after potential DOM changes
-    document.getElementById('rutinas').addEventListener('click', (e) => {
-        if (e.target.classList.contains('routine-selector')) {
-            const routineKey = e.target.dataset.routine;
-            routineDetailsContainer.innerHTML = createRoutineHTML(routineKey, false);
-            if (window.innerWidth < 640) {
-                routineDetailsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Calculate stats for last 7 days
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date(today);
+            date.setDate(date.getDate() - i);
+            const d = date.getDate();
+            const m = date.getMonth() + 1;
+            const y = date.getFullYear();
+            const progressKey = `${y}-${m}-${d}`;
+            
+            const routineKey = monthlySchedule[d];
+            const routine = routines[routineKey];
+            
+            if (routine && routine.details) {
+                const exerciseCount = routine.details.exercises.length;
+                totalExercises += exerciseCount;
+
+                const dayProgress = allProgress[progressKey] || [];
+                const completedCount = dayProgress.filter(Boolean).length;
+                
+                if (completedCount > 0) {
+                    weeklyCompletion += completedCount;
+                    if (completedCount === exerciseCount) {
+                        workoutsDone++;
+                    }
+                }
             }
         }
-    });
-    
-    document.querySelectorAll('.accordion-toggle').forEach(button => {
-        button.addEventListener('click', () => {
-            const content = button.nextElementSibling;
-            const icon = button.querySelector('span:last-child');
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-                icon.style.transform = 'rotate(0deg)';
-            } else {
-                document.querySelectorAll('.accordion-content').forEach(el => {
-                    el.style.maxHeight = null;
-                    if (el.previousElementSibling) {
-                       el.previousElementSibling.querySelector('span:last-child').style.transform = 'rotate(0deg)';
-                    }
-                });
-                content.style.maxHeight = content.scrollHeight + "px";
-                icon.style.transform = 'rotate(180deg)';
+
+        // Calculate streak
+        let currentDate = new Date();
+        for (let i = 0; i < 365; i++) {
+            const d = currentDate.getDate();
+            const m = currentDate.getMonth() + 1;
+            const y = currentDate.getFullYear();
+            const progressKey = `${y}-${m}-${d}`;
+            
+            const routineKey = monthlySchedule[d];
+            const routine = routines[routineKey];
+            
+            if (routine && routine.details) {
+                const dayProgress = allProgress[progressKey] || [];
+                if (dayProgress.filter(Boolean).length > 0) {
+                    streak++;
+                } else {
+                    break;
+                }
+            }
+            
+            currentDate.setDate(currentDate.getDate() - 1);
+        }
+
+        const weeklyPercentage = totalExercises > 0 ? Math.round((weeklyCompletion / totalExercises) * 100) : 0;
+
+        return { weeklyPercentage, workoutsDone, totalExercises: weeklyCompletion, streak };
+    }
+
+    function updateStatsDashboard() {
+        const stats = calculateWeeklyStats();
+        document.getElementById('weekly-completion').textContent = `${stats.weeklyPercentage}%`;
+        document.getElementById('workouts-done').textContent = stats.workoutsDone;
+        document.getElementById('total-exercises').textContent = stats.totalExercises;
+        document.getElementById('current-streak').textContent = stats.streak;
+
+        // Update daily breakdown
+        const breakdownContainer = document.getElementById('weekly-breakdown');
+        const allProgress = getStoredProgress();
+        breakdownContainer.innerHTML = '';
+
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date();
+            date.setDate(date.getDate() - i);
+            const d = date.getDate();
+            const m = date.getMonth() + 1;
+            const y = date.getFullYear();
+            const progressKey = `${y}-${m}-${d}`;
+            
+            const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+            const routineKey = monthlySchedule[d];
+            const routine = routines[routineKey];
+            
+            if (routine && routine.details) {
+                const exerciseCount = routine.details.exercises.length;
+                const dayProgress = allProgress[progressKey] || [];
+                const completedCount = dayProgress.filter(Boolean).length;
+                const percentage = Math.round((completedCount / exerciseCount) * 100);
+
+                const barColor = percentage === 100 ? 'bg-emerald-500' : percentage >= 50 ? 'bg-accent' : 'bg-orange-500';
+                breakdownContainer.innerHTML += `
+                    <div class="flex items-center gap-3">
+                        <span class="w-12 text-sm font-semibold text-secondary">${dayName}</span>
+                        <div class="flex-grow bg-black/30 rounded-full h-2">
+                            <div class="${barColor} h-2 rounded-full transition-all" style="width: ${percentage}%"></div>
+                        </div>
+                        <span class="w-12 text-right text-xs text-secondary">${completedCount}/${exerciseCount}</span>
+                    </div>
+                `;
+            }
+        }
+    }
+
+    // --- Exercise Editor Functions ---
+    let currentEditingExercise = { routineKey: null, index: null };
+
+    function openEditExerciseModal(routineKey, index) {
+        currentEditingExercise = { routineKey, index };
+        const routine = routines[routineKey];
+        if (!routine || !routine.details || !routine.details.exercises[index]) return;
+
+        const exercise = routine.details.exercises[index];
+        document.getElementById('edit-exercise-name').value = exercise.name;
+        document.getElementById('edit-exercise-series').value = exercise.series;
+        document.getElementById('edit-exercise-reps').value = exercise.reps;
+        document.getElementById('edit-exercise-rest').value = exercise.rest;
+        document.getElementById('edit-exercise-notes').value = exercise.notes || '';
+
+        editModal.classList.add('active');
+    }
+
+    function saveEditedExercise(e) {
+        e.preventDefault();
+        const { routineKey, index } = currentEditingExercise;
+        if (!routineKey || index === null) return;
+
+        const routine = routines[routineKey];
+        if (!routine || !routine.details) return;
+
+        routine.details.exercises[index] = {
+            name: document.getElementById('edit-exercise-name').value,
+            series: document.getElementById('edit-exercise-series').value,
+            reps: document.getElementById('edit-exercise-reps').value,
+            rest: document.getElementById('edit-exercise-rest').value,
+            notes: document.getElementById('edit-exercise-notes').value
+        };
+
+        localStorage.setItem(ROUTINES_STORAGE_KEY, JSON.stringify(routines));
+        editModal.classList.remove('active');
+
+        // Refresh the routine display
+        routineDetailsContainer.innerHTML = createRoutineHTML(routineKey, false);
+    }
+
+    function deleteExercise() {
+        const { routineKey, index } = currentEditingExercise;
+        if (!routineKey || index === null) return;
+
+        if (confirm('Delete this exercise?')) {
+            const routine = routines[routineKey];
+            if (routine && routine.details) {
+                routine.details.exercises.splice(index, 1);
+                localStorage.setItem(ROUTINES_STORAGE_KEY, JSON.stringify(routines));
+                editModal.classList.remove('active');
+                routineDetailsContainer.innerHTML = createRoutineHTML(routineKey, false);
+            }
+        }
+    }
+
+    // --- Event Listeners ---
+    function addEventListeners() {
+        tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.dataset.tab)));
+
+        document.getElementById('rutinas').addEventListener('click', (e) => {
+            const button = e.target.closest('.routine-selector');
+            if (button) {
+                const routineKey = button.dataset.routine;
+                routineDetailsContainer.innerHTML = createRoutineHTML(routineKey, false);
+                if (window.innerWidth < 640) {
+                    routineDetailsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
         });
-    });
-    
-    hoyContainer.addEventListener('change', (e) => {
-        if (e.target.matches('input[type="checkbox"]')) {
-            saveProgress();
-            updateProgress();
-            updateGlobalProgress();
+        
+        routineDetailsContainer.addEventListener('click', (e) => {
+            const editBtn = e.target.closest('.edit-exercise-btn');
+            if (editBtn) {
+                const routineKey = editBtn.dataset.routine;
+                const index = parseInt(editBtn.dataset.index);
+                openEditExerciseModal(routineKey, index);
+            }
+        });
+        
+        document.querySelectorAll('.accordion-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('span:last-child');
+                const isExpanded = content.style.maxHeight;
+
+                // Close all others
+                document.querySelectorAll('.accordion-content').forEach(el => {
+                    el.style.maxHeight = null;
+                    const otherIcon = el.previousElementSibling.querySelector('span:last-child');
+                    if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+                });
+
+                // Open the clicked one if it was closed
+                if (!isExpanded) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    if (icon) icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+        
+        hoyContainer.addEventListener('change', (e) => {
+            if (e.target.matches('input[type="checkbox"]')) {
+                saveProgress();
+                updateProgressUI();
+                updateGlobalProgress(); // Update global progress on change
+                updateStatsDashboard(); // Update stats on change
+            }
+        });
+
+        // Edit modal handlers
+        editForm.addEventListener('submit', saveEditedExercise);
+        document.getElementById('delete-exercise-btn').addEventListener('click', deleteExercise);
+        closeEditBtn.addEventListener('click', () => editModal.classList.remove('active'));
+        editModal.addEventListener('click', (e) => {
+            if (e.target === editModal) editModal.classList.remove('active');
+        });
+
+        // ESC key to close modals
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.remove('active');
+                editModal.classList.remove('active');
+            }
+        });
+
+        initModal();
+    }
+
+    // --- Simplified App Start ---
+    async function initializeApp() {
+        // Add all event listeners
+        addEventListeners();
+        
+        // Load data and set initial state
+        await loadProgress();
+        displayTodaysPlan();
+        generateCalendar();
+        updateGlobalProgress();
+        updateStatsDashboard(); // Initialize stats
+        
+        // Set initial UI state
+        switchTab('hoy');
+        routineDetailsContainer.innerHTML = createRoutineHTML('TORSO_PUSH', false);
+        
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js').catch(err => {
+                console.log('Service Worker registration failed:', err);
+            });
         }
+    }
+
+    // --- App Entry Point ---
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeApp();
     });
 
-    // Initial Load
-    displayTodaysPlan();
-    generateCalendar();
-    updateGlobalProgress();
-    initModal();
-    switchTab('hoy');
-    // Set a default view for the routines tab
-    routineDetailsContainer.innerHTML = createRoutineHTML('TORSO_PUSH', false);
-});
 </script>
 
 </body>
