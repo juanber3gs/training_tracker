@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ber Online Fitness - Your 4:20 Retro-Futuristic AI Training Plan</title>
     <meta name="theme-color" content="#00D0FF">
-    <link rel="manifest" id="manifest-link" href="/training_tracker/manifest.json">
-    <link rel="apple-touch-icon" href="/training_tracker/imagenes/logo.png">
+    <link rel="manifest" id="manifest-link" href="manifest.json">
+    <link rel="apple-touch-icon" href="imagenes/logo.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -275,7 +275,7 @@
             <!-- Hero Logo Section --><div class="relative mb-8">
                 <div class="absolute inset-0 rounded-full blur-3xl opacity-50" style="background: linear-gradient(135deg, #00D0FF, #FF00FF);"></div>
                 <a href="#" id="logo-link" class="relative inline-block transition-transform hover:scale-105 cursor-pointer" onclick="window.location.reload(); return false;">
-                    <img id="logo-img" src="/training_tracker/imagenes/logo.png" alt="Ft Ber Fitness Logo" class="w-40 h-40 rounded-full shadow-2xl border-4 border-accent" style="box-shadow: 0 0 40px rgba(0, 208, 255, 0.8), 0 0 80px rgba(255, 0, 255, 0.4);">
+                    <img id="logo-img" src="imagenes/logo.png" alt="Ber Online Fitness Logo" class="w-40 h-40 rounded-full shadow-2xl border-4 border-accent" style="box-shadow: 0 0 40px rgba(0, 208, 255, 0.8), 0 0 80px rgba(255, 0, 255, 0.4);">
                 </a>
             </div>
             <h1 class="text-4xl sm:text-5xl animated-text-glow font-bold">Ber Online Fitness</h1>
@@ -426,7 +426,10 @@
 
     // --- Detect Environment (Local vs GitHub Pages) ---
     const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    const BASE_PATH = isLocalhost ? '' : '/training_tracker';
+    
+    // Detect if running on GitHub Pages subdirectory vs custom domain
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const BASE_PATH = (isLocalhost || !isGitHubPages) ? '' : '/training_tracker';
     
     // Function to get correct path
     function getPath(filePath) {
