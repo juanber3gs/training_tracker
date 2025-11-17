@@ -2,7 +2,7 @@
   "name": "Ft Ber Fitness - RetroWave Training Tracker",
   "short_name": "Ft Ber Fitness",
   "description": "Advanced personal fitness training tracker with retro-futuristic design",
-  "start_url": "/training_tracker/plan.html",
+  "start_url": "/training_tracker/index.html",
   "scope": "/training_tracker/",
   "display": "standalone",
   "background_color": "#10001C",

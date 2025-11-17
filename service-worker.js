@@ -1,7 +1,7 @@
 const CACHE_NAME = 'ftber-fitness-v1';
 const ASSETS_TO_CACHE = [
   '/training_tracker/',
-  '/training_tracker/plan.html',
+  '/training_tracker/index.html',
   '/training_tracker/style.css',
   '/training_tracker/fitnesslogo.png',
   'https://cdn.tailwindcss.com',
