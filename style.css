@@ -1,5 +1,4 @@
-
-        :root {
+:root {
             --bg-color: #10001C;
             --card-bg: #1A0A2A;
             --text-primary: #F0E6FF;
@@ -235,4 +234,22 @@
                 grid-template-columns: 1fr;
             }
         }
-    
+        /* Language Toggle Button */
+        #lang-toggle {
+            font-size: 1rem; /* Slightly larger text */
+            padding: 0.75rem 1.5rem; /* Larger padding */
+            background-color: var(--accent); /* Use accent color for background */
+            color: var(--bg-color); /* Dark text for contrast */
+            border: 2px solid var(--accent-hover); /* Stronger border */
+            box-shadow: var(--glow-accent); /* More prominent glow */
+            transition: all 0.3s ease-in-out;
+            right: 1rem; /* Adjust position slightly */
+            top: 1rem; /* Adjust position slightly */
+            z-index: 20; /* Ensure it's above other elements */
+        }
+
+        #lang-toggle:hover {
+            background-color: var(--accent-hover);
+            box-shadow: 0 0 15px var(--accent-hover);
+            transform: scale(1.05);
+        }

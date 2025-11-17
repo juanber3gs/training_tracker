@@ -1392,6 +1392,7 @@
     }
 
     function updateLanguageDisplay() {
+        document.documentElement.lang = currentLanguage; // Update the HTML lang attribute
         document.querySelectorAll('[data-key]').forEach(el => {
             const key = el.getAttribute('data-key');
             el.textContent = t(key);
