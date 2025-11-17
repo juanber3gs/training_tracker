@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bernie - Online Fitness Tracker | Your 4:20 Retro-Futuristic AI Training Workouts</title>
     <meta name="theme-color" content="#00D0FF">
-    <link rel="manifest" id="manifest-link" href="manifest.json">
-    <link rel="apple-touch-icon" href="imagenes/logo.png">
+    <link rel="manifest" id="manifest-link" href="">
+<script>
+    document.getElementById('manifest-link').href = getPath('manifest.json');
+</script>
+    <link rel="apple-touch-icon" href="">
+<script>
+    document.querySelector('link[rel="apple-touch-icon"]').href = getPath('imagenes/logo.png');
+</script>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -275,7 +281,10 @@
             <!-- Hero Logo Section --><div class="relative mb-8">
                 <div class="absolute inset-0 rounded-full blur-3xl opacity-50" style="background: linear-gradient(135deg, #00D0FF, #FF00FF);"></div>
                 <a href="#" id="logo-link" class="relative inline-block transition-transform hover:scale-105 cursor-pointer" onclick="window.location.reload(); return false;">
-                    <img id="logo-img" src="imagenes/logo.png" alt="Ber Online Fitness Logo" class="w-40 h-40 rounded-full shadow-2xl border-4 border-accent" style="box-shadow: 0 0 40px rgba(0, 208, 255, 0.8), 0 0 80px rgba(255, 0, 255, 0.4);">
+                    <img id="logo-img" src="" alt="Ber Online Fitness Logo" class="w-40 h-40 rounded-full shadow-2xl border-4 border-accent" style="box-shadow: 0 0 40px rgba(0, 208, 255, 0.8), 0 0 80px rgba(255, 0, 255, 0.4);">
+<script>
+    document.getElementById('logo-img').src = getPath('imagenes/logo.png');
+</script>
                 </a>
             </div>
             <div class="flex justify-center items-center gap-4 mb-4">
@@ -432,12 +441,8 @@
     const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     
     // For custom domains pointing to /training_tracker/, detect by pathname
-    const pathName = window.location.pathname;
-    const isInTrainingTrackerPath = pathName.includes('/training_tracker/');
     const isGitHubPages = window.location.hostname.includes('github.io');
-    
-    // Use relative paths for everything - no need for BASE_PATH on custom domains
-    const BASE_PATH = '';
+    const BASE_PATH = isGitHubPages ? '/training_tracker' : '';
     
     // Function to get correct path
     function getPath(filePath) {
