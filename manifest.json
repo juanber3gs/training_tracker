@@ -2,27 +2,27 @@
   "name": "Ft Ber Fitness - RetroWave Training Tracker",
   "short_name": "Ft Ber Fitness",
   "description": "Advanced personal fitness training tracker with retro-futuristic design",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "/training_tracker/plan.html",
+  "scope": "/training_tracker/",
   "display": "standalone",
   "background_color": "#10001C",
   "theme_color": "#00D0FF",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "fitnesslogo.png",
+      "src": "/training_tracker/imagenes/logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "fitnesslogo.png",
+      "src": "/training_tracker/imagenes/logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "fitnesslogo.png",
+      "src": "/training_tracker/imagenes/logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
@@ -31,12 +31,12 @@
   "categories": ["health", "fitness"],
   "screenshots": [
     {
-      "src": "fitnesslogo.png",
+      "src": "/training_tracker/fitnesslogo.png",
       "sizes": "540x720",
       "form_factor": "narrow"
     },
     {
-      "src": "fitnesslogo.png",
+      "src": "/training_tracker/fitnesslogo.png",
       "sizes": "1280x720",
       "form_factor": "wide"
     }
