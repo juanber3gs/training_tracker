@@ -170,7 +170,9 @@
              font-family: 'Press Start 2P', cursive;
              color: var(--text-primary);
              text-shadow: var(--glow-accent);
-             font-size: clamp(1.5rem, 5vw, 3rem);
+             font-size: 2rem;
+             line-height: 1.2;
+             letter-spacing: 0.05em;
         }
         .animated-text-glow {
             animation: text-glow 2.5s ease-in-out infinite;
@@ -178,14 +180,6 @@
         @keyframes text-glow {
             0%, 100% { text-shadow: 0 0 4px var(--accent), 0 0 8px var(--accent), 0 0 12px var(--accent); }
             50% { text-shadow: 0 0 8px var(--accent-hover), 0 0 16px var(--accent-hover), 0 0 24px var(--accent-hover); }
-        }
-        h1 {
-             font-family: 'Press Start 2P', cursive;
-             color: var(--text-primary);
-             text-shadow: var(--glow-accent);
-             font-size: clamp(1.75rem, 4vw, 2.5rem);
-             line-height: 1.2;
-             letter-spacing: 0.05em;
         }
         h2, h3, h4, h5 {
              font-family: 'Aldrich', sans-serif;
@@ -195,10 +189,10 @@
              letter-spacing: 0.025em;
         }
         h2 {
-             font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+             font-size: 1.25rem;
         }
         h3 {
-             font-size: clamp(1rem, 2vw, 1.25rem);
+             font-size: 1.125rem;
         }
         .tab-active {
             border-color: var(--accent);
@@ -299,18 +293,13 @@
             border-radius: 0.5rem;
             border: 1px solid var(--border);
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            max-width: 90vw;
+            max-width: 90%;
             max-height: 90vh;
             overflow-y: auto;
             width: 100%;
             color: var(--text-primary);
             transform: scale(0.95);
             transition: transform 0.3s ease-out;
-        }
-        @media (min-width: 768px) {
-            .modal-content {
-                width: 60rem;
-            }
         }
         .modal-overlay.active .modal-content {
             transform: scale(1);
@@ -364,84 +353,14 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        @media (max-width: 640px) {
-            .calendar-grid {
-                gap: 2px;
-            }
-            .calendar-day {
-                min-height: 85px;
-                font-size: 0.7rem;
-                padding: 4px;
-            }
-            h2, h3, h4, h5 {
-                font-size: clamp(0.9rem, 2.5vw, 1.25rem);
-            }
-            .modal-content {
-                width: 96vw;
-                padding: 1rem;
-                max-height: 85vh;
-            }
-            .routine-selector, .nav-tab {
-                min-height: 44px;
-                font-size: 0.8rem;
-                padding: 0.5rem 0.75rem;
-            }
-            button, input, textarea, select {
-                min-height: 44px;
-                font-size: 16px;
-            }
-            body {
-                font-size: 14px;
-            }
-            .container {
-                padding: 0.75rem;
-            }
-        }
-        /* Extra mobile adjustments: remove hover scaling, tighten library cards and table sizing */
-        @media (max-width: 640px) {
-            /* Disable hover scaling on touch devices to avoid layout shift */
-            .calendar-day:hover {
-                transform: none;
-                box-shadow: none;
-            }
-
-            /* Tighter library card spacing on small screens */
-            #exercise-library .rounded-lg {
-                padding: 0.75rem;
-            }
-            #exercise-library h3 {
-                font-size: 1.125rem;
-            }
-            #exercise-library .text-secondary {
-                font-size: 0.9rem;
-            }
-
-            /* Make routine tables easier to scan on small screens */
-            .overflow-x-auto table td, .overflow-x-auto table th {
-                font-size: 13px;
-                padding: 0.5rem;
-            }
-        }
-
         .edit-exercise-modal .modal-content {
-            width: 95vw;
+            width: 90%;
             max-width: 500px;
-        }
-        @media (max-width: 480px) {
-            .edit-exercise-modal .modal-content {
-                width: 98vw;
-                padding: 1rem;
-            }
         }
         .routine-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 1fr;
             gap: 1rem;
-        }
-
-            .routine-grid {
-                grid-template-columns: 1fr;
-            }
             .container {
                 max-width: 100%;
             }

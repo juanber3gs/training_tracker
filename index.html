@@ -16,17 +16,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased">
-    <div class="container mx-auto max-w-5xl p-4 sm:p-6 main-container rounded-lg shadow-2xl border border-border">
+    <div class="container mx-auto p-4 main-container rounded-lg shadow-2xl border border-border" style="width: 100vw; max-width: 100vw;">
         
         <header class="text-center my-8 mb-12 relative">
             <!-- Hero Logo Section -->
-            <div class="relative mb-8">
-                <div class="absolute inset-0 rounded-full blur-3xl opacity-50" style="background: linear-gradient(135deg, #00D0FF, #FF00FF);"></div>
-                <a href="#" id="logo-link" class="relative inline-block transition-transform hover:scale-105 cursor-pointer" onclick="window.location.reload(); return false;">
-                    <img id="logo-img" src="imagenes/logo.png" alt="Bernie Online Fitness Logo" class="w-40 h-40 rounded-full shadow-2xl border-4 border-accent" style="box-shadow: 0 0 40px rgba(0, 208, 255, 0.8), 0 0 80px rgba(255, 0, 255, 0.4);">
+            <div class="relative mb-6">
+                <div class="absolute inset-0 rounded-full blur-2xl opacity-40" style="background: linear-gradient(135deg, #00D0FF, #FF00FF);"></div>
+                <a href="#" id="logo-link" class="relative inline-block transition-transform hover:scale-110 cursor-pointer" onclick="window.location.reload(); return false;">
+                    <img id="logo-img" src="imagenes/logo.png" alt="Bernie Online Fitness Logo" class="w-24 h-24 rounded-full shadow-lg border-2 border-accent" style="box-shadow: 0 0 20px rgba(0, 208, 255, 0.6), 0 0 40px rgba(255, 0, 255, 0.3);">
                 </a>
             </div>
-            <h1 class="text-6xl sm:text-7xl animated-text-glow font-bold tracking-wider">Bernie</h1>
+            <h1 class="text-6xl animated-text-glow font-bold tracking-wider">Bernie</h1>
             <p class="text-lg text-secondary mt-4 font-['Aldrich'] uppercase tracking-widest">Online Fitness Tracker</p>
             <p class="text-sm text-secondary/70 mt-2 font-light tracking-wider">Your 4:20 Retro-Futuristic AI Training Workouts</p>
             <p class="text-xs text-white mt-6 font-light">Updated 23 min ago</p>
@@ -43,11 +43,11 @@
 
         <nav class="flex justify-between items-center border-b border-border mb-8">
             <div class="flex flex-wrap justify-center -mb-px overflow-x-auto flex-1">
-                <button data-tab="hoy" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">🗓️ <span data-key="today">Hoy</span></button>
-                <button data-tab="stats" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📊 <span data-key="stats">Estadísticas</span></button>
-                <button data-tab="calendario" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📅 <span data-key="calendar">Calendario</span></button>
-                <button data-tab="rutinas" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">🏋️‍♂️ <span data-key="routines">Rutinas</span></button>
-                <button data-tab="biblioteca" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📚 <span data-key="library">Biblioteca</span></button>
+                <button data-tab="hoy" class="nav-tab text-md py-3 px-3 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">🗓️ <span data-key="today">Hoy</span></button>
+                <button data-tab="stats" class="nav-tab text-md py-3 px-3 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📊 <span data-key="stats">Estadísticas</span></button>
+                <button data-tab="calendario" class="nav-tab text-md py-3 px-3 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📅 <span data-key="calendar">Calendario</span></button>
+                <button data-tab="rutinas" class="nav-tab text-md py-3 px-3 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">🏋️‍♂️ <span data-key="routines">Rutinas</span></button>
+                <button data-tab="biblioteca" class="nav-tab text-md py-3 px-3 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📚 <span data-key="library">Biblioteca</span></button>
             </div>
         </nav>
 
@@ -71,9 +71,9 @@
                 </div>
             </nav>
             <section id="stats" class="content-section">
-                <div class="bg-card-bg/80 p-4 sm:p-6 rounded-lg shadow-lg border border-border">
+                <div class="bg-card-bg/80 p-4 rounded-lg shadow-lg border border-border">
                     <h2 class="text-2xl font-bold mb-6 text-center">📊 <span data-key="weeklyStats">Estadísticas Semanales</span></h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <div class="grid grid-cols-2 gap-4 mb-8">
                         <div class="stats-card p-4 rounded-lg">
                             <p class="text-secondary text-sm mb-2"><span data-key="weeklyCompletion">Completitud Semanal</span></p>
                             <div class="stat-number" id="weekly-completion">0%</div>
@@ -102,7 +102,7 @@
                 </div>
             </section>
             <section id="calendario" class="content-section">
-                 <div class="bg-card-bg/80 p-4 sm:p-6 rounded-lg shadow-lg border border-border">
+                 <div class="bg-card-bg/80 p-4 rounded-lg shadow-lg border border-border">
                     <div class="text-center mb-6">
                         <h2 id="calendar-title" class="text-2xl font-bold"></h2>
                         <p class="text-secondary mt-1">Vista completa de tu mes de entrenamiento.</p>
@@ -123,7 +123,7 @@
                 <div class="mb-6 text-center">
                     <p class="text-secondary">Here you can check the details of each routine. Select one to see the exercises.</p>
                 </div>
-                <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8">
+                <div class="flex flex-wrap justify-center gap-2 mb-8">
                     <button data-routine="TORSO_PUSH" class="routine-selector bg-card-bg hover:bg-border text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="push">💪 <span data-routine-key="TORSO_PUSH">Push</span></button>
                     <button data-routine="LEGS_ANKLES" class="routine-selector bg-card-bg hover:bg-border text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="legsAnkles">🦵 <span data-routine-key="LEGS_ANKLES">Legs & Ankles</span></button>
                     <button data-routine="CORE_CARDIO" class="routine-selector bg-card-bg hover:bg-border text-metabolic font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="coreCardio">🔥 <span data-routine-key="CORE_CARDIO">Core & Cardio</span></button>
