@@ -2313,6 +2313,15 @@
                     
                     <!-- Main Content -->
                     ${createRoutineHTML(activityKey, true, viewDate)}
+                    
+                    <!-- Save Progress Button (visible when viewing past/future dates) -->
+                    ${!isSameDay(viewDate, new Date()) ? `
+                    <div class="flex justify-center mt-6">
+                        <button id="save-progress-btn" class="px-8 py-3 bg-accent hover:bg-accent-hover text-bg-color font-bold rounded-lg shadow-lg transition-all transform hover:scale-105">
+                            💾 Guardar Progreso
+                        </button>
+                    </div>
+                    ` : ''}
                 </div>
             `;
         } else {
@@ -2425,26 +2434,44 @@
         if (progressCount) progressCount.textContent = `${checked} de ${total} ejercicios`;
     }
 
-    async function saveProgress() {
+    async function saveProgress(showConfirmation = false) {
         const checkboxes = document.querySelectorAll('#hoy input[type="checkbox"]');
         if (checkboxes.length === 0) return;
 
-        // Only save progress for today, not for previewed dates
-        const today = new Date();
-        const todayKey = dateKeyFromDate(today);
+        // Save progress for the currently viewed date
         const currentKey = dateKeyFromDate(currentViewDate);
-        
-        // Don't save progress if we're not viewing today
-        if (todayKey !== currentKey) {
-            return;
-        }
 
         const progressState = Array.from(checkboxes).map(cb => cb.checked);
         const allProgress = getStoredProgress();
-        allProgress[todayKey] = progressState;
+        allProgress[currentKey] = progressState;
 
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allProgress));
-        console.log(`Progreso guardado para ${todayKey}`);
+        console.log(`Progreso guardado para ${currentKey}`);
+        
+        // Show confirmation if requested
+        if (showConfirmation) {
+            showSaveConfirmation();
+        }
+    }
+    
+    function showSaveConfirmation() {
+        const confirmation = document.createElement('div');
+        confirmation.id = 'save-confirmation';
+        confirmation.className = 'fixed top-4 right-4 bg-emerald-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
+        confirmation.innerHTML = '✅ Progreso guardado correctamente';
+        document.body.appendChild(confirmation);
+        
+        setTimeout(() => {
+            confirmation.classList.add('animate-fade-out');
+            setTimeout(() => confirmation.remove(), 300);
+        }, 2000);
+    }
+
+    // --- Date Utilities ---
+    function isSameDay(date1, date2) {
+        return date1.getFullYear() === date2.getFullYear() &&
+               date1.getMonth() === date2.getMonth() &&
+               date1.getDate() === date2.getDate();
     }
 
     // --- Rest Timer Utilities ---
@@ -2896,15 +2923,33 @@
         
         hoyContainer.addEventListener('change', (e) => {
             if (e.target.matches('input[type="checkbox"]')) {
-                saveProgress();
+                const today = new Date();
+                const isToday = isSameDay(currentViewDate, today);
+                // Auto-save only for today, manual save for other dates
+                if (isToday) {
+                    saveProgress();
+                }
                 updateProgressUI();
                 updateGlobalProgress(); // Update global progress on change
                 updateStatsDashboard(); // Update stats on change
             }
         });
-
-        // Exercise info and library navigation from 'Hoy'
+        
+        // Save Progress Button Click
         hoyContainer.addEventListener('click', (e) => {
+            if (e.target.closest('#save-progress-btn')) {
+                saveProgress(true); // true = show confirmation
+                updateGlobalProgress();
+                updateStatsDashboard();
+                return;
+            }
+        });
+
+        // Exercise info and library navigation from 'Hoy' (existing listener continues)
+        hoyContainer.addEventListener('click', (e) => {
+            // Skip if clicking save button (already handled above)
+            if (e.target.closest('#save-progress-btn')) return;
+            
             const infoBtn = e.target.closest('.exercise-info-btn');
             if (infoBtn) {
                 const name = infoBtn.dataset.exercise;
