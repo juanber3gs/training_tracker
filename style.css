@@ -353,6 +353,153 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        
+        /* === MOBILE APP BUTTON & SPACING REDESIGN === */
+        button, .nav-tab, .routine-selector {
+            min-height: 48px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        /* Navigation tabs - horizontal scroll friendly */
+        .nav-tab {
+            flex: 0 0 auto;
+            white-space: nowrap;
+            border-radius: 8px 8px 0 0;
+            border-bottom: 3px solid transparent;
+            padding: 14px 16px;
+            min-height: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tab:hover {
+            background-color: rgba(0, 208, 255, 0.1);
+        }
+        
+        .nav-tab.tab-active {
+            background-color: rgba(0, 208, 255, 0.15);
+            border-bottom-color: var(--accent);
+            color: var(--accent);
+            text-shadow: var(--glow-accent);
+        }
+        
+        /* Routine selector buttons */
+        .routine-selector {
+            background: linear-gradient(135deg, rgba(26, 10, 42, 0.8), rgba(26, 10, 42, 0.6));
+            border: 2px solid var(--border);
+            color: var(--accent);
+            min-height: 50px;
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+        }
+        
+        .routine-selector:active {
+            background: linear-gradient(135deg, rgba(0, 208, 255, 0.2), rgba(255, 0, 255, 0.1));
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(0, 208, 255, 0.4);
+        }
+        
+        .routine-selector:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(0, 208, 255, 0.3);
+            text-shadow: var(--glow-accent);
+        }
+        
+        /* Primary action buttons */
+        button[type="submit"], .show-guide-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            color: var(--bg-color);
+            border: none;
+            min-height: 50px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0, 208, 255, 0.3);
+        }
+        
+        button[type="submit"]:active, .show-guide-btn:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 8px rgba(0, 208, 255, 0.5);
+        }
+        
+        /* Modal spacing */
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            width: 100%;
+            color: var(--text-primary);
+            transform: scale(0.95);
+            transition: transform 0.3s ease-out;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        
+        /* Card spacing for better hierarchy */
+        .stats-card {
+            background: linear-gradient(135deg, var(--card-bg), rgba(60, 30, 90, 0.5));
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 8px rgba(0, 208, 255, 0.3);
+            padding: 18px;
+            border-radius: 12px;
+        }
+        
+        /* Section spacing */
+        .content-section > div {
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+        
+        /* Form inputs */
+        input[type="text"], input[type="number"], textarea, select {
+            min-height: 48px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 2px solid var(--border);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(0, 208, 255, 0.3);
+            outline: none;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        /* Checkbox styling */
+        input[type="checkbox"] {
+            min-width: 24px;
+            min-height: 24px;
+            cursor: pointer;
+            accent-color: var(--accent);
+        }
+        
         .edit-exercise-modal .modal-content {
             width: 90%;
             max-width: 500px;
