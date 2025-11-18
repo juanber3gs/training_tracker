@@ -1,28 +1,28 @@
 {
-  "name": "Ft Ber Fitness - RetroWave Training Tracker",
-  "short_name": "Ft Ber Fitness",
+  "name": "Online Fitness Tracker - AI Training Workouts",
+  "short_name": "Fitness Tracker",
   "description": "Advanced personal fitness training tracker with retro-futuristic design",
-  "start_url": "/training_tracker/index.html",
-  "scope": "/training_tracker/",
+  "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#10001C",
   "theme_color": "#00D0FF",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/training_tracker/imagenes/logo.png",
+      "src": "/imagenes/logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/training_tracker/imagenes/logo.png",
+      "src": "/imagenes/logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/training_tracker/imagenes/logo.png",
+      "src": "/imagenes/logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
@@ -31,14 +31,9 @@
   "categories": ["health", "fitness"],
   "screenshots": [
     {
-      "src": "/training_tracker/fitnesslogo.png",
+      "src": "/imagenes/logo.png",
       "sizes": "540x720",
       "form_factor": "narrow"
-    },
-    {
-      "src": "/training_tracker/fitnesslogo.png",
-      "sizes": "1280x720",
-      "form_factor": "wide"
     }
   ]
 }
