@@ -398,21 +398,26 @@
 <body class="antialiased">
     <div class="container mx-auto main-container rounded-lg shadow-2xl border border-border">
         
-        <header class="text-center my-6 mb-8 relative px-4">
+        <header class="text-center my-8 mb-12 relative px-4">
+            <div class="flex justify-end mb-4">
+                <button id="download-app-btn" class="px-4 py-2 bg-metabolic/20 border border-metabolic text-metabolic rounded text-sm font-semibold hover:bg-metabolic/40 transition">
+                    ⬇️ DESCARGAR APP
+                </button>
+            </div>
             <div class="inline-block relative group cursor-default">
-                <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-2 uppercase transform -skew-x-6 transition-transform duration-300 hover:skew-x-0" 
-                    style="color: var(--primary); text-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(0, 240, 255, 0.5); -webkit-text-stroke: 1px var(--accent);">
-                    BERNI <span style="color: var(--metabolic); text-shadow: 0 0 20px rgba(255, 0, 110, 0.8), 0 0 40px rgba(255, 0, 110, 0.5);">AI</span> <span style="color: var(--accent); text-shadow: 0 0 20px rgba(0, 212, 255, 0.8);">TRAINING</span>
+                <h1 class="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-4 uppercase transform -skew-x-6 transition-transform duration-300 hover:skew-x-0 leading-none" 
+                    style="color: var(--primary); text-shadow: 0 0 30px rgba(0, 212, 255, 0.8), 0 0 60px rgba(0, 240, 255, 0.6), 0 0 100px rgba(0, 212, 255, 0.4); -webkit-text-stroke: 2px var(--accent);">
+                    BERNI <span style="color: var(--metabolic); text-shadow: 0 0 30px rgba(255, 0, 110, 0.8), 0 0 60px rgba(255, 0, 110, 0.6); display: block;">AI</span> <span style="color: var(--accent); text-shadow: 0 0 30px rgba(0, 212, 255, 0.8), 0 0 60px rgba(0, 240, 255, 0.6); display: block;">TRAINING</span>
                 </h1>
                 
-                <div class="flex justify-between items-center border-t border-b border-secondary/30 py-1 mt-1">
-                    <span class="text-[0.6rem] md:text-xs font-mono text-secondary tracking-widest uppercase" style="text-shadow: 0 0 10px rgba(0, 184, 255, 0.6);">HOME WORKOUTS</span>
-                    <div class="h-1.5 w-1.5 rounded-full bg-metabolic animate-pulse mx-2" style="box-shadow: 0 0 10px rgba(255, 0, 110, 0.8);"></div>
-                    <span class="text-[0.6rem] md:text-xs font-mono text-accent tracking-widest uppercase" style="text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);">OPTIMIZE. EXECUTE. EVOLVE.</span>
+                <div class="flex justify-between items-center border-t-2 border-b-2 border-secondary/40 py-2 mt-4">
+                    <span class="text-sm md:text-base font-mono text-secondary tracking-widest uppercase font-bold" style="text-shadow: 0 0 15px rgba(0, 184, 255, 0.6);">HOME WORKOUTS</span>
+                    <div class="h-2 w-2 rounded-full bg-metabolic animate-pulse mx-3" style="box-shadow: 0 0 15px rgba(255, 0, 110, 0.8);"></div>
+                    <span class="text-sm md:text-base font-mono text-accent tracking-widest uppercase font-bold" style="text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);">OPTIMIZE. EXECUTE. EVOLVE.</span>
                 </div>
                 
-                <div class="absolute -left-4 top-0 h-full w-1 bg-gradient-to-b from-transparent via-secondary/20 to-transparent"></div>
-                <div class="absolute -right-4 top-0 h-full w-1 bg-gradient-to-b from-transparent via-secondary/20 to-transparent"></div>
+                <div class="absolute -left-6 top-0 h-full w-1.5 bg-gradient-to-b from-transparent via-secondary/30 to-transparent"></div>
+                <div class="absolute -right-6 top-0 h-full w-1.5 bg-gradient-to-b from-transparent via-secondary/30 to-transparent"></div>
             </div>
         </header>
 
@@ -1099,6 +1104,20 @@
             chatInput.addEventListener('keypress', (e) => { if(e.key==='Enter' && chatInput.value.trim()) callBernie(chatInput.value.trim()); });
         }
 
+        // Download app functionality
+        function downloadApp() {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'BERNI_AI_Training.html';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
             const modal = document.getElementById('exercise-modal');
             const title = document.getElementById('guide-title');
@@ -1113,6 +1132,9 @@
             };
 
             document.getElementById('modal-close').addEventListener('click', () => { modal.classList.add('hidden'); modal.classList.remove('flex'); });
+            
+            // Download button
+            document.getElementById('download-app-btn').addEventListener('click', downloadApp);
             
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.addEventListener('click', async () => {
