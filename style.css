@@ -17,36 +17,8 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
-            /* Updated background with logo and gradient */
-            background-image: 
-                linear-gradient(rgba(16, 0, 28, 0.95), rgba(16, 0, 28, 0.95)), /* Dark overlay for text readability */
-                linear-gradient(var(--accent), transparent 1px),
-                linear-gradient(90deg, var(--accent), transparent 1px);
-            background-size: 
-                cover, /* For the overlay */
-                30% auto, /* Adjust logo size as needed */
-                40px 40px,
-                40px 40px;
-            background-repeat: 
-                no-repeat, 
-                no-repeat, 
-                repeat, 
-                repeat;
-            background-position: 
-                center center, /* For the overlay */
-                center 10%, /* Adjust logo position */
-                -1px -1px,
-                -1px -1px;
-            background-blend-mode: overlay, normal, normal, normal; /* Blend the overlay with the logo */
-            animation: bg-scroll 3s linear infinite;
-        }
-        @keyframes bg-scroll {
-            0% { background-position: center center, center 10%, 0 0, 0 0; } /* Include logo position */
-            100% { background-position: center center, center 10%, 40px 40px, 40px 40px; } /* Include logo position */
-        }
-        @keyframes bg-scroll {
-            0% { background-position: center center, center 10%, 0 0, 0 0; } /* Include logo position */
-            100% { background-position: center center, center 10%, 40px 40px, 40px 40px; } /* Include logo position */
+            background: linear-gradient(135deg, #10001C 0%, #1a0033 50%, #0d0015 100%);
+            background-attachment: fixed;
         }
         @keyframes fade-in {
             from { opacity: 0; transform: translateY(10px); }
