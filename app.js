@@ -2029,6 +2029,15 @@
         const patternIndex = (dow === 0) ? 6 : dow - 1;
         const activityKey = schedulePattern[patternIndex];
         const activity = routines[activityKey];
+        
+        // Error handling: check if activity exists
+        if (!activity) {
+            console.error(`Activity not found for key: ${activityKey}`);
+            const hoyContainer = document.getElementById('hoy');
+            hoyContainer.innerHTML = '<div class="p-8 text-center text-secondary">Error loading workout data. Please refresh the page.</div>';
+            return;
+        }
+        
         const todayName = viewDate.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
         const dayOfWeekEmoji = ['🌙', '📅', '📅', '📅', '📅', '📅', '📅'][viewDate.getDay()];
 
@@ -2580,49 +2589,7 @@
         return { weeklyPercentage, workoutsDone, totalExercises: weeklyCompletion, streak };
     }
 
-    function updateStatsDashboard() {
-        const stats = calculateWeeklyStats();
-        document.getElementById('weekly-completion').textContent = `${stats.weeklyPercentage}%`;
-        document.getElementById('workouts-done').textContent = stats.workoutsDone;
-        document.getElementById('total-exercises').textContent = stats.totalExercises;
-        document.getElementById('current-streak').textContent = stats.streak;
 
-        // Update daily breakdown
-        const breakdownContainer = document.getElementById('weekly-breakdown');
-        const allProgress = getStoredProgress();
-        breakdownContainer.innerHTML = '';
-
-        for (let i = 6; i >= 0; i--) {
-            const date = new Date();
-            date.setDate(date.getDate() - i);
-            const d = date.getDate();
-            const m = date.getMonth() + 1;
-            const y = date.getFullYear();
-            const progressKey = `${y}-${m}-${d}`;
-            
-            const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
-            const routineKey = monthlySchedule[d];
-            const routine = routines[routineKey];
-            
-            if (routine && routine.details) {
-                const exerciseCount = routine.details.exercises.length;
-                const dayProgress = allProgress[progressKey] || [];
-                const completedCount = dayProgress.filter(Boolean).length;
-                const percentage = Math.round((completedCount / exerciseCount) * 100);
-
-                const barColor = percentage === 100 ? 'bg-emerald-500' : percentage >= 50 ? 'bg-accent' : 'bg-orange-500';
-                breakdownContainer.innerHTML += `
-                    <div class="flex items-center gap-3">
-                        <span class="w-12 text-sm font-semibold text-secondary">${dayName}</span>
-                        <div class="flex-grow bg-black/30 rounded-full h-2">
-                            <div class="${barColor} h-2 rounded-full transition-all" style="width: ${percentage}%"></div>
-                        </div>
-                        <span class="w-12 text-right text-xs text-secondary">${completedCount}/${exerciseCount}</span>
-                    </div>
-                `;
-            }
-        }
-    }
 
     // --- Exercise Editor Functions ---
     let currentEditingExercise = { routineKey: null, index: null };

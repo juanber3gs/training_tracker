@@ -691,17 +691,6 @@
         #stats .space-y-2 > div .flex-grow {
             height: 8px;
         }
-        .routine-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            .container {
-                max-width: 100%;
-            }
-            h1 {
-                font-size: clamp(1.5rem, 3.5vw, 2rem);
-            }
-        }
         
         /* === EQUAL WIDTH SECTIONS IN HOY VIEW === */
         #hoy {
