@@ -2,10 +2,8 @@ const CACHE_NAME = 'fitness-tracker-v1';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
-  '/style.css',
-  '/app.js',
   'https://cdn.tailwindcss.com',
-  'https://fonts.googleapis.com/css2?family=Aldrich&family=Inter:wght@400;600&family=Press+Start+2P&display=swap'
+  'https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;600;700;900&display=swap'
 ];
 
 // Install event - cache assets

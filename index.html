@@ -3,32 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Online Fitness Tracker - Bernie Training App</title>
+    <title>BERNI AI: Home Workouts & Training</title>
     <meta name="theme-color" content="#00D0FF">
-    <meta name="description" content="Advanced personal fitness training tracker with retro-futuristic design">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" type="image/png" href="/imagenes/logo.png">
-    <link rel="apple-touch-icon" href="/imagenes/logo.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Online Fitness Tracker">
+    <meta name="description" content="BERNI AI: Advanced home workout training system with neural interface">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Inter:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for Retro-Futuristic Theme */
+        :root {
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --primary: #2c3144;
+            --secondary: #6d7b8d;
+            --accent: #5a6e5f;
+            --accent-hover: #6b8e7f;
+            --metabolic: #c5a265;
+            --border: #e0e0e0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--primary);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            padding-bottom: 6rem; /* Space for FAB */
+            padding-top: 1rem;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Lora', serif;
+        }
+
+        .main-container {
+            max-width: 900px;
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+        }
+
+        .progress-bar-container {
+            height: 0.75rem;
+            background-color: #374151;
+            border-radius: 9999px;
+            overflow: hidden;
+            border: 1px solid #4b5563;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--accent);
+            transition: width 0.5s ease-in-out;
+            border-radius: 9999px;
+            box-shadow: var(--glow-accent);
+        }
+
+        /* Navigation */
+        .nav-tab {
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-tab.tab-active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+            text-shadow: 0 0 4px rgba(0, 208, 255, 0.5);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: 1rem 0;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Calendar */
+        .calendar-container {
+            padding: 1rem;
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .calendar-headers {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            margin-bottom: 0.5rem;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: var(--secondary);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1 / 1.1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            padding: 0.5rem;
+            font-size: 0.75rem;
+        }
+        .calendar-day .font-bold { font-size: 0.875rem; }
+        .calendar-day .text-xs { font-size: 0.6rem; }
+
+        .calendar-day[data-date]:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+            z-index: 10;
+        }
+        .calendar-day.today {
+            border-color: var(--metabolic);
+            box-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
+            background-color: #2c3541 !important;
+        }
+
+        /* Animations and Visuals */
+        .animated-text-glow {
+            text-shadow: var(--glow-metabolic);
+            color: var(--primary);
+        }
+
+        .metabolic-text {
+            color: var(--metabolic) !important;
+            text-shadow: var(--glow-metabolic);
+        }
+
+        .metabolic-border {
+            border-color: var(--metabolic) !important;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.3) inset;
+        }
+
+        .metabolic-shadow {
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+        }
+
+        /* Exercise Library Cards */
+        .exercise-card {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .exercise-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .exercise-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .section-title {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 0 2px rgba(0, 208, 255, 0.3);
+        }
+
+        /* AI Chat Floating Button & Modal */
+        .ai-fab {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--metabolic));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(0, 208, 255, 0.6);
+            cursor: pointer;
+            z-index: 40;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .ai-fab:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+        }
+
+        .ai-chat-modal {
+            display: none;
+            position: fixed;
+            bottom: 6rem;
+            right: 1.5rem;
+            width: 90%;
+            max-width: 380px;
+            height: 500px;
+            background-color: rgba(31, 41, 55, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--accent);
+            border-radius: 1rem;
+            z-index: 40;
+            flex-direction: column;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-chat-modal.open {
+            display: flex;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chat-bubble {
+            max-width: 85%;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .chat-bubble.user {
+            align-self: flex-end;
+            background-color: var(--accent);
+            color: #111827;
+            border-bottom-right-radius: 0;
+        }
+
+        .chat-bubble.ai {
+            align-self: flex-start;
+            background-color: #374151;
+            color: var(--primary);
+            border-bottom-left-radius: 0;
+            border: 1px solid var(--border);
+        }
+        
+        .typing-indicator::after {
+            content: '...';
+            animation: typing 1.5s infinite;
+        }
+        
+        @keyframes typing {
+            0% { content: '.'; }
+            33% { content: '..'; }
+            66% { content: '...'; }
+        }
+        
+        /* Celebration Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 100;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
+
+    </style>
 </head>
-<body class="antialiased" style="overflow-x: hidden;">
+<body class="antialiased">
     <div class="container mx-auto main-container rounded-lg shadow-2xl border border-border">
         
-        <header class="text-center my-4 mb-6 relative">
-            <h1 class="text-3xl font-bold tracking-wide mb-2" style="color: var(--accent); text-shadow: var(--glow-accent);">Online Fitness Tracker</h1>
-            <p class="text-xs text-secondary/80 font-light tracking-wider">Your 4:20 Retro-Futuristic AI Training Workouts</p>
-            <div class="mt-3 w-16 h-0.5 bg-gradient-to-r from-accent via-metabolic to-accent mx-auto rounded-full"></div>
+        <header class="text-center my-6 mb-8 relative px-4">
+            <div class="inline-block relative group cursor-default">
+                <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-2 uppercase transform -skew-x-6 transition-transform duration-300 hover:skew-x-0" 
+                    style="color: var(--primary); -webkit-text-stroke: 1px transparent;">
+                    BERNI <span style="color: var(--metabolic); text-shadow: 0 0 15px rgba(255, 0, 255, 0.5);">AI</span> <span style="color: var(--accent); text-shadow: 0 0 15px rgba(0, 208, 255, 0.5);">TRAINING</span>
+                </h1>
+                
+                <div class="flex justify-between items-center border-t border-b border-secondary/30 py-1 mt-1">
+                    <span class="text-[0.6rem] md:text-xs font-mono text-secondary tracking-widest uppercase">HOME WORKOUTS</span>
+                    <div class="h-1.5 w-1.5 rounded-full bg-metabolic animate-pulse mx-2"></div>
+                    <span class="text-[0.6rem] md:text-xs font-mono text-accent tracking-widest uppercase">OPTIMIZE. EXECUTE. EVOLVE.</span>
+                </div>
+                
+                <div class="absolute -left-4 top-0 h-full w-1 bg-gradient-to-b from-transparent via-secondary/20 to-transparent"></div>
+                <div class="absolute -right-4 top-0 h-full w-1 bg-gradient-to-b from-transparent via-secondary/20 to-transparent"></div>
+            </div>
         </header>
 
         <div class="mb-6 p-4 bg-card-bg/80 rounded-lg shadow-lg border border-border">
-            <h2 class="text-center text-lg font-bold text-primary mb-3">Progreso Mensual Global</h2>
+            <h2 class="text-center text-lg font-bold text-primary mb-3">MÉTRICA GLOBAL DE CONSOLIDACIÓN</h2>
             <div id="global-progress-text" class="text-center font-bold text-lg mb-2 text-accent" style="text-shadow: var(--glow-accent);">0%</div>
             <div class="progress-bar-container">
                 <div id="global-progress-bar" class="progress-bar" style="width: 0%;"></div>
@@ -45,12 +348,10 @@
         </nav>
 
         <main id="main-content">
-            <!-- HOY SECTION -->
             <section id="hoy" class="content-section"></section>
             
-            <!-- CALENDAR SECTION -->
             <section id="calendario" class="content-section">
-                <div class="calendar-container">
+                <div class="calendar-container w-full">
                     <div class="calendar-headers">
                         <div class="calendar-day-header">Lun</div>
                         <div class="calendar-day-header">Mar</div>
@@ -64,23 +365,21 @@
                 </div>
             </section>
             
-            <!-- ROUTINES SECTION -->
             <section id="rutinas" class="content-section">
                 <div class="mb-6 text-center">
                     <p class="text-secondary"><span data-key="selectRoutineDesc">Aquí puedes revisar los detalles de cada rutina. Selecciona una para ver los ejercicios.</span></p>
                 </div>
                 <div class="flex flex-wrap justify-center gap-2 mb-8">
-                    <button data-routine="TORSO_PUSH" class="routine-selector bg-card-bg hover:bg-accent/20 text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="push">💪 <span data-routine-key="TORSO_PUSH">Push</span></button>
-                    <button data-routine="LEGS_ANKLES" class="routine-selector bg-card-bg hover:bg-accent/20 text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="legsAnkles">🦵 <span data-routine-key="LEGS_ANKLES">Legs & Ankles</span></button>
-                    <button data-routine="CORE_CARDIO" class="routine-selector bg-card-bg hover:bg-metabolic/20 text-metabolic font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="coreCardio">🔥 <span data-routine-key="CORE_CARDIO">Core & Cardio</span></button>
-                    <button data-routine="TORSO_PULL" class="routine-selector bg-card-bg hover:bg-accent/20 text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="pull">🏋️‍♂️ <span data-routine-key="TORSO_PULL">Pull</span></button>
-                    <button data-routine="GLUTES_CORE" class="routine-selector bg-card-bg hover:bg-accent/20 text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="glutesCore">🍑 <span data-routine-key="GLUTES_CORE">Glutes & Core</span></button>
-                    <button data-routine="METABOLIC" class="routine-selector bg-card-bg hover:bg-metabolic/20 text-metabolic font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="metabolic">⚡ <span data-routine-key="METABOLIC">Metabolic</span></button>
+                    <button data-routine="TORSO_PUSH" class="routine-selector bg-card-bg hover:bg-accent/20 text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="push">💪 <span data-routine-key="TORSO_PUSH">PUSH-ARMAMENTO</span></button>
+                    <button data-routine="LEGS_ANKLES" class="routine-selector bg-card-bg hover:bg-accent/20 text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="legsAnkles">🦵 <span data-routine-key="LEGS_ANKLES">LEGS-MOVILIDAD</span></button>
+                    <button data-routine="CORE_CARDIO" class="routine-selector bg-card-bg hover:bg-metabolic/20 text-metabolic font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="coreCardio">🔥 <span data-routine-key="CORE_CARDIO">CORE-FUSIÓN</span></button>
+                    <button data-routine="TORSO_PULL" class="routine-selector bg-card-bg hover:bg-accent/20 text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="pull">🏋️‍♂️ <span data-routine-key="TORSO_PULL">PULL-POSTERIOR</span></button>
+                    <button data-routine="GLUTES_CORE" class="routine-selector bg-card-bg hover:bg-accent/20 text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="glutesCore">🍑 <span data-routine-key="GLUTES_CORE">GLUTES-NÚCLEO</span></button>
+                    <button data-routine="METABOLIC" class="routine-selector bg-card-bg hover:bg-metabolic/20 text-metabolic font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="metabolic">⚡ <span data-routine-key="METABOLIC">SHOCK-VEL. MAX.</span></button>
                 </div>
                 <div id="routine-details-container"></div>
             </section>
             
-            <!-- LIBRARY SECTION -->
             <section id="biblioteca" class="content-section">
                 <div class="mb-8 text-center">
                     <h2 class="text-3xl font-bold mb-2">📚 <span data-key="library">Biblioteca</span></h2>
@@ -91,35 +390,531 @@
         </main>
     </div>
 
+    <div id="ai-fab" class="ai-fab" title="Enlace Neural con Berni (IA)">
+        <div class="text-white text-2xl">✨</div>
+    </div>
 
-    <script type="module" src="app.js"></script>
-    
+    <div id="ai-chat-modal" class="ai-chat-modal">
+        <div class="bg-black/50 p-3 border-b border-accent/30 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                <h3 class="text-accent font-bold text-sm tracking-wider">BERNI_AI [ONLINE]</h3>
+            </div>
+            <button id="close-ai-modal" class="text-secondary hover:text-white">✕</button>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+            <div class="chat-bubble ai">
+                Iniciando enlace neural... ⚡<br>Soy Berni. Analizo tu biometría y rutina. ¿En qué puedo asistirte hoy, recluta?
+            </div>
+        </div>
+        <div class="p-3 bg-black/50 border-t border-border">
+            <div class="flex gap-2">
+                <input type="text" id="chat-input" class="flex-1 bg-bg-color border border-border rounded-lg px-3 py-2 text-sm text-primary focus:outline-none focus:border-accent placeholder-secondary/50" placeholder="Pregunta sobre técnica, dieta...">
+                <button id="send-chat" class="bg-accent/20 hover:bg-accent/40 text-accent border border-accent/50 rounded-lg px-3 transition">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="exercise-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-card-bg p-6 rounded-xl shadow-2xl border border-border w-full max-w-lg relative">
+            <button id="modal-close" class="absolute top-3 right-3 text-2xl text-secondary hover:text-accent transition">❌</button>
+            <h2 id="guide-title" class="text-3xl font-bold text-accent mb-4 border-b border-border pb-2">Detalles del Ejercicio</h2>
+            <div id="guide-content" class="space-y-4 text-primary">
+                <p>Cargando detalles...</p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // PWA Installation Support
-        let deferredPrompt;
-        
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            console.log('PWA install prompt ready');
-        });
-        
-        // Register Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(reg => {
-                    console.log('Service Worker registered successfully:', reg);
-                })
-                .catch(err => {
-                    console.log('Service Worker registration failed:', err);
-                });
+        // --- App Configuration ---
+        const routines = {
+            TORSO_PUSH: {
+                title: '💪 CÓDIGO: PUSH-ARMAMENTO SUPERIOR',
+                description: 'Optimización de la propulsión pectoral, deltoides y extensores de muñeca. Fase de Fuerza I.',
+                details: {
+                    exercises: [
+                        { name: 'Push-ups', series: 4, reps: 'AMRAP', rest: '60s', notes: 'Fuerza de pecho con calistenia.' },
+                        { name: 'Pilates Bar Shoulder Press', series: 4, reps: '12-15', rest: '60s', notes: 'Pisa la banda para generar resistencia' },
+                        { name: 'Band Flys', series: 3, reps: '15-20', rest: '45s', notes: 'Aislar y estirar el pecho' },
+                        { name: 'Band Lateral Raises', series: 3, reps: '15-20', rest: '45s', notes: 'Ancho de hombros, usa banda' },
+                        { name: 'Band Triceps Pushdowns', series: 3, reps: '15-20', rest: '45s', notes: 'Aislar tríceps' },
+                        { name: 'Wrist Extension (Palms down)', series: 3, reps: '15-20', rest: '30s', notes: 'Salud de las articulaciones' }
+                    ]
+                }
+            },
+            LEGS_ANKLES: {
+                title: '🦵 CÓDIGO: LEGS-UNIDAD DE MOVILIDAD',
+                description: 'Aumento de la capacidad biomecánica del tren inferior. Estabilidad de articulación y fuerza de propulsión.',
+                details: {
+                    exercises: [
+                        { name: 'Pilates Bar Squat', series: 4, reps: '12-15', rest: '60s', notes: 'Pisa la banda, barra en la espalda' },
+                        { name: 'Dumbbell Romanian Deadlift', series: 3, reps: '12-15', rest: '75s', notes: 'Enfócate en los isquiotibiales' },
+                        { name: 'Static Lunge (Ankle Focus)', series: 3, reps: '10-12/side', rest: '60s', notes: 'Controla la estabilidad del tobillo' },
+                        { name: 'Banded Glute Bridge', series: 3, reps: '15-20', rest: '45s', notes: 'Banda en las rodillas, empuja hacia afuera' },
+                        { name: 'Calf Raises (Ankle Focus)', series: 4, reps: '20-25', rest: '45s', notes: 'Con barra de pilates para resistencia' }
+                    ]
+                }
+            },
+            CORE_CARDIO: {
+                title: '🔥 CÓDIGO: CORE-FUSIÓN METABÓLICA',
+                description: 'Secuencia de choque para el core central y aceleración de la tasa metabólica basal. Alto Impacto.',
+                details: {
+                    exercises: [
+                        { name: 'Plank Hold', series: 4, reps: '45-60s', rest: '45s', notes: 'Mantén el cuerpo recto, core activado' },
+                        { name: 'Bicycle Crunches', series: 4, reps: '20-25', rest: '30s', notes: 'Toca codo con rodilla opuesta' },
+                        { name: 'Burpees', series: 4, reps: '10-15', rest: '60s', notes: 'Explosivos, mantén buena forma' },
+                        { name: 'Mountain Climbers', series: 4, reps: '30-40', rest: '45s', notes: 'Ritmo rápido pero controlado' },
+                        { name: 'Russian Twists', series: 3, reps: '30-40', rest: '45s', notes: 'Usa banda o pilates bar, gira el torso' },
+                        { name: 'Leg Raises', series: 3, reps: '12-15', rest: '45s', notes: 'Core bajo, piernas rectas' },
+                        { name: 'Jump Squats', series: 3, reps: '15-20', rest: '60s', notes: 'Cardio explosivo, aterriza suave' }
+                    ]
+                }
+            },
+            TORSO_PULL: {
+                title: '🏋️‍♂️ CÓDIGO: PULL-CADENA POSTERIOR',
+                description: 'Desarrollo del segmento dorsal, flexores de brazo y extensores de antebrazo. Fase de Tracción I.',
+                details: {
+                    exercises: [
+                        { name: 'Pilates Bar Lat Pulldown', series: 4, reps: '12-15', rest: '60s', notes: 'Anclaje alto en la puerta' },
+                        { name: 'Dumbbell Bent-Over Row', series: 4, reps: '8-12', rest: '60s', notes: 'Fuerza y densidad de la espalda' },
+                        { name: 'Band Face Pulls', series: 3, reps: '15-20', rest: '45s', notes: 'Salud y postura de los hombros' },
+                        { name: 'Pilates Bar Bicep Curl', series: 3, reps: '12-15', rest: '45s', notes: 'Pisa la banda para generar resistencia' },
+                        { name: 'Wrist Flexion (Palms up)', series: 3, reps: '15-20', rest: '30s', notes: 'Salud de las articulaciones' }
+                    ]
+                }
+            },
+            GLUTES_CORE: {
+                title: '🍑 CÓDIGO: GLUTES-NÚCLEO ESTABILIZADOR',
+                description: 'Activación profunda del complejo glúteo y estabilidad del núcleo espinal. Concentración de Fuerza.',
+                details: {
+                    exercises: [
+                        { name: 'Pull Through', series: 4, reps: '15-20', rest: '60s', notes: 'Anclaje bajo, enfócate en los glúteos' },
+                        { name: 'Banded Lateral Walk', series: 3, reps: '12 steps/side', rest: '45s', notes: 'Banda en las rodillas o tobillos' },
+                        { name: 'Pilates Bar Russian Twists', series: 3, reps: '20 twists', rest: '45s', notes: 'Sostén la barra, gira el torso' },
+                        { name: 'Plank', series: 3, reps: '45-75s', rest: '60s', notes: 'Mantén el cuerpo recto' },
+                        { name: 'Bird-Dog', series: 3, reps: '12/side', rest: '30s', notes: 'Movimiento lento y controlado' }
+                    ]
+                }
+            },
+            METABOLIC: {
+                title: '⚡ CÓDIGO: SHOCK-CIRCUITO MAX. VEL.',
+                description: 'Protocolo de resistencia máxima y quema de energía. Ejecución en circuito sin pausa programada.',
+                details: {
+                    exercises: [
+                        { name: 'Pilates Bar Thrusters', series: '4 Rounds', reps: '15', rest: '15s', notes: 'Sentadilla + Press de Hombros' },
+                        { name: 'Fast Band Rows', series: '4 Rounds', reps: '20', rest: '15s', notes: 'Ritmo rápido' },
+                        { name: 'Lunge with Twist', series: '4 Rounds', reps: '10/side', rest: '15s', notes: 'Con barra de pilates' },
+                        { name: 'Jumping Jacks', series: '4 Rounds', reps: '45s', rest: '90s', notes: 'Descanso largo al final' }
+                    ]
+                }
+            },
+            REST: {
+                title: 'ESTADO: REGENERACIÓN DE SISTEMAS',
+                description: 'El sistema entra en fase de reparación sináptica y crecimiento muscular. Priorizar el descanso.'
+            }
+        };
+
+        const exerciseLibrary = {
+            'Dumbbell Bench Press': { category: 'Chest', equipment: '🏋️ Mancuernas', difficulty: 'Intermedio', form: { es: ['1. Acuéstate en un banco', '2. Sostén las mancernas a nivel del pecho', '3. Empuja las mancernas hacia arriba hasta extender los brazos'] }, tips: { es: ['✓ Controla el peso en la bajada', '✗ Evita: Codos muy abiertos'] }, muscleGroups: ['Pectoral', 'Tríceps'] },
+            'Push-ups': { category: 'Chest', equipment: '🛏️ Tapete', difficulty: 'Principiante', form: { es: ['1. Plancha alta, manos al ancho de hombros', '2. Baja el cuerpo hasta que el pecho casi toque el suelo', '3. Empuja de vuelta a la posición inicial'] }, tips: { es: ['✓ Mantén el core contraído', '✗ Evita: Dejar caer las caderas'] }, muscleGroups: ['Pectoral', 'Core'] },
+            'Pilates Bar Shoulder Press': { category: 'Shoulders', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Pisa la banda, barra a altura de hombros', '2. Empuja la barra hacia arriba hasta extender los brazos', '3. Baja con control'] }, tips: { es: ['✓ Mantén la espalda recta', '✗ Evita: Usar impulso para empujar'] }, muscleGroups: ['Hombros'] },
+            'Band Flys': { category: 'Chest', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Fija la banda, extiende el brazo', '2. Trae el brazo cruzando el cuerpo en movimiento de abrazo', '3. Regresa con control'] }, tips: { es: ['✓ Contrae el pecho al final', '✗ Evita: Bloquear el codo'] }, muscleGroups: ['Pectoral'] },
+            'Band Lateral Raises': { category: 'Shoulders', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Párate sobre la banda', '2. Eleva los brazos hacia los lados hasta la altura de los hombros', '3. Baja lentamente'] }, tips: { es: ['✓ Codos ligeramente más altos que las manos', '✗ Evita: Balancear las bandas'] }, muscleGroups: ['Hombros (Lateral)'] },
+            'Band Triceps Pushdowns': { category: 'Triceps', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Fija banda alta, codos a 90°', '2. Empuja la banda hacia abajo hasta extender los brazos', '3. Regresa a nivel del pecho con control'] }, tips: { es: ['✓ Codos pegados al cuerpo', '✗ Evita: Dejar que los codos se abran'] }, muscleGroups: ['Tríceps'] },
+            'Wrist Extension (Palms down)': { category: 'Forearms', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Antebrazo apoyado, palma hacia abajo', '2. Levanta la barra extendiendo la muñeca hacia arriba', '3. Baja con control'] }, tips: { es: ['✓ Muévete solo desde la muñeca', '✗ Evita: Mover el antebrazo o codo'] }, muscleGroups: ['Antebrazos (Extensores)'] },
+            'Pilates Bar Squat': { category: 'Legs', equipment: '🎯 Barra Pilates', difficulty: 'Intermedio', form: { es: ['1. Pisa la banda, barra sobre los hombros', '2. Baja a sentadilla hasta paralelo', '3. Empuja a través de los talones para subir'] }, tips: { es: ['✓ Mantén el pecho erguido', '✗ Evita: Rodillas colapsando hacia adentro'] }, muscleGroups: ['Cuádriceps', 'Glúteos'] },
+            'Dumbbell Romanian Deadlift': { category: 'Hamstrings', equipment: '🏋️ Mancuernas', difficulty: 'Intermedio', form: { es: ['1. Ligero doblez en rodillas', '2. Bisagra desde las caderas, bajando el peso', '3. Empuja las caderas hacia adelante para volver a incorporarte'] }, tips: { es: ['✓ Mantén la espalda recta', '✗ Evita: Redondear la espalda baja'] }, muscleGroups: ['Isquiotibiales', 'Glúteos'] },
+            'Static Lunge (Ankle Focus)': { category: 'Legs', equipment: '🛏️ Tapete', difficulty: 'Intermedio', form: { es: ['1. Da un paso adelante, ambas rodillas a 90°', '2. Rodilla frontal alineada con el tobillo', '3. Mantén el torso erguido'] }, tips: { es: ['✓ Enfócate en la estabilidad del tobillo', '✗ Evita: Rodilla frontal pasando los dedos'] }, muscleGroups: ['Cuádriceps', 'Glúteos', 'Estabilizadores'] },
+            'Banded Glute Bridge': { category: 'Glutes', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Banda sobre las rodillas', '2. Empuja las rodillas hacia afuera contra la banda', '3. Levanta caderas, contrayendo glúteos'] }, tips: { es: ['✓ Mantén tensión en la banda', '✗ Evita: Hiperextensión de espalda baja'] }, muscleGroups: ['Glúteos', 'Isquiotibiales'] },
+            'Calf Raises (Ankle Focus)': { category: 'Calves', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Eleva sobre los dedos, levantando talones alto', '2. Pausa brevemente en la parte superior', '3. Baja con control'] }, tips: { es: ['✓ Rango completo de movimiento', '✗ Evita: Rebotar'] }, muscleGroups: ['Pantorrillas', 'Tobillo'] },
+            'Pilates Bar Lat Pulldown': { category: 'Back', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Fija banda alta, agarre ancho', '2. Jala la barra hacia abajo hasta nivel del pecho', '3. Regresa con control'] }, tips: { es: ['✓ Contrae la espalda en la parte inferior', '✗ Evita: Usar los brazos en lugar de la espalda'] }, muscleGroups: ['Dorsales', 'Espalda'] },
+            'Dumbbell Bent-Over Row': { category: 'Back', equipment: '🏋️ Mancuernas', difficulty: 'Intermedio', form: { es: ['1. Bisagra desde cadera, espalda paralela al suelo', '2. Jala las mancernas hacia la caja torácica', '3. Baja con control'] }, tips: { es: ['✓ Mantén core contraído', '✗ Evita: Redondear la espalda baja'] }, muscleGroups: ['Espalda', 'Dorsales'] },
+            'Band Face Pulls': { category: 'Shoulders', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Fija banda a altura de la cara', '2. Jala la banda hacia la cara/cabeza', '3. Rota las manos hacia afuera al final'] }, tips: { es: ['✓ Codos altos', '✗ Evita: Jalar hacia abajo'] }, muscleGroups: ['Hombros (Posterior)', 'Espalda Superior'] },
+            'Pilates Bar Bicep Curl': { category: 'Biceps', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Pisa la banda, brazos extendidos', '2. Dobla los codos, curva la barra hacia los hombros', '3. Baja con control'] }, tips: { es: ['✓ Contrae los bíceps en la parte superior', '✗ Evita: Balancearte o usar impulso'] }, muscleGroups: ['Bíceps'] },
+            'Wrist Flexion (Palms up)': { category: 'Forearms', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Antebrazo apoyado, palma hacia arriba', '2. Curva la muñeca hacia arriba', '3. Baja con control'] }, tips: { es: ['✓ Muévete solo desde la muñeca', '✗ Evita: Mover antebrazo o codo'] }, muscleGroups: ['Antebrazos (Flexores)'] },
+            'Pull Through': { category: 'Glutes', equipment: '🟰 Bandas', difficulty: 'Intermedio', form: { es: ['1. Fija la banda baja, de espaldas al anclaje', '2. Bisagra de cadera, empuja banda entre piernas', '3. Empuja las caderas hacia adelante (extensión completa)'] }, tips: { es: ['✓ La fuerza viene de las caderas, no de los brazos', '✗ Evita: Redondear la espalda baja'] }, muscleGroups: ['Glúteos', 'Isquiotibiales'] },
+            'Banded Lateral Walk': { category: 'Glutes', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Banda en rodillas/tobillos, semi-sentadilla', '2. Pasos laterales manteniendo tensión', '3. Alterna direcciones'] }, tips: { es: ['✓ Mantén las rodillas dobladas', '✗ Evita: Banda aflojándose'] }, muscleGroups: ['Glúteos (Medio)'] },
+            'Pilates Bar Russian Twists': { category: 'Core', equipment: '🎯 Barra Pilates', difficulty: 'Intermedio', form: { es: ['1. Sentado, torso inclinado (45°)', '2. Sostén la barra, rota torso a izquierda/derecha', '3. Toca el suelo con la barra (opcional)'] }, tips: { es: ['✓ La rotación viene del core', '✗ Evita: Moverte demasiado rápido'] }, muscleGroups: ['Oblicuos', 'Core'] },
+            'Plank': { category: 'Core', equipment: '🛏️ Tapete', difficulty: 'Principiante', form: { es: ['1. Plancha de antebrazos, codos bajo hombros', '2. Cuerpo en línea recta desde cabeza hasta talones', '3. Mantén la posición'] }, tips: { es: ['✓ Core y glúteos apretados', '✗ Evita: Dejar caer las caderas'] }, muscleGroups: ['Core', 'Hombros'] },
+            'Bird-Dog': { category: 'Core', equipment: '🛏️ Tapete', difficulty: 'Principiante', form: { es: ['1. En cuatro patas', '2. Extiende brazo y pierna opuestos', '3. Regresa lentamente al inicio'] }, tips: { es: ['✓ Mantén el cuerpo alineado', '✗ Evita: Rotar caderas u hombros'] }, muscleGroups: ['Core', 'Glúteos'] },
+            'Pilates Bar Thrusters': { category: 'Full Body', equipment: '🎯 Barra Pilates', difficulty: 'Avanzado', form: { es: ['1. Sentadilla completa', '2. Explota hacia arriba', '3. Empuja la barra sobre la cabeza en un solo movimiento'] }, tips: { es: ['✓ Movimiento fluido y explosivo', '✗ Evita: Profundidad incompleta de sentadilla'] }, muscleGroups: ['Cuádriceps', 'Hombros', 'Full Body'] },
+            'Fast Band Rows': { category: 'Back', equipment: '🟰 Bandas', difficulty: 'Intermedio', form: { es: ['1. Fija banda a altura del pecho', '2. Jala rápidamente la banda hacia el pecho', '3. Regreso rápido y controlado'] }, tips: { es: ['✓ Ritmo rápido pero controlado', '✗ Evita: Impulso excesivo'] }, muscleGroups: ['Espalda', 'Dorsales'] },
+            'Lunge with Twist': { category: 'Full Body', equipment: '🎯 Barra Pilates', difficulty: 'Intermedio', form: { es: ['1. Estocada, ambas rodillas a 90°', '2. Sostén la barra, gira el torso sobre la pierna frontal', '3. Regresa y cambia de lado'] }, tips: { es: ['✓ Gira desde el core, no desde los brazos', '✗ Evita: Girar antes de estar estable'] }, muscleGroups: ['Cuádriceps', 'Core', 'Glúteos'] },
+            'Jumping Jacks': { category: 'Cardio', equipment: '🛏️ Espacio', difficulty: 'Principiante', form: { es: ['1. Salta abriendo piernas y brazos simultáneamente', '2. Salta cerrando', '3. Repite en movimiento continuo'] }, tips: { es: ['✓ Aterriza suavemente', '✗ Evita: Golpear los pies al aterrizar'] }, muscleGroups: ['Full Body', 'Cardio'] },
+            'Plank Hold': { category: 'Core', equipment: '🛏️ Tapete', difficulty: 'Principiante', form: { es: ['1. Plancha de antebrazos', '2. Mantén el cuerpo en línea recta', '3. Contrae core y glúteos'] }, tips: { es: ['✓ Aprieta glúteos para proteger la espalda baja', '✗ Evita: Aguantar la respiración'] }, muscleGroups: ['Core', 'Hombros'] },
+            'Bicycle Crunches': { category: 'Core', equipment: '🛏️ Tapete', difficulty: 'Intermedio', form: { es: ['1. Acuéstate, manos detrás de la cabeza', '2. Lleva codo a rodilla opuesta, extiende la otra pierna', '3. Continúa alternando'] }, tips: { es: ['✓ Toca codo con rodilla opuesta', '✗ Evita: Jalar el cuello'] }, muscleGroups: ['Abs', 'Oblicuos'] },
+            'Burpees': { category: 'Full Body', equipment: '🛏️ Espacio', difficulty: 'Intermedio', form: { es: ['1. Baja a sentadilla', '2. Salta pies atrás a plancha', '3. Salta pies adelante a sentadilla', '4. Explota hacia arriba en salto'] }, tips: { es: ['✓ Movimiento explosivo completo', '✗ Evita: Forma descuidada cuando estás cansado'] }, muscleGroups: ['Full Body', 'Cardio', 'Core'] },
+            'Mountain Climbers': { category: 'Cardio', equipment: '🛏️ Tapete', difficulty: 'Intermedio', form: { es: ['1. Plancha alta', '2. Lleva rodilla al pecho, cambia rápidamente de pierna', '3. Continúa alternando a ritmo rápido'] }, tips: { es: ['✓ Ritmo rápido pero controlado', '✗ Evita: Dejar rebotar las caderas'] }, muscleGroups: ['Core', 'Cardio'] },
+            'Russian Twists': { category: 'Core', equipment: '🎯 Barra Pilates', difficulty: 'Intermedio', form: { es: ['1. Sentado, torso inclinado (45°)', '2. Gira el torso de lado a lado'] }, tips: { es: ['✓ La rotación viene del core', '✗ Evita: Rotar demasiado lejos'] }, muscleGroups: ['Oblicuos', 'Core'] },
+            'Leg Raises': { category: 'Core', equipment: '🛏️ Tapete', difficulty: 'Intermedio', form: { es: ['1. Acuéstate, manos bajo glúteos', '2. Eleva piernas hasta 90 grados', '3. Baja lentamente sin tocar el piso'] }, tips: { es: ['✓ Presiona la espalda baja contra el piso', '✗ Evita: Arquear la espalda baja'] }, muscleGroups: ['Abs (Bajo)', 'Flexores'] },
+            'Jump Squats': { category: 'Legs', equipment: '🛏️ Espacio', difficulty: 'Intermedio', form: { es: ['1. Baja a sentadilla completa', '2. Explota hacia arriba en salto', '3. Aterriza suavemente de vuelta a sentadilla'] }, tips: { es: ['✓ Poder explosivo desde las piernas', '✗ Evita: Aterrizar con rodillas bloqueadas'] }, muscleGroups: ['Cuádriceps', 'Glúteos', 'Cardio'] }
+        };
+
+        function getExerciseSlug(name) {
+            return name.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
         }
+        function getExerciseName(englishName) { return englishName; } 
+        function getExerciseDescription(englishName) {
+            const allExercises = Object.values(routines).flatMap(r => r.details ? r.details.exercises : []);
+            const ex = allExercises.find(e => e.name === englishName);
+            return ex ? ex.notes : '';
+        }
+
+        // --- Date & Schedule ---
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth();
+        const day = today.getDate();
+        let currentViewDate = new Date();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
         
-        // App installed event
-        window.addEventListener('appinstalled', () => {
-            console.log('PWA was installed');
-            deferredPrompt = null;
+        function dateKeyFromDate(d) {
+            return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+        }
+
+        const LOCAL_STORAGE_KEY = 'ftber_progress';
+        const schedulePattern = ['TORSO_PUSH', 'LEGS_ANKLES', 'CORE_CARDIO', 'TORSO_PULL', 'GLUTES_CORE', 'METABOLIC', 'REST'];
+        const monthlySchedule = {};
+
+        function generateMonthlySchedule() {
+            for (let d = 1; d <= daysInMonth; d++) {
+                const date = new Date(year, month, d);
+                const dayOfWeek = date.getDay(); 
+                const patternIndex = (dayOfWeek === 0) ? 6 : dayOfWeek - 1;
+                monthlySchedule[d] = schedulePattern[patternIndex];
+            }
+        }
+        generateMonthlySchedule();
+
+        // --- Language ---
+        const translations = { es: { today: 'Hoy', calendar: 'Calendario', routines: 'Rutinas', library: 'Biblioteca', dailyProgress: 'ESTADO DE LA SECUENCIA DIARIA', equipmentNeeded: 'UNIDADES DE REQUERIMIENTO', exercise: 'MÓDULO DE ACCIÓN', sets: 'CICLOS', reps: 'REPETICIONES', rest: 'COOLDOWN', notes: 'PARÁMETROS', done: 'COMPLETADO', selectRoutineDesc: 'ANÁLISIS DE MÓDULOS DE ENTRENAMIENTO.', exerciseLibraryDesc: 'BASE DE DATOS DE MOVIMIENTO.' } };
+        function t(key) { return translations.es[key] || key; }
+
+        function updateLanguageDisplay() {
+            document.querySelectorAll('[data-key]').forEach(el => el.textContent = t(el.getAttribute('data-key')));
+            document.querySelectorAll('[data-routine-key]').forEach(el => {
+                const r = routines[el.getAttribute('data-routine-key')];
+                if (r && r.title) el.textContent = r.title.includes(':') ? r.title.split(':')[1].split(' ')[1] : 'REGENERACIÓN';
+            });
+        }
+
+        // --- Core UI Functions ---
+        function getRoutineColorClass(routineKey) {
+            const isHighIntensity = routineKey === 'METABOLIC' || routineKey === 'CORE_CARDIO';
+            if (isHighIntensity) return { text: 'text-metabolic', border: 'border-metabolic/50', shadow: 'shadow-metabolic', bg: 'bg-metabolic/10' };
+            if (routineKey === 'REST') return { text: 'text-emerald-300', border: 'border-emerald-500/50', shadow: 'shadow-emerald-500', bg: 'bg-emerald-500/10' };
+            if (routineKey.includes('PUSH') || routineKey.includes('PULL')) return { text: 'text-sky-400', border: 'border-sky-400/50', shadow: 'shadow-sky-400', bg: 'bg-sky-400/10' };
+            if (routineKey.includes('LEGS') || routineKey.includes('GLUTES')) return { text: 'text-amber-400', border: 'border-amber-400/50', shadow: 'shadow-amber-400', bg: 'bg-amber-400/10' };
+            return { text: 'text-secondary', border: 'border-border', shadow: '', bg: 'bg-card-bg/80' };
+        }
+
+        function createRoutineHeaderHTML(routineData, routineKey, isTodayView) {
+            const isHighIntensity = routineKey === 'METABOLIC' || routineKey === 'CORE_CARDIO';
+            let progressHTML = '';
+            if (isTodayView && routineData.details) {
+                progressHTML = `
+                    <div class="mb-6">
+                        <h3 class="text-center font-bold text-xl mb-2 text-primary">${t('dailyProgress')}</h3>
+                        <div id="progress-text" class="text-center font-bold text-lg text-accent" style="text-shadow: var(--glow-accent);">0% Completado</div>
+                        <div id="progress-count" class="text-center text-secondary text-sm mt-1">0 de ${routineData.details.exercises.length} módulos</div>
+                        <div class="progress-bar-container mt-3" style="height: 1rem;"><div id="progress-bar" class="progress-bar" style="width: 0%;"></div></div>
+                    </div>`;
+            }
+            return `<div class="relative bg-card-bg/80 p-4 md:p-6 lg:p-8 rounded-lg shadow-lg border ${isHighIntensity ? 'metabolic-border metabolic-shadow' : 'border-border'}">
+                        ${progressHTML}
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 text-center ${isHighIntensity ? 'metabolic-text' : 'text-primary'}">${routineData.title}</h2>
+                        <p class="text-center text-secondary mb-2 text-sm md:text-base">${routineData.description}</p>
+                    </div>`;
+        }
+
+        function createRoutineTableHTML(exercises, isTodayView, routineKey) {
+            const rows = exercises.map((ex, index) => `
+                <tr class="border-b border-border last:border-b-0 hover:bg-black/20 transition">
+                    <td class="p-2 md:p-3 lg:p-4 font-medium text-primary text-sm md:text-base">
+                        <div class="font-semibold flex items-center gap-1 md:gap-2"><span>${getExerciseName(ex.name)}</span><button class="exercise-info-btn text-[10px] px-1 py-0.5 rounded text-secondary/60 hover:text-accent/80 hover:bg-accent/10 transition" data-exercise="${ex.name}">📚</button></div>
+                        <div class="text-xs text-secondary hidden md:block">${getExerciseDescription(ex.name)}</div>
+                    </td>
+                    <td class="p-2 md:p-3 lg:p-4 text-center text-secondary text-sm md:text-base">${ex.series}</td>
+                    <td class="p-2 md:p-3 lg:p-4 text-center text-secondary text-sm md:text-base">${ex.reps}</td>
+                    <td class="p-2 md:p-3 lg:p-4 text-center text-secondary text-sm md:text-base">
+                        <div class="flex justify-center items-center gap-1 md:gap-2"><span class="rest-text text-xs md:text-sm">${ex.rest}</span>
+                        ${isTodayView ? `<button class="rest-timer-btn text-[10px] px-1 py-0.5 rounded text-accent/60 hover:text-accent hover:bg-accent/10 transition" data-rest="${ex.rest}">⏱️</button><span class="rest-countdown text-secondary text-xs"></span>` : ''}</div>
+                    </td>
+                    <td class="p-2 md:p-3 lg:p-4 text-xs md:text-sm text-secondary hidden md:table-cell">${ex.notes || ''}</td>
+                    ${isTodayView ? `<td class="p-2 md:p-3 lg:p-4 text-center"><input type="checkbox" data-exercise-index="${index}" class="h-4 w-4 rounded bg-card-bg border-border accent-accent"></td>` : ''}
+                </tr>
+            `).join('');
+            return `<div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-black/30"><tr><th class="p-2 text-xs text-secondary uppercase">${t('exercise')}</th><th class="p-2 text-xs text-center text-secondary uppercase">${t('sets')}</th><th class="p-2 text-xs text-center text-secondary uppercase">${t('reps')}</th><th class="p-2 text-xs text-center text-secondary uppercase">${t('rest')}</th><th class="p-2 text-xs text-secondary uppercase hidden md:table-cell">${t('notes')}</th>${isTodayView ? `<th class="p-2 text-xs text-center text-secondary uppercase">${t('done')}</th>` : ''}</tr></thead><tbody>${rows}</tbody></table></div>`;
+        }
+
+        function createRoutineHTML(routineKey, isTodayView, date) {
+            const routineData = routines[routineKey];
+            const colors = getRoutineColorClass(routineKey);
+            
+            if (routineKey === 'REST') {
+                return `<div class="p-8 text-center ${colors.bg} border ${colors.border} rounded-xl shadow-lg">
+                            <div class="text-4xl mb-4">🛌</div>
+                            <h2 class="text-3xl font-bold ${colors.text}">${routineData.title}</h2>
+                            <p class="text-secondary mt-2">${routineData.description}</p>
+                        </div>`;
+            }
+            if (!routineData || !routineData.details) return `<div class="p-8 text-center bg-card-bg/80">No hay rutina asignada.</div>`;
+
+            const headerHTML = createRoutineHeaderHTML(routineData, routineKey, isTodayView, date);
+            const tableHTML = createRoutineTableHTML(routineData.details.exercises, isTodayView, routineKey);
+            
+            const equipmentSet = new Set();
+            routineData.details.exercises.forEach(ex => {
+                if (ex.name.includes('Dumbbell')) equipmentSet.add('🏋️ Mancuernas');
+                if (ex.name.includes('Pilates Bar')) equipmentSet.add('🎯 Barra Pilates');
+                if (ex.name.includes('Band')) equipmentSet.add('🟰 Bandas');
+                if (ex.name.includes('Tapete') || ex.name.includes('Plank')) equipmentSet.add('🛏️ Tapete');
+            });
+            
+            let equipmentHTML = equipmentSet.size > 0 && isTodayView ? `<div class="mt-6 p-4 bg-metabolic/10 border border-metabolic/30 rounded-lg"><h4 class="font-bold text-metabolic mb-3">⚙️ ${t('equipmentNeeded')}</h4><div class="grid grid-cols-2 gap-2">${Array.from(equipmentSet).map(eq => `<div class="text-sm text-secondary">${eq}</div>`).join('')}</div></div>` : '';
+
+            return `<div class="space-y-6">${headerHTML}<div class="bg-card-bg/80 border border-border rounded-lg shadow-lg">${tableHTML}</div>${equipmentHTML}</div>`;
+        }
+
+        async function displayTodaysPlan(dateOverride) {
+            const viewDate = dateOverride instanceof Date ? dateOverride : currentViewDate;
+            const routineKey = monthlySchedule[viewDate.getDate()];
+            document.getElementById('hoy').innerHTML = createRoutineHTML(routineKey, true, viewDate);
+            await loadProgress();
+        }
+
+        // --- Logic ---
+        function getStoredProgress() { try { return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {}; } catch { return {}; } }
+
+        function loadProgress() {
+            const allProgress = getStoredProgress();
+            const key = dateKeyFromDate(currentViewDate);
+            const todaysData = allProgress[key] || [];
+            document.querySelectorAll('#hoy input[type="checkbox"]').forEach((cb, idx) => cb.checked = !!todaysData[idx]);
+            updateProgressUI();
+        }
+
+        function saveProgress() {
+            const checkboxes = document.querySelectorAll('#hoy input[type="checkbox"]');
+            const state = Array.from(checkboxes).map(cb => cb.checked);
+            const allProgress = getStoredProgress();
+            allProgress[dateKeyFromDate(currentViewDate)] = state;
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allProgress));
+            updateProgressUI();
+            updateGlobalProgress();
+            generateCalendar();
+            checkDayCompletion();
+        }
+
+        function updateProgressUI() {
+            const checkboxes = document.querySelectorAll('#hoy input[type="checkbox"]');
+            if(checkboxes.length === 0) return;
+            const checked = Array.from(checkboxes).filter(c => c.checked).length;
+            const pct = Math.round((checked/checkboxes.length)*100);
+            const bar = document.getElementById('progress-bar');
+            const text = document.getElementById('progress-text');
+            const count = document.getElementById('progress-count');
+            if(bar) bar.style.width = `${pct}%`;
+            if(text) text.innerText = `${pct}% COMPLETADO`;
+            if(count) count.innerText = `${checked} de ${checkboxes.length} módulos`;
+        }
+
+        function updateGlobalProgress() {
+            const allProgress = getStoredProgress();
+            let total = 0, completed = 0;
+            for (let d = 1; d <= daysInMonth; d++) {
+                const r = routines[monthlySchedule[d]];
+                if (r && r.details) {
+                    total += r.details.exercises.length;
+                    const dayP = allProgress[`${year}-${month + 1}-${d}`] || [];
+                    completed += dayP.filter(Boolean).length;
+                }
+            }
+            const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+            document.getElementById('global-progress-bar').style.width = `${pct}%`;
+            document.getElementById('global-progress-text').textContent = `${pct}% CONSOLIDADO`;
+        }
+
+        function generateCalendar() {
+            const calendarBody = document.getElementById('calendar-body');
+            if (!calendarBody) return;
+            const firstDay = new Date(year, month, 1).getDay();
+            const offset = (firstDay === 0) ? 6 : firstDay - 1;
+            const allProgress = getStoredProgress();
+
+            let html = '';
+            for (let i = 0; i < offset; i++) html += `<div class="bg-black/20 rounded-md"></div>`;
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const key = monthlySchedule[d];
+                const act = routines[key];
+                const isToday = d === today.getDate();
+                const colors = getRoutineColorClass(key);
+                const dayP = allProgress[`${year}-${month + 1}-${d}`] || [];
+                let badge = '';
+
+                if (act.details) {
+                    const pct = act.details.exercises.length > 0 ? Math.round((dayP.filter(Boolean).length / act.details.exercises.length) * 100) : 0;
+                    if(pct > 0) badge = `<span class="inline-block mt-1 text-[10px] px-2 py-0.5 rounded-full ${pct===100?'bg-emerald-500/20 text-emerald-300':'bg-yellow-500/20 text-yellow-300'}">${pct}%</span>`;
+                }
+
+                let label = key === 'REST' ? '🛌' : (act.title.split(' ')[0] + ' ' + act.title.split(':')[1].split(' ')[1]);
+                html += `<div class="calendar-day ${colors.bg} rounded-md border ${colors.border} flex flex-col ${isToday ? 'today' : ''}" data-date="${year}-${month + 1}-${d}">
+                            <div class="font-bold text-sm text-primary">${d}</div>
+                            <div class="text-xs mt-1 flex-grow"><p class="font-semibold ${colors.text} leading-tight">${label}</p>${badge}</div>
+                         </div>`;
+            }
+            calendarBody.innerHTML = html;
+        }
+
+        function launchConfetti() {
+            for(let i=0; i<50; i++) {
+                const c = document.createElement('div');
+                c.classList.add('confetti');
+                c.style.left = Math.random() * 100 + 'vw';
+                c.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+                c.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(c);
+                setTimeout(() => c.remove(), 4000);
+            }
+        }
+
+        function checkDayCompletion() {
+            const checkboxes = document.querySelectorAll('#hoy input[type="checkbox"]');
+            if (checkboxes.length === 0) return;
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            const key = `celebrated_${dateKeyFromDate(currentViewDate)}`;
+            if (allChecked && !sessionStorage.getItem(key)) {
+                sessionStorage.setItem(key, 'true');
+                launchConfetti();
+                document.getElementById('progress-text').innerText = '¡PROTOCOLO CUMPLIDO! 🎉';
+            }
+        }
+
+        // --- Initialization ---
+        function initGeminiChat() {
+            const fab = document.getElementById('ai-fab');
+            const chatModal = document.getElementById('ai-chat-modal');
+            const closeChat = document.getElementById('close-ai-modal');
+            const sendBtn = document.getElementById('send-chat');
+            const chatInput = document.getElementById('chat-input');
+            const messagesContainer = document.getElementById('chat-messages');
+            
+            const apiKey = ""; // INSERT YOUR KEY HERE
+
+            fab.addEventListener('click', () => { chatModal.classList.add('open'); chatInput.focus(); });
+            closeChat.addEventListener('click', () => chatModal.classList.remove('open'));
+
+            function getSystemTelemetry() {
+                const activeTab = document.querySelector('.nav-tab.tab-active')?.innerText.replace(/\p{Emoji}/gu, '').trim() || 'Menu';
+                const globalProgress = document.getElementById('global-progress-text')?.innerText || '0%';
+                let specificContext = "Navegando menús.";
+                if (document.getElementById('hoy').classList.contains('active')) {
+                    const dayProgress = document.getElementById('progress-text')?.innerText || 'No iniciado';
+                    const routineName = document.querySelector('#hoy h2')?.innerText || 'Desconocida';
+                    specificContext = `Ejecutando protocolo: ${routineName}. Estado: ${dayProgress}.`;
+                }
+                return `[TELEMETRÍA] Ubicación: ${activeTab}. Global: ${globalProgress}. Actividad: ${specificContext}`;
+            }
+
+            async function callBernie(prompt) {
+                if(!apiKey) { alert("Por favor configura tu API KEY en el código fuente."); return; }
+                messagesContainer.innerHTML += `<div class="chat-bubble user">${prompt}</div>`;
+                chatInput.value = '';
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                const typingId = 'typing-' + Date.now();
+                messagesContainer.innerHTML += `<div id="${typingId}" class="chat-bubble ai typing-indicator">Pensando</div>`;
+                
+                try {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: prompt }] }],
+                            systemInstruction: { parts: [{ text: `Eres Berni, entrenador personal cyberpunk. Respuestas cortas, técnicas, motivadoras. Emojis: 🦾, ⚡. Contexto: ${getSystemTelemetry()}` }] }
+                        })
+                    });
+                    const data = await response.json();
+                    document.getElementById(typingId).remove();
+                    messagesContainer.innerHTML += `<div class="chat-bubble ai">${data.candidates?.[0]?.content?.parts?.[0]?.text || "Error de red."}</div>`;
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                } catch (e) {
+                    document.getElementById(typingId).remove();
+                    messagesContainer.innerHTML += `<div class="chat-bubble ai text-metabolic">⚠️ Error del sistema.</div>`;
+                }
+            }
+            sendBtn.addEventListener('click', () => { if(chatInput.value.trim()) callBernie(chatInput.value.trim()); });
+            chatInput.addEventListener('keypress', (e) => { if(e.key==='Enter' && chatInput.value.trim()) callBernie(chatInput.value.trim()); });
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const modal = document.getElementById('exercise-modal');
+            const title = document.getElementById('guide-title');
+            const content = document.getElementById('guide-content');
+            
+            window.openExerciseInfo = (name) => {
+                const data = exerciseLibrary[name] || { category: 'N/A', equipment: 'N/A', difficulty: 'N/A', form: { es: ['N/A'] }, tips: { es: ['N/A'] }, muscleGroups: ['N/A'] };
+                title.textContent = name;
+                content.innerHTML = `<div class="space-y-4"><div class="flex flex-wrap gap-2"><span class="px-3 py-1 bg-accent/20 text-accent text-xs font-semibold rounded-full">${data.category}</span></div><h4 class="font-bold">Forma:</h4><ul class="list-decimal pl-4 text-sm">${(data.form.es||[]).map(s=>`<li>${s}</li>`).join('')}</ul><h4 class="font-bold">Tips:</h4><div class="text-sm">${(data.tips.es||[]).map(t=>`<p>${t}</p>`).join('')}</div></div>`;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            };
+
+            document.getElementById('modal-close').addEventListener('click', () => { modal.classList.add('hidden'); modal.classList.remove('flex'); });
+            
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('tab-active'));
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                    tab.classList.add('tab-active');
+                });
+            });
+
+            document.getElementById('rutinas').addEventListener('click', (e) => {
+                const btn = e.target.closest('.routine-selector');
+                if (btn) document.getElementById('routine-details-container').innerHTML = createRoutineHTML(btn.dataset.routine, false, null);
+            });
+
+            document.body.addEventListener('click', (e) => {
+                if(e.target.closest('.exercise-info-btn')) openExerciseInfo(e.target.closest('.exercise-info-btn').dataset.exercise);
+                if(e.target.closest('.rest-timer-btn')) {
+                    const btn = e.target.closest('.rest-timer-btn');
+                    let val = parseInt(btn.dataset.rest);
+                    const display = btn.nextElementSibling;
+                    btn.textContent = '⏹';
+                    const int = setInterval(() => { val--; display.innerText = val+'s'; if(val<=0){ clearInterval(int); btn.textContent='⏱️'; display.innerText='LISTO'; } }, 1000);
+                }
+            });
+
+            document.getElementById('hoy').addEventListener('change', (e) => { if(e.target.matches('input')) saveProgress(); });
+            
+            document.getElementById('calendar-body').addEventListener('click', (e) => {
+                const cell = e.target.closest('.calendar-day');
+                if(cell) {
+                    const [y,m,d] = cell.dataset.date.split('-').map(Number);
+                    currentViewDate = new Date(y, m-1, d);
+                    displayTodaysPlan(currentViewDate);
+                    document.querySelector('[data-tab="hoy"]').click();
+                }
+            });
+
+            updateLanguageDisplay();
+            await displayTodaysPlan();
+            generateCalendar();
+            updateGlobalProgress();
+            
+            // Generate Library
+            const libContainer = document.getElementById('exercise-library');
+            const allEx = new Set();
+            Object.values(routines).forEach(r=>r.details?.exercises.forEach(e=>allEx.add(e.name)));
+            libContainer.innerHTML = `<div class="grid gap-4 md:grid-cols-2">${Array.from(allEx).map(name=>`<div class="p-4 bg-card-bg border border-border rounded-lg cursor-pointer hover:border-accent transition" onclick="openExerciseInfo('${name}')"><h3 class="font-bold text-primary">${name}</h3></div>`).join('')}</div>`;
+
+            initGeminiChat();
+            document.querySelector('[data-tab="hoy"]').classList.add('tab-active');
+            document.getElementById('hoy').classList.add('active');
         });
     </script>
 </body>
 </html>
+
