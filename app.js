@@ -1744,22 +1744,6 @@
             }
         });
         // No language toggle in Spanish-only mode
-
-        // Re-render dynamic content
-        displayTodaysPlan();
-        // Ensure progress is restored after re-render
-        loadProgress();
-        generateCalendar();
-        const activeRoutine = document.querySelector('.routine-selector.tab-active');
-        if (activeRoutine) {
-            routineDetailsContainer.innerHTML = createRoutineHTML(activeRoutine.dataset.routine, false, null);
-        }
-        
-        // Regenerate exercise library if it's the active tab
-        const activeTab = document.querySelector('.nav-tab.tab-active');
-        if (activeTab && activeTab.dataset.tab === 'biblioteca') {
-            generateExerciseLibrary();
-        }
     }
 
     // (Removed) updateLanguageLabels: no longer needed

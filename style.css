@@ -707,7 +707,6 @@
             margin: 0;
             overflow-y: visible;
             overflow: visible;
-            all: revert;
         }
         
         #hoy > div {
