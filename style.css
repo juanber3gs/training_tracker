@@ -609,35 +609,33 @@
             margin: 0 !important;
         }
         
+        .exercise-card ul {
+            list-style: none !important;
+            list-style-type: none !important;
+            padding-left: 0 !important;
+            margin: 0 !important;
+        }
+        
         .exercise-card ol li {
             counter-increment: item;
             margin-bottom: 14px;
-            padding-left: 40px;
+            padding-left: 0;
             position: relative;
             line-height: 1.6;
             color: var(--text-secondary);
         }
         
-        .exercise-card ol li:last-child {
-            margin-bottom: 0;
+        .exercise-card ul li {
+            margin-bottom: 14px;
+            padding-left: 0;
+            position: relative;
+            line-height: 1.6;
+            color: var(--text-secondary);
         }
         
-        .exercise-card ol li:before {
-            content: counter(item);
-            position: absolute;
-            left: 0;
-            top: 0;
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            color: var(--bg-color);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.85rem;
-            box-shadow: 0 4px 12px rgba(0, 208, 255, 0.3);
+        .exercise-card ol li:last-child,
+        .exercise-card ul li:last-child {
+            margin-bottom: 0;
         }
         
         .exercise-section .space-y-2 {

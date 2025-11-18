@@ -1483,9 +1483,9 @@
                     <div class="exercise-content">
                         <div class="exercise-section">
                             <h4 class="section-title">${formTitle}</h4>
-                            <ol class="space-y-2">
+                            <ul class="space-y-2">
                                 ${formSteps.map((step, i) => `<li class="text-secondary text-sm leading-relaxed">${step}</li>`).join('')}
-                            </ol>
+                            </ul>
                         </div>
                         
                         <div class="exercise-section">
@@ -1847,11 +1847,7 @@
     const routineDetailsContainer = document.getElementById('routine-details-container');
     const hoyContainer = document.getElementById('hoy');
     const calendarBody = document.getElementById('calendar-body');
-    const calendarTitle = document.getElementById('calendar-title');
     const mainContent = document.getElementById('main-content');
-    const editModal = document.getElementById('edit-exercise-modal');
-    const closeEditBtn = document.getElementById('close-edit-modal');
-    const editForm = document.getElementById('edit-exercise-form');
 
     function openExerciseInfo(exerciseEnglishName) {
         const data = exerciseLibrary[exerciseEnglishName];
@@ -1966,7 +1962,7 @@
                     </div>
                 </td>
                 <td class="p-3 text-sm text-secondary">${ex.notes || ''}</td>
-                ${isTodayView ? `<td class="p-3 text-center"><input type="checkbox" data-exercise-index="${index}" class="h-5 w-5 rounded bg-card-bg border-border text-accent focus:ring-accent"></td>` : `<td class="p-3 text-center"><button class="edit-exercise-btn text-accent hover:text-accent-hover" data-routine="${routineKey}" data-index="${index}" title="Edit">✎</button></td>`}
+                ${isTodayView ? `<td class="p-3 text-center"><input type="checkbox" data-exercise-index="${index}" class="h-5 w-5 rounded bg-card-bg border-border text-accent focus:ring-accent"></td>` : ''}
             </tr>
         `).join('');
 
@@ -2514,13 +2510,6 @@
                 tab.classList.add('tab-active');
             }
         });
-
-        // Toggle floating back-to-today button visibility
-        const backBtn = document.getElementById('back-to-today');
-        if (backBtn) {
-            if (tabName === 'hoy') backBtn.classList.add('hidden');
-            else backBtn.classList.remove('hidden');
-        }
     }
 
     // --- Statistics Functions ---
@@ -2592,60 +2581,7 @@
 
 
     // --- Exercise Editor Functions ---
-    let currentEditingExercise = { routineKey: null, index: null };
 
-    function openEditExerciseModal(routineKey, index) {
-        currentEditingExercise = { routineKey, index };
-        const routine = routines[routineKey];
-        if (!routine || !routine.details || !routine.details.exercises[index]) return;
-
-        const exercise = routine.details.exercises[index];
-        document.getElementById('edit-exercise-name').value = exercise.name;
-        document.getElementById('edit-exercise-series').value = exercise.series;
-        document.getElementById('edit-exercise-reps').value = exercise.reps;
-        document.getElementById('edit-exercise-rest').value = exercise.rest;
-        document.getElementById('edit-exercise-notes').value = exercise.notes || '';
-
-        editModal.classList.add('active');
-    }
-
-    function saveEditedExercise(e) {
-        e.preventDefault();
-        const { routineKey, index } = currentEditingExercise;
-        if (!routineKey || index === null) return;
-
-        const routine = routines[routineKey];
-        if (!routine || !routine.details) return;
-
-        routine.details.exercises[index] = {
-            name: document.getElementById('edit-exercise-name').value,
-            series: document.getElementById('edit-exercise-series').value,
-            reps: document.getElementById('edit-exercise-reps').value,
-            rest: document.getElementById('edit-exercise-rest').value,
-            notes: document.getElementById('edit-exercise-notes').value
-        };
-
-        localStorage.setItem(ROUTINES_STORAGE_KEY, JSON.stringify(routines));
-        editModal.classList.remove('active');
-
-        // Refresh the routine display
-        routineDetailsContainer.innerHTML = createRoutineHTML(routineKey, false);
-    }
-
-    function deleteExercise() {
-        const { routineKey, index } = currentEditingExercise;
-        if (!routineKey || index === null) return;
-
-        if (confirm('Delete this exercise?')) {
-            const routine = routines[routineKey];
-            if (routine && routine.details) {
-                routine.details.exercises.splice(index, 1);
-                localStorage.setItem(ROUTINES_STORAGE_KEY, JSON.stringify(routines));
-                editModal.classList.remove('active');
-                routineDetailsContainer.innerHTML = createRoutineHTML(routineKey, false);
-            }
-        }
-    }
 
     // --- Event Listeners ---
     function addEventListeners() {
@@ -2664,14 +2600,7 @@
             }
         });
         
-        routineDetailsContainer.addEventListener('click', (e) => {
-            const editBtn = e.target.closest('.edit-exercise-btn');
-            if (editBtn) {
-                const routineKey = editBtn.dataset.routine;
-                const index = parseInt(editBtn.dataset.index);
-                openEditExerciseModal(routineKey, index);
-            }
-        });
+
         
         document.querySelectorAll('.accordion-toggle').forEach(button => {
             button.addEventListener('click', () => {
@@ -2766,24 +2695,6 @@
             });
         }
 
-        // Edit modal handlers
-        editForm.addEventListener('submit', e => {
-            e.preventDefault();
-            const routineKey = e.target.dataset.routine;
-            const index = parseInt(e.target.dataset.index, 10);
-            
-            const newValues = {
-                name: document.getElementById('edit-exercise-name').value,
-                series: document.getElementById('edit-exercise-series').value,
-                reps: document.getElementById('edit-exercise-reps').value,
-                rest: document.getElementById('edit-exercise-rest').value,
-                notes: document.getElementById('edit-exercise-notes').value,
-            };
-
-            updateExercise(routineKey, index, newValues);
-            editModal.classList.remove('active');
-        });
-
         // Routine changing functionality removed - using fixed pattern only
     }
 
@@ -2807,17 +2718,6 @@
             const swPath = 'service-worker.js';
             navigator.serviceWorker.register(swPath).catch(err => {
                 console.log('Service Worker registration failed:', err);
-            });
-        }
-
-        // Back to today button
-        const backBtn = document.getElementById('back-to-today');
-        if (backBtn) {
-            backBtn.addEventListener('click', () => {
-                currentViewDate = new Date();
-                displayTodaysPlan(currentViewDate);
-                switchTab('hoy');
-                document.getElementById('hoy')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         }
     }
