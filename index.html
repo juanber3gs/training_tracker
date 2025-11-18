@@ -16,18 +16,20 @@
     <style>
         /* Custom CSS for Retro-Futuristic Theme */
         :root {
-            --bg-color: #f9f9f9;
-            --card-bg: #ffffff;
-            --primary: #2c3144;
-            --secondary: #6d7b8d;
-            --accent: #5a6e5f;
-            --accent-hover: #6b8e7f;
-            --metabolic: #c5a265;
-            --border: #e0e0e0;
+            --bg-color: #0a0e27;
+            --card-bg: #1a1f3a;
+            --primary: #00d4ff;
+            --secondary: #00b8ff;
+            --accent: #00f0ff;
+            --accent-hover: #1dff7f;
+            --metabolic: #ff006e;
+            --border: #00d4ff;
+            --glow-accent: 0 0 10px rgba(0, 212, 255, 0.8);
+            --glow-metabolic: 0 0 15px rgba(255, 0, 110, 0.6);
         }
 
         body {
-            background-color: var(--bg-color);
+            background: linear-gradient(135deg, #0a0e27 0%, #1a0a2e 50%, #16213e 100%);
             color: var(--primary);
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
@@ -42,24 +44,27 @@
 
         .main-container {
             max-width: 900px;
-            background-color: var(--card-bg);
+            background-color: rgba(26, 31, 58, 0.8);
             padding: 1.5rem;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.4), inset 0 0 20px rgba(0, 240, 255, 0.1);
         }
 
         .progress-bar-container {
             height: 0.75rem;
-            background-color: #374151;
+            background-color: rgba(0, 0, 0, 0.6);
             border-radius: 9999px;
             overflow: hidden;
-            border: 1px solid #4b5563;
+            border: 1px solid var(--accent);
+            box-shadow: inset 0 0 10px rgba(0, 212, 255, 0.3);
         }
 
         .progress-bar {
             height: 100%;
-            background-color: var(--accent);
+            background: linear-gradient(90deg, #00d4ff 0%, #1dff7f 50%, #00f0ff 100%);
             transition: width 0.5s ease-in-out;
             border-radius: 9999px;
-            box-shadow: var(--glow-accent);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.8), 0 0 20px rgba(29, 255, 127, 0.6);
         }
 
         /* Navigation */
@@ -67,12 +72,13 @@
             transition: all 0.2s ease;
             cursor: pointer;
             border-bottom: 2px solid transparent;
+            color: var(--secondary);
         }
 
         .nav-tab.tab-active {
             color: var(--accent);
             border-bottom-color: var(--accent);
-            text-shadow: 0 0 4px rgba(0, 208, 255, 0.5);
+            text-shadow: 0 0 8px rgba(0, 212, 255, 0.8), 0 0 15px rgba(0, 240, 255, 0.5);
         }
 
         /* Content Sections */
@@ -94,9 +100,10 @@
         /* Calendar */
         .calendar-container {
             padding: 1rem;
-            background-color: var(--bg-color);
+            background-color: rgba(0, 0, 0, 0.3);
             border-radius: 8px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
         }
 
         .calendar-headers {
@@ -109,7 +116,9 @@
             text-align: center;
             font-weight: 600;
             font-size: 0.75rem;
-            color: var(--secondary);
+            color: var(--accent);
+            background: rgba(0, 212, 255, 0.1);
+            text-shadow: 0 0 5px rgba(0, 212, 255, 0.6);
         }
 
         .calendar-grid {
@@ -125,23 +134,46 @@
             justify-content: flex-start;
             align-items: flex-start;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
             position: relative;
             padding: 0.5rem;
             font-size: 0.75rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: var(--accent);
+            overflow: hidden;
         }
-        .calendar-day .font-bold { font-size: 0.875rem; }
+        .calendar-day::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(29, 255, 127, 0.05));
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        .calendar-day > * {
+            position: relative;
+            z-index: 1;
+        }
+        .calendar-day .font-bold { font-size: 0.875rem; color: var(--accent); }
         .calendar-day .text-xs { font-size: 0.6rem; }
 
         .calendar-day[data-date]:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
+            opacity: 1;
+            transform: scale(1.08) translateY(-2px);
             z-index: 10;
+            border-color: var(--accent-hover);
+            box-shadow: 0 8px 20px rgba(0, 240, 255, 0.4), inset 0 0 15px rgba(29, 255, 127, 0.15), 0 0 15px rgba(0, 212, 255, 0.6);
+            background: rgba(0, 20, 40, 0.6);
         }
         .calendar-day.today {
-            border-color: var(--metabolic);
-            box-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
-            background-color: #2c3541 !important;
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.8), inset 0 0 15px rgba(0, 212, 255, 0.25), 0 4px 0px rgba(0, 212, 255, 0.5);
+            background-color: rgba(0, 212, 255, 0.12) !important;
+            border-width: 2px;
         }
 
         /* Animations and Visuals */
@@ -152,16 +184,16 @@
 
         .metabolic-text {
             color: var(--metabolic) !important;
-            text-shadow: var(--glow-metabolic);
+            text-shadow: 0 0 15px rgba(255, 0, 110, 0.8), 0 0 30px rgba(255, 0, 110, 0.5);
         }
 
         .metabolic-border {
             border-color: var(--metabolic) !important;
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.3) inset;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.4) inset, 0 0 30px rgba(255, 0, 110, 0.3);
         }
 
         .metabolic-shadow {
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            box-shadow: 0 0 25px rgba(255, 0, 110, 0.6), 0 0 15px rgba(255, 0, 110, 0.3);
         }
 
         /* Exercise Library Cards */
@@ -169,9 +201,9 @@
             margin-bottom: 1.5rem;
             padding: 1.5rem;
             border-radius: 0.75rem;
-            background-color: #1f2937;
-            border: 1px solid #374151;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.8), rgba(26, 31, 58, 0.8));
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 15px rgba(0, 240, 255, 0.1);
         }
 
         .exercise-header {
@@ -197,7 +229,7 @@
             color: var(--accent);
             font-weight: 600;
             margin-bottom: 0.75rem;
-            text-shadow: 0 0 2px rgba(0, 208, 255, 0.3);
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
         }
 
         /* AI Chat Floating Button & Modal */
@@ -315,14 +347,14 @@
         <header class="text-center my-6 mb-8 relative px-4">
             <div class="inline-block relative group cursor-default">
                 <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-2 uppercase transform -skew-x-6 transition-transform duration-300 hover:skew-x-0" 
-                    style="color: var(--primary); -webkit-text-stroke: 1px transparent;">
-                    BERNI <span style="color: var(--metabolic); text-shadow: 0 0 15px rgba(255, 0, 255, 0.5);">AI</span> <span style="color: var(--accent); text-shadow: 0 0 15px rgba(0, 208, 255, 0.5);">TRAINING</span>
+                    style="color: var(--primary); text-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(0, 240, 255, 0.5); -webkit-text-stroke: 1px var(--accent);">
+                    BERNI <span style="color: var(--metabolic); text-shadow: 0 0 20px rgba(255, 0, 110, 0.8), 0 0 40px rgba(255, 0, 110, 0.5);">AI</span> <span style="color: var(--accent); text-shadow: 0 0 20px rgba(0, 212, 255, 0.8);">TRAINING</span>
                 </h1>
                 
                 <div class="flex justify-between items-center border-t border-b border-secondary/30 py-1 mt-1">
-                    <span class="text-[0.6rem] md:text-xs font-mono text-secondary tracking-widest uppercase">HOME WORKOUTS</span>
-                    <div class="h-1.5 w-1.5 rounded-full bg-metabolic animate-pulse mx-2"></div>
-                    <span class="text-[0.6rem] md:text-xs font-mono text-accent tracking-widest uppercase">OPTIMIZE. EXECUTE. EVOLVE.</span>
+                    <span class="text-[0.6rem] md:text-xs font-mono text-secondary tracking-widest uppercase" style="text-shadow: 0 0 10px rgba(0, 184, 255, 0.6);">HOME WORKOUTS</span>
+                    <div class="h-1.5 w-1.5 rounded-full bg-metabolic animate-pulse mx-2" style="box-shadow: 0 0 10px rgba(255, 0, 110, 0.8);"></div>
+                    <span class="text-[0.6rem] md:text-xs font-mono text-accent tracking-widest uppercase" style="text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);">OPTIMIZE. EXECUTE. EVOLVE.</span>
                 </div>
                 
                 <div class="absolute -left-4 top-0 h-full w-1 bg-gradient-to-b from-transparent via-secondary/20 to-transparent"></div>
@@ -330,12 +362,13 @@
             </div>
         </header>
 
-        <div class="mb-6 p-4 bg-card-bg/80 rounded-lg shadow-lg border border-border">
-            <h2 class="text-center text-lg font-bold text-primary mb-3">MÉTRICA GLOBAL DE CONSOLIDACIÓN</h2>
-            <div id="global-progress-text" class="text-center font-bold text-lg mb-2 text-accent" style="text-shadow: var(--glow-accent);">0%</div>
+        <div class="mb-6 p-4 bg-black/40 rounded-lg shadow-lg border border-accent backdrop-blur-sm" style="box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);">
+            <h2 class="text-center text-lg font-bold text-accent mb-3" style="text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);">⚡ MÉTRICA GLOBAL DE CONSOLIDACIÓN ⚡</h2>
+            <div id="global-progress-text" class="text-center font-bold text-lg mb-2 text-accent-hover" style="text-shadow: 0 0 15px rgba(29, 255, 127, 0.8);">0%</div>
             <div class="progress-bar-container">
                 <div id="global-progress-bar" class="progress-bar" style="width: 0%;"></div>
             </div>
+            <div id="global-stats" class="mt-4"></div>
         </div>
 
         <nav class="flex justify-between items-center border-b border-border mb-6">
@@ -608,9 +641,13 @@
             return { text: 'text-secondary', border: 'border-border', shadow: '', bg: 'bg-card-bg/80' };
         }
 
-        function createRoutineHeaderHTML(routineData, routineKey, isTodayView) {
+        function createRoutineHeaderHTML(routineData, routineKey, isTodayView, dateParam) {
             const isHighIntensity = routineKey === 'METABOLIC' || routineKey === 'CORE_CARDIO';
+            const isCurrentDay = isTodayView && dateParam && dateKeyFromDate(dateParam) === dateKeyFromDate(today);
+            const dateLabel = dateParam ? dateParam.toLocaleDateString('es-ES', { weekday: 'long', month: 'short', day: 'numeric' }) : '';
+            
             let progressHTML = '';
+            let saveButtonHTML = '';
             if (isTodayView && routineData.details) {
                 progressHTML = `
                     <div class="mb-6">
@@ -619,11 +656,18 @@
                         <div id="progress-count" class="text-center text-secondary text-sm mt-1">0 de ${routineData.details.exercises.length} módulos</div>
                         <div class="progress-bar-container mt-3" style="height: 1rem;"><div id="progress-bar" class="progress-bar" style="width: 0%;"></div></div>
                     </div>`;
+                
+                // Mostrar botón de guardar cuando no es el día actual
+                if (!isCurrentDay) {
+                    saveButtonHTML = `<div class="mt-6 p-4 bg-accent/15 border-2 border-accent rounded-lg"><button id="save-day-btn" class="w-full px-4 py-3 bg-accent/25 hover:bg-accent/50 border border-accent text-accent rounded-lg font-bold transition text-base md:text-lg" style="text-shadow: 0 0 8px rgba(0, 212, 255, 0.8); box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);">💾 GUARDAR CAMBIOS DEL DÍA</button></div>`;
+                }
             }
             return `<div class="relative bg-card-bg/80 p-4 md:p-6 lg:p-8 rounded-lg shadow-lg border ${isHighIntensity ? 'metabolic-border metabolic-shadow' : 'border-border'}">
+                        ${!isCurrentDay && isTodayView ? `<div class="text-center text-base md:text-lg text-accent-hover mb-4 font-bold px-3 py-2 bg-accent-hover/10 rounded-lg" style="text-shadow: 0 0 10px rgba(29, 255, 127, 0.8);">📅 EDITANDO: ${dateLabel.toUpperCase()}</div>` : ''}
                         ${progressHTML}
                         <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 text-center ${isHighIntensity ? 'metabolic-text' : 'text-primary'}">${routineData.title}</h2>
                         <p class="text-center text-secondary mb-2 text-sm md:text-base">${routineData.description}</p>
+                        ${saveButtonHTML}
                     </div>`;
         }
 
@@ -652,11 +696,36 @@
             const colors = getRoutineColorClass(routineKey);
             
             if (routineKey === 'REST') {
-                return `<div class="p-8 text-center ${colors.bg} border ${colors.border} rounded-xl shadow-lg">
-                            <div class="text-4xl mb-4">🛌</div>
-                            <h2 class="text-3xl font-bold ${colors.text}">${routineData.title}</h2>
-                            <p class="text-secondary mt-2">${routineData.description}</p>
-                        </div>`;
+                if (isTodayView) {
+                    const allProgress = getStoredProgress();
+                    const key = dateKeyFromDate(currentViewDate);
+                    const restCompleted = allProgress[key] && allProgress[key][0];
+                    return `<div class="space-y-6">
+                                <div class="relative bg-card-bg/80 p-4 md:p-6 lg:p-8 rounded-lg shadow-lg border border-border">
+                                    <div class="text-center">
+                                        <h3 class="text-center font-bold text-xl mb-2 text-primary">ESTADO DE LA SECUENCIA DIARIA</h3>
+                                        <div id="progress-text" class="text-center font-bold text-lg text-accent-hover" style="text-shadow: 0 0 15px rgba(29, 255, 127, 0.8);">${restCompleted ? '100% COMPLETADO' : '0% COMPLETADO'}</div>
+                                        <div id="progress-count" class="text-center text-secondary text-sm mt-1">${restCompleted ? '✓' : '✗'} Descanso</div>
+                                        <div class="progress-bar-container mt-3" style="height: 1rem;"><div id="progress-bar" class="progress-bar" style="width: ${restCompleted ? '100' : '0'}%; background: linear-gradient(90deg, ${restCompleted ? '#1dff7f' : '#00d4ff'} 0%, ${restCompleted ? '#1dff7f' : '#00f0ff'} 100%);"></div></div>
+                                    </div>
+                                </div>
+                                <div class="p-8 text-center ${colors.bg} border ${colors.border} rounded-xl shadow-lg">
+                                    <div class="text-4xl mb-4">🛌</div>
+                                    <h2 class="text-3xl font-bold ${colors.text}">${routineData.title}</h2>
+                                    <p class="text-secondary mt-2">${routineData.description}</p>
+                                    <div class="mt-6 flex items-center justify-center gap-3">
+                                        <input type="checkbox" id="rest-completed" class="w-6 h-6 accent-accent cursor-pointer" data-index="0" ${restCompleted ? 'checked' : ''} style="cursor: pointer;">
+                                        <label for="rest-completed" class="text-accent font-bold cursor-pointer text-lg">Día de Descanso Completado</label>
+                                    </div>
+                                </div>
+                            </div>`;
+                } else {
+                    return `<div class="p-8 text-center ${colors.bg} border ${colors.border} rounded-xl shadow-lg">
+                                <div class="text-4xl mb-4">🛌</div>
+                                <h2 class="text-3xl font-bold ${colors.text}">${routineData.title}</h2>
+                                <p class="text-secondary mt-2">${routineData.description}</p>
+                            </div>`;
+                }
             }
             if (!routineData || !routineData.details) return `<div class="p-8 text-center bg-card-bg/80">No hay rutina asignada.</div>`;
 
@@ -671,7 +740,7 @@
                 if (ex.name.includes('Tapete') || ex.name.includes('Plank')) equipmentSet.add('🛏️ Tapete');
             });
             
-            let equipmentHTML = equipmentSet.size > 0 && isTodayView ? `<div class="mt-6 p-4 bg-metabolic/10 border border-metabolic/30 rounded-lg"><h4 class="font-bold text-metabolic mb-3">⚙️ ${t('equipmentNeeded')}</h4><div class="grid grid-cols-2 gap-2">${Array.from(equipmentSet).map(eq => `<div class="text-sm text-secondary">${eq}</div>`).join('')}</div></div>` : '';
+            let equipmentHTML = equipmentSet.size > 0 && isTodayView ? `<div class="mt-8 p-5 bg-gradient-to-br from-black/50 to-black/30 border-2 border-metabolic/60 rounded-lg shadow-lg" style="box-shadow: 0 0 20px rgba(255, 0, 110, 0.3), inset 0 0 15px rgba(255, 0, 110, 0.1);"><h4 class="font-bold text-lg text-metabolic mb-4 flex items-center gap-2" style="text-shadow: 0 0 10px rgba(255, 0, 110, 0.8);">⚙️ ${t('equipmentNeeded')}</h4><div class="grid grid-cols-1 md:grid-cols-2 gap-3">${Array.from(equipmentSet).map(eq => `<div class="text-base font-semibold text-white bg-black/40 p-3 rounded-lg border border-metabolic/40 flex items-center gap-2" style="text-shadow: 0 0 5px rgba(255, 0, 110, 0.6);">${eq}</div>`).join('')}</div></div>` : '';
 
             return `<div class="space-y-6">${headerHTML}<div class="bg-card-bg/80 border border-border rounded-lg shadow-lg">${tableHTML}</div>${equipmentHTML}</div>`;
         }
@@ -685,6 +754,56 @@
 
         // --- Logic ---
         function getStoredProgress() { try { return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {}; } catch { return {}; } }
+
+        function getHistoricalStats() {
+            const allProgress = getStoredProgress();
+            let stats = {
+                totalWorkouts: 0,
+                totalExercisesCompleted: 0,
+                longestStreak: 0,
+                currentStreak: 0,
+                lastWorkoutDate: null,
+                completedDays: []
+            };
+            
+            // Calculate statistics
+            const sortedDates = Object.keys(allProgress).sort();
+            for (const dateStr of sortedDates) {
+                const dayData = allProgress[dateStr];
+                if (Array.isArray(dayData) && dayData.length > 0) {
+                    const completed = dayData.filter(Boolean).length;
+                    if (completed > 0) {
+                        stats.totalWorkouts++;
+                        stats.totalExercisesCompleted += completed;
+                        stats.lastWorkoutDate = dateStr;
+                        stats.completedDays.push(dateStr);
+                    }
+                }
+            }
+            
+            // Calculate streaks
+            let currentS = 0;
+            let maxS = 0;
+            for (let i = 0; i < stats.completedDays.length; i++) {
+                const curr = new Date(stats.completedDays[i]);
+                if (i === 0) {
+                    currentS = 1;
+                } else {
+                    const prev = new Date(stats.completedDays[i - 1]);
+                    const diffTime = Math.abs(curr - prev);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    if (diffDays === 1) {
+                        currentS++;
+                    } else {
+                        maxS = Math.max(maxS, currentS);
+                        currentS = 1;
+                    }
+                }
+            }
+            stats.longestStreak = Math.max(maxS, currentS);
+            
+            return stats;
+        }
 
         function loadProgress() {
             const allProgress = getStoredProgress();
@@ -714,13 +833,22 @@
             const bar = document.getElementById('progress-bar');
             const text = document.getElementById('progress-text');
             const count = document.getElementById('progress-count');
+            const routineKey = monthlySchedule[currentViewDate.getDate()];
+            const isRestDay = routineKey === 'REST';
             if(bar) bar.style.width = `${pct}%`;
             if(text) text.innerText = `${pct}% COMPLETADO`;
-            if(count) count.innerText = `${checked} de ${checkboxes.length} módulos`;
+            if(count) {
+                if (isRestDay) {
+                    count.innerText = `${checked > 0 ? '✓' : '✗'} Descanso`;
+                } else {
+                    count.innerText = `${checked} de ${checkboxes.length} módulos`;
+                }
+            }
         }
 
         function updateGlobalProgress() {
             const allProgress = getStoredProgress();
+            const stats = getHistoricalStats();
             let total = 0, completed = 0;
             for (let d = 1; d <= daysInMonth; d++) {
                 const r = routines[monthlySchedule[d]];
@@ -733,6 +861,27 @@
             const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
             document.getElementById('global-progress-bar').style.width = `${pct}%`;
             document.getElementById('global-progress-text').textContent = `${pct}% CONSOLIDADO`;
+            
+            // Update global stats if element exists
+            const globalStatsEl = document.getElementById('global-stats');
+            if (globalStatsEl) {
+                globalStatsEl.innerHTML = `
+                    <div class="grid grid-cols-3 gap-2 text-center text-sm">
+                        <div class="p-2 bg-black/30 rounded border border-accent/30">
+                            <div class="text-secondary text-xs">RACHA</div>
+                            <div class="text-accent font-bold">${stats.longestStreak}d</div>
+                        </div>
+                        <div class="p-2 bg-black/30 rounded border border-accent/30">
+                            <div class="text-secondary text-xs">WORKOUTS</div>
+                            <div class="text-accent font-bold">${stats.totalWorkouts}</div>
+                        </div>
+                        <div class="p-2 bg-black/30 rounded border border-accent/30">
+                            <div class="text-secondary text-xs">EJERCICIOS</div>
+                            <div class="text-accent font-bold">${stats.totalExercisesCompleted}</div>
+                        </div>
+                    </div>
+                `;
+            }
         }
 
         function generateCalendar() {
@@ -751,17 +900,42 @@
                 const isToday = d === today.getDate();
                 const colors = getRoutineColorClass(key);
                 const dayP = allProgress[`${year}-${month + 1}-${d}`] || [];
+                
+                // Get emoji and short description
+                let emoji = '';
+                let shortDesc = '';
+                if (key === 'REST') {
+                    emoji = '🛌';
+                    shortDesc = 'DESCANSO';
+                } else {
+                    const titleParts = act.title.split(':');
+                    emoji = titleParts[0].trim().split(' ')[0];
+                    shortDesc = titleParts[1] ? titleParts[1].trim().split(' ').slice(0, 2).join(' ') : 'ENTRENAMIENTO';
+                }
+                
+                // Calculate progress percentage
                 let badge = '';
-
+                let progressBar = '';
                 if (act.details) {
                     const pct = act.details.exercises.length > 0 ? Math.round((dayP.filter(Boolean).length / act.details.exercises.length) * 100) : 0;
-                    if(pct > 0) badge = `<span class="inline-block mt-1 text-[10px] px-2 py-0.5 rounded-full ${pct===100?'bg-emerald-500/20 text-emerald-300':'bg-yellow-500/20 text-yellow-300'}">${pct}%</span>`;
+                    if(pct > 0) {
+                        const barColor = pct === 100 ? 'bg-emerald-500' : 'bg-yellow-500';
+                        badge = `<span class="inline-block mt-1 text-[9px] px-1.5 py-0.5 rounded-full ${pct===100?'bg-emerald-500/20 text-emerald-300':'bg-yellow-500/20 text-yellow-300'} font-bold">${pct}%</span>`;
+                        progressBar = `<div class="w-full h-0.5 bg-black/40 rounded-full mt-1 overflow-hidden"><div class="h-full ${barColor}" style="width: ${pct}%"></div></div>`;
+                    } else {
+                        progressBar = `<div class="w-full h-0.5 bg-black/40 rounded-full mt-1"></div>`;
+                    }
                 }
 
-                let label = key === 'REST' ? '🛌' : (act.title.split(' ')[0] + ' ' + act.title.split(':')[1].split(' ')[1]);
-                html += `<div class="calendar-day ${colors.bg} rounded-md border ${colors.border} flex flex-col ${isToday ? 'today' : ''}" data-date="${year}-${month + 1}-${d}">
-                            <div class="font-bold text-sm text-primary">${d}</div>
-                            <div class="text-xs mt-1 flex-grow"><p class="font-semibold ${colors.text} leading-tight">${label}</p>${badge}</div>
+                html += `<div class="calendar-day ${colors.bg} rounded-md border ${colors.border} flex flex-col cursor-pointer hover:shadow-lg transition-all" data-date="${year}-${month + 1}-${d}" style="min-height: 100px;">
+                            <div class="flex items-center justify-between mb-1">
+                                <div class="font-bold text-sm text-accent">${d}</div>
+                                <div class="text-lg">${emoji}</div>
+                            </div>
+                            <div class="text-[10px] font-semibold ${colors.text} leading-tight line-clamp-2">${shortDesc}</div>
+                            ${act.details ? `<div class="text-[9px] text-secondary/70 mt-0.5">${act.details.exercises.length} módulos</div>` : ''}
+                            ${progressBar}
+                            ${badge}
                          </div>`;
             }
             calendarBody.innerHTML = html;
@@ -863,7 +1037,13 @@
             document.getElementById('modal-close').addEventListener('click', () => { modal.classList.add('hidden'); modal.classList.remove('flex'); });
             
             document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.addEventListener('click', () => {
+                tab.addEventListener('click', async () => {
+                    // Si es el botón "Hoy", siempre regresa a la fecha actual
+                    if (tab.dataset.tab === 'hoy') {
+                        currentViewDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                        await displayTodaysPlan(currentViewDate);
+                    }
+                    
                     document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
                     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('tab-active'));
                     document.getElementById(tab.dataset.tab).classList.add('active');
@@ -885,6 +1065,22 @@
                     btn.textContent = '⏹';
                     const int = setInterval(() => { val--; display.innerText = val+'s'; if(val<=0){ clearInterval(int); btn.textContent='⏱️'; display.innerText='LISTO'; } }, 1000);
                 }
+                // Botón de guardar día del calendario
+                if(e.target.closest('#save-day-btn')) {
+                    saveProgress();
+                    const btn = e.target.closest('#save-day-btn');
+                    const originalText = btn.textContent;
+                    btn.textContent = '✓ GUARDADO';
+                    btn.style.backgroundColor = 'rgba(29, 255, 127, 0.3)';
+                    btn.style.borderColor = 'rgb(29, 255, 127)';
+                    btn.style.color = 'rgb(29, 255, 127)';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.backgroundColor = '';
+                        btn.style.borderColor = '';
+                        btn.style.color = '';
+                    }, 2000);
+                }
             });
 
             document.getElementById('hoy').addEventListener('change', (e) => { if(e.target.matches('input')) saveProgress(); });
@@ -895,7 +1091,11 @@
                     const [y,m,d] = cell.dataset.date.split('-').map(Number);
                     currentViewDate = new Date(y, m-1, d);
                     displayTodaysPlan(currentViewDate);
-                    document.querySelector('[data-tab="hoy"]').click();
+                    // No hacemos click en 'hoy', el calendario es independiente
+                    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('tab-active'));
+                    document.getElementById('hoy').classList.add('active');
+                    document.querySelector('[data-tab="hoy"]').classList.add('tab-active');
                 }
             });
 
@@ -908,7 +1108,17 @@
             const libContainer = document.getElementById('exercise-library');
             const allEx = new Set();
             Object.values(routines).forEach(r=>r.details?.exercises.forEach(e=>allEx.add(e.name)));
-            libContainer.innerHTML = `<div class="grid gap-4 md:grid-cols-2">${Array.from(allEx).map(name=>`<div class="p-4 bg-black/40 border border-accent/40 rounded-lg cursor-pointer hover:border-accent hover:bg-accent/10 hover:shadow-lg shadow-md transition duration-300" onclick="openExerciseInfo('${name}')"><h3 class="font-bold text-accent text-lg">${name}</h3></div>`).join('')}</div>`;
+            // Ordenar alfabéticamente
+            const sortedEx = Array.from(allEx).sort((a, b) => a.localeCompare(b, 'es'));
+            libContainer.innerHTML = `<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">${sortedEx.map((name, idx) => {
+                const firstLetter = name.charAt(0).toUpperCase();
+                const showLetter = idx === 0 || sortedEx[idx - 1].charAt(0).toUpperCase() !== firstLetter;
+                return `${showLetter ? `<div class="col-span-full"><h3 class="text-2xl font-bold text-accent mt-4 mb-2" style="text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);">📌 ${firstLetter}</h3></div>` : ''}
+                <div class="p-4 bg-gradient-to-br from-black/50 to-black/30 border border-accent/50 rounded-lg cursor-pointer hover:border-accent/80 hover:bg-accent/15 hover:shadow-lg shadow-md transition duration-300 transform hover:scale-105" onclick="openExerciseInfo('${name}')" style="box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);">
+                    <h3 class="font-bold text-accent text-base leading-tight">${name}</h3>
+                    <div class="text-xs text-secondary/70 mt-1 opacity-0 group-hover:opacity-100 transition">Click para detalles →</div>
+                </div>`;
+            }).join('')}</div>`;
 
             initGeminiChat();
             document.querySelector('[data-tab="hoy"]').classList.add('tab-active');
