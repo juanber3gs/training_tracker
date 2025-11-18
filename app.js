@@ -1952,7 +1952,7 @@
                 <td class="p-3 font-medium text-primary">
                     <div class="font-semibold flex items-center gap-2">
                         <span>${getExerciseName(ex.name)}</span>
-                        ${isTodayView ? `<button class="exercise-open-library text-xs px-2 py-0.5 border border-border rounded text-secondary hover:text-accent transition" data-exercise="${ex.name}">📚 Ver en biblioteca</button>` : ''}
+                        ${isTodayView ? `<button class="exercise-open-library text-[10px] px-1.5 py-0.5 rounded text-secondary/60 hover:text-accent/80 hover:bg-accent/10 transition opacity-70 hover:opacity-100" data-exercise="${ex.name}" title="Ver en biblioteca">📚</button>` : ''}
                     </div>
                     <div class="text-xs text-secondary">${getExerciseDescription(ex.name)}</div>
                 </td>
@@ -1961,7 +1961,7 @@
                 <td class="p-3 text-center text-secondary">
                     <div class="flex justify-center items-center gap-2">
                         <span class="rest-text">${ex.rest}</span>
-                        ${isTodayView ? `<button class="rest-timer-btn text-xs px-2 py-0.5 border border-accent/40 rounded text-accent hover:bg-accent hover:text-bg-color transition" data-rest="${ex.rest}">⏱️</button>` : ''}
+                        ${isTodayView ? `<button class="rest-timer-btn text-[10px] px-1.5 py-0.5 rounded text-accent/60 hover:text-accent hover:bg-accent/10 transition opacity-70 hover:opacity-100" data-rest="${ex.rest}" title="Iniciar temporizador">⏱️</button>` : ''}
                         ${isTodayView ? `<span class="rest-countdown text-secondary text-xs"></span>` : ''}
                     </div>
                 </td>

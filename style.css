@@ -203,17 +203,19 @@
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 4px;
+            width: 100%;
         }
         .calendar-container {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
             width: 100%;
         }
         .calendar-headers {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 4px;
+            width: 100%;
             margin-bottom: 8px;
         }
         .calendar-day { 
@@ -239,12 +241,15 @@
             z-index: 10;
         }
         .calendar-day-header {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             text-align: center;
-            padding: 4px 0;
-            color: var(--text-secondary);
+            padding: 10px 4px;
+            color: var(--text-accent);
             font-family: 'Aldrich', sans-serif;
-        }
+            font-weight: bold;
+            background-color: rgba(0, 208, 255, 0.1);
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
         .today {
             border-width: 2px;
             border-color: var(--accent);
