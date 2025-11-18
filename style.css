@@ -488,4 +488,18 @@
                 font-size: clamp(1.5rem, 3.5vw, 2rem);
             }
         }
+        
+        /* === EQUAL WIDTH SECTIONS IN HOY VIEW === */
+        #hoy > div > div {
+            width: 100%;
+        }
+        
+        #hoy .overflow-x-auto {
+            width: 100%;
+        }
+        
+        #hoy .overflow-x-auto table {
+            width: 100%;
+        }
+        
         /* (Removed) Language toggle styles */
