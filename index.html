@@ -46,24 +46,10 @@
         </nav>
 
         <main id="main-content">
+            <!-- HOY SECTION -->
             <section id="hoy" class="content-section"></section>
-            <!-- Progreso mensual (debajo de HOY) -->
-            <div class="mb-8 p-4 bg-card-bg/80 rounded-lg shadow-lg border border-border">
-                <h2 class="text-center text-xl font-bold text-primary mb-3">Progreso Mensual Global</h2>
-                <div id="global-progress-text" class="text-center font-bold text-lg mb-2 text-accent" style="text-shadow: var(--glow-accent);">0%</div>
-                <div class="progress-bar-container">
-                    <div id="global-progress-bar" class="progress-bar" style="width: 0%;"></div>
-                </div>
-            </div>
-            <!-- Secondary navigation: other sections below 'Hoy' -->
-            <nav class="flex justify-between items-center border-b border-border my-8">
-                <div class="flex flex-wrap justify-center -mb-px overflow-x-auto flex-1">
-                    <button data-tab="stats" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📊 <span data-key="stats">Estadísticas</span></button>
-                    <button data-tab="calendario" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📅 <span data-key="calendar">Calendario</span></button>
-                    <button data-tab="rutinas" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">🏋️‍♂️ <span data-key="routines">Rutinas</span></button>
-                    <button data-tab="biblioteca" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📚 <span data-key="library">Biblioteca</span></button>
-                </div>
-            </nav>
+            
+            <!-- STATS SECTION -->
             <section id="stats" class="content-section">
                 <div class="bg-card-bg/80 p-4 rounded-lg shadow-lg border border-border">
                     <h2 class="text-2xl font-bold mb-6 text-center">📊 <span data-key="weeklyStats">Estadísticas Semanales</span></h2>
@@ -95,8 +81,10 @@
                     </div>
                 </div>
             </section>
+            
+            <!-- CALENDAR SECTION -->
             <section id="calendario" class="content-section">
-                 <div class="bg-card-bg/80 p-4 rounded-lg shadow-lg border border-border">
+                <div class="bg-card-bg/80 p-4 rounded-lg shadow-lg border border-border">
                     <div class="text-center mb-6">
                         <h2 id="calendar-title" class="text-2xl font-bold"></h2>
                         <p class="text-secondary mt-1">Vista completa de tu mes de entrenamiento.</p>
@@ -113,6 +101,8 @@
                     <div id="calendar-body" class="calendar-grid"></div>
                 </div>
             </section>
+            
+            <!-- ROUTINES SECTION -->
             <section id="rutinas" class="content-section">
                 <div class="mb-6 text-center">
                     <p class="text-secondary">Here you can check the details of each routine. Select one to see the exercises.</p>
@@ -127,6 +117,8 @@
                 </div>
                 <div id="routine-details-container"></div>
             </section>
+            
+            <!-- LIBRARY SECTION -->
             <section id="biblioteca" class="content-section">
                 <div class="mb-8 text-center">
                     <h2 class="text-3xl font-bold mb-2">📚 <span data-key="library">Library</span></h2>
