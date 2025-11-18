@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug</title>
+    <style>
+        body { background: #10001C; color: #FFF; font-family: Arial; padding: 20px; }
+        h1 { color: #00D0FF; }
+        .error { color: #FF0000; }
+        .success { color: #00FF00; }
+    </style>
+</head>
+<body>
+    <h1>Debug Page</h1>
+    <p id="status">Loading...</p>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Content Loaded');
+            document.getElementById('status').innerHTML = '<span class="success">✓ DOM loaded successfully</span>';
+            
+            // Test if app.js is loading
+            fetch('app.js')
+                .then(r => r.text())
+                .then(text => {
+                    console.log('app.js loaded, size:', text.length);
+                    const status = document.getElementById('status');
+                    status.innerHTML += '<br><span class="success">✓ app.js found (' + text.length + ' bytes)</span>';
+                })
+                .catch(e => {
+                    console.error('Error loading app.js:', e);
+                    document.getElementById('status').innerHTML += '<br><span class="error">✗ Error loading app.js: ' + e.message + '</span>';
+                });
+        });
+        
+        window.addEventListener('error', (event) => {
+            console.error('Uncaught error:', event.error);
+            const status = document.getElementById('status');
+            status.innerHTML += '<br><span class="error">✗ JavaScript Error: ' + event.error.message + '</span>';
+        });
+    </script>
+</body>
+</html>

@@ -1493,10 +1493,12 @@
                             <ul class="space-y-2">
                                 ${formSteps.map((step, i) => `<li class="text-secondary text-xs md:text-sm leading-relaxed">${step}</li>`).join('')}
                             </ul>
-                        </div>                        <div class="exercise-section">
-                            <h4 class="section-title">${tipsTitle}</h4>
+                        </div>
+                        
+                        <div class="exercise-section">
+                            <h4 class="section-title text-base md:text-lg">${tipsTitle}</h4>
                             <div class="space-y-2">
-                                ${tipsList.map(tip => `<p class="text-secondary text-sm leading-relaxed">${tip}</p>`).join('')}
+                                ${tipsList.map(tip => `<p class="text-secondary text-xs md:text-sm leading-relaxed">${tip}</p>`).join('')}
                             </div>
                             <div class="mt-4 pt-4 border-t border-border">
                                 <p class="text-xs text-secondary"><strong>${musclesLabel}</strong> ${data.muscleGroups.join(', ')}</p>
@@ -1854,13 +1856,13 @@
         return exerciseDescriptions[englishName]?.en || '';
     }
     
-    // --- DOM Elements ---
-    const tabs = document.querySelectorAll('.nav-tab');
-    const contentSections = document.querySelectorAll('.content-section');
-    const routineDetailsContainer = document.getElementById('routine-details-container');
-    const hoyContainer = document.getElementById('hoy');
-    const calendarBody = document.getElementById('calendar-body');
-    const mainContent = document.getElementById('main-content');
+    // --- DOM Elements (will be initialized after DOM is ready) ---
+    let tabs;
+    let contentSections;
+    let routineDetailsContainer;
+    let hoyContainer;
+    let calendarBody;
+    let mainContent;
 
     function openExerciseInfo(exerciseEnglishName) {
         const data = exerciseLibrary[exerciseEnglishName];
@@ -2160,7 +2162,10 @@
                 </div>
             `;
         }
-        hoyContainer.innerHTML = content;
+        const hoyEl = document.getElementById('hoy');
+        if (hoyEl) {
+            hoyEl.innerHTML = content;
+        }
         // After rendering, load stored progress to restore checkbox states and update UI
         await loadProgress();
     }
@@ -2438,9 +2443,6 @@
 
     function generateCalendar() {
         const monthName = today.toLocaleDateString('es-ES', { month: 'long' });
-        if (calendarTitle) {
-            calendarTitle.textContent = `Plan de ${monthName} ${year}`;
-        }
         const firstDayOfMonth = new Date(year, month, 1).getDay();
         const offset = (firstDayOfMonth === 0) ? 6 : firstDayOfMonth - 1;
         const allProgress = getStoredProgress();
@@ -2511,13 +2513,17 @@
     }
 
     function switchTab(tabName) {
-        contentSections.forEach(section => section.classList.remove('active'));
+        // Use querySelectorAll directly instead of relying on cached variables
+        const sections = document.querySelectorAll('.content-section');
+        const allTabs = document.querySelectorAll('.nav-tab');
+        
+        sections.forEach(section => section.classList.remove('active'));
         const activeSection = document.getElementById(tabName);
         if (activeSection) {
             activeSection.classList.add('active');
         }
 
-        tabs.forEach(tab => {
+        allTabs.forEach(tab => {
             tab.classList.remove('tab-active');
             if (tab.dataset.tab === tabName) {
                 tab.classList.add('tab-active');
@@ -2598,7 +2604,9 @@
 
     // --- Event Listeners ---
     function addEventListeners() {
-        tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.dataset.tab)));
+        // Get tab elements directly
+        const allTabs = document.querySelectorAll('.nav-tab');
+        allTabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.dataset.tab)));
 
         // Language toggle removed (Spanish-only mode)
 
@@ -2606,9 +2614,15 @@
             const button = e.target.closest('.routine-selector');
             if (button) {
                 const routineKey = button.dataset.routine;
-                routineDetailsContainer.innerHTML = createRoutineHTML(routineKey, false, null);
+                const container = document.getElementById('routine-details-container');
+                if (container) {
+                    container.innerHTML = createRoutineHTML(routineKey, false, null);
+                }
                 if (window.innerWidth < 640) {
-                    routineDetailsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const container = document.getElementById('routine-details-container');
+                    if (container) {
+                        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
                 }
             }
         });
@@ -2636,68 +2650,72 @@
             });
         });
         
-        hoyContainer.addEventListener('change', (e) => {
-            if (e.target.matches('input[type="checkbox"]')) {
-                const today = new Date();
-                const isToday = isSameDay(currentViewDate, today);
-                // Auto-save only for today, manual save for other dates
-                if (isToday) {
-                    saveProgress();
-                    generateCalendar(); // Update calendar colors in real-time
+        const hoy = document.getElementById('hoy');
+        if (hoy) {
+            hoy.addEventListener('change', (e) => {
+                if (e.target.matches('input[type="checkbox"]')) {
+                    const today = new Date();
+                    const isToday = isSameDay(currentViewDate, today);
+                    // Auto-save only for today, manual save for other dates
+                    if (isToday) {
+                        saveProgress();
+                        generateCalendar(); // Update calendar colors in real-time
+                    }
+                    updateProgressUI();
+                    updateGlobalProgress(); // Update global progress on change
+                    updateStatsDashboard(); // Update stats on change
+                    
+                    // Check if day is completed and celebrate!
+                    checkDayCompletion();
                 }
-                updateProgressUI();
-                updateGlobalProgress(); // Update global progress on change
-                updateStatsDashboard(); // Update stats on change
-                
-                // Check if day is completed and celebrate!
-                checkDayCompletion();
-            }
-        });
-        
-        // Save Progress Button Click
-        hoyContainer.addEventListener('click', (e) => {
-            if (e.target.closest('#save-progress-btn')) {
-                saveProgress(true); // true = show confirmation
-                updateGlobalProgress();
-                updateStatsDashboard();
-                generateCalendar(); // Update calendar colors
-                checkDayCompletion(); // Check for celebration
-                return;
-            }
-        });
-
-        // Exercise info and library navigation from 'Hoy' (existing listener continues)
-        hoyContainer.addEventListener('click', (e) => {
-            // Skip if clicking save button (already handled above)
-            if (e.target.closest('#save-progress-btn')) return;
+            });
             
-            const infoBtn = e.target.closest('.exercise-info-btn');
-            if (infoBtn) {
-                const name = infoBtn.dataset.exercise;
-                openExerciseInfo(name);
-                return;
-            }
-            const openLibBtn = e.target.closest('.exercise-open-library');
-            if (openLibBtn) {
-                const name = openLibBtn.dataset.exercise;
-                const slug = getExerciseSlug(name);
-                switchTab('biblioteca');
-                // Ensure library exists and scroll
-                const el = document.getElementById(`exercise-${slug}`);
-                if (el) {
-                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Save Progress Button Click
+            hoy.addEventListener('click', (e) => {
+                if (e.target.closest('#save-progress-btn')) {
+                    saveProgress(true); // true = show confirmation
+                    updateGlobalProgress();
+                    updateStatsDashboard();
+                    generateCalendar(); // Update calendar colors
+                    checkDayCompletion(); // Check for celebration
+                    return;
                 }
-                return;
-            }
-            const restBtn = e.target.closest('.rest-timer-btn');
-            if (restBtn) {
-                startOrStopRestTimer(restBtn);
-            }
-        });
+            });
+
+            // Exercise info and library navigation from 'Hoy'
+            hoy.addEventListener('click', (e) => {
+                // Skip if clicking save button (already handled above)
+                if (e.target.closest('#save-progress-btn')) return;
+                
+                const infoBtn = e.target.closest('.exercise-info-btn');
+                if (infoBtn) {
+                    const name = infoBtn.dataset.exercise;
+                    openExerciseInfo(name);
+                    return;
+                }
+                const openLibBtn = e.target.closest('.exercise-open-library');
+                if (openLibBtn) {
+                    const name = openLibBtn.dataset.exercise;
+                    const slug = getExerciseSlug(name);
+                    switchTab('biblioteca');
+                    // Ensure library exists and scroll
+                    const el = document.getElementById(`exercise-${slug}`);
+                    if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                    return;
+                }
+                const restBtn = e.target.closest('.rest-timer-btn');
+                if (restBtn) {
+                    startOrStopRestTimer(restBtn);
+                }
+            });
+        }
 
         // Calendar day click → preview that date in "Hoy"
-        if (calendarBody) {
-            calendarBody.addEventListener('click', (e) => {
+        const calendarBodyEl = document.getElementById('calendar-body');
+        if (calendarBodyEl) {
+            calendarBodyEl.addEventListener('click', (e) => {
                 const cell = e.target.closest('.calendar-day');
                 if (!cell || !cell.dataset.date) return;
                 const [y, m, d] = cell.dataset.date.split('-').map(Number);
@@ -2723,7 +2741,12 @@
         
         // Set initial UI state
         switchTab('hoy');
-        routineDetailsContainer.innerHTML = createRoutineHTML('TORSO_PUSH', false);
+        
+        const container = document.getElementById('routine-details-container');
+        if (container) {
+            container.innerHTML = createRoutineHTML('TORSO_PUSH', false);
+        }
+        
         generateExerciseLibrary();
         
         // Register Service Worker
