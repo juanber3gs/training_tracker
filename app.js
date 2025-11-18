@@ -2422,7 +2422,9 @@
 
     function generateCalendar() {
         const monthName = today.toLocaleDateString('es-ES', { month: 'long' });
-        calendarTitle.textContent = `Plan de ${monthName} ${year}`;
+        if (calendarTitle) {
+            calendarTitle.textContent = `Plan de ${monthName} ${year}`;
+        }
         const firstDayOfMonth = new Date(year, month, 1).getDay();
         const offset = (firstDayOfMonth === 0) ? 6 : firstDayOfMonth - 1;
         const allProgress = getStoredProgress();
@@ -2829,7 +2831,6 @@
         await displayTodaysPlan();
         generateCalendar();
         updateGlobalProgress();
-        updateStatsDashboard(); // Initialize stats
         
         // Set initial UI state
         switchTab('hoy');
