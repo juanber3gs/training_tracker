@@ -231,13 +231,13 @@
             width: 90%;
             max-width: 380px;
             height: 500px;
-            background-color: rgba(31, 41, 55, 0.95);
+            background-color: rgba(15, 15, 20, 0.98);
             backdrop-filter: blur(10px);
             border: 1px solid var(--accent);
             border-radius: 1rem;
             z-index: 40;
             flex-direction: column;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(0, 208, 255, 0.3);
             overflow: hidden;
             transition: all 0.3s ease;
         }
@@ -416,10 +416,10 @@
     </div>
 
     <div id="exercise-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-        <div class="bg-card-bg p-6 rounded-xl shadow-2xl border border-border w-full max-w-lg relative">
+        <div class="bg-black/70 p-6 rounded-xl shadow-2xl border border-accent/50 w-full max-w-lg relative">
             <button id="modal-close" class="absolute top-3 right-3 text-2xl text-secondary hover:text-accent transition">❌</button>
-            <h2 id="guide-title" class="text-3xl font-bold text-accent mb-4 border-b border-border pb-2">Detalles del Ejercicio</h2>
-            <div id="guide-content" class="space-y-4 text-primary">
+            <h2 id="guide-title" class="text-3xl font-bold text-accent mb-4 border-b border-accent/30 pb-2">Detalles del Ejercicio</h2>
+            <div id="guide-content" class="space-y-4 text-white">
                 <p>Cargando detalles...</p>
             </div>
         </div>
@@ -908,7 +908,7 @@
             const libContainer = document.getElementById('exercise-library');
             const allEx = new Set();
             Object.values(routines).forEach(r=>r.details?.exercises.forEach(e=>allEx.add(e.name)));
-            libContainer.innerHTML = `<div class="grid gap-4 md:grid-cols-2">${Array.from(allEx).map(name=>`<div class="p-4 bg-card-bg border border-border rounded-lg cursor-pointer hover:border-accent transition" onclick="openExerciseInfo('${name}')"><h3 class="font-bold text-primary">${name}</h3></div>`).join('')}</div>`;
+            libContainer.innerHTML = `<div class="grid gap-4 md:grid-cols-2">${Array.from(allEx).map(name=>`<div class="p-4 bg-black/40 border border-accent/40 rounded-lg cursor-pointer hover:border-accent hover:bg-accent/10 hover:shadow-lg shadow-md transition duration-300" onclick="openExerciseInfo('${name}')"><h3 class="font-bold text-accent text-lg">${name}</h3></div>`).join('')}</div>`;
 
             initGeminiChat();
             document.querySelector('[data-tab="hoy"]').classList.add('tab-active');
