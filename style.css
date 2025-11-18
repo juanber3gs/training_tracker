@@ -204,6 +204,18 @@
             grid-template-columns: repeat(7, 1fr);
             gap: 4px;
         }
+        .calendar-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+        }
+        .calendar-headers {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: 8px;
+        }
         .calendar-day { 
             min-height: 100px;
             transition: all 0.2s ease-in-out;
@@ -701,6 +713,8 @@
             padding: 0;
             margin: 0;
             overflow-y: visible;
+            overflow: visible;
+            all: revert;
         }
         
         #hoy > div {
@@ -718,6 +732,12 @@
             flex-shrink: 0;
             margin: 0;
             padding: 0;
+        }
+        
+        #hoy .space-y-6 {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
         
         #hoy .overflow-x-auto {
@@ -743,13 +763,21 @@
             overflow-wrap: break-word;
         }
         
-        /* Isolate each content section */
+        /* Isolate each content section - prevent hoy styles from leaking */
         #calendario,
         #rutinas,
         #biblioteca {
             margin: 0;
             padding: 0;
             gap: 0;
+            all: revert;
+        }
+        
+        #calendario > div,
+        #rutinas > div,
+        #biblioteca > div {
+            margin: 0;
+            padding: 0;
         }
         
         /* (Removed) Language toggle styles */

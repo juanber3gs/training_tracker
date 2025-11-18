@@ -2036,8 +2036,7 @@
         
         if (activity.details) {
             // Workout day
-            content = `
-                <div class="space-y-6">
+            content = `<div class="space-y-6">
                     <!-- Header Card -->
                     <div class="relative overflow-hidden bg-gradient-to-r from-card-bg/80 to-card-bg/40 p-8 rounded-2xl shadow-2xl border border-accent/30 backdrop-blur-sm">
                         <div class="absolute -right-20 -top-10 w-60 h-60 bg-accent/10 rounded-full blur-3xl"></div>
@@ -2064,8 +2063,7 @@
                         </button>
                     </div>
                     ` : ''}
-                </div>
-            `;
+                </div>`;
         } else {
             // Rest/Recovery day
             const isRest = activityKey === 'REST';
