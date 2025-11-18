@@ -19,15 +19,14 @@
     <div class="container mx-auto max-w-5xl p-4 sm:p-6 main-container rounded-lg shadow-2xl border border-border">
         
         <header class="text-center my-8 mb-12 relative">
-            <button id="lang-toggle" class="absolute top-0 right-0 px-3 py-2 rounded-lg bg-card-bg/80 border border-border text-secondary hover:text-accent transition-colors font-semibold text-sm whitespace-nowrap">🌐 EN</button>
-            <!-- Hero Logo Section --><div class="relative mb-8">
+            <!-- Hero Logo Section -->
+            <div class="relative mb-8">
                 <div class="absolute inset-0 rounded-full blur-3xl opacity-50" style="background: linear-gradient(135deg, #00D0FF, #FF00FF);"></div>
                 <a href="#" id="logo-link" class="relative inline-block transition-transform hover:scale-105 cursor-pointer" onclick="window.location.reload(); return false;">
                     <img id="logo-img" src="imagenes/logo.png" alt="Ber Online Fitness Logo" class="w-40 h-40 rounded-full shadow-2xl border-4 border-accent" style="box-shadow: 0 0 40px rgba(0, 208, 255, 0.8), 0 0 80px rgba(255, 0, 255, 0.4);">
                 </a>
             </div>
-            <div class="flex justify-center items-center gap-4 mb-4">
-            </div>
+            <!-- English Title + Tagline (single instance below) -->
             <h1 class="text-6xl sm:text-7xl font-bold tracking-wider">Bernie</h1>
             <p class="text-lg text-secondary mt-4 font-['Aldrich'] uppercase tracking-widest">Online Fitness Tracker</p>
             <p class="text-sm text-secondary/70 mt-2 font-light tracking-wider">Your 4:20 Retro-Futuristic AI Training Workouts</p>
@@ -35,52 +34,52 @@
             <div class="mt-4 w-24 h-1 bg-gradient-to-r from-accent via-metabolic to-accent mx-auto rounded-full"></div>
         </header>
 
-        <div class="mb-8 p-4 bg-card-bg/80 rounded-lg shadow-lg border border-border">
-            <h2 class="text-center text-xl font-bold text-primary mb-3">Global Monthly Progress</h2>
-            <div id="global-progress-text" class="text-center font-bold text-lg mb-2 text-accent" style="text-shadow: var(--glow-accent);">0%</div>
-            <div class="progress-bar-container">
-                <div id="global-progress-bar" class="progress-bar" style="width: 0%;"></div>
-            </div>
-        </div>
-
-        <nav class="flex justify-between items-center border-b border-border mb-8">
-            <div class="flex flex-wrap justify-center -mb-px overflow-x-auto flex-1">
-                <button data-tab="hoy" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">🗓️ <span data-key="today">Today</span></button>
-                <button data-tab="stats" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📊 <span data-key="stats">Stats</span></button>
-                <button data-tab="calendario" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📅 <span data-key="calendar">Calendar</span></button>
-                <button data-tab="rutinas" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">🏋️‍♂️ <span data-key="routines">Routines</span></button>
-                <button data-tab="biblioteca" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📚 <span data-key="library">Library</span></button>
-        </nav>
-
         <main id="main-content">
             <section id="hoy" class="content-section"></section>
+            <!-- Progreso mensual (debajo de HOY) -->
+            <div class="mb-8 p-4 bg-card-bg/80 rounded-lg shadow-lg border border-border">
+                <h2 class="text-center text-xl font-bold text-primary mb-3">Progreso Mensual Global</h2>
+                <div id="global-progress-text" class="text-center font-bold text-lg mb-2 text-accent" style="text-shadow: var(--glow-accent);">0%</div>
+                <div class="progress-bar-container">
+                    <div id="global-progress-bar" class="progress-bar" style="width: 0%;"></div>
+                </div>
+            </div>
+            <!-- Secondary navigation: other sections below 'Hoy' -->
+            <nav class="flex justify-between items-center border-b border-border my-8">
+                <div class="flex flex-wrap justify-center -mb-px overflow-x-auto flex-1">
+                    <button data-tab="stats" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📊 <span data-key="stats">Estadísticas</span></button>
+                    <button data-tab="calendario" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📅 <span data-key="calendar">Calendario</span></button>
+                    <button data-tab="rutinas" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">🏋️‍♂️ <span data-key="routines">Rutinas</span></button>
+                    <button data-tab="biblioteca" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📚 <span data-key="library">Biblioteca</span></button>
+                </div>
+            </nav>
             <section id="stats" class="content-section">
                 <div class="bg-card-bg/80 p-4 sm:p-6 rounded-lg shadow-lg border border-border">
-                    <h2 class="text-2xl font-bold mb-6 text-center">📊 <span data-key="weeklyStats">Weekly Statistics</span></h2>
+                    <h2 class="text-2xl font-bold mb-6 text-center">📊 <span data-key="weeklyStats">Estadísticas Semanales</span></h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                         <div class="stats-card p-4 rounded-lg">
-                            <p class="text-secondary text-sm mb-2">Weekly Completion</p>
+                            <p class="text-secondary text-sm mb-2"><span data-key="weeklyCompletion">Completitud Semanal</span></p>
                             <div class="stat-number" id="weekly-completion">0%</div>
-                            <p class="text-xs text-secondary mt-2">Last 7 days</p>
+                            <p class="text-xs text-secondary mt-2"><span data-key="lastSevenDays">Últimos 7 días</span></p>
                         </div>
                         <div class="stats-card p-4 rounded-lg">
-                            <p class="text-secondary text-sm mb-2">Workouts Done</p>
+                            <p class="text-secondary text-sm mb-2"><span data-key="workoutsDone">Entrenamientos Realizados</span></p>
                             <div class="stat-number" id="workouts-done">0</div>
-                            <p class="text-xs text-secondary mt-2">This week</p>
+                            <p class="text-xs text-secondary mt-2"><span data-key="thisWeek">Esta semana</span></p>
                         </div>
                         <div class="stats-card p-4 rounded-lg">
-                            <p class="text-secondary text-sm mb-2">Total Exercises</p>
+                            <p class="text-secondary text-sm mb-2"><span data-key="totalExercises">Ejercicios Totales</span></p>
                             <div class="stat-number" id="total-exercises">0</div>
-                            <p class="text-xs text-secondary mt-2">Completed</p>
+                            <p class="text-xs text-secondary mt-2"><span data-key="completed">Completados</span></p>
                         </div>
                         <div class="stats-card p-4 rounded-lg">
-                            <p class="text-secondary text-sm mb-2">Streak</p>
+                            <p class="text-secondary text-sm mb-2"><span data-key="streak">Racha</span></p>
                             <div class="stat-number" id="current-streak">0</div>
-                            <p class="text-xs text-secondary mt-2">Days active</p>
+                            <p class="text-xs text-secondary mt-2"><span data-key="daysActive">Días activos</span></p>
                         </div>
                     </div>
                     <div class="mt-6">
-                        <h3 class="text-lg font-bold mb-4 text-primary">Daily Breakdown</h3>
+                        <h3 class="text-lg font-bold mb-4 text-primary"><span data-key="dailyBreakdown">Desglose Diario</span></h3>
                         <div id="weekly-breakdown" class="space-y-2"></div>
                     </div>
                 </div>
@@ -89,16 +88,16 @@
                  <div class="bg-card-bg/80 p-4 sm:p-6 rounded-lg shadow-lg border border-border">
                     <div class="text-center mb-6">
                         <h2 id="calendar-title" class="text-2xl font-bold"></h2>
-                        <p class="text-secondary mt-1">A complete overview of your training month.</p>
+                        <p class="text-secondary mt-1">Vista completa de tu mes de entrenamiento.</p>
                     </div>
                     <div class="calendar-grid font-semibold text-secondary">
-                        <div class="calendar-day-header">Mon</div>
-                        <div class="calendar-day-header">Tue</div>
-                        <div class="calendar-day-header">Wed</div>
-                        <div class="calendar-day-header">Thu</div>
-                        <div class="calendar-day-header">Fri</div>
-                        <div class="calendar-day-header">Sat</div>
-                        <div class="calendar-day-header">Sun</div>
+                        <div class="calendar-day-header">Lun</div>
+                        <div class="calendar-day-header">Mar</div>
+                        <div class="calendar-day-header">Mié</div>
+                        <div class="calendar-day-header">Jue</div>
+                        <div class="calendar-day-header">Vie</div>
+                        <div class="calendar-day-header">Sáb</div>
+                        <div class="calendar-day-header">Dom</div>
                     </div>
                     <div id="calendar-body" class="calendar-grid"></div>
                 </div>
@@ -174,7 +173,24 @@
         </div>
     </div>
 
+    <!-- Modal for Routine Selection -->
+    <div id="routine-select-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold"><span data-key="changeRoutine">Change Routine</span></h2>
+                <button id="close-routine-select-modal" class="text-2xl font-bold text-secondary hover:text-white">&times;</button>
+            </div>
+            <p class="text-secondary mb-4"><span data-key="changeRoutineDesc">Select a new routine for this day. You can restore the original routine anytime.</span></p>
+            <div id="routine-selection-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Routines will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="app.js"></script>
+    
+    <!-- Botón flotante para volver a HOY -->
+    <button id="back-to-today" class="hidden fixed bottom-6 right-6 z-50 bg-accent text-bg-color font-bold py-2 px-4 rounded-full shadow-lg border border-accent/60 hover:bg-accent-hover transition">🏠 HOY</button>
 
 </body>
 </html>
