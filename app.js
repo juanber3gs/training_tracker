@@ -1451,7 +1451,7 @@
             return;
         }
         
-        let html = '<div class="space-y-4">';
+        let html = '<div class="space-y-4 md:space-y-6 lg:columns-2 lg:gap-6">';
         let count = 0;
         
         for (const [name, data] of Object.entries(exerciseLibrary)) {
@@ -1474,14 +1474,14 @@
             const musclesLabel = currentLanguage === 'es' ? 'Músculos:' : 'Muscles:';
             
             html += `
-                <div id="exercise-${slug}" class="exercise-card">
+                <div id="exercise-${slug}" class="exercise-card break-inside-avoid">
                     <div class="exercise-header">
                         <div>
-                            <h3>${exerciseName}</h3>
+                            <h3 class="text-lg md:text-xl lg:text-2xl">${exerciseName}</h3>
                             <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-3 py-1 bg-accent/20 text-accent text-xs font-semibold rounded-full">${data.category}</span>
-                                <span class="px-3 py-1 bg-metabolic/20 text-metabolic text-xs font-semibold rounded-full">${data.difficulty}</span>
-                                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full">${data.equipment}</span>
+                                <span class="px-2 md:px-3 py-1 bg-accent/20 text-accent text-xs md:text-sm font-semibold rounded-full">${data.category}</span>
+                                <span class="px-2 md:px-3 py-1 bg-metabolic/20 text-metabolic text-xs md:text-sm font-semibold rounded-full">${data.difficulty}</span>
+                                <span class="px-2 md:px-3 py-1 bg-blue-500/20 text-blue-400 text-xs md:text-sm font-semibold rounded-full">${data.equipment}</span>
                             </div>
                         </div>
                         <span class="text-xs text-secondary italic">Source: ${data.source}</span>
@@ -1489,13 +1489,11 @@
                     
                     <div class="exercise-content">
                         <div class="exercise-section">
-                            <h4 class="section-title">${formTitle}</h4>
+                            <h4 class="section-title text-base md:text-lg">${formTitle}</h4>
                             <ul class="space-y-2">
-                                ${formSteps.map((step, i) => `<li class="text-secondary text-sm leading-relaxed">${step}</li>`).join('')}
+                                ${formSteps.map((step, i) => `<li class="text-secondary text-xs md:text-sm leading-relaxed">${step}</li>`).join('')}
                             </ul>
-                        </div>
-                        
-                        <div class="exercise-section">
+                        </div>                        <div class="exercise-section">
                             <h4 class="section-title">${tipsTitle}</h4>
                             <div class="space-y-2">
                                 ${tipsList.map(tip => `<p class="text-secondary text-sm leading-relaxed">${tip}</p>`).join('')}
@@ -1950,38 +1948,38 @@
         const routineTitle = typeof routineData.title === 'function' ? routineData.title() : routineData.title;
         const routineDesc = typeof routineData.description === 'function' ? routineData.description() : routineData.description;
 
-        return `<div class="relative bg-card-bg/80 p-4 sm:p-6 rounded-lg shadow-lg border ${isHighIntensity ? 'metabolic-border metabolic-shadow' : 'border-border'}">
+        return `<div class="relative bg-card-bg/80 p-4 md:p-6 lg:p-8 rounded-lg shadow-lg border ${isHighIntensity ? 'metabolic-border metabolic-shadow' : 'border-border'}">
                     ${progressHTML}
-                    <h2 class="text-2xl font-bold mb-1 text-center ${isHighIntensity ? 'metabolic-text' : 'text-primary'}">${routineTitle}</h2>
-                    <p class="text-center text-secondary mb-2">${routineDesc}</p>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 text-center ${isHighIntensity ? 'metabolic-text' : 'text-primary'}">${routineTitle}</h2>
+                    <p class="text-center text-secondary mb-2 text-sm md:text-base">${routineDesc}</p>
                     </div>`;
     }
 
     function createRoutineTableHTML(exercises, isTodayView, routineKey) {
         const rows = exercises.map((ex, index) => `
             <tr class="border-b border-border last:border-b-0 hover:bg-black/20 transition">
-                <td class="p-3 font-medium text-primary">
-                    <div class="font-semibold flex items-center gap-2">
+                <td class="p-2 md:p-3 lg:p-4 font-medium text-primary text-sm md:text-base">
+                    <div class="font-semibold flex items-center gap-1 md:gap-2">
                         <span>${getExerciseName(ex.name)}</span>
-                        ${isTodayView ? `<button class="exercise-open-library text-[10px] px-1.5 py-0.5 rounded text-secondary/60 hover:text-accent/80 hover:bg-accent/10 transition opacity-70 hover:opacity-100" data-exercise="${ex.name}" title="Ver en biblioteca">📚</button>` : ''}
+                        ${isTodayView ? `<button class="exercise-open-library text-[10px] px-1 py-0.5 md:px-1.5 md:py-0.5 rounded text-secondary/60 hover:text-accent/80 hover:bg-accent/10 transition opacity-70 hover:opacity-100" data-exercise="${ex.name}" title="Ver en biblioteca">📚</button>` : ''}
                     </div>
-                    <div class="text-xs text-secondary">${getExerciseDescription(ex.name)}</div>
+                    <div class="text-xs text-secondary hidden md:block">${getExerciseDescription(ex.name)}</div>
                 </td>
-                <td class="p-3 text-center text-secondary">${ex.series}</td>
-                <td class="p-3 text-center text-secondary">${ex.reps}</td>
-                <td class="p-3 text-center text-secondary">
-                    <div class="flex justify-center items-center gap-2">
-                        <span class="rest-text">${ex.rest}</span>
-                        ${isTodayView ? `<button class="rest-timer-btn text-[10px] px-1.5 py-0.5 rounded text-accent/60 hover:text-accent hover:bg-accent/10 transition opacity-70 hover:opacity-100" data-rest="${ex.rest}" title="Iniciar temporizador">⏱️</button>` : ''}
+                <td class="p-2 md:p-3 lg:p-4 text-center text-secondary text-sm md:text-base">${ex.series}</td>
+                <td class="p-2 md:p-3 lg:p-4 text-center text-secondary text-sm md:text-base">${ex.reps}</td>
+                <td class="p-2 md:p-3 lg:p-4 text-center text-secondary text-sm md:text-base">
+                    <div class="flex justify-center items-center gap-1 md:gap-2">
+                        <span class="rest-text text-xs md:text-sm">${ex.rest}</span>
+                        ${isTodayView ? `<button class="rest-timer-btn text-[10px] px-1 py-0.5 md:px-1.5 md:py-0.5 rounded text-accent/60 hover:text-accent hover:bg-accent/10 transition opacity-70 hover:opacity-100" data-rest="${ex.rest}" title="Iniciar temporizador">⏱️</button>` : ''}
                         ${isTodayView ? `<span class="rest-countdown text-secondary text-xs"></span>` : ''}
                     </div>
                 </td>
-                <td class="p-3 text-sm text-secondary">${ex.notes || ''}</td>
-                ${isTodayView ? `<td class="p-3 text-center"><input type="checkbox" data-exercise-index="${index}" class="h-5 w-5 rounded bg-card-bg border-border text-accent focus:ring-accent"></td>` : ''}
+                <td class="p-2 md:p-3 lg:p-4 text-xs md:text-sm text-secondary hidden md:table-cell">${ex.notes || ''}</td>
+                ${isTodayView ? `<td class="p-2 md:p-3 lg:p-4 text-center"><input type="checkbox" data-exercise-index="${index}" class="h-4 w-4 md:h-5 md:w-5 rounded bg-card-bg border-border text-accent focus:ring-accent"></td>` : ''}
             </tr>
         `).join('');
 
-        return `<div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-black/30"><tr><th class="p-3 font-semibold text-sm text-secondary uppercase">${t('exercise')}</th><th class="p-3 font-semibold text-sm text-center text-secondary uppercase">${t('sets')}</th><th class="p-3 font-semibold text-sm text-center text-secondary uppercase">${t('reps')}</th><th class="p-3 font-semibold text-sm text-center text-secondary uppercase">${t('rest')}</th><th class="p-3 font-semibold text-sm text-secondary uppercase">${t('notes')}</th><th class="p-3 font-semibold text-sm text-center text-secondary uppercase">${isTodayView ? t('done') : t('edit')}</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+        return `<div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-black/30"><tr><th class="p-2 md:p-3 lg:p-4 font-semibold text-xs md:text-sm text-secondary uppercase">${t('exercise')}</th><th class="p-2 md:p-3 lg:p-4 font-semibold text-xs md:text-sm text-center text-secondary uppercase">${t('sets')}</th><th class="p-2 md:p-3 lg:p-4 font-semibold text-xs md:text-sm text-center text-secondary uppercase">${t('reps')}</th><th class="p-2 md:p-3 lg:p-4 font-semibold text-xs md:text-sm text-center text-secondary uppercase">${t('rest')}</th><th class="p-2 md:p-3 lg:p-4 font-semibold text-xs md:text-sm text-secondary uppercase hidden md:table-cell">${t('notes')}</th><th class="p-2 md:p-3 lg:p-4 font-semibold text-xs md:text-sm text-center text-secondary uppercase">${isTodayView ? t('done') : t('edit')}</th></tr></thead><tbody>${rows}</tbody></table></div>`;
     }
 
     function createRoutineHTML(routineKey, isTodayView, date) {
@@ -2056,19 +2054,19 @@
         
         if (activity.details) {
             // Workout day
-            content = `<div class="space-y-6">
+            content = `<div class="space-y-4 md:space-y-6 lg:space-y-8">
                     <!-- Header Card -->
-                    <div class="relative overflow-hidden bg-gradient-to-r from-card-bg/80 to-card-bg/40 p-8 rounded-2xl shadow-2xl border border-accent/30 backdrop-blur-sm">
+                    <div class="relative overflow-hidden bg-gradient-to-r from-card-bg/80 to-card-bg/40 p-4 md:p-6 lg:p-8 rounded-lg md:rounded-xl lg:rounded-2xl shadow-2xl border border-accent/30 backdrop-blur-sm">
                         <div class="absolute -right-20 -top-10 w-60 h-60 bg-accent/10 rounded-full blur-3xl"></div>
                         <div class="relative z-10">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="inline-block px-4 py-2 bg-accent/20 border border-accent rounded-full">
-                                    <p class="text-accent text-sm font-semibold uppercase tracking-wider">${todayName}</p>
+                            <div class="flex items-center justify-between mb-2 md:mb-4">
+                                <div class="inline-block px-2 md:px-4 py-1 md:py-2 bg-accent/20 border border-accent rounded-full">
+                                    <p class="text-accent text-xs md:text-sm font-semibold uppercase tracking-wider">${todayName}</p>
                                 </div>
-                                <div class="text-4xl">${dayOfWeekEmoji}</div>
+                                <div class="text-2xl md:text-3xl lg:text-4xl">${dayOfWeekEmoji}</div>
                             </div>
-                            <h2 class="text-5xl font-bold animated-text-glow mb-2">${t('todaysWorkout')}</h2>
-                            <p class="text-secondary text-lg">${t('getReady')}</p>
+                            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold animated-text-glow mb-2">${t('todaysWorkout')}</h2>
+                            <p class="text-secondary text-sm md:text-base lg:text-lg">${t('getReady')}</p>
                         </div>
                     </div>
                     
@@ -2077,8 +2075,8 @@
                     
                     <!-- Save Progress Button (visible when viewing past/future dates) -->
                     ${!isSameDay(viewDate, new Date()) ? `
-                    <div class="flex justify-center mt-6">
-                        <button id="save-progress-btn" class="px-8 py-3 bg-accent hover:bg-accent-hover text-bg-color font-bold rounded-lg shadow-lg transition-all transform hover:scale-105">
+                    <div class="flex justify-center mt-4 md:mt-6 lg:mt-8">
+                        <button id="save-progress-btn" class="px-4 md:px-8 py-2 md:py-3 bg-accent hover:bg-accent-hover text-bg-color font-bold rounded-lg shadow-lg transition-all transform hover:scale-105 text-sm md:text-base">
                             💾 Guardar Progreso
                         </button>
                     </div>
@@ -2499,12 +2497,12 @@
                 : '';
 
             let dayCell = `
-                <div class="calendar-day bg-card-bg/80 p-2 rounded-md border border-border flex flex-col ${todayClass} relative" data-date="${year}-${month + 1}-${d}">
+                <div class="calendar-day bg-card-bg/80 p-2 md:p-3 lg:p-4 rounded-md border border-border flex flex-col ${todayClass} relative" data-date="${year}-${month + 1}-${d}">
                     ${progressIndicator}
-                    <div class="font-bold text-sm text-primary">${d}</div>
-                    <div class="text-xs mt-1 flex-grow">
-                        <p class="font-semibold ${isHighIntensity ? 'metabolic-text' : isRest ? 'text-emerald-300' : 'text-accent'}">${activityTitle}</p>
-                        <p class="text-secondary">${activityDesc}</p>
+                    <div class="font-bold text-sm md:text-base lg:text-lg text-primary">${d}</div>
+                    <div class="text-xs md:text-sm mt-1 flex-grow">
+                        <p class="font-semibold text-xs md:text-sm ${isHighIntensity ? 'metabolic-text' : isRest ? 'text-emerald-300' : 'text-accent'}">${activityTitle}</p>
+                        <p class="text-secondary text-xs">${activityDesc}</p>
                         ${progressBadge}${restBadge}
                     </div>
                 </div>`;

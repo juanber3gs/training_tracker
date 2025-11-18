@@ -773,4 +773,289 @@
             padding: 0;
         }
         
+        /* === TAILWIND COLOR OVERRIDES === */
+        /* These ensure Tailwind classes with CSS variables work correctly */
+        .text-accent { color: var(--accent) !important; }
+        .text-metabolic { color: var(--metabolic) !important; }
+        .text-primary { color: var(--primary) !important; }
+        .text-secondary { color: var(--secondary) !important; }
+        .text-border { color: var(--border) !important; }
+        
+        .bg-accent { background-color: var(--accent) !important; }
+        .bg-metabolic { background-color: var(--metabolic) !important; }
+        .bg-card-bg { background-color: var(--card-bg) !important; }
+        .bg-primary { background-color: var(--primary) !important; }
+        .bg-secondary { background-color: var(--secondary) !important; }
+        .bg-border { background-color: var(--border) !important; }
+        
+        /* Opacity variants */
+        .bg-accent\/10 { background-color: rgba(0, 208, 255, 0.1) !important; }
+        .bg-accent\/20 { background-color: rgba(0, 208, 255, 0.2) !important; }
+        .bg-metabolic\/10 { background-color: rgba(255, 0, 255, 0.1) !important; }
+        .bg-metabolic\/20 { background-color: rgba(255, 0, 255, 0.2) !important; }
+        .bg-card-bg\/80 { background-color: rgba(30, 10, 55, 0.8) !important; }
+        
+        .text-accent\/80 { color: rgba(0, 208, 255, 0.8) !important; }
+        .text-accent\/60 { color: rgba(0, 208, 255, 0.6) !important; }
+        .text-secondary\/60 { color: rgba(160, 140, 180, 0.6) !important; }
+        .text-secondary\/80 { color: rgba(160, 140, 180, 0.8) !important; }
+        .text-metabolic\/80 { color: rgba(255, 0, 255, 0.8) !important; }
+        
+        .border-accent { border-color: var(--accent) !important; }
+        .border-metabolic { border-color: var(--metabolic) !important; }
+        .border-border { border-color: var(--border) !important; }
+        .border-accent\/20 { border-color: rgba(0, 208, 255, 0.2) !important; }
+        .border-metabolic\/30 { border-color: rgba(255, 0, 255, 0.3) !important; }
+        
         /* (Removed) Language toggle styles */
+
+        /* === RESPONSIVE DESIGN === */
+        /* Base (mobile): 320px - 639px */
+        @media (min-width: 640px) {
+            /* sm: Small tablets - 640px and up */
+            .main-container {
+                border-radius: 1.5rem;
+                margin: 1.5rem auto;
+                max-width: 90vw;
+            }
+            
+            header {
+                margin: 1.5rem 0;
+                padding: 0 1rem;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                padding: 0 1rem;
+            }
+            
+            .nav-tab {
+                padding: 16px 20px;
+                font-size: 1rem;
+            }
+            
+            .routine-selector {
+                padding: 16px 20px;
+                font-size: 1rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .progress-bar-container {
+                height: 14px;
+            }
+            
+            button, .nav-tab, .routine-selector {
+                min-height: 52px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            /* md: Tablets/Small Desktop - 768px and up */
+            .main-container {
+                max-width: 85vw;
+                border-radius: 2rem;
+            }
+            
+            header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            header p {
+                font-size: 0.95rem;
+            }
+            
+            nav {
+                padding: 0 1.5rem;
+            }
+            
+            .nav-tab {
+                padding: 18px 24px;
+                font-size: 1.1rem;
+            }
+            
+            .routine-selector {
+                padding: 18px 24px;
+                font-size: 1.05rem;
+                flex: 0 0 calc(50% - 0.5rem);
+            }
+            
+            .content-section {
+                padding: 2rem;
+            }
+            
+            .calendar-container {
+                max-width: 100%;
+            }
+            
+            .calendar-day {
+                min-height: 60px;
+                font-size: 0.95rem;
+            }
+            
+            button, .nav-tab, .routine-selector {
+                min-height: 56px;
+            }
+            
+            .exercise-table {
+                font-size: 1rem;
+            }
+            
+            table td {
+                padding: 0.75rem 1rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            /* lg: Desktop - 1024px and up */
+            .main-container {
+                max-width: 1200px;
+                margin: 2rem auto;
+                border-radius: 2.5rem;
+            }
+            
+            header {
+                margin: 2rem 0 1.5rem;
+            }
+            
+            header h1 {
+                font-size: 3rem;
+            }
+            
+            header p {
+                font-size: 1rem;
+                letter-spacing: 0.05em;
+            }
+            
+            nav {
+                padding: 0 2rem;
+                font-size: 1.1rem;
+            }
+            
+            .nav-tab {
+                padding: 20px 28px;
+                font-size: 1.15rem;
+                min-height: 60px;
+            }
+            
+            .routine-selector {
+                padding: 20px 28px;
+                font-size: 1.1rem;
+                flex: 0 0 calc(33.333% - 0.67rem);
+                min-height: 60px;
+            }
+            
+            .content-section {
+                padding: 2.5rem 3rem;
+            }
+            
+            .calendar-day {
+                min-height: 70px;
+                font-size: 1rem;
+            }
+            
+            button, .nav-tab, .routine-selector {
+                min-height: 60px;
+            }
+            
+            .exercise-table {
+                font-size: 1.05rem;
+            }
+            
+            table td {
+                padding: 1rem 1.25rem;
+            }
+            
+            #exercise-library {
+                columns: 2;
+                column-gap: 2rem;
+            }
+            
+            .exercise-card {
+                break-inside: avoid;
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        @media (min-width: 1440px) {
+            /* xl: Large Desktop - 1440px and up */
+            .main-container {
+                max-width: 1400px;
+            }
+            
+            header h1 {
+                font-size: 3.5rem;
+            }
+            
+            #exercise-library {
+                columns: 3;
+                column-gap: 2.5rem;
+            }
+        }
+        
+        /* === RESPONSIVE UTILITIES === */
+        /* Mobile-specific optimizations */
+        @media (max-width: 639px) {
+            /* Hide elements that are too big for mobile */
+            .hide-mobile {
+                display: none !important;
+            }
+            
+            /* Stack layout on mobile */
+            .flex {
+                flex-direction: column;
+            }
+            
+            /* Reduce padding on mobile */
+            .content-section {
+                padding: 1rem;
+            }
+            
+            main {
+                margin: 0 -0.5rem;
+            }
+        }
+        
+        /* Tablet-specific */
+        @media (min-width: 640px) and (max-width: 1023px) {
+            .hide-tablet {
+                display: none !important;
+            }
+        }
+        
+        /* Desktop-specific */
+        @media (min-width: 1024px) {
+            .hide-desktop {
+                display: none !important;
+            }
+        }
+        
+        /* === LANDSCAPE ORIENTATION === */
+        @media (orientation: landscape) and (max-height: 600px) {
+            header {
+                margin: 0.5rem 0;
+            }
+            
+            header h1 {
+                font-size: 1.5rem;
+                margin-bottom: 0;
+            }
+            
+            header p {
+                display: none;
+            }
+            
+            nav {
+                margin-bottom: 0.5rem;
+            }
+            
+            .content-section {
+                padding: 0.75rem 1rem;
+            }
+        }
