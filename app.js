@@ -1467,10 +1467,10 @@
             const musclesLabel = currentLanguage === 'es' ? 'Músculos:' : 'Muscles:';
             
             html += `
-                <div id="exercise-${slug}" class="bg-card-bg/80 rounded-lg border border-border p-4 sm:p-6 hover:border-accent transition">
-                    <div class="flex flex-col sm:flex-row justify-between items-start gap-4 mb-4">
+                <div id="exercise-${slug}" class="exercise-card">
+                    <div class="exercise-header">
                         <div>
-                            <h3 class="text-2xl font-bold text-accent mb-2">${exerciseName}</h3>
+                            <h3>${exerciseName}</h3>
                             <div class="flex flex-wrap gap-2 mb-3">
                                 <span class="px-3 py-1 bg-accent/20 text-accent text-xs font-semibold rounded-full">${data.category}</span>
                                 <span class="px-3 py-1 bg-metabolic/20 text-metabolic text-xs font-semibold rounded-full">${data.difficulty}</span>
@@ -1480,16 +1480,16 @@
                         <span class="text-xs text-secondary italic">Source: ${data.source}</span>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <h4 class="text-lg font-semibold text-primary mb-3">${formTitle}</h4>
+                    <div class="exercise-content">
+                        <div class="exercise-section">
+                            <h4 class="section-title">${formTitle}</h4>
                             <ol class="space-y-2">
                                 ${formSteps.map((step, i) => `<li class="text-secondary text-sm leading-relaxed">${step}</li>`).join('')}
                             </ol>
                         </div>
                         
-                        <div>
-                            <h4 class="text-lg font-semibold text-primary mb-3">${tipsTitle}</h4>
+                        <div class="exercise-section">
+                            <h4 class="section-title">${tipsTitle}</h4>
                             <div class="space-y-2">
                                 ${tipsList.map(tip => `<p class="text-secondary text-sm leading-relaxed">${tip}</p>`).join('')}
                             </div>

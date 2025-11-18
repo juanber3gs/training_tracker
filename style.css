@@ -484,9 +484,85 @@
             accent-color: var(--accent);
         }
         
-        .edit-exercise-modal .modal-content {
-            width: 90%;
-            max-width: 500px;
+        /* Exercise Library Card Styling */
+        #exercise-library {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            width: 100%;
+        }
+        
+        #exercise-library > div > div {
+            background: linear-gradient(135deg, rgba(26, 10, 42, 0.9), rgba(26, 10, 42, 0.7));
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 15px rgba(0, 208, 255, 0.2), inset 0 0 8px rgba(0, 208, 255, 0.05);
+            border-radius: 14px;
+            padding: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        #exercise-library > div > div:hover {
+            border-color: var(--accent-hover);
+            box-shadow: 0 0 25px rgba(0, 208, 255, 0.4), inset 0 0 12px rgba(0, 208, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        #exercise-library h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--accent);
+            text-shadow: var(--glow-accent);
+        }
+        
+        #exercise-library .space-y-2 > p {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        #exercise-library ol {
+            counter-reset: item;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        #exercise-library ol li {
+            counter-increment: item;
+            margin-bottom: 10px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        #exercise-library ol li:before {
+            content: counter(item);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--accent);
+            color: var(--bg-color);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+        
+        /* === STATS SECTION IMPROVEMENTS === */
+        #stats .space-y-2 > div {
+            background: linear-gradient(135deg, rgba(0, 208, 255, 0.1), rgba(255, 0, 255, 0.05));
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        #stats .space-y-2 > div:hover {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(0, 208, 255, 0.2), rgba(255, 0, 255, 0.1));
+            box-shadow: 0 0 10px rgba(0, 208, 255, 0.2);
         }
         .routine-grid {
             display: grid;
