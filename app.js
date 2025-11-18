@@ -1446,9 +1446,16 @@
 
     function generateExerciseLibrary() {
         const container = document.getElementById('exercise-library');
+        if (!container) {
+            console.error('Exercise library container not found!');
+            return;
+        }
+        
         let html = '<div class="space-y-4">';
+        let count = 0;
         
         for (const [name, data] of Object.entries(exerciseLibrary)) {
+            count++;
             // Get translated exercise name
             const exerciseName = getExerciseName(name);
             const slug = getExerciseSlug(name);
@@ -1504,6 +1511,7 @@
         
         html += '</div>';
         container.innerHTML = html;
+        console.log(`Exercise library generated with ${count} exercises`);
     }
     
     // --- Date & Schedule Variables ---
@@ -1786,7 +1794,14 @@
         'Pilates Bar Thrusters': { en: 'Pilates Bar Thrusters', es: 'Thrusters con Barra Pilates' },
         'Fast Band Rows': { en: 'Fast Band Rows', es: 'Remos Rápidos con Banda' },
         'Lunge with Twist': { en: 'Lunge with Twist', es: 'Estocada con Giro' },
-        'Jumping Jacks': { en: 'Jumping Jacks', es: 'Saltos de Tijera' }
+        'Jumping Jacks': { en: 'Jumping Jacks', es: 'Saltos de Tijera' },
+        'Plank Hold': { en: 'Plank Hold', es: 'Plancha Prolongada' },
+        'Bicycle Crunches': { en: 'Bicycle Crunches', es: 'Abdominales en Bicicleta' },
+        'Burpees': { en: 'Burpees', es: 'Burpees' },
+        'Mountain Climbers': { en: 'Mountain Climbers', es: 'Escaladores de Montaña' },
+        'Russian Twists': { en: 'Russian Twists', es: 'Giros Rusos' },
+        'Leg Raises': { en: 'Leg Raises', es: 'Elevaciones de Piernas' },
+        'Jump Squats': { en: 'Jump Squats', es: 'Sentadillas Saltadas' }
     };
 
     function getExerciseName(englishName) {
@@ -1871,7 +1886,7 @@
                     <span class="px-3 py-1 bg-metabolic/20 text-metabolic text-xs font-semibold rounded-full">${data.difficulty}</span>
                     <span class="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full">${data.equipment}</span>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 gap-6">
                     <div>
                         <h4 class="text-lg font-semibold text-primary mb-3">${formTitle}</h4>
                         <ol class="space-y-2">${formSteps.map(s=>`<li class='text-secondary text-sm'>${s}</li>`).join('')}</ol>
@@ -1997,7 +2012,7 @@
             equipmentHTML = `
                 <div class="mt-6 p-4 bg-metabolic/10 border border-metabolic/30 rounded-lg">
                     <h4 class="font-bold text-metabolic mb-3">⚙️ ${t('equipmentNeeded')}</h4>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <div class="grid grid-cols-2 gap-2">
                         ${Array.from(equipmentSet).map(eq => `<div class="flex items-center gap-2 text-sm text-secondary"><span class="text-base">${eq.split(' ')[0]}</span> <span>${eq.split(' ').slice(1).join(' ')}</span></div>`).join('')}
                     </div>
                 </div>
@@ -2052,7 +2067,7 @@
                                 </div>
                                 <div class="text-4xl">${dayOfWeekEmoji}</div>
                             </div>
-                            <h2 class="text-5xl sm:text-6xl font-bold animated-text-glow mb-2">${t('todaysWorkout')}</h2>
+                            <h2 class="text-5xl font-bold animated-text-glow mb-2">${t('todaysWorkout')}</h2>
                             <p class="text-secondary text-lg">${t('getReady')}</p>
                         </div>
                     </div>
@@ -2088,13 +2103,13 @@
                                 </div>
                                 <div class="text-4xl">${emoji}</div>
                             </div>
-                            <h2 class="text-5xl sm:text-6xl font-bold animated-text-glow mb-2">${activity.title}</h2>
+                            <h2 class="text-5xl font-bold animated-text-glow mb-2">${activity.title}</h2>
                             <p class="text-secondary text-lg">${activity.description}</p>
                         </div>
                     </div>
                     
                     <!-- Recovery Info Cards -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 gap-4">
                         <div class="bg-card-bg/80 border border-accent/30 rounded-xl p-6 hover:border-accent/50 transition-all">
                             <div class="flex items-start gap-3">
                                 <div class="text-2xl">⚡</div>
@@ -2489,7 +2504,7 @@
                     <div class="font-bold text-sm text-primary">${d}</div>
                     <div class="text-xs mt-1 flex-grow">
                         <p class="font-semibold ${isHighIntensity ? 'metabolic-text' : isRest ? 'text-emerald-300' : 'text-accent'}">${activityTitle}</p>
-                        <p class="text-secondary hidden sm:block">${activityDesc}</p>
+                        <p class="text-secondary">${activityDesc}</p>
                         ${progressBadge}${restBadge}
                     </div>
                 </div>`;
