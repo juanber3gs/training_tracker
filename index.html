@@ -38,7 +38,6 @@
         <nav class="flex justify-between items-center border-b border-border mb-6">
             <div class="flex flex-wrap justify-center -mb-px overflow-x-auto flex-1">
                 <button data-tab="hoy" class="nav-tab text-md py-3 px-3 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">🗓️ <span data-key="today">Hoy</span></button>
-                <button data-tab="stats" class="nav-tab text-md py-3 px-3 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📊 <span data-key="stats">Estadísticas</span></button>
                 <button data-tab="calendario" class="nav-tab text-md py-3 px-3 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📅 <span data-key="calendar">Calendario</span></button>
                 <button data-tab="rutinas" class="nav-tab text-md py-3 px-3 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">🏋️‍♂️ <span data-key="routines">Rutinas</span></button>
                 <button data-tab="biblioteca" class="nav-tab text-md py-3 px-3 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📚 <span data-key="library">Biblioteca</span></button>
@@ -49,55 +48,16 @@
             <!-- HOY SECTION -->
             <section id="hoy" class="content-section"></section>
             
-            <!-- STATS SECTION -->
-            <section id="stats" class="content-section">
-                <div class="bg-card-bg/80 p-4 rounded-lg shadow-lg border border-border">
-                    <h2 class="text-2xl font-bold mb-6 text-center">📊 <span data-key="weeklyStats">Estadísticas Semanales</span></h2>
-                    <div class="grid grid-cols-2 gap-4 mb-8">
-                        <div class="stats-card p-4 rounded-lg">
-                            <p class="text-secondary text-sm mb-2"><span data-key="weeklyCompletion">Completitud Semanal</span></p>
-                            <div class="stat-number" id="weekly-completion">0%</div>
-                            <p class="text-xs text-secondary mt-2"><span data-key="lastSevenDays">Últimos 7 días</span></p>
-                        </div>
-                        <div class="stats-card p-4 rounded-lg">
-                            <p class="text-secondary text-sm mb-2"><span data-key="workoutsDone">Entrenamientos Realizados</span></p>
-                            <div class="stat-number" id="workouts-done">0</div>
-                            <p class="text-xs text-secondary mt-2"><span data-key="thisWeek">Esta semana</span></p>
-                        </div>
-                        <div class="stats-card p-4 rounded-lg">
-                            <p class="text-secondary text-sm mb-2"><span data-key="totalExercises">Ejercicios Totales</span></p>
-                            <div class="stat-number" id="total-exercises">0</div>
-                            <p class="text-xs text-secondary mt-2"><span data-key="completed">Completados</span></p>
-                        </div>
-                        <div class="stats-card p-4 rounded-lg">
-                            <p class="text-secondary text-sm mb-2"><span data-key="streak">Racha</span></p>
-                            <div class="stat-number" id="current-streak">0</div>
-                            <p class="text-xs text-secondary mt-2"><span data-key="daysActive">Días activos</span></p>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <h3 class="text-lg font-bold mb-4 text-primary"><span data-key="dailyBreakdown">Desglose Diario</span></h3>
-                        <div id="weekly-breakdown" class="space-y-2"></div>
-                    </div>
-                </div>
-            </section>
-            
             <!-- CALENDAR SECTION -->
             <section id="calendario" class="content-section">
-                <div class="bg-card-bg/80 p-4 rounded-lg shadow-lg border border-border">
-                    <div class="text-center mb-6">
-                        <h2 id="calendar-title" class="text-2xl font-bold"></h2>
-                        <p class="text-secondary mt-1">Vista completa de tu mes de entrenamiento.</p>
-                    </div>
-                    <div class="calendar-grid font-semibold text-secondary">
-                        <div class="calendar-day-header">Lun</div>
-                        <div class="calendar-day-header">Mar</div>
-                        <div class="calendar-day-header">Mié</div>
-                        <div class="calendar-day-header">Jue</div>
-                        <div class="calendar-day-header">Vie</div>
-                        <div class="calendar-day-header">Sáb</div>
-                        <div class="calendar-day-header">Dom</div>
-                    </div>
+                <div class="calendar-grid font-semibold text-secondary">
+                    <div class="calendar-day-header">Lun</div>
+                    <div class="calendar-day-header">Mar</div>
+                    <div class="calendar-day-header">Mié</div>
+                    <div class="calendar-day-header">Jue</div>
+                    <div class="calendar-day-header">Vie</div>
+                    <div class="calendar-day-header">Sáb</div>
+                    <div class="calendar-day-header">Dom</div>
                     <div id="calendar-body" class="calendar-grid"></div>
                 </div>
             </section>
