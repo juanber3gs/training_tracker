@@ -756,55 +756,12 @@
         }
         
         /* Isolate each content section - prevent hoy styles from leaking */
-        #calendario,
-        #rutinas,
-        #biblioteca {
-            margin: 0;
-            padding: 0;
-            gap: 0;
-            all: revert;
-        }
-        
         #calendario > div,
         #rutinas > div,
         #biblioteca > div {
             margin: 0;
             padding: 0;
         }
-        
-        /* === TAILWIND COLOR OVERRIDES === */
-        /* These ensure Tailwind classes with CSS variables work correctly */
-        .text-accent { color: var(--accent) !important; }
-        .text-metabolic { color: var(--metabolic) !important; }
-        .text-primary { color: var(--primary) !important; }
-        .text-secondary { color: var(--secondary) !important; }
-        .text-border { color: var(--border) !important; }
-        
-        .bg-accent { background-color: var(--accent) !important; }
-        .bg-metabolic { background-color: var(--metabolic) !important; }
-        .bg-card-bg { background-color: var(--card-bg) !important; }
-        .bg-primary { background-color: var(--primary) !important; }
-        .bg-secondary { background-color: var(--secondary) !important; }
-        .bg-border { background-color: var(--border) !important; }
-        
-        /* Opacity variants */
-        .bg-accent\/10 { background-color: rgba(0, 208, 255, 0.1) !important; }
-        .bg-accent\/20 { background-color: rgba(0, 208, 255, 0.2) !important; }
-        .bg-metabolic\/10 { background-color: rgba(255, 0, 255, 0.1) !important; }
-        .bg-metabolic\/20 { background-color: rgba(255, 0, 255, 0.2) !important; }
-        .bg-card-bg\/80 { background-color: rgba(30, 10, 55, 0.8) !important; }
-        
-        .text-accent\/80 { color: rgba(0, 208, 255, 0.8) !important; }
-        .text-accent\/60 { color: rgba(0, 208, 255, 0.6) !important; }
-        .text-secondary\/60 { color: rgba(160, 140, 180, 0.6) !important; }
-        .text-secondary\/80 { color: rgba(160, 140, 180, 0.8) !important; }
-        .text-metabolic\/80 { color: rgba(255, 0, 255, 0.8) !important; }
-        
-        .border-accent { border-color: var(--accent) !important; }
-        .border-metabolic { border-color: var(--metabolic) !important; }
-        .border-border { border-color: var(--border) !important; }
-        .border-accent\/20 { border-color: rgba(0, 208, 255, 0.2) !important; }
-        .border-metabolic\/30 { border-color: rgba(255, 0, 255, 0.3) !important; }
         
         /* (Removed) Language toggle styles */
 
@@ -1004,16 +961,6 @@
             /* Hide elements that are too big for mobile */
             .hide-mobile {
                 display: none !important;
-            }
-            
-            /* Stack layout on mobile */
-            .flex {
-                flex-direction: column;
-            }
-            
-            /* Reduce padding on mobile */
-            .content-section {
-                padding: 1rem;
             }
             
             main {
