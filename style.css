@@ -199,6 +199,14 @@
             padding: 4px;
             box-sizing: border-box;
         }
+        /* Clamp long descriptions and ensure ellipsis for overflow */
+        .calendar-day .text-secondary, .calendar-day p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
         .calendar-day:hover {
             transform: scale(1.05);
             border-color: var(--accent) !important;
@@ -350,6 +358,32 @@
                 font-size: 16px;
             }
         }
+        /* Extra mobile adjustments: remove hover scaling, tighten library cards and table sizing */
+        @media (max-width: 640px) {
+            /* Disable hover scaling on touch devices to avoid layout shift */
+            .calendar-day:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            /* Tighter library card spacing on small screens */
+            #exercise-library .rounded-lg {
+                padding: 0.75rem;
+            }
+            #exercise-library h3 {
+                font-size: 1.125rem;
+            }
+            #exercise-library .text-secondary {
+                font-size: 0.9rem;
+            }
+
+            /* Make routine tables easier to scan on small screens */
+            .overflow-x-auto table td, .overflow-x-auto table th {
+                font-size: 13px;
+                padding: 0.5rem;
+            }
+        }
+
         .edit-exercise-modal .modal-content {
             width: 95vw;
             max-width: 500px;
