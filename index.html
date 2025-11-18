@@ -16,19 +16,42 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased">
-    <div class="container mx-auto max-w-full h-screen flex flex-col bg-bg-color">
+    <div class="container mx-auto max-w-5xl p-4 sm:p-6 main-container rounded-lg shadow-2xl border border-border">
         
-        <header class="sticky top-0 z-40 bg-card-bg/95 backdrop-blur-md border-b border-border py-3 px-4 mb-6">
-            <div class="flex items-center justify-between">
-                <div class="flex-1">
-                    <h1 class="text-2xl sm:text-3xl font-bold tracking-wide text-accent">Bernie</h1>
-                    <p class="text-xs sm:text-sm text-secondary font-light">Fitness Tracker</p>
-                </div>
-                <button id="back-to-today" class="hidden sm:inline-block px-3 py-2 text-xs font-semibold bg-accent/10 border border-accent/30 rounded text-accent hover:bg-accent hover:text-bg-color transition">🏠 HOY</button>
+        <header class="text-center my-8 mb-12 relative">
+            <!-- Hero Logo Section -->
+            <div class="relative mb-8">
+                <div class="absolute inset-0 rounded-full blur-3xl opacity-50" style="background: linear-gradient(135deg, #00D0FF, #FF00FF);"></div>
+                <a href="#" id="logo-link" class="relative inline-block transition-transform hover:scale-105 cursor-pointer" onclick="window.location.reload(); return false;">
+                    <img id="logo-img" src="imagenes/logo.png" alt="Bernie Online Fitness Logo" class="w-40 h-40 rounded-full shadow-2xl border-4 border-accent" style="box-shadow: 0 0 40px rgba(0, 208, 255, 0.8), 0 0 80px rgba(255, 0, 255, 0.4);">
+                </a>
             </div>
+            <h1 class="text-6xl sm:text-7xl animated-text-glow font-bold tracking-wider">Bernie</h1>
+            <p class="text-lg text-secondary mt-4 font-['Aldrich'] uppercase tracking-widest">Online Fitness Tracker</p>
+            <p class="text-sm text-secondary/70 mt-2 font-light tracking-wider">Your 4:20 Retro-Futuristic AI Training Workouts</p>
+            <p class="text-xs text-white mt-6 font-light">Updated 23 min ago</p>
+            <div class="mt-4 w-24 h-1 bg-gradient-to-r from-accent via-metabolic to-accent mx-auto rounded-full"></div>
         </header>
 
-        <main id="main-content" class="flex-1 overflow-y-auto px-4 sm:px-6 pb-20 sm:pb-6">
+        <div class="mb-8 p-4 bg-card-bg/80 rounded-lg shadow-lg border border-border">
+            <h2 class="text-center text-xl font-bold text-primary mb-3">Progreso Mensual Global</h2>
+            <div id="global-progress-text" class="text-center font-bold text-lg mb-2 text-accent" style="text-shadow: var(--glow-accent);">0%</div>
+            <div class="progress-bar-container">
+                <div id="global-progress-bar" class="progress-bar" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <nav class="flex justify-between items-center border-b border-border mb-8">
+            <div class="flex flex-wrap justify-center -mb-px overflow-x-auto flex-1">
+                <button data-tab="hoy" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">🗓️ <span data-key="today">Hoy</span></button>
+                <button data-tab="stats" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📊 <span data-key="stats">Estadísticas</span></button>
+                <button data-tab="calendario" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📅 <span data-key="calendar">Calendario</span></button>
+                <button data-tab="rutinas" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">🏋️‍♂️ <span data-key="routines">Rutinas</span></button>
+                <button data-tab="biblioteca" class="nav-tab text-md sm:text-lg py-3 px-3 sm:px-6 font-semibold border-b-2 border-transparent text-secondary hover:text-accent whitespace-nowrap">📚 <span data-key="library">Biblioteca</span></button>
+            </div>
+        </nav>
+
+        <main id="main-content">
             <section id="hoy" class="content-section"></section>
             <!-- Progreso mensual (debajo de HOY) -->
             <div class="mb-8 p-4 bg-card-bg/80 rounded-lg shadow-lg border border-border">
