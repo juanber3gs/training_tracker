@@ -603,9 +603,10 @@
         
         .exercise-card ol {
             counter-reset: item;
-            list-style-type: none;
-            padding-left: 0;
-            margin: 0;
+            list-style: none !important;
+            list-style-type: none !important;
+            padding-left: 0 !important;
+            margin: 0 !important;
         }
         
         .exercise-card ol li {
