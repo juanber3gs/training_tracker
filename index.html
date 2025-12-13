@@ -414,106 +414,110 @@
         const routines = {
             TORSO_PUSH: {
                 title: '💪 CÓDIGO: PUSH-ARMAMENTO SUPERIOR',
-                description: 'Optimización de la propulsión pectoral, deltoides y extensores de muñeca. Fase de Fuerza I.',
+                description: 'En casa (35–50 min). Enfoque: pecho/hombro/tríceps con técnica limpia. Deja 1–2 repeticiones en reserva (RIR 1–2) en los ejercicios principales.',
                 details: {
                     exercises: [
-                        { name: 'Push-ups', series: 4, reps: 'AMRAP', rest: '60s', notes: 'Fuerza de pecho con calistenia.' },
-                        { name: 'Pilates Bar Shoulder Press', series: 4, reps: '12-15', rest: '60s', notes: 'Pisa la banda para generar resistencia' },
-                        { name: 'Band Flys', series: 3, reps: '15-20', rest: '45s', notes: 'Aislar y estirar el pecho' },
-                        { name: 'Band Lateral Raises', series: 3, reps: '15-20', rest: '45s', notes: 'Ancho de hombros, usa banda' },
-                        { name: 'Band Triceps Pushdowns', series: 3, reps: '15-20', rest: '45s', notes: 'Aislar tríceps' },
-                        { name: 'Wrist Extension (Palms down)', series: 3, reps: '15-20', rest: '30s', notes: 'Salud de las articulaciones' }
+                        { name: 'Push-ups', series: 4, reps: '8–15 (RIR 1–2)', rest: '75s', notes: 'Cuerpo en bloque; codos ~45°; controla 2s la bajada.' },
+                        { name: 'Pilates Bar Shoulder Press', series: 3, reps: '10–14', rest: '75s', notes: 'Costillas “abajo”; glúteos firmes; no arquees la espalda.' },
+                        { name: 'Band Flys', series: 3, reps: '12–20', rest: '60s', notes: 'Abrazo controlado; pausa 1s apretando el pecho.' },
+                        { name: 'Band Lateral Raises', series: 3, reps: '12–18', rest: '60s', notes: 'Codo lidera; hombros lejos de orejas; rango sin dolor.' },
+                        { name: 'Band Triceps Pushdowns', series: 3, reps: '12–20', rest: '45–60s', notes: 'Codos pegados; extiende completo sin balanceo.' },
+                        { name: 'Wrist Extension (Palms down)', series: 2, reps: '15–25', rest: '30–45s', notes: 'Solo muñeca; tempo lento para antebrazo saludable.' }
                     ]
                 }
             },
             LEGS_ANKLES: {
                 title: '🦵 CÓDIGO: LEGS-UNIDAD DE MOVILIDAD',
-                description: 'Aumento de la capacidad biomecánica del tren inferior. Estabilidad de articulación y fuerza de propulsión.',
+                description: 'En casa (40–55 min). Enfoque: fuerza de piernas + estabilidad de tobillo/rodilla. Prioriza rango cómodo y control; si hay dolor articular, reduce profundidad.',
                 details: {
                     exercises: [
-                        { name: 'Pilates Bar Squat', series: 4, reps: '12-15', rest: '60s', notes: 'Pisa la banda, barra en la espalda' },
-                        { name: 'Dumbbell Romanian Deadlift', series: 3, reps: '12-15', rest: '75s', notes: 'Enfócate en los isquiotibiales' },
-                        { name: 'Static Lunge (Ankle Focus)', series: 3, reps: '10-12/side', rest: '60s', notes: 'Controla la estabilidad del tobillo' },
-                        { name: 'Banded Glute Bridge', series: 3, reps: '15-20', rest: '45s', notes: 'Banda en las rodillas, empuja hacia afuera' },
-                        { name: 'Calf Raises (Ankle Focus)', series: 4, reps: '20-25', rest: '45s', notes: 'Con barra de pilates para resistencia' }
+                        { name: 'Pilates Bar Squat', series: 4, reps: '8–12', rest: '90s', notes: 'Talón completo; rodillas siguen la punta del pie; sube “empujando el piso”.' },
+                        { name: 'Band Romanian Deadlift', series: 3, reps: '10–14', rest: '90s', notes: 'Bisagra de cadera; espalda neutra; siente estiramiento en isquios.' },
+                        { name: 'Pilates Ball Hamstring Curl', series: 3, reps: '8–15', rest: '75–90s', notes: 'Puente + curl: cadera alta, tira con isquios. Si tiembla mucho, reduce rango.' },
+                        { name: 'Static Lunge (Ankle Focus)', series: 3, reps: '8–12/lado', rest: '75s', notes: 'Controla la rodilla; torso alto; pie trípode (dedo gordo–dedo chico–talón).' },
+                        { name: 'Banded Glute Bridge', series: 3, reps: '12–20', rest: '60s', notes: 'Pausa 2s arriba; costillas abajo; empuja rodillas hacia afuera.' },
+                        { name: 'Calf Raises (Ankle Focus)', series: 4, reps: '12–20', rest: '45–60s', notes: 'Rango completo; 1s arriba/2s abajo; sin rebote.' }
                     ]
                 }
             },
             CORE_CARDIO: {
-                title: '🔥 CÓDIGO: CORE-FUSIÓN METABÓLICA',
-                description: 'Secuencia de choque para el core central y aceleración de la tasa metabólica basal. Alto Impacto.',
+                title: '🧘‍♀️ CÓDIGO: PILATES-CORE + CARDIO',
+                description: 'En casa (25–40 min). Enfoque: pilates/core (control + respiración) + cardio sostenible. Objetivo: terminar con energía (RPE 6–7), no reventado. Si tu técnica se rompe, baja el ritmo.',
                 details: {
                     exercises: [
-                        { name: 'Plank Hold', series: 4, reps: '45-60s', rest: '45s', notes: 'Mantén el cuerpo recto, core activado' },
-                        { name: 'Bicycle Crunches', series: 4, reps: '20-25', rest: '30s', notes: 'Toca codo con rodilla opuesta' },
-                        { name: 'Burpees', series: 4, reps: '10-15', rest: '60s', notes: 'Explosivos, mantén buena forma' },
-                        { name: 'Mountain Climbers', series: 4, reps: '30-40', rest: '45s', notes: 'Ritmo rápido pero controlado' },
-                        { name: 'Russian Twists', series: 3, reps: '30-40', rest: '45s', notes: 'Usa banda o pilates bar, gira el torso' },
-                        { name: 'Leg Raises', series: 3, reps: '12-15', rest: '45s', notes: 'Core bajo, piernas rectas' },
-                        { name: 'Jump Squats', series: 3, reps: '15-20', rest: '60s', notes: 'Cardio explosivo, aterriza suave' }
+                        { name: 'Dead Bug (Pilates Ball Press)', series: 3, reps: '8–12/lado', rest: '30–45s', notes: 'Aprieta la pelota (presión constante). Exhala largo; costillas abajo.' },
+                        { name: 'Side Plank', series: 3, reps: '25–45s/lado', rest: '30–45s', notes: 'Cadera alta; hombro lejos de oreja; respiración controlada.' },
+                        { name: 'Pilates Ball Rollout', series: 3, reps: '8–12', rest: '45–60s', notes: 'Rueda la pelota sin perder costillas abajo. Rango corto si arqueas.' },
+                        { name: 'Plank Hold', series: 2, reps: '35–60s', rest: '45s', notes: 'Glúteos firmes; “empuja” el suelo; sin aguantar la respiración.' },
+                        { name: 'Jumping Jacks', series: 4, reps: '40–60s', rest: '30–45s', notes: 'Versión low-impact si lo necesitas. Ritmo sostenible.' },
+                        { name: 'Mountain Climbers', series: 3, reps: '25–40s', rest: '45s', notes: 'Cadera estable; pasos silenciosos. Si te acelera mucho, baja ritmo.' }
                     ]
                 }
             },
             TORSO_PULL: {
                 title: '🏋️‍♂️ CÓDIGO: PULL-CADENA POSTERIOR',
-                description: 'Desarrollo del segmento dorsal, flexores de brazo y extensores de antebrazo. Fase de Tracción I.',
+                description: 'En casa (35–50 min). Enfoque: espalda/postura + bíceps + progreso de dominadas (pull-ups). Prioriza escápulas activas y rango controlado; mejor pocas reps perfectas que muchas con trampa.',
                 details: {
                     exercises: [
-                        { name: 'Pilates Bar Lat Pulldown', series: 4, reps: '12-15', rest: '60s', notes: 'Anclaje alto en la puerta' },
-                        { name: 'Dumbbell Bent-Over Row', series: 4, reps: '8-12', rest: '60s', notes: 'Fuerza y densidad de la espalda' },
-                        { name: 'Band Face Pulls', series: 3, reps: '15-20', rest: '45s', notes: 'Salud y postura de los hombros' },
-                        { name: 'Pilates Bar Bicep Curl', series: 3, reps: '12-15', rest: '45s', notes: 'Pisa la banda para generar resistencia' },
-                        { name: 'Wrist Flexion (Palms up)', series: 3, reps: '15-20', rest: '30s', notes: 'Salud de las articulaciones' }
+                        { name: 'Scapular Pull-ups', series: 3, reps: '6–10', rest: '60–75s', notes: 'Sin doblar codos: baja/eleva escápulas. Activa la espalda antes de tirar.' },
+                        { name: 'Negative Pull-ups', series: 4, reps: '3–6', rest: '90–120s', notes: 'Sube con apoyo y baja 3–5s. Si no tienes barra, reemplaza por Lat Pulldown.' },
+                        { name: 'Pilates Bar Lat Pulldown', series: 3, reps: '10–14', rest: '75–90s', notes: 'Codos hacia abajo/atrás; pausa 1s abajo; sin balanceo.' },
+                        { name: 'Dumbbell Bent-Over Row', series: 3, reps: '8–12', rest: '75–90s', notes: 'Bisagra estable; tira hacia costillas; 2s bajada.' },
+                        { name: 'Band Face Pulls', series: 2, reps: '12–20', rest: '60s', notes: 'Codos altos; termina con manos cerca de sienes; control total.' },
+                        { name: 'Pilates Bar Bicep Curl', series: 3, reps: '10–15', rest: '60s', notes: 'Codos fijos; sube sin impulso; aprieta 1s arriba.' }
                     ]
                 }
             },
             GLUTES_CORE: {
                 title: '🍑 CÓDIGO: GLUTES-NÚCLEO ESTABILIZADOR',
-                description: 'Activación profunda del complejo glúteo y estabilidad del núcleo espinal. Concentración de Fuerza.',
+                description: 'En casa (30–45 min). Enfoque: glúteo medio/mayor + estabilidad lumbar. Siente el trabajo en glúteos, no en espalda baja.',
                 details: {
                     exercises: [
-                        { name: 'Pull Through', series: 4, reps: '15-20', rest: '60s', notes: 'Anclaje bajo, enfócate en los glúteos' },
-                        { name: 'Banded Lateral Walk', series: 3, reps: '12 steps/side', rest: '45s', notes: 'Banda en las rodillas o tobillos' },
-                        { name: 'Pilates Bar Russian Twists', series: 3, reps: '20 twists', rest: '45s', notes: 'Sostén la barra, gira el torso' },
-                        { name: 'Plank', series: 3, reps: '45-75s', rest: '60s', notes: 'Mantén el cuerpo recto' },
-                        { name: 'Bird-Dog', series: 3, reps: '12/side', rest: '30s', notes: 'Movimiento lento y controlado' }
+                        { name: 'Pull Through', series: 4, reps: '12–18', rest: '75s', notes: 'Bisagra; “empuja” cadera atrás y luego aprieta glúteos arriba.' },
+                        { name: 'Banded Lateral Walk', series: 3, reps: '10–14 pasos/lado', rest: '45–60s', notes: 'Rodillas afuera; pasos cortos; tensión constante.' },
+                        { name: 'Pilates Ball Glute Bridge', series: 3, reps: '10–18', rest: '60–75s', notes: 'Talones en pelota, cadera alta. Si se complica: glute bridge sin pelota.' },
+                        { name: 'Pilates Bar Russian Twists', series: 3, reps: '16–24 giros', rest: '45–60s', notes: 'Gira costillas, no solo brazos; exhala al rotar.' },
+                        { name: 'Plank', series: 3, reps: '35–60s', rest: '60s', notes: 'Pélvis neutra; glúteos firmes; respiración nasal si puedes.' },
+                        { name: 'Bird-Dog', series: 3, reps: '10–14/lado', rest: '30–45s', notes: 'Pausa 1s extendido; cadera cuadrada; lento y estable.' }
                     ]
                 }
             },
             METABOLIC: {
                 title: '⚡ CÓDIGO: SHOCK-CIRCUITO MAX. VEL.',
-                description: 'Protocolo de resistencia máxima y quema de energía. Ejecución en circuito sin pausa programada.',
+                description: 'En casa (20–35 min). Circuito para sudar sin destruir técnica. Mantén el ritmo “sostenible”: debes poder hablar frases cortas. Descanso corto entre estaciones.',
                 details: {
                     exercises: [
-                        { name: 'Pilates Bar Thrusters', series: '4 Rounds', reps: '15', rest: '15s', notes: 'Sentadilla + Press de Hombros' },
-                        { name: 'Fast Band Rows', series: '4 Rounds', reps: '20', rest: '15s', notes: 'Ritmo rápido' },
-                        { name: 'Lunge with Twist', series: '4 Rounds', reps: '10/side', rest: '15s', notes: 'Con barra de pilates' },
-                        { name: 'Jumping Jacks', series: '4 Rounds', reps: '45s', rest: '90s', notes: 'Descanso largo al final' }
+                        { name: 'Pilates Bar Thrusters', series: '3 Rounds', reps: '10–15', rest: '20–30s', notes: 'Sentadilla + press; no arquees; exhala arriba.' },
+                        { name: 'Fast Band Rows', series: '3 Rounds', reps: '15–25', rest: '20–30s', notes: 'Rápido pero controlado; hombros lejos de orejas.' },
+                        { name: 'Lunge with Twist', series: '3 Rounds', reps: '8–12/lado', rest: '20–30s', notes: 'Estabilidad primero; rota desde el core.' },
+                        { name: 'Push-ups', series: '3 Rounds', reps: '6–12', rest: '20–30s', notes: 'Escala a rodillas o manos elevadas si hace falta.' },
+                        { name: 'Jumping Jacks', series: '3 Rounds', reps: '30–45s', rest: '90s', notes: 'Descanso largo al final de cada ronda.' }
                     ]
                 }
             },
             REST: {
                 title: 'ESTADO: REGENERACIÓN DE SISTEMAS',
-                description: 'El sistema entra en fase de reparación sináptica y crecimiento muscular. Priorizar el descanso.'
+                description: 'Día de descanso activo opcional: 20–40 min caminata suave + 8–12 min movilidad (cadera/tobillo/columna) + 5 min respiración. Prioriza sueño e hidratación.'
             }
         };
 
         const exerciseLibrary = {
             'Dumbbell Bench Press': { category: 'Chest', equipment: '🏋️ Mancuernas', difficulty: 'Intermedio', form: { es: ['1. Acuéstate en un banco', '2. Sostén las mancernas a nivel del pecho', '3. Empuja las mancernas hacia arriba hasta extender los brazos'] }, tips: { es: ['✓ Controla el peso en la bajada', '✗ Evita: Codos muy abiertos'] }, muscleGroups: ['Pectoral', 'Tríceps'] },
-            'Push-ups': { category: 'Chest', equipment: '🛏️ Tapete', difficulty: 'Principiante', form: { es: ['1. Plancha alta, manos al ancho de hombros', '2. Baja el cuerpo hasta que el pecho casi toque el suelo', '3. Empuja de vuelta a la posición inicial'] }, tips: { es: ['✓ Mantén el core contraído', '✗ Evita: Dejar caer las caderas'] }, muscleGroups: ['Pectoral', 'Core'] },
-            'Pilates Bar Shoulder Press': { category: 'Shoulders', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Pisa la banda, barra a altura de hombros', '2. Empuja la barra hacia arriba hasta extender los brazos', '3. Baja con control'] }, tips: { es: ['✓ Mantén la espalda recta', '✗ Evita: Usar impulso para empujar'] }, muscleGroups: ['Hombros'] },
-            'Band Flys': { category: 'Chest', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Fija la banda, extiende el brazo', '2. Trae el brazo cruzando el cuerpo en movimiento de abrazo', '3. Regresa con control'] }, tips: { es: ['✓ Contrae el pecho al final', '✗ Evita: Bloquear el codo'] }, muscleGroups: ['Pectoral'] },
-            'Band Lateral Raises': { category: 'Shoulders', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Párate sobre la banda', '2. Eleva los brazos hacia los lados hasta la altura de los hombros', '3. Baja lentamente'] }, tips: { es: ['✓ Codos ligeramente más altos que las manos', '✗ Evita: Balancear las bandas'] }, muscleGroups: ['Hombros (Lateral)'] },
-            'Band Triceps Pushdowns': { category: 'Triceps', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Fija banda alta, codos a 90°', '2. Empuja la banda hacia abajo hasta extender los brazos', '3. Regresa a nivel del pecho con control'] }, tips: { es: ['✓ Codos pegados al cuerpo', '✗ Evita: Dejar que los codos se abran'] }, muscleGroups: ['Tríceps'] },
-            'Wrist Extension (Palms down)': { category: 'Forearms', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Antebrazo apoyado, palma hacia abajo', '2. Levanta la barra extendiendo la muñeca hacia arriba', '3. Baja con control'] }, tips: { es: ['✓ Muévete solo desde la muñeca', '✗ Evita: Mover el antebrazo o codo'] }, muscleGroups: ['Antebrazos (Extensores)'] },
-            'Pilates Bar Squat': { category: 'Legs', equipment: '🎯 Barra Pilates', difficulty: 'Intermedio', form: { es: ['1. Pisa la banda, barra sobre los hombros', '2. Baja a sentadilla hasta paralelo', '3. Empuja a través de los talones para subir'] }, tips: { es: ['✓ Mantén el pecho erguido', '✗ Evita: Rodillas colapsando hacia adentro'] }, muscleGroups: ['Cuádriceps', 'Glúteos'] },
-            'Dumbbell Romanian Deadlift': { category: 'Hamstrings', equipment: '🏋️ Mancuernas', difficulty: 'Intermedio', form: { es: ['1. Ligero doblez en rodillas', '2. Bisagra desde las caderas, bajando el peso', '3. Empuja las caderas hacia adelante para volver a incorporarte'] }, tips: { es: ['✓ Mantén la espalda recta', '✗ Evita: Redondear la espalda baja'] }, muscleGroups: ['Isquiotibiales', 'Glúteos'] },
-            'Static Lunge (Ankle Focus)': { category: 'Legs', equipment: '🛏️ Tapete', difficulty: 'Intermedio', form: { es: ['1. Da un paso adelante, ambas rodillas a 90°', '2. Rodilla frontal alineada con el tobillo', '3. Mantén el torso erguido'] }, tips: { es: ['✓ Enfócate en la estabilidad del tobillo', '✗ Evita: Rodilla frontal pasando los dedos'] }, muscleGroups: ['Cuádriceps', 'Glúteos', 'Estabilizadores'] },
-            'Banded Glute Bridge': { category: 'Glutes', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Banda sobre las rodillas', '2. Empuja las rodillas hacia afuera contra la banda', '3. Levanta caderas, contrayendo glúteos'] }, tips: { es: ['✓ Mantén tensión en la banda', '✗ Evita: Hiperextensión de espalda baja'] }, muscleGroups: ['Glúteos', 'Isquiotibiales'] },
-            'Calf Raises (Ankle Focus)': { category: 'Calves', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Eleva sobre los dedos, levantando talones alto', '2. Pausa brevemente en la parte superior', '3. Baja con control'] }, tips: { es: ['✓ Rango completo de movimiento', '✗ Evita: Rebotar'] }, muscleGroups: ['Pantorrillas', 'Tobillo'] },
+            'Push-ups': { category: 'Pecho/Tríceps', equipment: '🛏️ Tapete', difficulty: 'Principiante–Intermedio', form: { es: ['1. Manos bajo hombros (o un poco más abiertas), dedos bien apoyados', '2. Cuerpo en línea recta: glúteos firmes y abdomen activo', '3. Baja en 2–3s hasta que el pecho quede a pocos cm del suelo', '4. Codos a ~30–60° del torso (no totalmente abiertos)', '5. Empuja el suelo, sube manteniendo la línea y exhala'] }, tips: { es: ['✓ Escala: rodillas al suelo o manos elevadas (mesa/sillón)', '✓ Progresión: pies elevados o pausa 1s abajo', '✓ Mantén cuello largo (mirada al piso)', '✗ Evita: caderas caídas o “pico” con cadera alta', '✗ Evita: hombros encogidos hacia orejas'] }, muscleGroups: ['Pectoral', 'Tríceps', 'Core'] },
+            'Pilates Bar Shoulder Press': { category: 'Shoulders', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Pisa la banda con ambos pies (estable) y toma la barra a altura de hombros', '2. Aprieta glúteos y abdomen (costillas abajo) para evitar arquear la espalda', '3. Empuja la barra hacia arriba en línea ligeramente al frente de la cabeza', '4. Pausa 1s arriba sin encoger hombros', '5. Baja controlado hasta volver a hombros (2s)'] }, tips: { es: ['✓ Exhala al empujar, inhala al bajar', '✓ Mantén muñecas neutras (no dobladas)', '✓ Si molesta el hombro: reduce rango o usa agarre más estrecho', '✗ Evita: arquear la espalda baja para “ganar” repeticiones', '✗ Evita: hombros hacia orejas en la parte alta'] }, muscleGroups: ['Hombros', 'Tríceps (sec.)', 'Core (est.)'] },
+            'Band Flys': { category: 'Chest', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Ancla la banda detrás (altura pecho) y toma las asas con brazos semi-flexionados', '2. Da un paso adelante para crear tensión inicial', '3. Junta las manos al frente (como “abrazar un árbol”) sin bloquear codos', '4. Pausa 1s apretando el pecho', '5. Regresa lento abriendo brazos hasta sentir estiramiento controlado'] }, tips: { es: ['✓ Mantén hombros abajo/atrás', '✓ Movimiento desde el pecho, no desde el trapecio', '✓ Ajusta tensión alejándote o acercándote al anclaje', '✗ Evita: hiperextender hombro al abrir demasiado', '✗ Evita: codos completamente rectos'] }, muscleGroups: ['Pectoral', 'Deltoide anterior (sec.)'] },
+            'Band Lateral Raises': { category: 'Shoulders', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Párate sobre la banda (un pie o ambos) y toma extremos con manos a los lados', '2. Ligera flexión de codos y torso estable', '3. Eleva brazos hacia los lados hasta altura de hombros (o un poco menos si molesta)', '4. Pausa 1s arriba sin encoger hombros', '5. Baja en 2–3s manteniendo tensión'] }, tips: { es: ['✓ Codo “lidera” el movimiento; muñeca relajada', '✓ Hombros lejos de orejas', '✓ Trabaja en rango sin dolor', '✗ Evita: balancearte o usar impulso', '✗ Evita: subir por encima de lo controlable si duele'] }, muscleGroups: ['Hombros (Lateral)'] },
+            'Band Triceps Pushdowns': { category: 'Triceps', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Ancla la banda arriba, codos pegados al cuerpo a ~90°', '2. Pecho alto, abdomen firme', '3. Extiende codos hacia abajo hasta bloquear suave (sin dolor)', '4. Pausa 1s apretando tríceps', '5. Regresa controlado manteniendo codos fijos'] }, tips: { es: ['✓ Mantén hombros estables y codos quietos', '✓ Si se abre el codo: baja la tensión', '✗ Evita: inclinarte demasiado y convertirlo en “jalón” de espalda', '✗ Evita: mover hombros adelante/atrás'] }, muscleGroups: ['Tríceps'] },
+            'Wrist Extension (Palms down)': { category: 'Forearms', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Apoya antebrazo en muslo o banco, palma hacia abajo, muñeca fuera del borde', '2. Deja que la muñeca baje controlado (extensión al final del rango)', '3. Sube la mano extendiendo muñeca sin despegar el antebrazo', '4. Pausa 1s arriba', '5. Baja lento (2–3s)'] }, tips: { es: ['✓ Rango pequeño pero controlado', '✓ Mantén el codo quieto', '✗ Evita: dolor punzante (reduce rango/tensión)', '✗ Evita: mover todo el brazo'] }, muscleGroups: ['Antebrazos (Extensores)'] },
+            'Pilates Bar Squat': { category: 'Legs', equipment: '🎯 Barra Pilates', difficulty: 'Intermedio', form: { es: ['1. Barra sobre espalda alta (no cuello) y banda bajo los pies', '2. Inhala y baja: cadera atrás y abajo, rodillas siguen la punta del pie', '3. Mantén talones apoyados y torso estable', '4. Llega a profundidad que controles sin perder postura', '5. Exhala y sube empujando el piso; aprieta glúteos al final'] }, tips: { es: ['✓ Mantén “pie trípode” (talón + base dedo gordo + base dedo chico)', '✓ Rodillas hacia afuera, sin colapsar', '✓ Si hay dolor: reduce profundidad o usa apoyo (silla) como referencia', '✗ Evita: levantar talones o colapsar rodillas', '✗ Evita: redondear espalda en el fondo'] }, muscleGroups: ['Cuádriceps', 'Glúteos', 'Aductores (sec.)'] },
+            'Band Romanian Deadlift': { category: 'Isquios/Glúteos', equipment: '🟰 Bandas', difficulty: 'Intermedio', form: { es: ['1. Pisa la banda con ambos pies, toma extremos o usa barra Pilates', '2. Rodillas con leve flexión, pecho abierto y espalda neutra', '3. Empuja cadera atrás (bisagra) manteniendo la banda cerca del cuerpo', '4. Baja hasta sentir estiramiento en isquiotibiales (sin redondear)', '5. Sube “empujando el suelo” y apretando glúteos al final'] }, tips: { es: ['✓ Piensa: cadera atrás, no “bajar con la espalda”', '✓ Mantén peso en mediopié-talón', '✓ Tempo: 2–3s bajada, 1s subida', '✗ Evita: redondear espalda baja o mirar al frente exagerado', '✗ Evita: bajar más allá del rango que puedas controlar'] }, muscleGroups: ['Isquiotibiales', 'Glúteos', 'Erectores (estabilización)'] },
+            'Static Lunge (Ankle Focus)': { category: 'Legs', equipment: '🛏️ Tapete', difficulty: 'Intermedio', form: { es: ['1. Posición de estocada: pie adelante firme, pie atrás en punta', '2. Baja vertical: ambas rodillas flexionan, torso erguido', '3. Mantén rodilla frontal alineada con 2º–3º dedo del pie', '4. Pausa 1s abajo sin “rebotar”', '5. Sube empujando el suelo con el pie delantero'] }, tips: { es: ['✓ Pie delantero trípode: no colapses el arco', '✓ Usa apoyo (pared/silla) si pierdes equilibrio', '✗ Evita: rodilla frontal colapsando hacia adentro', '✗ Evita: inclinarte demasiado hacia adelante'] }, muscleGroups: ['Cuádriceps', 'Glúteos', 'Estabilizadores'] },
+            'Banded Glute Bridge': { category: 'Glutes', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Acuéstate boca arriba, pies al ancho de cadera, banda sobre rodillas', '2. Aprieta abdomen (zona lumbar neutra) y abre rodillas contra la banda', '3. Eleva caderas hasta alinear rodillas–cadera–hombros', '4. Pausa 2s apretando glúteos', '5. Baja lento sin perder tensión'] }, tips: { es: ['✓ Empuja desde talones', '✓ Mantén costillas abajo (sin arquear)', '✗ Evita: empujar con espalda baja', '✗ Evita: rodillas colapsando hacia adentro'] }, muscleGroups: ['Glúteos', 'Isquiotibiales', 'Glúteo medio (est.)'] },
+            'Calf Raises (Ankle Focus)': { category: 'Calves', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. De pie, apóyate suave en pared si hace falta', '2. Eleva talones lo más alto posible manteniendo control', '3. Pausa 1s arriba', '4. Baja lento 2–3s hasta estirar gemelo', '5. Repite sin rebote'] }, tips: { es: ['✓ Piensa en “subir alto y bajar lento”', '✓ Haz una pierna si te queda fácil', '✗ Evita: rebotar o acortar el rango', '✗ Evita: rodillas bloqueadas con tensión'] }, muscleGroups: ['Pantorrillas', 'Sóleo', 'Tobillo'] },
             'Pilates Bar Lat Pulldown': { category: 'Back', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Fija banda alta, agarre ancho', '2. Jala la barra hacia abajo hasta nivel del pecho', '3. Regresa con control'] }, tips: { es: ['✓ Contrae la espalda en la parte inferior', '✗ Evita: Usar los brazos en lugar de la espalda'] }, muscleGroups: ['Dorsales', 'Espalda'] },
             'Dumbbell Bent-Over Row': { category: 'Back', equipment: '🏋️ Mancuernas', difficulty: 'Intermedio', form: { es: ['1. Bisagra desde cadera, espalda paralela al suelo', '2. Jala las mancernas hacia la caja torácica', '3. Baja con control'] }, tips: { es: ['✓ Mantén core contraído', '✗ Evita: Redondear la espalda baja'] }, muscleGroups: ['Espalda', 'Dorsales'] },
             'Band Face Pulls': { category: 'Shoulders', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Fija banda a altura de la cara', '2. Jala la banda hacia la cara/cabeza', '3. Rota las manos hacia afuera al final'] }, tips: { es: ['✓ Codos altos', '✗ Evita: Jalar hacia abajo'] }, muscleGroups: ['Hombros (Posterior)', 'Espalda Superior'] },
+            'Band Pull-Aparts': { category: 'Espalda superior/Postura', equipment: '🟰 Bandas', difficulty: 'Principiante', form: { es: ['1. Banda al frente a la altura del pecho, brazos extendidos', '2. Hombros abajo/atrás, pecho abierto', '3. Separa manos hasta que la banda toque el pecho (o lo máximo controlado)', '4. Pausa 1s apretando escápulas', '5. Regresa lento sin perder tensión'] }, tips: { es: ['✓ Mantén costillas abajo (sin arquear)', '✓ Piensa en “meter escápulas en el bolsillo trasero”', '✗ Evita: encoger hombros o doblar demasiado codos', '✗ Evita: ir rápido y perder control'] }, muscleGroups: ['Romboides', 'Trapecio medio', 'Deltoide posterior'] },
             'Pilates Bar Bicep Curl': { category: 'Biceps', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Pisa la banda, brazos extendidos', '2. Dobla los codos, curva la barra hacia los hombros', '3. Baja con control'] }, tips: { es: ['✓ Contrae los bíceps en la parte superior', '✗ Evita: Balancearte o usar impulso'] }, muscleGroups: ['Bíceps'] },
             'Wrist Flexion (Palms up)': { category: 'Forearms', equipment: '🎯 Barra Pilates', difficulty: 'Principiante', form: { es: ['1. Antebrazo apoyado, palma hacia arriba', '2. Curva la muñeca hacia arriba', '3. Baja con control'] }, tips: { es: ['✓ Muévete solo desde la muñeca', '✗ Evita: Mover antebrazo o codo'] }, muscleGroups: ['Antebrazos (Flexores)'] },
             'Pull Through': { category: 'Glutes', equipment: '🟰 Bandas', difficulty: 'Intermedio', form: { es: ['1. Fija la banda baja, de espaldas al anclaje', '2. Bisagra de cadera, empuja banda entre piernas', '3. Empuja las caderas hacia adelante (extensión completa)'] }, tips: { es: ['✓ La fuerza viene de las caderas, no de los brazos', '✗ Evita: Redondear la espalda baja'] }, muscleGroups: ['Glúteos', 'Isquiotibiales'] },
@@ -531,7 +535,23 @@
             'Mountain Climbers': { category: 'Cardio', equipment: '🛏️ Tapete', difficulty: 'Intermedio', form: { es: ['1. Plancha alta', '2. Lleva rodilla al pecho, cambia rápidamente de pierna', '3. Continúa alternando a ritmo rápido'] }, tips: { es: ['✓ Ritmo rápido pero controlado', '✗ Evita: Dejar rebotar las caderas'] }, muscleGroups: ['Core', 'Cardio'] },
             'Russian Twists': { category: 'Core', equipment: '🎯 Barra Pilates', difficulty: 'Intermedio', form: { es: ['1. Sentado, torso inclinado (45°)', '2. Gira el torso de lado a lado'] }, tips: { es: ['✓ La rotación viene del core', '✗ Evita: Rotar demasiado lejos'] }, muscleGroups: ['Oblicuos', 'Core'] },
             'Leg Raises': { category: 'Core', equipment: '🛏️ Tapete', difficulty: 'Intermedio', form: { es: ['1. Acuéstate, manos bajo glúteos', '2. Eleva piernas hasta 90 grados', '3. Baja lentamente sin tocar el piso'] }, tips: { es: ['✓ Presiona la espalda baja contra el piso', '✗ Evita: Arquear la espalda baja'] }, muscleGroups: ['Abs (Bajo)', 'Flexores'] },
-            'Jump Squats': { category: 'Legs', equipment: '🛏️ Espacio', difficulty: 'Intermedio', form: { es: ['1. Baja a sentadilla completa', '2. Explota hacia arriba en salto', '3. Aterriza suavemente de vuelta a sentadilla'] }, tips: { es: ['✓ Poder explosivo desde las piernas', '✗ Evita: Aterrizar con rodillas bloqueadas'] }, muscleGroups: ['Cuádriceps', 'Glúteos', 'Cardio'] }
+            'Jump Squats': { category: 'Legs', equipment: '🛏️ Espacio', difficulty: 'Intermedio', form: { es: ['1. Baja a sentadilla completa', '2. Explota hacia arriba en salto', '3. Aterriza suave y vuelve a cargar la sentadilla'] }, tips: { es: ['✓ Aterriza silencioso con rodillas “suaves”', '✗ Evita: colapsar rodillas hacia adentro'] }, muscleGroups: ['Cuádriceps', 'Glúteos', 'Cardio'] },
+
+            'Dead Bug': { category: 'Core / Pilates', equipment: '🛏️ Tapete', difficulty: 'Principiante', form: { es: ['1. Boca arriba: caderas y rodillas a 90°, brazos al techo', '2. Exhala largo y “baja costillas” (core activo)', '3. Extiende pierna y brazo contrarios sin despegar zona lumbar', '4. Pausa 1s extendido', '5. Regresa controlado y alterna'] }, tips: { es: ['✓ Calidad > cantidad: rango pequeño si lo necesitas', '✓ Mantén cuello relajado', '✗ Evita: arquear la espalda baja', '✗ Evita: apurar y perder control'] }, muscleGroups: ['Transverso', 'Recto abdominal', 'Control lumbo-pélvico'] },
+
+            'Side Plank': { category: 'Core / Pilates', equipment: '🛏️ Tapete', difficulty: 'Intermedio', form: { es: ['1. Apoya antebrazo bajo el hombro, piernas extendidas (o rodillas como escala)', '2. Eleva la cadera formando una línea recta hombro–cadera–tobillo', '3. Mantén hombro lejos de la oreja y cuello largo', '4. Respira controlado durante toda la serie', '5. Baja con control y cambia de lado'] }, tips: { es: ['✓ Escala: rodillas apoyadas o apoyo de mano', '✓ Mantén glúteos firmes', '✗ Evita: hundir el hombro', '✗ Evita: cadera caída o rotar el torso'] }, muscleGroups: ['Oblicuos', 'Glúteo medio', 'Estabilizadores del hombro'] },
+
+            'Scapular Pull-ups': { category: 'Pull-ups / Espalda', equipment: '🧱 Barra de dominadas', difficulty: 'Principiante', form: { es: ['1. Cuelga de la barra con agarre cómodo (sin dolor)', '2. Sin doblar codos: baja hombros (depresión) y junta levemente escápulas', '3. Sube el pecho 2–4 cm (micro-movimiento) manteniendo brazos rectos', '4. Pausa 1s arriba', '5. Vuelve lento a colgar relajando sin perder control'] }, tips: { es: ['✓ Este ejercicio “enciende” la espalda para dominar la dominada', '✓ Mantén abdomen firme para evitar balanceo', '✗ Evita: doblar codos (ya no es escapular)', '✗ Evita: encoger hombros hacia orejas'] }, muscleGroups: ['Dorsal (activación)', 'Trapecio inferior', 'Romboides'] },
+
+            'Negative Pull-ups': { category: 'Pull-ups / Espalda', equipment: '🧱 Barra de dominadas', difficulty: 'Intermedio', form: { es: ['1. Sube a la posición alta (barbilla sobre barra) usando un banco o salto suave', '2. Activa escápulas (hombros abajo) antes de bajar', '3. Baja en 3–5 segundos hasta brazos casi extendidos', '4. Pausa 1s abajo sin colgarte “muerto” si puedes', '5. Repite manteniendo control (pocas reps, máxima calidad)'] }, tips: { es: ['✓ Meta: controlar la bajada; si caes en 1s, usa más apoyo', '✓ Mantén piernas quietas (sin kipping)', '✗ Evita: dolor en codo/hombro (reduce volumen o rango)', '✗ Evita: bajar muy rápido sin control'] }, muscleGroups: ['Dorsales', 'Bíceps', 'Agarre'] },
+
+            'Dead Bug (Pilates Ball Press)': { category: 'Core / Pilates', equipment: '⚪ Pelota Pilates', difficulty: 'Principiante', form: { es: ['1. Boca arriba: caderas y rodillas a 90°', '2. Coloca la pelota entre mano y rodilla contrarias (o entre ambas manos y rodillas)', '3. Aprieta la pelota con presión constante (20–40%) y exhala largo', '4. Extiende la pierna contraria (la que no presiona) sin perder zona lumbar neutra', '5. Regresa controlado y alterna lados'] }, tips: { es: ['✓ La clave es la exhalación y mantener costillas abajo', '✓ Rango corto si arqueas la espalda', '✗ Evita: apretar al 100% y tensionar cuello', '✗ Evita: perder presión en la pelota (core se “apaga”)'] }, muscleGroups: ['Transverso', 'Oblicuos', 'Control lumbo-pélvico'] },
+
+            'Pilates Ball Rollout': { category: 'Core / Pilates', equipment: '⚪ Pelota Pilates', difficulty: 'Intermedio', form: { es: ['1. De rodillas, antebrazos/manos sobre la pelota (según comodidad)', '2. Aprieta abdomen y baja costillas (no arquees)', '3. Rueda la pelota hacia adelante 10–40 cm manteniendo control', '4. Pausa 1s en el punto más lejano que controles', '5. Regresa tirando con el core, sin colapsar hombros'] }, tips: { es: ['✓ Empieza con recorridos cortos y aumenta gradual', '✓ Mantén glúteos firmes para proteger la zona lumbar', '✗ Evita: arquear la espalda baja al alejar la pelota', '✗ Evita: hombros encogidos hacia orejas'] }, muscleGroups: ['Recto abdominal', 'Transverso', 'Serrato/estabilizadores'] },
+
+            'Pilates Ball Glute Bridge': { category: 'Glutes / Core', equipment: '⚪ Pelota Pilates', difficulty: 'Intermedio', form: { es: ['1. Boca arriba, talones sobre la pelota (piernas al ancho de cadera)', '2. Activa abdomen (costillas abajo) y eleva la cadera a puente', '3. Mantén la pelota estable: presión pareja con ambos talones', '4. Pausa 1–2s arriba apretando glúteos', '5. Baja lento sin perder control'] }, tips: { es: ['✓ Si se hace difícil: haz puente sin pelota o con pies en el suelo', '✓ Mantén rodillas alineadas (no colapsen)', '✗ Evita: hiperextender la espalda baja en la parte alta', '✗ Evita: empujar con isquios sin activar glúteos (piensa “aprieta glúteos”)'] }, muscleGroups: ['Glúteo mayor', 'Isquios (sec.)', 'Core (est.)'] },
+
+            'Pilates Ball Hamstring Curl': { category: 'Isquios / Glúteos', equipment: '⚪ Pelota Pilates', difficulty: 'Intermedio', form: { es: ['1. Boca arriba, talones sobre la pelota, brazos al costado', '2. Eleva cadera a puente (cuerpo en línea hombro–cadera–rodilla)', '3. Flexiona rodillas trayendo la pelota hacia ti (sin que caiga la cadera)', '4. Extiende piernas alejando la pelota de nuevo con control', '5. Mantén cadera alta todo el set (o baja a versión más fácil)'] }, tips: { es: ['✓ Prioriza control: mejor 8 buenas que 15 con cadera cayendo', '✓ Si tiembla mucho: reduce rango o baja la cadera (curl parcial)', '✗ Evita: cadera que sube/baja como “serrucho”', '✗ Evita: calambres por ir demasiado rápido (hazlo lento)'] }, muscleGroups: ['Isquiotibiales', 'Glúteos (est.)', 'Core (est.)'] }
         };
 
         function getExerciseSlug(name) {
@@ -552,8 +572,32 @@
         let currentViewDate = new Date();
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         
+        const STREAK_COMPLETION_THRESHOLD = 0.8; // % mínimo para contar el día como “completado”
+
+        function pad2(n) {
+            return String(n).padStart(2, '0');
+        }
+
+        function normalizeDateKey(key) {
+            const m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(String(key || '').trim());
+            if (!m) return null;
+            const y = Number(m[1]);
+            const mo = Number(m[2]);
+            const da = Number(m[3]);
+            if (!Number.isFinite(y) || !Number.isFinite(mo) || !Number.isFinite(da)) return null;
+            if (mo < 1 || mo > 12 || da < 1 || da > 31) return null;
+            return `${y}-${pad2(mo)}-${pad2(da)}`;
+        }
+
+        function dateFromKey(key) {
+            const norm = normalizeDateKey(key);
+            if (!norm) return null;
+            const [y, m, d] = norm.split('-').map(Number);
+            return new Date(y, m - 1, d);
+        }
+
         function dateKeyFromDate(d) {
-            return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+            return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
         }
 
         const LOCAL_STORAGE_KEY = 'ftber_progress';
@@ -571,7 +615,7 @@
         generateMonthlySchedule();
 
         // --- Language ---
-        const translations = { es: { today: 'Hoy', calendar: 'Calendario', routines: 'Rutinas', library: 'Biblioteca', dailyProgress: 'ESTADO DE LA SECUENCIA DIARIA', equipmentNeeded: 'UNIDADES DE REQUERIMIENTO', exercise: 'MÓDULO DE ACCIÓN', sets: 'CICLOS', reps: 'REPETICIONES', rest: 'COOLDOWN', notes: 'PARÁMETROS', done: 'COMPLETADO', selectRoutineDesc: 'ANÁLISIS DE MÓDULOS DE ENTRENAMIENTO.', exerciseLibraryDesc: 'BASE DE DATOS DE MOVIMIENTO.' } };
+        const translations = { es: { today: 'Hoy', calendar: 'Calendario', routines: 'Rutinas', library: 'Biblioteca', dailyProgress: 'Progreso del día', equipmentNeeded: 'Equipo', exercise: 'Ejercicio', sets: 'Series', reps: 'Repeticiones', rest: 'Descanso', notes: 'Notas', done: 'Hecho', selectRoutineDesc: 'Selecciona una rutina para ver los ejercicios.', exerciseLibraryDesc: 'Guía de ejercicios con técnica y consejos.' } };
         function t(key) { return translations.es[key] || key; }
 
         function updateLanguageDisplay() {
@@ -604,7 +648,7 @@
                     <div class="mb-6">
                         <h3 class="text-center font-bold text-xl mb-2 text-primary">${t('dailyProgress')}</h3>
                         <div id="progress-text" class="text-center font-bold text-lg text-accent" style="text-shadow: var(--glow-accent);">0% Completado</div>
-                        <div id="progress-count" class="text-center text-secondary text-sm mt-1">0 de ${routineData.details.exercises.length} módulos</div>
+                        <div id="progress-count" class="text-center text-secondary text-sm mt-1">0 de ${routineData.details.exercises.length} ejercicios</div>
                         <div class="progress-bar-container mt-3" style="height: 1rem;"><div id="progress-bar" class="progress-bar" style="width: 0%;"></div></div>
                     </div>`;
                 
@@ -685,10 +729,15 @@
             
             const equipmentSet = new Set();
             routineData.details.exercises.forEach(ex => {
+                const lib = exerciseLibrary[ex.name];
+                if (lib && lib.equipment) {
+                    equipmentSet.add(lib.equipment);
+                    return;
+                }
                 if (ex.name.includes('Dumbbell')) equipmentSet.add('🏋️ Mancuernas');
                 if (ex.name.includes('Pilates Bar')) equipmentSet.add('🎯 Barra Pilates');
                 if (ex.name.includes('Band')) equipmentSet.add('🟰 Bandas');
-                if (ex.name.includes('Tapete') || ex.name.includes('Plank')) equipmentSet.add('🛏️ Tapete');
+                if (ex.name.includes('Plank')) equipmentSet.add('🛏️ Tapete');
             });
             
             let equipmentHTML = equipmentSet.size > 0 && isTodayView ? `<div class="mt-8 p-5 bg-gradient-to-br from-black/50 to-black/30 border-2 border-metabolic/60 rounded-lg shadow-lg" style="box-shadow: 0 0 20px rgba(255, 0, 110, 0.3), inset 0 0 15px rgba(255, 0, 110, 0.1);"><h4 class="font-bold text-lg text-metabolic mb-4 flex items-center gap-2" style="text-shadow: 0 0 10px rgba(255, 0, 110, 0.8);">⚙️ ${t('equipmentNeeded')}</h4><div class="grid grid-cols-1 md:grid-cols-2 gap-3">${Array.from(equipmentSet).map(eq => `<div class="text-base font-semibold text-white bg-black/40 p-3 rounded-lg border border-metabolic/40 flex items-center gap-2" style="text-shadow: 0 0 5px rgba(255, 0, 110, 0.6);">${eq}</div>`).join('')}</div></div>` : '';
@@ -704,7 +753,38 @@
         }
 
         // --- Logic ---
-        function getStoredProgress() { try { return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {}; } catch { return {}; } }
+        function getStoredProgress() {
+            try {
+                const raw = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {};
+                const normalized = {};
+                let mutated = false;
+
+                for (const [k, v] of Object.entries(raw)) {
+                    const nk = normalizeDateKey(k) || k;
+                    if (nk !== k) mutated = true;
+
+                    if (Array.isArray(v)) {
+                        if (!Array.isArray(normalized[nk])) {
+                            normalized[nk] = v;
+                        } else {
+                            const a = normalized[nk];
+                            const maxLen = Math.max(a.length, v.length);
+                            const merged = new Array(maxLen).fill(false);
+                            for (let i = 0; i < maxLen; i++) merged[i] = !!a[i] || !!v[i];
+                            normalized[nk] = merged;
+                            mutated = true;
+                        }
+                    } else {
+                        normalized[nk] = v;
+                    }
+                }
+
+                if (mutated) localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(normalized));
+                return normalized;
+            } catch {
+                return {};
+            }
+        }
 
         function getHistoricalStats() {
             const allProgress = getStoredProgress();
@@ -717,41 +797,50 @@
                 completedDays: []
             };
             
-            // Calculate statistics
-            const sortedDates = Object.keys(allProgress).sort();
-            for (const dateStr of sortedDates) {
-                const dayData = allProgress[dateStr];
-                if (Array.isArray(dayData) && dayData.length > 0) {
-                    const completed = dayData.filter(Boolean).length;
-                    if (completed > 0) {
-                        stats.totalWorkouts++;
-                        stats.totalExercisesCompleted += completed;
-                        stats.lastWorkoutDate = dateStr;
-                        stats.completedDays.push(dateStr);
-                    }
+            const completed = [];
+
+            for (const [dateKey, dayData] of Object.entries(allProgress)) {
+                if (!Array.isArray(dayData) || dayData.length === 0) continue;
+                const done = dayData.filter(Boolean).length;
+                const total = dayData.length;
+                stats.totalExercisesCompleted += done;
+                const pct = total > 0 ? (done / total) : 0;
+                if (pct >= STREAK_COMPLETION_THRESHOLD) {
+                    const dt = dateFromKey(dateKey);
+                    if (dt) completed.push({ key: normalizeDateKey(dateKey) || dateKey, date: dt });
                 }
             }
-            
-            // Calculate streaks
-            let currentS = 0;
-            let maxS = 0;
-            for (let i = 0; i < stats.completedDays.length; i++) {
-                const curr = new Date(stats.completedDays[i]);
+
+            completed.sort((a, b) => a.date - b.date);
+            stats.completedDays = completed.map(x => x.key);
+            stats.totalWorkouts = stats.completedDays.length;
+            stats.lastWorkoutDate = stats.completedDays.length ? stats.completedDays[stats.completedDays.length - 1] : null;
+
+            // Mejor racha
+            let best = 0;
+            let run = 0;
+            for (let i = 0; i < completed.length; i++) {
                 if (i === 0) {
-                    currentS = 1;
+                    run = 1;
                 } else {
-                    const prev = new Date(stats.completedDays[i - 1]);
-                    const diffTime = Math.abs(curr - prev);
-                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                    if (diffDays === 1) {
-                        currentS++;
-                    } else {
-                        maxS = Math.max(maxS, currentS);
-                        currentS = 1;
-                    }
+                    const prev = completed[i - 1].date;
+                    const curr = completed[i].date;
+                    const diffDays = Math.round((curr - prev) / (1000 * 60 * 60 * 24));
+                    run = (diffDays === 1) ? (run + 1) : 1;
                 }
+                best = Math.max(best, run);
             }
-            stats.longestStreak = Math.max(maxS, currentS);
+            stats.longestStreak = best;
+
+            // Racha actual (hasta hoy)
+            const completedSet = new Set(stats.completedDays);
+            let streak = 0;
+            let cursor = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+            while (completedSet.has(dateKeyFromDate(cursor))) {
+                streak++;
+                cursor.setDate(cursor.getDate() - 1);
+            }
+            stats.currentStreak = streak;
             
             return stats;
         }
@@ -792,7 +881,7 @@
                 if (isRestDay) {
                     count.innerText = `${checked > 0 ? '✓' : '✗'} Descanso`;
                 } else {
-                    count.innerText = `${checked} de ${checkboxes.length} módulos`;
+                    count.innerText = `${checked} de ${checkboxes.length} ejercicios`;
                 }
             }
         }
@@ -802,10 +891,16 @@
             const stats = getHistoricalStats();
             let total = 0, completed = 0;
             for (let d = 1; d <= daysInMonth; d++) {
-                const r = routines[monthlySchedule[d]];
-                if (r && r.details) {
+                const routineKey = monthlySchedule[d];
+                const r = routines[routineKey];
+                const key = dateKeyFromDate(new Date(year, month, d));
+                const dayP = allProgress[key] || [];
+
+                if (routineKey === 'REST') {
+                    total += 1;
+                    completed += (dayP[0] ? 1 : 0);
+                } else if (r && r.details) {
                     total += r.details.exercises.length;
-                    const dayP = allProgress[`${year}-${month + 1}-${d}`] || [];
                     completed += dayP.filter(Boolean).length;
                 }
             }
@@ -819,11 +914,12 @@
                 globalStatsEl.innerHTML = `
                     <div class="grid grid-cols-3 gap-2 text-center text-sm">
                         <div class="p-2 bg-black/30 rounded border border-accent/30">
-                            <div class="text-secondary text-xs">RACHA</div>
-                            <div class="text-accent font-bold">${stats.longestStreak}d</div>
+                            <div class="text-secondary text-xs">RACHA ACTUAL</div>
+                            <div class="text-accent font-bold">${stats.currentStreak}d</div>
+                            <div class="text-secondary/70 text-[10px] mt-1">Mejor: ${stats.longestStreak}d</div>
                         </div>
                         <div class="p-2 bg-black/30 rounded border border-accent/30">
-                            <div class="text-secondary text-xs">WORKOUTS</div>
+                            <div class="text-secondary text-xs">DÍAS COMPLETOS</div>
                             <div class="text-accent font-bold">${stats.totalWorkouts}</div>
                         </div>
                         <div class="p-2 bg-black/30 rounded border border-accent/30">
@@ -838,6 +934,12 @@
         function generateCalendar() {
             const calendarBody = document.getElementById('calendar-body');
             if (!calendarBody) return;
+            const titleEl = document.getElementById('calendar-title');
+            if (titleEl) {
+                const monthLabelRaw = new Date(year, month, 1).toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+                const monthLabel = monthLabelRaw.charAt(0).toUpperCase() + monthLabelRaw.slice(1);
+                titleEl.textContent = `📅 ${monthLabel}`;
+            }
             const firstDay = new Date(year, month, 1).getDay();
             const offset = (firstDay === 0) ? 6 : firstDay - 1;
             const allProgress = getStoredProgress();
@@ -856,8 +958,8 @@
                 const act = routines[key];
                 const isToday = d === today.getDate() && month === today.getMonth() && year === today.getFullYear();
                 const colors = getRoutineColorClass(key);
-                const dayP = allProgress[`${year}-${month + 1}-${d}`] || [];
                 const dateObj = new Date(year, month, d);
+                const dayP = allProgress[dateKeyFromDate(dateObj)] || [];
                 const dayOfWeek = dayNames[dateObj.getDay()];
                 
                 // Get emoji and short description
@@ -876,7 +978,15 @@
                 let badge = '';
                 let progressBar = '';
                 let pct = 0;
-                if (act.details) {
+                if (key === 'REST') {
+                    pct = dayP[0] ? 100 : 0;
+                    if (pct > 0) {
+                        badge = `<span class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">✓ ${pct}%</span>`;
+                        progressBar = `<div class="w-full h-1 bg-black/40 rounded-full overflow-hidden mt-1"><div class="h-full bg-emerald-500 transition-all" style="width: ${pct}%"></div></div>`;
+                    } else {
+                        progressBar = `<div class="w-full h-1 bg-black/40 rounded-full mt-1"></div>`;
+                    }
+                } else if (act.details) {
                     pct = act.details.exercises.length > 0 ? Math.round((dayP.filter(Boolean).length / act.details.exercises.length) * 100) : 0;
                     if(pct > 0) {
                         const barColor = pct === 100 ? 'bg-emerald-500' : 'bg-amber-500';
