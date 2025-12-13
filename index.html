@@ -285,101 +285,6 @@
             margin-bottom: 0.75rem;
             text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
         }
-
-        /* AI Chat Floating Button & Modal */
-        .ai-fab {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            width: 3.5rem;
-            height: 3.5rem;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--metabolic));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 20px rgba(0, 208, 255, 0.6);
-            cursor: pointer;
-            z-index: 40;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-        .ai-fab:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
-        }
-
-        .ai-chat-modal {
-            display: none;
-            position: fixed;
-            bottom: 6rem;
-            right: 1.5rem;
-            width: 90%;
-            max-width: 380px;
-            height: 500px;
-            background-color: rgba(15, 15, 20, 0.98);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--accent);
-            border-radius: 1rem;
-            z-index: 40;
-            flex-direction: column;
-            box-shadow: 0 0 30px rgba(0, 208, 255, 0.3);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .ai-chat-modal.open {
-            display: flex;
-            animation: slideUp 0.3s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .chat-bubble {
-            max-width: 85%;
-            padding: 0.75rem;
-            border-radius: 0.75rem;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .chat-bubble.user {
-            align-self: flex-end;
-            background-color: var(--accent);
-            color: #111827;
-            border-bottom-right-radius: 0;
-        }
-
-        .chat-bubble.ai {
-            align-self: flex-start;
-            background-color: #374151;
-            color: var(--primary);
-            border-bottom-left-radius: 0;
-            border: 1px solid var(--border);
-        }
-        
-        .typing-indicator::after {
-            content: '...';
-            animation: typing 1.5s infinite;
-        }
-        
-        @keyframes typing {
-            0% { content: '.'; }
-            33% { content: '..'; }
-            66% { content: '...'; }
-        }
         
         /* Celebration Confetti */
         .confetti {
@@ -410,9 +315,9 @@
             </div>
         </header>
 
-        <div class="mb-6 p-4 bg-black/40 rounded-lg shadow-lg border border-accent backdrop-blur-sm" style="box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);">
-            <h2 class="text-center text-lg font-bold text-accent mb-3" style="text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);">⚡ MÉTRICA GLOBAL DE CONSOLIDACIÓN ⚡</h2>
-            <div id="global-progress-text" class="text-center font-bold text-lg mb-2 text-accent-hover" style="text-shadow: 0 0 15px rgba(29, 255, 127, 0.8);">0%</div>
+        <div class="mb-6 p-4 bg-black/40 rounded-lg shadow-lg border border-accent/50 backdrop-blur-sm">
+            <h2 class="text-center text-lg font-bold text-accent mb-3">📊 Progreso Mensual</h2>
+            <div id="global-progress-text" class="text-center font-bold text-xl mb-2 text-emerald-400">0%</div>
             <div class="progress-bar-container">
                 <div id="global-progress-bar" class="progress-bar" style="width: 0%;"></div>
             </div>
@@ -433,7 +338,11 @@
             
             <section id="calendario" class="content-section">
                 <div class="calendar-container w-full">
-                    <div class="calendar-headers">
+                    <div class="text-center mb-6">
+                        <h2 id="calendar-title" class="text-2xl md:text-3xl font-bold text-accent mb-2" style="text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);">📅 Diciembre 2025</h2>
+                        <p class="text-sm text-secondary/70">Tu plan de entrenamiento mensual</p>
+                    </div>
+                    <div class="calendar-headers hidden md:grid">
                         <div class="calendar-day-header">Lun</div>
                         <div class="calendar-day-header">Mar</div>
                         <div class="calendar-day-header">Mié</div>
@@ -448,52 +357,46 @@
             
             <section id="rutinas" class="content-section">
                 <div class="mb-6 text-center">
-                    <p class="text-secondary"><span data-key="selectRoutineDesc">Aquí puedes revisar los detalles de cada rutina. Selecciona una para ver los ejercicios.</span></p>
+                    <h2 class="text-2xl md:text-3xl font-bold text-accent mb-2" style="text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);">🏋️ Rutinas de Entrenamiento</h2>
+                    <p class="text-sm text-secondary/70">Selecciona una rutina para ver los ejercicios</p>
                 </div>
-                <div class="flex flex-wrap justify-center gap-2 mb-8">
-                    <button data-routine="TORSO_PUSH" class="routine-selector bg-card-bg hover:bg-accent/20 text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="push">💪 <span data-routine-key="TORSO_PUSH">PUSH-ARMAMENTO</span></button>
-                    <button data-routine="LEGS_ANKLES" class="routine-selector bg-card-bg hover:bg-accent/20 text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="legsAnkles">🦵 <span data-routine-key="LEGS_ANKLES">LEGS-MOVILIDAD</span></button>
-                    <button data-routine="CORE_CARDIO" class="routine-selector bg-card-bg hover:bg-metabolic/20 text-metabolic font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="coreCardio">🔥 <span data-routine-key="CORE_CARDIO">CORE-FUSIÓN</span></button>
-                    <button data-routine="TORSO_PULL" class="routine-selector bg-card-bg hover:bg-accent/20 text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="pull">🏋️‍♂️ <span data-routine-key="TORSO_PULL">PULL-POSTERIOR</span></button>
-                    <button data-routine="GLUTES_CORE" class="routine-selector bg-card-bg hover:bg-accent/20 text-accent font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="glutesCore">🍑 <span data-routine-key="GLUTES_CORE">GLUTES-NÚCLEO</span></button>
-                    <button data-routine="METABOLIC" class="routine-selector bg-card-bg hover:bg-metabolic/20 text-metabolic font-semibold py-2 px-4 border border-border rounded-lg shadow-md" data-title="metabolic">⚡ <span data-routine-key="METABOLIC">SHOCK-VEL. MAX.</span></button>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
+                    <button data-routine="TORSO_PUSH" class="routine-selector bg-gradient-to-br from-sky-900/40 to-sky-800/20 hover:from-sky-800/60 hover:to-sky-700/40 text-sky-400 font-semibold py-4 px-4 border-2 border-sky-500/50 rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-sky-500/30">
+                        <div class="text-2xl mb-1">💪</div>
+                        <span class="text-sm">Push</span>
+                    </button>
+                    <button data-routine="LEGS_ANKLES" class="routine-selector bg-gradient-to-br from-amber-900/40 to-amber-800/20 hover:from-amber-800/60 hover:to-amber-700/40 text-amber-400 font-semibold py-4 px-4 border-2 border-amber-500/50 rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-amber-500/30">
+                        <div class="text-2xl mb-1">🦵</div>
+                        <span class="text-sm">Piernas</span>
+                    </button>
+                    <button data-routine="CORE_CARDIO" class="routine-selector bg-gradient-to-br from-pink-900/40 to-pink-800/20 hover:from-pink-800/60 hover:to-pink-700/40 text-pink-400 font-semibold py-4 px-4 border-2 border-pink-500/50 rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-pink-500/30">
+                        <div class="text-2xl mb-1">🔥</div>
+                        <span class="text-sm">Core & Cardio</span>
+                    </button>
+                    <button data-routine="TORSO_PULL" class="routine-selector bg-gradient-to-br from-sky-900/40 to-sky-800/20 hover:from-sky-800/60 hover:to-sky-700/40 text-sky-400 font-semibold py-4 px-4 border-2 border-sky-500/50 rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-sky-500/30">
+                        <div class="text-2xl mb-1">🏋️</div>
+                        <span class="text-sm">Pull</span>
+                    </button>
+                    <button data-routine="GLUTES_CORE" class="routine-selector bg-gradient-to-br from-amber-900/40 to-amber-800/20 hover:from-amber-800/60 hover:to-amber-700/40 text-amber-400 font-semibold py-4 px-4 border-2 border-amber-500/50 rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-amber-500/30">
+                        <div class="text-2xl mb-1">🍑</div>
+                        <span class="text-sm">Glúteos</span>
+                    </button>
+                    <button data-routine="METABOLIC" class="routine-selector bg-gradient-to-br from-pink-900/40 to-pink-800/20 hover:from-pink-800/60 hover:to-pink-700/40 text-pink-400 font-semibold py-4 px-4 border-2 border-pink-500/50 rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-pink-500/30">
+                        <div class="text-2xl mb-1">⚡</div>
+                        <span class="text-sm">Metabólico</span>
+                    </button>
                 </div>
                 <div id="routine-details-container"></div>
             </section>
             
             <section id="biblioteca" class="content-section">
                 <div class="mb-8 text-center">
-                    <h2 class="text-3xl font-bold mb-2">📚 <span data-key="library">Biblioteca</span></h2>
-                    <p class="text-secondary"><span data-key="exerciseLibraryDesc">Guía completa de todos los ejercicios con forma y técnica adecuadas</span></p>
+                    <h2 class="text-2xl md:text-3xl font-bold text-accent mb-2" style="text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);">📚 Biblioteca de Ejercicios</h2>
+                    <p class="text-sm text-secondary/70">Guía completa con técnica y forma correcta</p>
                 </div>
                 <div id="exercise-library"></div>
             </section>
         </main>
-    </div>
-
-    <div id="ai-fab" class="ai-fab" title="Enlace Neural con Berni (IA)">
-        <div class="text-white text-2xl">✨</div>
-    </div>
-
-    <div id="ai-chat-modal" class="ai-chat-modal">
-        <div class="bg-black/50 p-3 border-b border-accent/30 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                <h3 class="text-accent font-bold text-sm tracking-wider">BERNI_AI [ONLINE]</h3>
-            </div>
-            <button id="close-ai-modal" class="text-secondary hover:text-white">✕</button>
-        </div>
-        <div id="chat-messages" class="chat-messages">
-            <div class="chat-bubble ai">
-                Iniciando enlace neural... ⚡<br>Soy Berni. Analizo tu biometría y rutina. ¿En qué puedo asistirte hoy, recluta?
-            </div>
-        </div>
-        <div class="p-3 bg-black/50 border-t border-border">
-            <div class="flex gap-2">
-                <input type="text" id="chat-input" class="flex-1 bg-bg-color border border-border rounded-lg px-3 py-2 text-sm text-primary focus:outline-none focus:border-accent placeholder-secondary/50" placeholder="Pregunta sobre técnica, dieta...">
-                <button id="send-chat" class="bg-accent/20 hover:bg-accent/40 text-accent border border-accent/50 rounded-lg px-3 transition">➤</button>
-            </div>
-        </div>
     </div>
 
     <div id="exercise-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
@@ -939,6 +842,7 @@
             const offset = (firstDay === 0) ? 6 : firstDay - 1;
             const allProgress = getStoredProgress();
             const isMobile = window.innerWidth <= 768;
+            const dayNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
 
             let html = '';
             
@@ -950,63 +854,71 @@
             for (let d = 1; d <= daysInMonth; d++) {
                 const key = monthlySchedule[d];
                 const act = routines[key];
-                const isToday = d === today.getDate();
+                const isToday = d === today.getDate() && month === today.getMonth() && year === today.getFullYear();
                 const colors = getRoutineColorClass(key);
                 const dayP = allProgress[`${year}-${month + 1}-${d}`] || [];
+                const dateObj = new Date(year, month, d);
+                const dayOfWeek = dayNames[dateObj.getDay()];
                 
                 // Get emoji and short description
                 let emoji = '';
                 let shortDesc = '';
                 if (key === 'REST') {
                     emoji = '🛌';
-                    shortDesc = 'DESCANSO';
+                    shortDesc = 'Descanso';
                 } else {
                     const titleParts = act.title.split(':');
                     emoji = titleParts[0].trim().split(' ')[0];
-                    shortDesc = titleParts[1] ? titleParts[1].trim().split(' ').slice(0, 2).join(' ') : 'ENTRENAMIENTO';
+                    shortDesc = titleParts[1] ? titleParts[1].trim().split(' ').slice(0, 3).join(' ') : 'Entrenamiento';
                 }
                 
                 // Calculate progress percentage
                 let badge = '';
                 let progressBar = '';
+                let pct = 0;
                 if (act.details) {
-                    const pct = act.details.exercises.length > 0 ? Math.round((dayP.filter(Boolean).length / act.details.exercises.length) * 100) : 0;
+                    pct = act.details.exercises.length > 0 ? Math.round((dayP.filter(Boolean).length / act.details.exercises.length) * 100) : 0;
                     if(pct > 0) {
-                        const barColor = pct === 100 ? 'bg-emerald-500' : 'bg-yellow-500';
-                        badge = `<span class="inline-block text-[9px] px-1.5 py-0.5 rounded-full ${pct===100?'bg-emerald-500/20 text-emerald-300':'bg-yellow-500/20 text-yellow-300'} font-bold">${pct}%</span>`;
-                        progressBar = `<div class="w-full h-0.5 bg-black/40 rounded-full overflow-hidden"><div class="h-full ${barColor}" style="width: ${pct}%"></div></div>`;
+                        const barColor = pct === 100 ? 'bg-emerald-500' : 'bg-amber-500';
+                        badge = `<span class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${pct===100?'bg-emerald-500/20 text-emerald-300':'bg-amber-500/20 text-amber-300'} font-bold">${pct===100?'✓':''} ${pct}%</span>`;
+                        progressBar = `<div class="w-full h-1 bg-black/40 rounded-full overflow-hidden mt-1"><div class="h-full ${barColor} transition-all" style="width: ${pct}%"></div></div>`;
                     } else {
-                        progressBar = `<div class="w-full h-0.5 bg-black/40 rounded-full"></div>`;
+                        progressBar = `<div class="w-full h-1 bg-black/40 rounded-full mt-1"></div>`;
                     }
                 }
 
                 if (isMobile) {
-                    // Mobile list layout
-                    html += `<div class="calendar-day ${colors.bg} rounded-md border ${colors.border} cursor-pointer hover:shadow-lg transition-all ${isToday ? 'today' : ''}" data-date="${year}-${month + 1}-${d}">
-                                <div>
-                                    <div class="flex flex-col">
-                                        <div class="font-bold text-accent">${d}</div>
-                                        <div class="text-[10px] font-semibold ${colors.text}">${shortDesc}</div>
-                                        ${act.details ? `<div class="text-[9px] text-secondary/70">${act.details.exercises.length} módulos</div>` : ''}
+                    // Mobile list layout - improved with day name
+                    html += `<div class="calendar-day ${colors.bg} rounded-lg border-2 ${colors.border} cursor-pointer hover:shadow-lg transition-all ${isToday ? 'today ring-2 ring-accent' : ''}" data-date="${year}-${month + 1}-${d}">
+                                <div class="flex items-center gap-4 flex-1">
+                                    <div class="flex flex-col items-center min-w-[50px]">
+                                        <div class="text-[10px] uppercase text-secondary/70 font-semibold">${dayOfWeek}</div>
+                                        <div class="text-2xl font-bold ${isToday ? 'text-accent' : 'text-primary'}">${d}</div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="text-sm font-semibold ${colors.text}">${shortDesc}</div>
+                                        ${act.details ? `<div class="text-xs text-secondary/60">${act.details.exercises.length} ejercicios</div>` : '<div class="text-xs text-secondary/60">Recuperación activa</div>'}
+                                        ${progressBar}
                                     </div>
                                 </div>
-                                <div class="text-2xl">${emoji}</div>
-                                <div class="flex flex-col gap-1 items-end ml-2">
-                                    ${progressBar}
+                                <div class="flex flex-col items-end gap-1">
+                                    <div class="text-3xl">${emoji}</div>
                                     ${badge}
                                 </div>
                             </div>`;
                 } else {
-                    // Desktop grid layout
-                    html += `<div class="calendar-day ${colors.bg} rounded-md border ${colors.border} flex flex-col cursor-pointer hover:shadow-lg transition-all ${isToday ? 'today' : ''}" data-date="${year}-${month + 1}-${d}" style="min-height: 100px;">
+                    // Desktop grid layout - improved
+                    html += `<div class="calendar-day ${colors.bg} rounded-lg border-2 ${colors.border} flex flex-col cursor-pointer hover:shadow-lg hover:scale-105 transition-all ${isToday ? 'today ring-2 ring-accent ring-offset-2 ring-offset-black' : ''}" data-date="${year}-${month + 1}-${d}" style="min-height: 110px;">
                                 <div class="flex items-center justify-between mb-1">
-                                    <div class="font-bold text-sm text-accent">${d}</div>
-                                    <div class="text-lg">${emoji}</div>
+                                    <div class="font-bold text-base ${isToday ? 'text-accent' : 'text-primary'}">${d}</div>
+                                    <div class="text-xl">${emoji}</div>
                                 </div>
-                                <div class="text-[10px] font-semibold ${colors.text} leading-tight line-clamp-2">${shortDesc}</div>
-                                ${act.details ? `<div class="text-[9px] text-secondary/70 mt-0.5">${act.details.exercises.length} módulos</div>` : ''}
-                                ${progressBar}
-                                ${badge}
+                                <div class="text-[11px] font-semibold ${colors.text} leading-tight mb-1">${shortDesc}</div>
+                                ${act.details ? `<div class="text-[10px] text-secondary/60">${act.details.exercises.length} ejercicios</div>` : '<div class="text-[10px] text-secondary/60">Recuperación</div>'}
+                                <div class="mt-auto">
+                                    ${progressBar}
+                                    <div class="mt-1">${badge}</div>
+                                </div>
                              </div>`;
                 }
             }
@@ -1038,63 +950,6 @@
         }
 
         // --- Initialization ---
-        function initGeminiChat() {
-            const fab = document.getElementById('ai-fab');
-            const chatModal = document.getElementById('ai-chat-modal');
-            const closeChat = document.getElementById('close-ai-modal');
-            const sendBtn = document.getElementById('send-chat');
-            const chatInput = document.getElementById('chat-input');
-            const messagesContainer = document.getElementById('chat-messages');
-            
-            const apiKey = ""; // 🔐 INSERT YOUR GEMINI API KEY FROM https://aistudio.google.com/apikey
-
-            fab.addEventListener('click', () => { chatModal.classList.add('open'); chatInput.focus(); });
-            closeChat.addEventListener('click', () => chatModal.classList.remove('open'));
-
-            function getSystemTelemetry() {
-                const activeTab = document.querySelector('.nav-tab.tab-active')?.innerText.replace(/\p{Emoji}/gu, '').trim() || 'Menu';
-                const globalProgress = document.getElementById('global-progress-text')?.innerText || '0%';
-                let specificContext = "Navegando menús.";
-                if (document.getElementById('hoy').classList.contains('active')) {
-                    const dayProgress = document.getElementById('progress-text')?.innerText || 'No iniciado';
-                    const routineName = document.querySelector('#hoy h2')?.innerText || 'Desconocida';
-                    specificContext = `Ejecutando protocolo: ${routineName}. Estado: ${dayProgress}.`;
-                }
-                return `[TELEMETRÍA] Ubicación: ${activeTab}. Global: ${globalProgress}. Actividad: ${specificContext}`;
-            }
-
-            async function callBernie(prompt) {
-                if(!apiKey) { alert("Por favor configura tu API KEY en el código fuente."); return; }
-                messagesContainer.innerHTML += `<div class="chat-bubble user">${prompt}</div>`;
-                chatInput.value = '';
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                const typingId = 'typing-' + Date.now();
-                messagesContainer.innerHTML += `<div id="${typingId}" class="chat-bubble ai typing-indicator">Pensando</div>`;
-                
-                try {
-                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            contents: [{ parts: [{ text: prompt }] }],
-                            systemInstruction: { parts: [{ text: `Eres Berni, entrenador personal cyberpunk. Respuestas cortas, técnicas, motivadoras. Emojis: 🦾, ⚡. Contexto: ${getSystemTelemetry()}` }] }
-                        })
-                    });
-                    const data = await response.json();
-                    document.getElementById(typingId).remove();
-                    messagesContainer.innerHTML += `<div class="chat-bubble ai">${data.candidates?.[0]?.content?.parts?.[0]?.text || "Error de red."}</div>`;
-                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                } catch (e) {
-                    document.getElementById(typingId).remove();
-                    messagesContainer.innerHTML += `<div class="chat-bubble ai text-metabolic">⚠️ Error del sistema.</div>`;
-                }
-            }
-            sendBtn.addEventListener('click', () => { if(chatInput.value.trim()) callBernie(chatInput.value.trim()); });
-            chatInput.addEventListener('keypress', (e) => { if(e.key==='Enter' && chatInput.value.trim()) callBernie(chatInput.value.trim()); });
-        }
-
-
-
         document.addEventListener('DOMContentLoaded', async () => {
             const modal = document.getElementById('exercise-modal');
             const title = document.getElementById('guide-title');
@@ -1203,7 +1058,6 @@
                 </div>`;
             }).join('')}</div>`;
 
-            initGeminiChat();
             document.querySelector('[data-tab="hoy"]').classList.add('tab-active');
             document.getElementById('hoy').classList.add('active');
         });
