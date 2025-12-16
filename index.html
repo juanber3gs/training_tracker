@@ -396,27 +396,27 @@
                         <p class="text-sm">Elige una rutina para ver ejercicios y equipo.</p>
                     </div>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
-                    <button data-routine="TORSO_PUSH" class="routine-selector bg-gradient-to-br from-sky-900/40 to-sky-800/20 hover:from-sky-800/60 hover:to-sky-700/40 text-sky-400 font-semibold py-4 px-4 border-2 border-sky-500/50 rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-sky-500/30">
+                    <button data-routine="TORSO_PUSH" class="routine-selector btn btn-outline w-full py-6">
                         <div class="text-2xl mb-1">💪</div>
                         <span class="text-sm">Push</span>
                     </button>
-                    <button data-routine="LEGS_ANKLES" class="routine-selector bg-gradient-to-br from-amber-900/40 to-amber-800/20 hover:from-amber-800/60 hover:to-amber-700/40 text-amber-400 font-semibold py-4 px-4 border-2 border-amber-500/50 rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-amber-500/30">
+                    <button data-routine="LEGS_ANKLES" class="routine-selector btn btn-outline w-full py-6">
                         <div class="text-2xl mb-1">🦵</div>
                         <span class="text-sm">Piernas</span>
                     </button>
-                    <button data-routine="CORE_CARDIO" class="routine-selector bg-gradient-to-br from-pink-900/40 to-pink-800/20 hover:from-pink-800/60 hover:to-pink-700/40 text-pink-400 font-semibold py-4 px-4 border-2 border-pink-500/50 rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-pink-500/30">
+                    <button data-routine="CORE_CARDIO" class="routine-selector btn btn-outline w-full py-6">
                         <div class="text-2xl mb-1">🔥</div>
                         <span class="text-sm">Core & Cardio</span>
                     </button>
-                    <button data-routine="TORSO_PULL" class="routine-selector bg-gradient-to-br from-sky-900/40 to-sky-800/20 hover:from-sky-800/60 hover:to-sky-700/40 text-sky-400 font-semibold py-4 px-4 border-2 border-sky-500/50 rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-sky-500/30">
+                    <button data-routine="TORSO_PULL" class="routine-selector btn btn-outline w-full py-6">
                         <div class="text-2xl mb-1">🏋️</div>
                         <span class="text-sm">Pull</span>
                     </button>
-                    <button data-routine="GLUTES_CORE" class="routine-selector bg-gradient-to-br from-amber-900/40 to-amber-800/20 hover:from-amber-800/60 hover:to-amber-700/40 text-amber-400 font-semibold py-4 px-4 border-2 border-amber-500/50 rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-amber-500/30">
+                    <button data-routine="GLUTES_CORE" class="routine-selector btn btn-outline w-full py-6">
                         <div class="text-2xl mb-1">🍑</div>
                         <span class="text-sm">Glúteos</span>
                     </button>
-                    <button data-routine="METABOLIC" class="routine-selector bg-gradient-to-br from-pink-900/40 to-pink-800/20 hover:from-pink-800/60 hover:to-pink-700/40 text-pink-400 font-semibold py-4 px-4 border-2 border-pink-500/50 rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-pink-500/30">
+                    <button data-routine="METABOLIC" class="routine-selector btn btn-outline w-full py-6">
                         <div class="text-2xl mb-1">⚡</div>
                         <span class="text-sm">Metabólico</span>
                     </button>
@@ -689,7 +689,7 @@
                 
                 // Mostrar botón de guardar cuando no es el día actual
                 if (!isCurrentDay) {
-                    saveButtonHTML = `<div class="mt-6 p-4 bg-accent/15 border-2 border-accent rounded-lg"><button id="save-day-btn" class="w-full px-4 py-3 bg-accent/25 hover:bg-accent/50 border border-accent text-accent rounded-lg font-bold transition text-base md:text-lg" style="text-shadow: 0 0 8px rgba(0, 212, 255, 0.8); box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);">💾 GUARDAR CAMBIOS DEL DÍA</button></div>`;
+                    saveButtonHTML = `<div class="mt-6"><button id="save-day-btn" class="btn btn-primary w-full" style="height: 3rem; font-size: 1rem;">💾 Guardar cambios del día</button></div>`;
                 }
             }
             return `<div class="relative bg-card-bg/80 p-4 md:p-6 lg:p-8 rounded-lg shadow-lg border ${isHighIntensity ? 'metabolic-border metabolic-shadow' : 'border-border'}">
@@ -705,14 +705,17 @@
             const rows = exercises.map((ex, index) => `
                 <tr class="border-b border-border last:border-b-0 hover:bg-black/20 transition">
                     <td class="p-2 md:p-3 lg:p-4 font-medium text-primary text-sm md:text-base">
-                        <div class="font-semibold flex items-center gap-1 md:gap-2"><span>${getExerciseName(ex.name)}</span><button class="exercise-info-btn text-[10px] px-1 py-0.5 rounded text-secondary/60 hover:text-accent/80 hover:bg-accent/10 transition" data-exercise="${ex.name}">📚</button></div>
+                        <div class="font-semibold flex items-center gap-1 md:gap-2">
+                            <span>${getExerciseName(ex.name)}</span>
+                            <button class="exercise-info-btn btn btn-outline" style="height: 1.5rem; padding: 0 0.5rem; font-size: 10px" data-exercise="${ex.name}">Detalles</button>
+                        </div>
                         <div class="text-xs text-secondary hidden md:block">${getExerciseDescription(ex.name)}</div>
                     </td>
                     <td class="p-2 md:p-3 lg:p-4 text-center text-secondary text-sm md:text-base">${ex.series}</td>
                     <td class="p-2 md:p-3 lg:p-4 text-center text-secondary text-sm md:text-base">${ex.reps}</td>
                     <td class="p-2 md:p-3 lg:p-4 text-center text-secondary text-sm md:text-base">
                         <div class="flex justify-center items-center gap-1 md:gap-2"><span class="rest-text text-xs md:text-sm">${ex.rest}</span>
-                        ${isTodayView ? `<button class="rest-timer-btn text-[10px] px-1 py-0.5 rounded text-accent/60 hover:text-accent hover:bg-accent/10 transition" data-rest="${ex.rest}">⏱️</button><span class="rest-countdown text-secondary text-xs"></span>` : ''}</div>
+                        ${isTodayView ? `<button class="rest-timer-btn btn btn-outline" style="height: 1.5rem; padding: 0 0.5rem; font-size: 10px" data-rest="${ex.rest}">⏱️</button><span class="rest-countdown text-secondary text-xs"></span>` : ''}</div>
                     </td>
                     <td class="p-2 md:p-3 lg:p-4 text-xs md:text-sm text-secondary hidden md:table-cell">${ex.notes || ''}</td>
                     ${isTodayView ? `<td class="p-2 md:p-3 lg:p-4 text-center"><input type="checkbox" data-exercise-index="${index}" class="h-4 w-4 rounded bg-card-bg border-border accent-accent"></td>` : ''}
