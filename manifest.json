@@ -1,6 +1,6 @@
 {
-  "name": "BERNI AI TRAINING",
-  "short_name": "Berni Training",
+  "name": "JB Home AI Workout",
+  "short_name": "JB Workout",
   "description": "Home workouts with clean UX and progress tracking",
   "start_url": "/index.html",
   "scope": "/",
