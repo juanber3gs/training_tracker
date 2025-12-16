@@ -378,23 +378,23 @@
                         <p class="text-sm text-secondary/70">Tu plan de entrenamiento mensual</p>
                     </div>
                     <div class="calendar-headers hidden md:grid">
-                        <div class="calendar-day-header">Lun</div>
-                        <div class="calendar-day-header">Mar</div>
-                        <div class="calendar-day-header">Mié</div>
-                        <div class="calendar-day-header">Jue</div>
-                        <div class="calendar-day-header">Vie</div>
-                        <div class="calendar-day-header">Sáb</div>
-                        <div class="calendar-day-header">Dom</div>
-                    </div>
+                                <div class="calendar-day-header">Lun</div>
+                                <div class="calendar-day-header">Mar</div>
+                                <div class="calendar-day-header">Mié</div>
+                                <div class="calendar-day-header">Jue</div>
+                                <div class="calendar-day-header">Vie</div>
+                                <div class="calendar-day-header">Sáb</div>
+                                <div class="calendar-day-header">Dom</div>
+                            </div>
                     <div id="calendar-body" class="calendar-grid"></div>
                 </div>
             </section>
             
             <section id="rutinas" class="content-section">
                 <div class="mb-6 text-center">
-                    <h2 class="text-2xl md:text-3xl font-bold text-accent mb-2" style="text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);">🏋️ Rutinas de Entrenamiento</h2>
-                    <p class="text-sm text-secondary/70">Selecciona una rutina para ver los ejercicios</p>
-                </div>
+                        <h2 class="text-2xl md:text-3xl font-bold" style="color: var(--accent)">🏋️ Rutinas</h2>
+                        <p class="text-sm">Elige una rutina para ver ejercicios y equipo.</p>
+                    </div>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
                     <button data-routine="TORSO_PUSH" class="routine-selector bg-gradient-to-br from-sky-900/40 to-sky-800/20 hover:from-sky-800/60 hover:to-sky-700/40 text-sky-400 font-semibold py-4 px-4 border-2 border-sky-500/50 rounded-xl shadow-lg transition-all hover:scale-105 hover:shadow-sky-500/30">
                         <div class="text-2xl mb-1">💪</div>
@@ -426,8 +426,8 @@
             
             <section id="biblioteca" class="content-section">
                 <div class="mb-8 text-center">
-                    <h2 class="text-2xl md:text-3xl font-bold text-accent mb-2" style="text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);">📚 Biblioteca de Ejercicios</h2>
-                    <p class="text-sm text-secondary/70">Guía completa con técnica y forma correcta</p>
+                    <h2 class="text-2xl md:text-3xl font-bold" style="color: var(--accent)">📚 Biblioteca</h2>
+                    <p class="text-sm">Técnica clara, tips y grupos musculares.</p>
                 </div>
                 <div id="exercise-library"></div>
             </section>
@@ -650,7 +650,7 @@
         generateMonthlySchedule();
 
         // --- Language ---
-        const translations = { es: { today: 'Hoy', calendar: 'Calendario', routines: 'Rutinas', library: 'Biblioteca', dailyProgress: 'Progreso del día', equipmentNeeded: 'Equipo', exercise: 'Ejercicio', sets: 'Series', reps: 'Repeticiones', rest: 'Descanso', notes: 'Notas', done: 'Hecho', selectRoutineDesc: 'Selecciona una rutina para ver los ejercicios.', exerciseLibraryDesc: 'Guía de ejercicios con técnica y consejos.' } };
+            const translations = { es: { today: 'Hoy', calendar: 'Calendario', routines: 'Rutinas', library: 'Biblioteca', dailyProgress: 'Progreso diario', equipmentNeeded: 'Equipo', exercise: 'Ejercicio', sets: 'Series', reps: 'Repeticiones', rest: 'Descanso', notes: 'Notas', done: 'Hecho', selectRoutineDesc: 'Elige una rutina para ver ejercicios.', exerciseLibraryDesc: 'Técnica y consejos por ejercicio.' } };
         function t(key) { return translations.es[key] || key; }
 
         function updateLanguageDisplay() {
@@ -1062,7 +1062,7 @@
                                     <div class="text-xl">${emoji}</div>
                                 </div>
                                 <div class="text-[11px] font-semibold ${colors.text} leading-tight mb-1">${shortDesc}</div>
-                                ${act.details ? `<div class="text-[10px] text-secondary/60">${act.details.exercises.length} ejercicios</div>` : '<div class="text-[10px] text-secondary/60">Recuperación</div>'}
+                                ${act.details ? `<div class="text-[10px] text-secondary/60">${act.details.exercises.length} ejercicios</div>` : '<div class="text-[10px] text-secondary/60">Descanso activo</div>'}
                                 <div class="mt-auto">
                                     ${progressBar}
                                     <div class="mt-1">${badge}</div>
