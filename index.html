@@ -340,9 +340,11 @@
                 
                 <div class="flex items-center justify-center gap-4 mt-6">
                     <span class="flex-1 h-px bg-gradient-to-r from-transparent to-accent/50"></span>
-                    <p class="text-xs md:text-sm tracking-widest font-semibold text-secondary/70">HOME WORKOUTS</p>
-                    <span class="text-accent/50">⚡</span>
-                    <p class="text-xs md:text-sm tracking-widest font-semibold text-secondary/70">OPTIMIZE. EXECUTE. EVOLVE.</p>
+                    <p class="text-xs md:text-sm tracking-widest font-semibold text-secondary/70">ENTRENA EN CASA</p>
+                    <span style="color: var(--accent)">•</span>
+                    <p class="text-xs md:text-sm tracking-widest font-semibold text-secondary/70">PROGRESO CLARO</p>
+                    <span style="color: var(--accent)">•</span>
+                    <p class="text-xs md:text-sm tracking-widest font-semibold text-secondary/70">HÁBITOS SOSTENIBLES</p>
                     <span class="flex-1 h-px bg-gradient-to-l from-transparent to-accent/50"></span>
                 </div>
             </div>
@@ -1097,6 +1099,13 @@
 
         // --- Initialization ---
         document.addEventListener('DOMContentLoaded', async () => {
+            // Remove any legacy "Descargar app" buttons from previous versions
+            document.querySelectorAll('button, a').forEach(el => {
+                const txt = (el.textContent || '').trim().toUpperCase();
+                if (txt.includes('DESCARGAR APP')) {
+                    el.remove();
+                }
+            });
             const modal = document.getElementById('exercise-modal');
             const title = document.getElementById('guide-title');
             const content = document.getElementById('guide-content');
