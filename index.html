@@ -96,6 +96,33 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            height: 2.5rem;
+            padding: 0 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.04);
+            color: var(--primary);
+            font-weight: 600;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.05s ease;
+        }
+        .btn:hover { background: rgba(42, 209, 201, 0.12); border-color: var(--accent); }
+        .btn:active { transform: translateY(1px); }
+        .btn-primary { background: var(--accent); color: #042628; border-color: var(--accent); }
+        .btn-primary:hover { background: var(--accent-hover); }
+        .btn-outline { background: transparent; border-color: var(--border); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* Typography scale */
+        h1 { letter-spacing: -0.02em; }
+        h2 { letter-spacing: -0.01em; }
+        p { color: var(--secondary); }
+
         /* Calendar */
         .calendar-container {
             padding: 1rem;
@@ -321,9 +348,9 @@
             </div>
         </header>
 
-        <div class="mb-6 p-4 bg-black/40 rounded-lg shadow-lg border border-accent/50 backdrop-blur-sm">
-            <h2 class="text-center text-lg font-bold text-accent mb-3">📊 Progreso Mensual</h2>
-            <div id="global-progress-text" class="text-center font-bold text-xl mb-2 text-emerald-400">0%</div>
+        <div class="mb-6 p-4 rounded-lg border border-border" style="background: rgba(255,255,255,0.03)">
+            <h2 class="text-center text-lg font-bold" style="color: var(--accent)">📊 Progreso Mensual</h2>
+            <div id="global-progress-text" class="text-center font-bold text-xl mb-2" style="color: var(--success)">0%</div>
             <div class="progress-bar-container">
                 <div id="global-progress-bar" class="progress-bar" style="width: 0%;"></div>
             </div>
@@ -987,19 +1014,22 @@
                 if (key === 'REST') {
                     pct = dayP[0] ? 100 : 0;
                     if (pct > 0) {
-                        badge = `<span class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">✓ ${pct}%</span>`;
-                        progressBar = `<div class="w-full h-1 bg-black/40 rounded-full overflow-hidden mt-1"><div class="h-full bg-emerald-500 transition-all" style="width: ${pct}%"></div></div>`;
+                        badge = `<span class="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full" style="background: rgba(74, 222, 128, 0.15); color: var(--success); font-weight: 700;">✓ ${pct}%</span>`;
+                        progressBar = `<div class="w-full h-1 rounded-full overflow-hidden mt-1" style="background: rgba(255,255,255,0.06)"><div class="h-full transition-all" style="background: var(--success); width: ${pct}%"></div></div>`;
                     } else {
-                        progressBar = `<div class="w-full h-1 bg-black/40 rounded-full mt-1"></div>`;
+                        progressBar = `<div class="w-full h-1 rounded-full mt-1" style="background: rgba(255,255,255,0.06)"></div>`;
                     }
                 } else if (act.details) {
                     pct = act.details.exercises.length > 0 ? Math.round((dayP.filter(Boolean).length / act.details.exercises.length) * 100) : 0;
                     if(pct > 0) {
-                        const barColor = pct === 100 ? 'bg-emerald-500' : 'bg-amber-500';
-                        badge = `<span class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${pct===100?'bg-emerald-500/20 text-emerald-300':'bg-amber-500/20 text-amber-300'} font-bold">${pct===100?'✓':''} ${pct}%</span>`;
-                        progressBar = `<div class="w-full h-1 bg-black/40 rounded-full overflow-hidden mt-1"><div class="h-full ${barColor} transition-all" style="width: ${pct}%"></div></div>`;
+                        const isFull = pct === 100;
+                        const barColor = isFull ? 'var(--success)' : 'var(--warning)';
+                        const badgeBg = isFull ? 'rgba(74,222,128,0.15)' : 'rgba(245,158,11,0.15)';
+                        const badgeText = isFull ? 'var(--success)' : 'var(--warning)';
+                        badge = `<span class="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full" style="background: ${badgeBg}; color: ${badgeText}; font-weight: 700;">${isFull?'✓':''} ${pct}%</span>`;
+                        progressBar = `<div class="w-full h-1 rounded-full overflow-hidden mt-1" style="background: rgba(255,255,255,0.06)"><div class="h-full transition-all" style="background: ${barColor}; width: ${pct}%"></div></div>`;
                     } else {
-                        progressBar = `<div class="w-full h-1 bg-black/40 rounded-full mt-1"></div>`;
+                        progressBar = `<div class="w-full h-1 rounded-full mt-1" style="background: rgba(255,255,255,0.06)"></div>`;
                     }
                 }
 
