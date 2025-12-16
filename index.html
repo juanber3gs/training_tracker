@@ -118,6 +118,20 @@
         .btn-outline { background: transparent; border-color: var(--border); }
         .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
+        /* Micro-interactions */
+        .routine-selector {
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.2s ease;
+        }
+        .routine-selector:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+        }
+
+        /* Spacing rhythm utilities */
+        .section { margin: 1.25rem 0 1.75rem; }
+        .section-lg { margin: 1.5rem 0 2rem; }
+
         /* Typography scale */
         h1 { letter-spacing: -0.02em; }
         h2 { letter-spacing: -0.01em; }
@@ -350,7 +364,7 @@
             </div>
         </header>
 
-        <div class="mb-6 p-4 rounded-lg border border-border" style="background: rgba(255,255,255,0.03)">
+        <div class="section-lg p-4 rounded-lg border border-border" style="background: rgba(255,255,255,0.03)">
             <h2 class="text-center text-lg font-bold" style="color: var(--accent)">📊 Progreso Mensual</h2>
             <div id="global-progress-text" class="text-center font-bold text-xl mb-2" style="color: var(--success)">0%</div>
             <div class="progress-bar-container">
@@ -391,7 +405,7 @@
             </section>
             
             <section id="rutinas" class="content-section">
-                <div class="mb-6 text-center">
+                <div class="section text-center">
                         <h2 class="text-2xl md:text-3xl font-bold" style="color: var(--accent)">🏋️ Rutinas</h2>
                         <p class="text-sm">Elige una rutina para ver ejercicios y equipo.</p>
                     </div>
@@ -425,7 +439,7 @@
             </section>
             
             <section id="biblioteca" class="content-section">
-                <div class="mb-8 text-center">
+                <div class="section-lg text-center">
                     <h2 class="text-2xl md:text-3xl font-bold" style="color: var(--accent)">📚 Biblioteca</h2>
                     <p class="text-sm">Técnica clara, tips y grupos musculares.</p>
                 </div>
