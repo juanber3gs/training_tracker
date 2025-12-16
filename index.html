@@ -434,11 +434,11 @@
         </main>
     </div>
 
-    <div id="exercise-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-        <div class="bg-black/70 p-6 rounded-xl shadow-2xl border border-accent/50 w-full max-w-lg relative">
-            <button id="modal-close" class="absolute top-3 right-3 text-2xl text-secondary hover:text-accent transition">❌</button>
-            <h2 id="guide-title" class="text-3xl font-bold text-accent mb-4 border-b border-accent/30 pb-2">Detalles del Ejercicio</h2>
-            <div id="guide-content" class="space-y-4 text-white">
+    <div id="exercise-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4" style="background: rgba(11,18,33,0.80); backdrop-filter: blur(4px);">
+        <div class="p-6 rounded-2xl w-full max-w-lg relative" style="background: var(--card-bg); border: 1px solid var(--border); box-shadow: var(--shadow-soft)">
+            <button id="modal-close" class="absolute top-3 right-3 btn btn-outline" aria-label="Cerrar">❌</button>
+            <h2 id="guide-title" class="text-2xl md:text-3xl font-bold mb-4" style="color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Detalles del ejercicio</h2>
+            <div id="guide-content" class="space-y-4" style="color: var(--primary)">
                 <p>Cargando detalles...</p>
             </div>
         </div>
@@ -1113,7 +1113,23 @@
             window.openExerciseInfo = (name) => {
                 const data = exerciseLibrary[name] || { category: 'N/A', equipment: 'N/A', difficulty: 'N/A', form: { es: ['N/A'] }, tips: { es: ['N/A'] }, muscleGroups: ['N/A'] };
                 title.textContent = name;
-                content.innerHTML = `<div class="space-y-4"><div class="flex flex-wrap gap-2"><span class="px-3 py-1 bg-accent/20 text-accent text-xs font-semibold rounded-full">${data.category}</span></div><h4 class="font-bold">Forma:</h4><ul class="list-decimal pl-4 text-sm">${(data.form.es||[]).map(s=>`<li>${s}</li>`).join('')}</ul><h4 class="font-bold">Tips:</h4><div class="text-sm">${(data.tips.es||[]).map(t=>`<p>${t}</p>`).join('')}</div></div>`;
+                const pill = (text) => `<span class="px-3 py-1 rounded-full text-xs font-semibold" style="background: rgba(42,209,201,0.15); color: var(--accent); border: 1px solid var(--border)">${text}</span>`;
+                content.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap gap-2">
+                            ${pill(data.category)}
+                            ${pill(data.equipment)}
+                            ${pill(data.difficulty)}
+                        </div>
+                        <div>
+                            <h4 class="section-title" style="margin-bottom: 0.5rem; color: var(--accent)">Forma</h4>
+                            <ul class="list-decimal pl-4 text-sm" style="color: var(--primary)">${(data.form.es||[]).map(s=>`<li>${s}</li>`).join('')}</ul>
+                        </div>
+                        <div>
+                            <h4 class="section-title" style="margin-bottom: 0.5rem; color: var(--accent)">Tips</h4>
+                            <div class="text-sm" style="color: var(--primary)">${(data.tips.es||[]).map(t=>`<p>${t}</p>`).join('')}</div>
+                        </div>
+                    </div>`;
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
             };
