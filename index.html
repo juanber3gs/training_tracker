@@ -1126,6 +1126,7 @@
             const modal = document.getElementById('exercise-modal');
             const title = document.getElementById('guide-title');
             const content = document.getElementById('guide-content');
+            const tsEl = document.getElementById('build-timestamp');
             
             window.openExerciseInfo = (name) => {
                 const data = exerciseLibrary[name] || { category: 'N/A', equipment: 'N/A', difficulty: 'N/A', form: { es: ['N/A'] }, tips: { es: ['N/A'] }, muscleGroups: ['N/A'] };
@@ -1248,8 +1249,20 @@
 
             document.querySelector('[data-tab="hoy"]').classList.add('tab-active');
             document.getElementById('hoy').classList.add('active');
+
+            // Build timestamp (UTC) for deployed asset reference
+            try {
+                const now = new Date();
+                const pad = (n)=> String(n).padStart(2,'0');
+                const ts = `${now.getUTCFullYear()}-${pad(now.getUTCMonth()+1)}-${pad(now.getUTCDate())} ${pad(now.getUTCHours())}:${pad(now.getUTCMinutes())} UTC`;
+                if (tsEl) tsEl.textContent = ts;
+            } catch { if (tsEl) tsEl.textContent = 'N/A'; }
         });
     </script>
+    <footer class="mt-8 text-center text-xs" style="color: var(--secondary)">
+        <div style="border-top: 1px solid var(--border); margin: 1rem auto; max-width: 980px"></div>
+        <span>Última actualización: </span><span id="build-timestamp">actualizando…</span>
+    </footer>
 </body>
 </html>
 
