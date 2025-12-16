@@ -1,12 +1,12 @@
 {
-  "name": "Online Fitness Tracker - AI Training Workouts",
-  "short_name": "Fitness Tracker",
-  "description": "Advanced personal fitness training tracker with retro-futuristic design",
+  "name": "BERNI AI TRAINING",
+  "short_name": "Berni Training",
+  "description": "Home workouts with clean UX and progress tracking",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#10001C",
-  "theme_color": "#00D0FF",
+  "background_color": "#0b1221",
+  "theme_color": "#2ad1c9",
   "orientation": "portrait-primary",
   "icons": [
     {
