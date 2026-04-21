@@ -2,7 +2,7 @@
   "name": "BERNI AI TRAINING",
   "short_name": "Berni Training",
   "description": "Home workouts with clean UX and progress tracking",
-  "start_url": "/training_tracker/",
+  "start_url": "/training_tracker/index.html",
   "scope": "/training_tracker/",
   "display": "standalone",
   "background_color": "#0b1221",
