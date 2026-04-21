@@ -2,27 +2,27 @@
   "name": "BERNI AI TRAINING",
   "short_name": "Berni Training",
   "description": "Home workouts with clean UX and progress tracking",
-  "start_url": "/index.html",
-  "scope": "/",
+  "start_url": "/training_tracker/",
+  "scope": "/training_tracker/",
   "display": "standalone",
   "background_color": "#0b1221",
   "theme_color": "#2ad1c9",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/imagenes/logo.png",
+      "src": "/training_tracker/imagenes/logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/imagenes/logo.png",
+      "src": "/training_tracker/imagenes/logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/imagenes/logo.png",
+      "src": "/training_tracker/imagenes/logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
@@ -31,7 +31,7 @@
   "categories": ["health", "fitness"],
   "screenshots": [
     {
-      "src": "/imagenes/logo.png",
+      "src": "/training_tracker/imagenes/logo.png",
       "sizes": "540x720",
       "form_factor": "narrow"
     }
