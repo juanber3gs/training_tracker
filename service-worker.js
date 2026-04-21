@@ -1,7 +1,8 @@
-const CACHE_NAME = 'fitness-tracker-v3';
+const CACHE_NAME = 'fitness-tracker-v4';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
+  '/training_tracker/',
+  '/training_tracker/index.html',
+  '/training_tracker/manifest.json',
   'https://cdn.tailwindcss.com',
   'https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;600;700;900&display=swap'
 ];
