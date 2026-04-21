@@ -657,7 +657,9 @@
             for (let d = 1; d <= daysInMonth; d++) {
                 const date = new Date(year, month, d);
                 const dayOfWeek = date.getDay(); 
-                const patternIndex = (dayOfWeek === 0) ? 6 : dayOfWeek - 1;
+                const weekShift = Math.floor((d - 1) / 7) % 7; // Rotate schedule every week
+                const baseIndex = (dayOfWeek === 0) ? 6 : dayOfWeek - 1;
+                const patternIndex = (baseIndex + weekShift) % 7;
                 monthlySchedule[d] = schedulePattern[patternIndex];
             }
         }
