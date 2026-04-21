@@ -6,6 +6,7 @@
     <title>JB Home AI Workout</title>
     <meta name="theme-color" content="#00D0FF">
     <meta name="description" content="Fitness Tracker: Tu sistema de entrenamiento en casa">
+    <link rel="manifest" href="manifest.json">
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -1260,6 +1261,20 @@
                 if (tsEl) tsEl.textContent = ts;
             } catch { if (tsEl) tsEl.textContent = 'N/A'; }
         });
+    </script>
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
     </script>
     <footer class="mt-8 text-center text-xs" style="color: var(--secondary)">
         <div style="border-top: 1px solid var(--border); margin: 1rem auto; max-width: 980px"></div>
